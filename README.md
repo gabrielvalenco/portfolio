@@ -2,5 +2,5 @@
 
 ### Developer | Back-End | Laravel | Python | JavaScript | Flutter
 
-> "Cada fracasso carrega consigo a semente de um sucesso igual ou maior."  
+> "Every failure carries with it the seed of an equal or greater success."  
 > — **Napoleon Hill**
