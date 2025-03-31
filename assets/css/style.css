@@ -3,7 +3,7 @@
 :root {
     --text-primary: #fff;
     --text-secondary: #ddd;
-    --title-color: #ffc400;
+    --title-color: #33BB48;
 }
 
 * {
@@ -47,6 +47,7 @@ header nav ul li a {
     text-decoration: none;
     color: var(--text-primary);
     transition: color 0.3s ease;
+    font-size: 1.15rem;
 }
 
 header nav ul li a:hover {
@@ -55,29 +56,98 @@ header nav ul li a:hover {
 
 main {
     text-align: center;
-    padding: 3rem;
     margin-bottom: 10rem;
 }
 
 main section {
     text-align: center;
-    margin-bottom: 6rem !important;
+    margin-bottom: 12rem !important;
+    padding: 1.5rem;
 }
 
 main section h2 {
     margin-bottom: 3rem;
 }
 
+.Hero {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5rem !important;
+}
+
+.Hero img {
+    border-radius: 10px;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    overflow: hidden;
+    box-shadow: 0 5px 30px rgba(0, 255, 98, 0.322);
+}
+
+.hero-image-container {
+    position: relative;
+    text-align: center;
+}
+
+.hero-text {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 900px;
+}
+
+.hero-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-text h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: normal;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.hero-text p {
+    font-size: 1rem;
+    margin-bottom: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.Hero p span {
+    color: var(--title-color);
+    font-weight: bold;
+}
+
 .code-languages {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+.code-languages .item-title h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.code-languages .language-list {
     display: flex;
     justify-content: center;
     gap: 10rem;
-    margin-bottom: 3rem;
 }
 
 .code-languages .language-item {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     gap: 1rem;
     text-align: center;
@@ -98,14 +168,22 @@ main section h2 {
 
 .about {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
     gap: 2rem;
 }
 
 .about h2 {
-    color: var(--title-color);
-    margin-bottom: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+}
+
+.about .content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
 }
 
 .about .left-content {
@@ -119,11 +197,19 @@ main section h2 {
 }
 
 .about .left-content img {
-    width: 200px;
-    height: 200px;
+    border-radius: 10px;
+    width: 600px;
+    height: 900px;
+    object-fit: cover;
+    object-position: center;
+    overflow: hidden;
 }
 
 footer {
     text-align: center;
     padding: 3rem;
+}
+
+@media (max-width: 768px) {
+    
 }
