@@ -205,6 +205,57 @@ main section h2 {
     overflow: hidden;
 }
 
+.projects {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.projects h2 {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.github-anchor {
+    background-image: url(../images/pexels-markusspiske-1089438\ 1.png);
+    background-size: cover;
+    background-position: center;
+    max-width: 300px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 30px rgba(0, 255, 98, 0.322);
+    cursor: pointer;
+    padding: 0.5rem;
+    margin: 0 auto 5rem;
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+
+.github-anchor a {
+    display: flex;
+    font-size: 1.1rem;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+}
+
+.github-anchor:hover {
+    filter: brightness(1.1);
+    transform: scale(1.1);
+}
+
+.github-anchor img {
+    width: 40px;
+    height: 40px;
+}
+
 footer {
     text-align: center;
     padding: 3rem;
