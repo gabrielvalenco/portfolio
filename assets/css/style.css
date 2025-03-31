@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
+:root {
+    --text-primary: #fff;
+    --text-secondary: #ddd;
+    --title-color: #ffc400;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -8,7 +14,7 @@
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #000;
-    color: #fff;
+    color: var(--text-primary);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -23,7 +29,7 @@ header {
 }
 
 header span {
-    color: #ffc400;
+    color: var(--title-color);
 }
 
 header h1 {
@@ -39,10 +45,85 @@ header nav ul {
 
 header nav ul li a {
     text-decoration: none;
-    color: #fff;
+    color: var(--text-primary);
     transition: color 0.3s ease;
 }
 
 header nav ul li a:hover {
-    color: #ffc400;
+    color: var(--title-color);
+}
+
+main {
+    text-align: center;
+    padding: 3rem;
+    margin-bottom: 10rem;
+}
+
+main section {
+    text-align: center;
+    margin-bottom: 6rem !important;
+}
+
+main section h2 {
+    margin-bottom: 3rem;
+}
+
+.code-languages {
+    display: flex;
+    justify-content: center;
+    gap: 10rem;
+    margin-bottom: 3rem;
+}
+
+.code-languages .language-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    filter: brightness(0.5);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.code-languages .language-item:hover {
+    filter: brightness(1);
+    transform: scale(1.1);
+}
+
+.code-languages .language-item img {
+    width: 100px;
+    height: 100px;
+}
+
+.about {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.about h2 {
+    color: var(--title-color);
+    margin-bottom: 3rem;
+}
+
+.about .left-content {
+    flex: 1;
+    text-align: left;
+}
+
+.about .right-content {
+    flex: 2;
+    text-align: left;
+}
+
+.about .left-content img {
+    width: 200px;
+    height: 200px;
+}
+
+footer {
+    text-align: center;
+    padding: 3rem;
 }
