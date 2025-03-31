@@ -2,7 +2,7 @@
 
 :root {
     --text-primary: #fff;
-    --text-secondary: #ddd;
+    --text-secondary: #a8a8a8;
     --title-color: #33BB48;
 }
 
@@ -171,12 +171,21 @@ main section h2 {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+    margin-bottom: 3rem !important;
 }
 
 .about h2 {
     color: var(--primary-color);
     margin-bottom: 2rem;
     font-size: 2.5rem;
+}
+
+.about h3 {
+    color: var(--title-color);
+}
+
+.about p {
+    margin-bottom: 1.75rem;
 }
 
 .about .content-wrapper {
@@ -254,6 +263,55 @@ main section h2 {
 .github-anchor img {
     width: 40px;
     height: 40px;
+}
+
+.actual-projects-list {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.project-item {
+    flex: 1;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 255, 98, 0.322);
+    overflow: hidden;
+    height: auto;
+    padding: 0.5rem;
+}
+
+.project-item img {
+    width: 100%;
+    height: 250px;
+    object-position: center;
+    margin-bottom: 0.5rem;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.project-item a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+}
+
+.project-item a:hover {
+    color: var(--title-color);
+    transform: scale(1.1);
+}
+
+.project-item p {
+    padding: 0.5rem 1rem 1rem;
+}
+
+.description {
+    color: var(--text-secondary);
+    padding: 0.5rem 1rem 1rem;
 }
 
 footer {
