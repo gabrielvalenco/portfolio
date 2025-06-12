@@ -326,6 +326,7 @@ body::-webkit-scrollbar-thumb:hover {
     text-align: center;
     max-width: 800px;
     z-index: 1;
+    margin-bottom: 7rem;
 }
 
 .hero-title {
@@ -469,7 +470,7 @@ body::-webkit-scrollbar-thumb:hover {
 /* Scroll Indicator */
 .scroll-indicator {
     position: absolute;
-    bottom: 2rem;
+    bottom: 3rem;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -908,22 +909,32 @@ section {
 }
 
 .contact-methods {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
     gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .contact-method {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    justify-content: center;
+    text-align: center;
+    gap: 1rem;
     background: var(--bg-secondary);
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: var(--border-radius-large);
     text-decoration: none;
     color: var(--text-primary);
     border: 1px solid var(--border-color);
     transition: all var(--transition-medium);
+    flex: 1;
+    min-width: 350px;
+    max-width: 350px;
 }
 
 .contact-method:hover {
@@ -934,17 +945,25 @@ section {
 }
 
 .contact-icon {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     overflow: hidden;
-    flex-shrink: 0;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .contact-icon img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.contact-info {
+    width: 100%;
+    text-align: center;
 }
 
 .contact-info h4 {
@@ -1088,7 +1107,8 @@ section {
     }
 
     .contact-methods {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: center;
         gap: 1.5rem;
     }
 
