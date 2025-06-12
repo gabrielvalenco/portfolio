@@ -3,153 +3,384 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gabriel Valenço - Full-stack Developer Portfolio. Specialized in Laravel, Python, JavaScript, and Flutter development.">
+    <meta name="keywords" content="Gabriel Valenço, Full-stack Developer, Laravel, Python, JavaScript, Flutter, Web Development">
+    <meta name="author" content="Gabriel Valenço">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Gabriel Valenço - Full-stack Developer Portfolio">
+    <meta property="og:description" content="Transform your ideas into digital reality. Full-stack developer specializing in modern web and mobile development.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gabrielvalenco.github.io/portfolio/">
+    <meta property="og:image" content="https://gabrielvalenco.github.io/portfolio/assets/images/og-image.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Gabriel Valenço - Full-stack Developer Portfolio">
+    <meta name="twitter:description" content="Transform your ideas into digital reality. Full-stack developer specializing in modern web and mobile development.">
+    
     <link rel="shortcut icon" href="#" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- External Libraries -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom Styles -->
     <link rel="stylesheet" href="assets/css/style.css">
+    
     <title>Portfolio - Gabriel Valenço</title>
 </head>
 <body>
-    <header>
-        
-        <h1> Welcome to my <span>Portfolio</span> </h1>
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Loading Portfolio...</p>
+        </div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress-bar" id="scrollProgress"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">Gabriel<span class="logo-accent">.</span></span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link active" data-section="home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link" data-section="about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#projects" class="nav-link" data-section="projects">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+                </li>
             </ul>
-        </nav>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <header id="home" class="hero-section">
+        <!-- Animated Background -->
+        <div class="hero-bg">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+                <div class="shape shape-5"></div>
+            </div>
+        </div>
+        
+        <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+            <h1 class="hero-title">
+                Welcome to my <span class="gradient-text">Portfolio</span>
+            </h1>
+            <div class="hero-subtitle">
+                <span class="typing-text" id="typingText"></span>
+                <span class="cursor">|</span>
+            </div>
+            <p class="hero-description" data-aos="fade-up" data-aos-delay="300">
+                Bringing your vision to life, one line of code at a time
+            </p>
+            <div class="hero-tags" data-aos="fade-up" data-aos-delay="500">
+                <span class="tag">Web Development</span>
+                <span class="tag">Mobile Development</span>
+                <span class="tag">Fast & Efficient</span>
+            </div>
+            <div class="hero-cta" data-aos="fade-up" data-aos-delay="700">
+                <a href="#projects" class="btn btn-primary">
+                    <span>View My Work</span>
+                    <i class="arrow-icon">→</i>
+                </a>
+                <a href="#contact" class="btn btn-secondary">
+                    <span>Get In Touch</span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator" data-aos="fade-up" data-aos-delay="1000">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <p>Scroll to explore</p>
+        </div>
     </header>
 
     <main>
-        <section class="Hero">
-            <div class="hero-image-container">
-                <img src="assets/images/pexels-markusspiske-1089438 1.png" alt="hero-image">
-                <div class="hero-text">
-                    <h2>Transform your ideas into a digital reality</h2>
-                    <h3>Bringing your vision to life, one line of code at a time</h3>
-                    <p><span>Web</span> & <span>Mobile</span> Development | Fast & Efficient | Simple & Effective Solutions</p>
+        <!-- Technologies Section -->
+        <section class="technologies-section" id="technologies">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">
+                    <span class="title-number">01.</span>
+                    Technologies I Use
+                </h2>
+                <div class="tech-grid" data-aos="fade-up" data-aos-delay="200">
+                    <div class="tech-item" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="tech-icon">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" alt="Laravel">
+                        </div>
+                        <h3>Laravel</h3>
+                        <p>Backend Framework</p>
+                    </div>
+                    <div class="tech-item" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="tech-icon">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter">
+                        </div>
+                        <h3>Flutter</h3>
+                        <p>Mobile Development</p>
+                    </div>
+                    <div class="tech-item" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="tech-icon">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+                        </div>
+                        <h3>Python</h3>
+                        <p>Data & Backend</p>
+                    </div>
+                    <div class="tech-item" data-aos="zoom-in" data-aos-delay="400">
+                        <div class="tech-icon">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+                        </div>
+                        <h3>JavaScript</h3>
+                        <p>Frontend & Backend</p>
+                    </div>
                 </div>
             </div>
         </section>
-        <section class="code-languages">
-            <div class="item-title">
-                <h2>Code Languages</h2>
-            </div>
-            <div class="language-list">
-                <div class="language-item">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" alt="Laravel">
-                </div>
-                <div class="language-item">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter">
-                </div>
-                <div class="language-item">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
-                </div>
-                <div class="language-item">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+
+        <!-- About Section -->
+        <section class="about-section" id="about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text" data-aos="fade-right">
+                        <h2 class="section-title">
+                            <span class="title-number">02.</span>
+                            About Me
+                        </h2>
+                        <h3 class="about-name">Gabriel de Souza Valenço</h3>
+                        <div class="about-description">
+                            <p>
+                                I am a 20-year-old full-stack developer with a strong focus on front-end technologies. 
+                                My journey in programming began in 2023, driven by the rapid growth of the tech industry after COVID-19.
+                            </p>
+                            <p>
+                                At 18, I enrolled in a Technology and Systems Development degree while continuously expanding 
+                                my knowledge through free online courses. Passionate about modern programming languages while 
+                                valuing the foundations of legacy technologies.
+                            </p>
+                            <p>
+                                I am always eager to adapt and tackle any development challenge. 
+                                In my free time, I enjoy sci-fi books and movies.
+                            </p>
+                        </div>
+                        
+                        <div class="skills-grid">
+                            <div class="skill-category">
+                                <h4>Skills</h4>
+                                <ul>
+                                    <li>Advanced English</li>
+                                    <li>Good oratory</li>
+                                    <li>Creative</li>
+                                    <li>Cooperative</li>
+                                    <li>Sociable</li>
+                                    <li>Adaptable</li>
+                                </ul>
+                            </div>
+                            <div class="skill-category">
+                                <h4>Experience</h4>
+                                <ul>
+                                    <li>SpeedPark - Receptionist</li>
+                                    <li>Mundial Editora - Administrative Assistant</li>
+                                    <li>Grupo Prodemi - Full Stack Developer</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-image" data-aos="fade-left">
+                        <div class="image-container">
+                            <img src="assets/images/profile.jpg" alt="Gabriel Valenço" loading="lazy">
+                            <div class="image-overlay"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
-        <section class="about" id="about">
-            <h2>Gabriel de Souza Valenço</h2>
-            <div class="content-wrapper">
-                <div class="left-content">
-                    <img src="assets/images/img.jpg" alt="About Image">
+
+        <!-- Projects Section -->
+        <section class="projects-section" id="projects">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">
+                    <span class="title-number">03.</span>
+                    Featured Projects
+                </h2>
+                
+                <div class="github-link" data-aos="fade-up" data-aos-delay="200">
+                    <a href="https://github.com/gabrielvalenco" target="_blank" class="github-btn">
+                        <img src="assets/images/github.png" alt="GitHub">
+                        <span>View All Projects on GitHub</span>
+                        <i class="external-icon">↗</i>
+                    </a>
                 </div>
-                <div class="right-content">
-                    <div class="about-content">
-                        <h3>About Me</h3>
-                        <p>
-                            I am a 20-year-old full-stack developer with a strong focus on front-end technologies.  
-                            My journey in programming began in 2023, driven by the rapid growth of the tech industry after COVID-19.  
-                            At 18, I enrolled in a Technology and Systems Development degree while continuously expanding my knowledge through free online courses.  
-                        Passionate about modern programming languages while valuing the foundations of legacy technologies,  
-                        I am always eager to adapt and tackle any development challenge.  
-                        In my free time, I enjoy sci-fi books and movies.
+
+                <div class="projects-grid">
+                    <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="project-image">
+                            <img src="assets/images/projects/urlgenius.png" alt="UrlGenius Project" loading="lazy">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="https://urlgenius.io" target="_blank" class="project-link">
+                                        <span>Live Demo</span>
+                                        <i>↗</i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">UrlGenius</h3>
+                            <p class="project-description">
+                                A comprehensive URL redirection system for publishers, managing URLs, URIs, aliases, and domains. 
+                                Features traffic distribution, URL grouping, and change tracking to optimize performance.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Laravel</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">MySQL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="project-image">
+                            <img src="assets/images/projects/tcc-img.png" alt="Task Management System" loading="lazy">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="https://github.com/gabrielvalenco/taskmanagementsystem" target="_blank" class="project-link">
+                                        <span>View Code</span>
+                                        <i>↗</i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Task Management System</h3>
+                            <p class="project-description">
+                                Course completion project featuring a comprehensive task manager with AI implementation. 
+                                Designed to streamline workflow and enhance productivity through intelligent automation.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Laravel</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">AI Integration</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card coming-soon" data-aos="fade-up" data-aos-delay="300">
+                        <div class="project-image">
+                            <img src="assets/images/pexels-markusspiske-1089438 1.png" alt="Python Project Coming Soon" loading="lazy">
+                            <div class="project-overlay">
+                                <div class="coming-soon-badge">
+                                    <span>Coming Soon</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Python Data Analytics</h3>
+                            <p class="project-description">
+                                An exciting new project focusing on data analytics and machine learning implementations. 
+                                Stay tuned for updates!
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Data Science</span>
+                                <span class="tech-tag">ML</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section" id="contact">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">
+                    <span class="title-number">04.</span>
+                    Get In Touch
+                </h2>
+                <div class="contact-content" data-aos="fade-up" data-aos-delay="200">
+                    <p class="contact-description">
+                        I'm always interested in new opportunities and exciting projects. 
+                        Whether you have a question or just want to say hi, feel free to reach out!
                     </p>
+                    <div class="contact-methods">
+                        <a href="mailto:gabrielvalencoofc@gmail.com" class="contact-method" data-aos="zoom-in" data-aos-delay="100">
+                            <div class="contact-icon">
+                                <img src="assets/images/red-email-icon-png-17.jpg" alt="Email">
+                            </div>
+                            <div class="contact-info">
+                                <h4>Email</h4>
+                                <p>gabrielvalencoofc@gmail.com</p>
+                            </div>
+                        </a>
+                        <a href="https://www.linkedin.com/in/gabriel-valenço-480b43276" target="_blank" class="contact-method" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="contact-icon">
+                                <img src="assets/images/linkedin.webp" alt="LinkedIn">
+                            </div>
+                            <div class="contact-info">
+                                <h4>LinkedIn</h4>
+                                <p>Connect with me</p>
+                            </div>
+                        </a>
+                        <a href="https://github.com/gabrielvalenco" target="_blank" class="contact-method" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="contact-icon">
+                                <img src="assets/images/github.png" alt="GitHub">
+                            </div>
+                            <div class="contact-info">
+                                <h4>GitHub</h4>
+                                <p>Check out my code</p>
+                            </div>
+                        </a>
                     </div>
-                    <div class="about-content">
-                        <h3>Skills</h3>
-                        <ul>
-                            <li>Advanced English</li>
-                            <li>Good oratory</li>
-                            <li>Creative</li>
-                            <li>Cooperative</li>
-                            <li>Sociable</li>
-                            <li>Adaptable</li>
-                        </ul>
-                    </div>
-                    <div class="about-content">
-                        <h3>Professional Experiences</h3>
-                        <ul>
-                            <li>SpeedPark - receptionist</li>
-                            <li>Mundial Editora - Administrative Assistant</li>
-                            <li>Grupo Prodemi - Full stack Developer</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="projects" id="projects">
-            <h2>Projects</h2>
-            <div class="github-anchor">
-                <a href="https://github.com/gabrielvalenco">
-                    <img src="assets/images/github.png" alt="github">
-                    <p>see all projects in GitHub!</p>
-                </a>
-            </div>
-            <div class="actual-projects-list">
-                <div class="project-item">
-                    <img src="assets/images/projects/urlgenius.png" alt="project">
-                    <a href="https://urlgenius.io">
-                        <p>UrlGenius</p>
-                    </a>
-                    <div class="project-info">
-                        <p class="description">The project is a URL redirection system for publishers, managing URLs, URIs, aliases, and domains. It includes traffic distribution, URL grouping, and change tracking to optimize performance.</p>
-                    </div>
-                    <div class="languages-icons">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" alt="Laravel">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
-                    </div>
-                </div>
-                <div class="project-item">
-                    <img src="assets/images/projects/tcc-img.png" alt="project">
-                    <a href="https://github.com/gabrielvalenco/taskmanagementsystem">
-                        <p>Task Management System</p>
-                    </a>
-                    <div class="project-info">
-                        <p class="description">Project for course completion, the work is about a task manager with AI implementation</p>
-                    </div>
-                    <div class="languages-icons">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" alt="Laravel">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
-                    </div>
-                </div>
-                <div class="project-item">
-                    <img src="assets/images/pexels-markusspiske-1089438 1.png" alt="project">
-                    <a href="#">
-                        <p>Python...</p>
-                    </a>
-                    <p class="description">Coming soon</p>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <p> &copy; 2025 Gabriel Valenço. All rights reserved. </p>
-        <div class="social-links">
-            <a href="https://github.com/gabrielvalenco" target="_blank">
-                <img src="assets/images/github.png" alt="GitHub">
-            </a>
-            <a href="https://www.linkedin.com/in/gabriel-valenço-480b43276" target="_blank">
-                <img src="assets/images/linkedin.webp" alt="LinkedIn">
-            </a>
-            <a href="mailto:gabrielvalencoofc@gmail.com" target="_blank">
-                <img src="assets/images/red-email-icon-png-17.jpg" alt="Email">
-            </a>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Gabriel Valenço. All rights reserved.</p>
+                <p class="footer-quote">
+                    "Every failure carries with it the seed of an equal or greater success." - Napoleon Hill
+                </p>
+            </div>
         </div>
     </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i>↑</i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
+
