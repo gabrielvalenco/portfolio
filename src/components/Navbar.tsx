@@ -35,19 +35,28 @@ export default function Navbar() {
     localStorage.setItem('theme', checked ? 'dark' : 'light')
   }
   return (
-    <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
+    <nav role="navigation" aria-label="Navegação principal" className="sticky top-0 z-50 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
       <Progress />
       <div className="container mx-auto px-6 h-14 flex items-center justify-between">
         <div className="font-semibold tracking-tight">Gabriel<span className="text-primary">.</span></div>
         <div className="flex items-center gap-4 text-sm">
-          <Button variant="outline" onClick={() => go('home')}>Início</Button>
-          <Button variant="outline" onClick={() => go('about')}>Sobre</Button>
-          <Button variant="outline" onClick={() => go('technologies')}>Tecnologias</Button>
-          <Button variant="outline" onClick={() => go('projects')}>Projetos</Button>
-          <Button onClick={() => go('contact')}>Contato</Button>
+          <Button variant="outline" className="focus-visible:ring-primary/60" onClick={() => go('home')}>Início</Button>
+          <Button variant="outline" className="focus-visible:ring-primary/60" onClick={() => go('about')}>Sobre</Button>
+          <Button variant="outline" className="focus-visible:ring-primary/60" onClick={() => go('technologies')}>Tecnologias</Button>
+          <Button variant="outline" className="focus-visible:ring-primary/60" onClick={() => go('projects')}>Projetos</Button>
+          <Button variant="highlight" onClick={() => go('contact')}>Contato</Button>
           <div className="flex items-center gap-2">
-            {dark ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-            <Switch checked={dark} onCheckedChange={toggleTheme} />
+            {dark ? (
+              <Moon className="h-4 w-4 text-primary transition-transform duration-300 rotate-0" />
+            ) : (
+              <Sun className="h-4 w-4 text-primary transition-transform duration-300 rotate-180" />
+            )}
+            <Switch
+              checked={dark}
+              onCheckedChange={toggleTheme}
+              aria-label="Alternar tema"
+              className="transition-all duration-300 data-[state=checked]:shadow-md data-[state=unchecked]:shadow-inner"
+            />
           </div>
         </div>
       </div>

@@ -1,34 +1,33 @@
 <template>
   <div class="grid gap-6 md:grid-cols-3">
-    <article class="rounded-xl border border-neutral-800 bg-neutral-900 p-6 shadow animate-in fade-in-50">
-      <h3 class="text-lg font-semibold">UrlGenius</h3>
-      <p class="mt-2 text-sm text-neutral-400">Sistema de redirecionamento de URLs para publishers.</p>
-      <div class="mt-4 flex gap-2">
-        <span class="px-2 py-1 text-xs rounded bg-neutral-800">Laravel</span>
-        <span class="px-2 py-1 text-xs rounded bg-neutral-800">JavaScript</span>
-        <span class="px-2 py-1 text-xs rounded bg-neutral-800">MySQL</span>
+    <article class="bg-card text-card-foreground flex flex-col gap-3 rounded-xl border py-6 shadow-sm px-6 animate-in fade-in-50 transition-transform hover:-translate-y-0.5 hover:shadow-md">
+      <h3 class="text-lg font-semibold">Audio Downloader & Transcriber</h3>
+      <p class="mt-1 text-sm text-muted-foreground">Baixe áudio com yt-dlp + FFmpeg e transcreva via IA. Web UI + CLI + Docker.</p>
+      <div class="mt-3 flex gap-2">
+        <span class="px-2 py-1 text-xs rounded bg-muted text-muted-foreground">Python</span>
+        <span class="px-2 py-1 text-xs rounded bg-muted text-muted-foreground">FFmpeg</span>
+        <span class="px-2 py-1 text-xs rounded bg-muted text-muted-foreground">yt-dlp</span>
       </div>
-      <a class="mt-4 inline-block text-sm text-blue-400" href="https://urlgenius.io" target="_blank">Live</a>
+      <a class="mt-3 inline-flex items-center text-sm text-primary" href="https://github.com/gabrielvalenco/Audio-Downloader-Transcriber-Web-CLI" target="_blank">Repositório</a>
     </article>
-    <article class="rounded-xl border border-neutral-800 bg-neutral-900 p-6 shadow animate-in fade-in-50">
-      <h3 class="text-lg font-semibold">Task Management System</h3>
-      <p class="mt-2 text-sm text-neutral-400">Gerenciador de tarefas com IA para produtividade.</p>
-      <div class="mt-4 flex gap-2">
-        <span class="px-2 py-1 text-xs rounded bg-neutral-800">Laravel</span>
-        <span class="px-2 py-1 text-xs rounded bg-neutral-800">JavaScript</span>
-        <span class="px-2 py-1 text-xs rounded bg-neutral-800">AI</span>
+    <article class="bg-card text-card-foreground flex flex-col gap-3 rounded-xl border py-8 shadow-md px-6 animate-in fade-in-50 transition-transform hover:-translate-y-1 ring-2 ring-primary">
+      <h3 class="text-lg font-semibold">EnfantIA</h3>
+      <p class="mt-1 text-sm text-muted-foreground">Plataforma educacional com experiências interativas e conteúdo dinâmico.</p>
+      <div class="mt-3 flex gap-2">
+        <span class="px-2 py-1 text-xs rounded bg-muted text-muted-foreground">Web</span>
+        <span class="px-2 py-1 text-xs rounded bg-muted text-muted-foreground">UI/UX</span>
       </div>
-      <a class="mt-4 inline-block text-sm text-blue-400" href="https://github.com/gabrielvalenco/taskmanagementsystem" target="_blank">Código</a>
+      <a class="mt-3 inline-flex items-center text-sm text-primary" href="https://enfantia.com.br/" target="_blank">Visitar</a>
     </article>
-    <article class="rounded-xl border border-neutral-800 bg-neutral-900 p-6 shadow animate-in fade-in-50">
-      <h3 class="text-lg font-semibold">Python Data Analytics</h3>
-      <p class="mt-2 text-sm text-neutral-400">Projeto de análise de dados com ML.</p>
-      <div class="mt-4 flex gap-2">
-        <span class="px-2 py-1 text-xs rounded bg-neutral-800">Python</span>
-        <span class="px-2 py-1 text-xs rounded bg-neutral-800">Data Science</span>
-        <span class="px-2 py-1 text-xs rounded bg-neutral-800">ML</span>
+    <article class="bg-card text-card-foreground flex flex-col gap-3 rounded-xl border py-6 shadow-sm px-6 animate-in fade-in-50 transition-transform hover:-translate-y-0.5 hover:shadow-md">
+      <h3 class="text-lg font-semibold">WebhookControl</h3>
+      <p class="mt-1 text-sm text-muted-foreground">Entrega resiliente de webhooks com retries exponenciais, logs e Horizon.</p>
+      <div class="mt-3 flex gap-2">
+        <span class="px-2 py-1 text-xs rounded bg-muted text-muted-foreground">Laravel</span>
+        <span class="px-2 py-1 text-xs rounded bg-muted text-muted-foreground">Redis</span>
+        <span class="px-2 py-1 text-xs rounded bg-muted text-muted-foreground">Horizon</span>
       </div>
-      <span class="mt-4 inline-block text-sm text-neutral-400">Em breve</span>
+      <a class="mt-3 inline-flex items-center text-sm text-primary" href="https://github.com/gabrielvalenco/WebhookControl-Resilient-Webhook-Delivery-Platform" target="_blank">Repositório</a>
     </article>
   </div>
 </template>
