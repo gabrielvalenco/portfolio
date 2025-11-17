@@ -1,6 +1,6 @@
 <template>
   <div class="grid gap-6 md:grid-cols-3">
-    <article class="rounded-xl border border-neutral-800 bg-neutral-900 p-6">
+    <article class="rounded-xl border border-neutral-800 bg-neutral-900 p-6 shadow animate-in fade-in-50">
       <h3 class="text-lg font-semibold">UrlGenius</h3>
       <p class="mt-2 text-sm text-neutral-400">Sistema de redirecionamento de URLs para publishers.</p>
       <div class="mt-4 flex gap-2">
@@ -10,7 +10,7 @@
       </div>
       <a class="mt-4 inline-block text-sm text-blue-400" href="https://urlgenius.io" target="_blank">Live</a>
     </article>
-    <article class="rounded-xl border border-neutral-800 bg-neutral-900 p-6">
+    <article class="rounded-xl border border-neutral-800 bg-neutral-900 p-6 shadow animate-in fade-in-50">
       <h3 class="text-lg font-semibold">Task Management System</h3>
       <p class="mt-2 text-sm text-neutral-400">Gerenciador de tarefas com IA para produtividade.</p>
       <div class="mt-4 flex gap-2">
@@ -20,7 +20,7 @@
       </div>
       <a class="mt-4 inline-block text-sm text-blue-400" href="https://github.com/gabrielvalenco/taskmanagementsystem" target="_blank">Código</a>
     </article>
-    <article class="rounded-xl border border-neutral-800 bg-neutral-900 p-6">
+    <article class="rounded-xl border border-neutral-800 bg-neutral-900 p-6 shadow animate-in fade-in-50">
       <h3 class="text-lg font-semibold">Python Data Analytics</h3>
       <p class="mt-2 text-sm text-neutral-400">Projeto de análise de dados com ML.</p>
       <div class="mt-4 flex gap-2">

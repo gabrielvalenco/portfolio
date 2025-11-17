@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { Button } from './components/ui/button'
+import { Card, CardContent } from './components/ui/card'
+import { Code, Cpu, Database, Library, Smartphone, Github, Mail, Linkedin } from 'lucide-react'
 import { createApp } from 'vue'
 import ProjectsWidget from './vue/ProjectsWidget.vue'
 import Navbar from './components/Navbar'
@@ -16,7 +18,7 @@ function Section({ id, children }: { id: string; children: React.ReactNode }) {
 function Hero() {
   return (
     <header className="relative overflow-hidden">
-      <div className="container mx-auto px-6 py-24">
+      <div className="container mx-auto px-6 py-24 animate-in fade-in-50">
         <p className="text-sm text-neutral-400">Gabriel Valenço</p>
         <h1 className="mt-2 text-4xl md:text-6xl font-semibold tracking-tight">
           Transformando ideias em produtos digitais
@@ -35,22 +37,27 @@ function Hero() {
 
 function Technologies() {
   const items = [
-    { name: 'React', desc: 'Frontend', icon: 'react' },
-    { name: 'Vue', desc: 'Frontend', icon: 'vue' },
-    { name: 'Laravel', desc: 'Backend', icon: 'laravel' },
-    { name: 'Python', desc: 'Data & Backend', icon: 'python' },
-    { name: 'Flutter', desc: 'Mobile', icon: 'flutter' },
-    { name: 'JavaScript', desc: 'Full-stack', icon: 'javascript' },
+    { name: 'React', desc: 'Frontend', Icon: Code },
+    { name: 'Vue', desc: 'Frontend', Icon: Library },
+    { name: 'Laravel', desc: 'Backend', Icon: Database },
+    { name: 'Python', desc: 'Data & Backend', Icon: Cpu },
+    { name: 'Flutter', desc: 'Mobile', Icon: Smartphone },
+    { name: 'JavaScript', desc: 'Full-stack', Icon: Code },
   ]
   return (
     <Section id="technologies">
       <h2 className="text-2xl md:text-3xl font-semibold">Tecnologias</h2>
       <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-        {items.map((t) => (
-          <div key={t.name} className="rounded-xl border border-neutral-800 bg-neutral-900 p-4">
-            <p className="text-sm font-medium">{t.name}</p>
-            <p className="text-xs text-neutral-400">{t.desc}</p>
-          </div>
+        {items.map(({ name, desc, Icon }) => (
+          <Card key={name} className="animate-in fade-in-50">
+            <CardContent className="flex items-center gap-3 p-4">
+              <Icon className="h-5 w-5 text-primary" />
+              <div>
+                <p className="text-sm font-medium">{name}</p>
+                <p className="text-xs text-neutral-400">{desc}</p>
+              </div>
+            </CardContent>
+          </Card>
         ))}
       </div>
     </Section>
@@ -61,7 +68,7 @@ function About() {
   return (
     <Section id="about">
       <h2 className="text-2xl md:text-3xl font-semibold">Sobre</h2>
-      <div className="mt-6 grid md:grid-cols-2 gap-8">
+      <div className="mt-6 grid md:grid-cols-2 gap-8 animate-in fade-in-50">
         <div className="space-y-4">
           <p>
             Desenvolvedor full-stack, 20 anos, com foco em front-end moderno.
@@ -124,9 +131,15 @@ function Contact() {
     <Section id="contact">
       <h2 className="text-2xl md:text-3xl font-semibold">Contato</h2>
       <div className="mt-6 flex flex-wrap gap-4">
-        <Button onClick={() => (window.location.href = 'mailto:gabrielvalencoofc@gmail.com')}>Email</Button>
-        <Button variant="outline" onClick={() => window.open('https://www.linkedin.com/in/gabriel-valenço-480b43276', '_blank')}>LinkedIn</Button>
-        <Button variant="outline" onClick={() => window.open('https://github.com/gabrielvalenco', '_blank')}>GitHub</Button>
+        <Button onClick={() => (window.location.href = 'mailto:gabrielvalencoofc@gmail.com')}>
+          <Mail className="mr-2 h-4 w-4" /> Email
+        </Button>
+        <Button variant="outline" onClick={() => window.open('https://www.linkedin.com/in/gabriel-valenço-480b43276', '_blank')}>
+          <Linkedin className="mr-2 h-4 w-4" /> LinkedIn
+        </Button>
+        <Button variant="outline" onClick={() => window.open('https://github.com/gabrielvalenco', '_blank')}>
+          <Github className="mr-2 h-4 w-4" /> GitHub
+        </Button>
       </div>
     </Section>
   )

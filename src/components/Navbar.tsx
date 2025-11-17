@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Button } from './ui/button'
+import { Sun, Moon } from 'lucide-react'
 
 function Progress() {
   const [progress, setProgress] = useState(0)
@@ -24,6 +25,16 @@ export default function Navbar() {
   const go = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
+  const [light, setLight] = useState(() => localStorage.getItem('theme') === 'light')
+  useEffect(() => {
+    document.documentElement.classList.toggle('theme-light', light)
+  }, [light])
+  const toggleTheme = () => {
+    const next = !light
+    setLight(next)
+    document.documentElement.classList.toggle('theme-light', next)
+    localStorage.setItem('theme', next ? 'light' : 'dark')
+  }
   return (
     <nav className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-neutral-950/70 border-b border-neutral-800">
       <Progress />
@@ -35,6 +46,9 @@ export default function Navbar() {
           <Button variant="outline" onClick={() => go('technologies')}>Tecnologias</Button>
           <Button variant="outline" onClick={() => go('projects')}>Projetos</Button>
           <Button onClick={() => go('contact')}>Contato</Button>
+          <Button variant="outline" onClick={toggleTheme}>
+            {light ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </Button>
         </div>
       </div>
     </nav>
