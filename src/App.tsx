@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react'
-import { Button } from './components/ui/button'
-import { Card, CardContent } from './components/ui/card'
-import { Code, Cpu, Database, Library, Smartphone, Github, Mail, Linkedin } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import { Code, Cpu, Database, Library, Smartphone, Github, Mail, Linkedin, Coffee, Server, Cog } from 'lucide-react'
 import { createApp } from 'vue'
-import ProjectsWidget from './vue/ProjectsWidget.vue'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
+import ProjectsWidget from '@/vue/ProjectsWidget.vue'
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 
 function Section({ id, children }: { id: string; children: React.ReactNode }) {
   return (
@@ -39,9 +39,12 @@ function Technologies() {
   const items = [
     { name: 'React', desc: 'Frontend', Icon: Code },
     { name: 'Vue', desc: 'Frontend', Icon: Library },
+    { name: 'React Native', desc: 'Mobile', Icon: Smartphone },
+    { name: 'Node.js', desc: 'Backend', Icon: Server },
     { name: 'Laravel', desc: 'Backend', Icon: Database },
     { name: 'Python', desc: 'Data & Backend', Icon: Cpu },
-    { name: 'Flutter', desc: 'Mobile', Icon: Smartphone },
+    { name: 'Java', desc: 'Backend', Icon: Coffee },
+    { name: 'Golang', desc: 'Backend', Icon: Cog },
     { name: 'JavaScript', desc: 'Full-stack', Icon: Code },
   ]
   return (
@@ -96,8 +99,6 @@ function About() {
             <div>
               <p className="text-sm font-semibold">Experiências</p>
               <ul className="mt-2 text-sm text-neutral-400 space-y-1">
-                <li>SpeedPark • Recepção</li>
-                <li>Mundial Editora • Administrativo</li>
                 <li>Grupo Prodemi • Full Stack</li>
                 <li>Jem • Tráfego pago</li>
               </ul>
