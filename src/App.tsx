@@ -17,7 +17,7 @@ function Section({ id, children }: { id: string; children: React.ReactNode }) {
 
 function Hero() {
   return (
-    <header className="relative overflow-hidden">
+    <header id="home" className="relative overflow-hidden">
       <div className="container mx-auto px-6 py-24 animate-in fade-in-50">
         <p className="text-sm text-neutral-400">Gabriel Valenço</p>
         <h1 className="mt-2 text-4xl md:text-6xl font-semibold tracking-tight">
@@ -50,10 +50,10 @@ function Technologies() {
   return (
     <Section id="technologies">
       <h2 className="text-2xl md:text-3xl font-semibold">Tecnologias</h2>
-      <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+      <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4">
         {items.map(({ name, desc, Icon }) => (
-          <Card key={name} className="animate-in fade-in-50">
-            <CardContent className="flex items-center gap-3 p-4">
+          <Card key={name} className="animate-in fade-in-50 transition-transform hover:-translate-y-0.5">
+            <CardContent className="flex items-center gap-3 p-5">
               <Icon className="h-5 w-5 text-primary" />
               <div>
                 <p className="text-sm font-medium">{name}</p>

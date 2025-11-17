@@ -35,11 +35,11 @@ export default function Navbar() {
     localStorage.setItem('theme', checked ? 'dark' : 'light')
   }
   return (
-    <nav className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-neutral-950/70 border-b border-neutral-800">
+    <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
       <Progress />
       <div className="container mx-auto px-6 h-14 flex items-center justify-between">
-        <div className="font-semibold">Gabriel<span className="text-primary">.</span></div>
-        <div className="flex items-center gap-2">
+        <div className="font-semibold tracking-tight">Gabriel<span className="text-primary">.</span></div>
+        <div className="flex items-center gap-4 text-sm">
           <Button variant="outline" onClick={() => go('home')}>Início</Button>
           <Button variant="outline" onClick={() => go('about')}>Sobre</Button>
           <Button variant="outline" onClick={() => go('technologies')}>Tecnologias</Button>
