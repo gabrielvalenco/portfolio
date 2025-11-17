@@ -63,9 +63,9 @@ function Hero() {
         <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
           Desenvolvedor full-stack focado em experiências modernas e eficientes com React, Vue e Laravel.
         </p>
-        <div className="mt-10 flex gap-4">
-          <Button variant="highlight" size="lg" aria-label="Ver projetos" className="transition-transform active:scale-95 hover:scale-[1.02]" onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}>Ver projetos</Button>
-          <Button variant="highlight" size="lg" aria-label="Ir para contato" className="transition-transform active:scale-95 hover:scale-[1.02]" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>Contato</Button>
+        <div className="mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <Button variant="highlight" size="lg" aria-label="Ver projetos" className="transition-transform active:scale-95 hover:scale-[1.02] w-full sm:w-auto" onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}>Ver projetos</Button>
+          <Button variant="highlight" size="lg" aria-label="Ir para contato" className="transition-transform active:scale-95 hover:scale-[1.02] w-full sm:w-auto" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>Contato</Button>
         </div>
       </div>
       <Particles density={80} />

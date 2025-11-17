@@ -21,6 +21,7 @@ export default function ProjectCarousel() {
   )
 
   const [index, setIndex] = useState(0)
+  const [depth, setDepth] = useState(() => (window.innerWidth < 640 ? 280 : 420))
   const size = projects.length
   const next = useCallback(() => setIndex(i => (i + 1) % size), [size])
   const prev = useCallback(() => setIndex(i => (i - 1 + size) % size), [size])
@@ -31,21 +32,27 @@ export default function ProjectCarousel() {
       if (e.key === 'ArrowLeft') prev()
     }
     window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
+    const onResize = () => setDepth(window.innerWidth < 640 ? 280 : 420)
+    window.addEventListener('resize', onResize)
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      window.removeEventListener('resize', onResize)
+    }
   }, [next, prev])
 
   return (
     <div className="relative">
       <div
-        className="mx-auto h-[18rem] md:h-[22rem] perspective-[1200px]"
+        className="mx-auto h-[16rem] md:h-[22rem]"
         aria-roledescription="carrossel"
+        style={{ perspective: `${depth * 3}px` }}
       >
         <ul className="relative h-full w-full [transform-style:preserve-3d] transition-transform duration-700 ease-out"
-            style={{ transform: `translateZ(-420px) rotateY(${(360 / size) * index}deg)` }}>
+            style={{ transform: `translateZ(-${depth}px) rotateY(${(360 / size) * index}deg)` }}>
           {projects.map((p, i) => (
             <li key={p.title}
-                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] max-w-[26rem]"
-                style={{ transform: `rotateY(${(360 / size) * i}deg) translateZ(420px)` }}>
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] sm:w-[70%] max-w-[26rem]"
+                style={{ transform: `rotateY(${(360 / size) * i}deg) translateZ(${depth}px)` }}>
               <div className="rounded-xl border bg-card/80 backdrop-blur shadow-md px-6 py-5 transition-transform hover:scale-[1.02]">
                 <p className="text-sm text-muted-foreground">{p.desc}</p>
                 <p className="mt-1 text-lg font-semibold">{p.title}</p>
