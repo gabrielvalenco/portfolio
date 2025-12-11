@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Button } from './ui/button'
 import { Sun, Moon, Menu, X } from 'lucide-react'
 import { Switch } from './ui/switch'
+import LogoGV from './LogoGV'
 
 function Progress() {
   const [progress, setProgress] = useState(0)
@@ -39,7 +40,10 @@ export default function Navbar() {
     <nav role="navigation" aria-label="Navegação principal" className="sticky top-0 z-50 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
       <Progress />
       <div className="container mx-auto px-6 h-14 flex items-center justify-between">
-        <div className="font-semibold tracking-tight">Gabriel<span className="text-primary">.</span></div>
+        <div className="flex items-center gap-2">
+          <LogoGV className="h-6 w-6 text-primary" />
+          <div className="font-semibold tracking-tight">Gabriel</div>
+        </div>
         <div className="flex items-center gap-3">
           <div className="hidden md:flex items-center gap-2 text-sm">
             <Button size="sm" variant="outline" onClick={() => go('home')}>Início</Button>
