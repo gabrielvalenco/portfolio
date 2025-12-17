@@ -3,6 +3,7 @@ import { Button } from './ui/button'
 import { Sun, Moon, Menu, X } from 'lucide-react'
 import { Switch } from './ui/switch'
 import LogoGV from './LogoGV'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 function Progress() {
   const [progress, setProgress] = useState(0)
@@ -24,9 +25,22 @@ function Progress() {
 }
 
 export default function Navbar() {
+  const navigate = useNavigate()
+  const location = useLocation()
+  
   const go = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    if (location.pathname !== '/') {
+      navigate('/', { state: { scrollTo: id } })
+    } else {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
   }
+
+  const goToCertificates = () => {
+    navigate('/certificates')
+    setOpen(false)
+  }
+
   const [dark, setDark] = useState(() => localStorage.getItem('theme') === 'dark')
   const [open, setOpen] = useState(false)
   useEffect(() => {
@@ -40,7 +54,7 @@ export default function Navbar() {
     <nav role="navigation" aria-label="Navegação principal" className="sticky top-0 z-50 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
       <Progress />
       <div className="container mx-auto px-6 h-14 flex items-center justify-between">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 cursor-pointer" onClick={() => go('home')}>
           <LogoGV className="h-6 w-6 text-primary" />
           <div className="font-semibold tracking-tight">Gabriel</div>
         </div>
@@ -50,6 +64,7 @@ export default function Navbar() {
             <Button size="sm" variant="outline" onClick={() => go('about')}>Sobre</Button>
             <Button size="sm" variant="outline" onClick={() => go('technologies')}>Tecnologias</Button>
             <Button size="sm" variant="outline" onClick={() => go('projects')}>Projetos</Button>
+            <Button size="sm" variant="outline" onClick={goToCertificates}>Certificados</Button>
             <Button size="sm" variant="highlight" onClick={() => go('contact')}>Contato</Button>
           </div>
           <div className="flex items-center gap-2">
@@ -87,6 +102,7 @@ export default function Navbar() {
                 <Button variant="outline" onClick={() => { setOpen(false); go('about') }}>Sobre</Button>
                 <Button variant="outline" onClick={() => { setOpen(false); go('technologies') }}>Tecnologias</Button>
                 <Button variant="outline" onClick={() => { setOpen(false); go('projects') }}>Projetos</Button>
+                <Button variant="outline" onClick={goToCertificates}>Certificados</Button>
                 <Button variant="highlight" onClick={() => { setOpen(false); go('contact') }}>Contato</Button>
               </div>
             </div>
