@@ -65,66 +65,68 @@ html, body, #root {
   --radius: 0.75rem;
   --background: #f8fafc; /* slate-50 */
   --foreground: #0a0a0a;
+  --dot-color: rgba(109, 40, 217, 0.18);
   --card: #ffffff;
   --card-foreground: #0a0a0a;
   --popover: #ffffff;
   --popover-foreground: #0a0a0a;
   --primary: #7C3AED; /* purple */
   --primary-foreground: #ffffff;
-  --secondary: #14B8A6; /* teal */
+  --secondary: #A78BFA; /* violet */
   --secondary-foreground: #ffffff;
   --muted: #f1f5f9; /* slate-100 */
   --muted-foreground: #4b5563; /* slate-600 */
-  --accent: #7C3AED; /* match hover to purple */
+  --accent: #8B5CF6; /* purple accent */
   --accent-foreground: #ffffff;
   --destructive: #ef4444;
   --border: #e5e7eb; /* gray-200 */
   --input: #e5e7eb;
   --ring: #7C3AED;
   --chart-1: #7C3AED;
-  --chart-2: #14B8A6;
-  --chart-3: #9333EA; /* darker purple */
+  --chart-2: #8B5CF6;
+  --chart-3: #6D28D9; /* deeper purple */
   --chart-4: #22C55E;
   --chart-5: #F59E0B;
   --sidebar: #ffffff;
   --sidebar-foreground: #0a0a0a;
   --sidebar-primary: #7C3AED;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #14B8A6;
+  --sidebar-accent: #A78BFA;
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: #e5e7eb;
   --sidebar-ring: #7C3AED;
 }
 
 .dark {
-  --background: #0b0b10;
+  --background: #0a0a0f;
   --foreground: #fafafa;
+  --dot-color: rgba(139, 92, 246, 0.10);
   --card: #0e0e14;
   --card-foreground: #fafafa;
   --popover: #0e0e14;
   --popover-foreground: #fafafa;
   --primary: #7C3AED;
   --primary-foreground: #0b0b10;
-  --secondary: #14B8A6;
+  --secondary: #A78BFA;
   --secondary-foreground: #0b0b10;
   --muted: #15151a;
   --muted-foreground: #a3a3a3;
-  --accent: #7C3AED;
+  --accent: #8B5CF6;
   --accent-foreground: #0b0b10;
   --destructive: #ef4444;
   --border: #242432;
   --input: #242432;
   --ring: #7C3AED;
   --chart-1: #7C3AED;
-  --chart-2: #14B8A6;
-  --chart-3: #EC4899;
+  --chart-2: #8B5CF6;
+  --chart-3: #A78BFA;
   --chart-4: #22C55E;
   --chart-5: #F59E0B;
   --sidebar: #0e0e14;
   --sidebar-foreground: #fafafa;
   --sidebar-primary: #7C3AED;
   --sidebar-primary-foreground: #0b0b10;
-  --sidebar-accent: #14B8A6;
+  --sidebar-accent: #A78BFA;
   --sidebar-accent-foreground: #0b0b10;
   --sidebar-border: #242432;
   --sidebar-ring: #7C3AED;
@@ -137,6 +139,12 @@ html, body, #root {
   body {
     @apply bg-background text-foreground font-sans;
     transition: background-color 300ms ease, color 200ms ease;
+    /* Polka dot pattern (duas camadas defasadas para efeito xadrez) */
+    background-image:
+      radial-gradient(circle, var(--dot-color) 1.5px, transparent 1.5px),
+      radial-gradient(circle, var(--dot-color) 1.5px, transparent 1.5px);
+    background-position: 0 0, 9px 9px;
+    background-size: 18px 18px;
   }
   h1 { @apply text-5xl md:text-7xl font-semibold tracking-tight leading-tight; }
   h2 { @apply text-3xl md:text-4xl font-semibold; }

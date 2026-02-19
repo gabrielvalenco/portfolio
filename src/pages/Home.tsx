@@ -1,11 +1,10 @@
 import { useEffect, useRef } from 'react'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
 import { Code, Cpu, Database, Library, Smartphone, Github, Mail, Linkedin, Coffee, Server, Cog, Cloud } from 'lucide-react'
-import { createApp } from 'vue'
 import ProjectCarousel from '@/components/ProjectCarousel'
-import Particles from '@/components/Particles'
 import Section from '@/components/Section'
+import useHomeAnimations from '@/hooks/useHomeAnimations'
+import { gsap } from '@/lib/gsap'
 
 function Hero() {
   const containerRef = useRef<HTMLDivElement | null>(null)
@@ -37,53 +36,109 @@ function Hero() {
           <Button variant="highlight" size="lg" aria-label="Ir para contato" className="transition-transform active:scale-95 hover:scale-[1.02] w-full sm:w-auto" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>Contato</Button>
         </div>
       </div>
-      <Particles density={80} />
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-24 -left-24 size-[28rem] bg-gradient-to-tr from-primary/40 to-accent/40 blur-3xl animate-[blobMorph_16s_ease-in-out_infinite]" style={{ transform: 'translate3d(calc(var(--mx,0)*12px), calc(var(--my,0)*12px), 0)' }} />
-        <div className="absolute top-24 right-10 size-[22rem] bg-gradient-to-br from-secondary/40 to-primary/30 blur-3xl animate-[blobMorph_18s_ease-in-out_infinite]" style={{ transform: 'translate3d(calc(var(--mx,0)*-10px), calc(var(--my,0)*-10px), 0)' }} />
-      </div>
+      {/* Blobs removidos conforme pedido */}
     </header>
   )
 }
 
 function Technologies() {
+  const gridRef = useRef<HTMLDivElement | null>(null)
+  const highlightRef = useRef<HTMLDivElement | null>(null)
+  useEffect(() => {
+    const grid = gridRef.current
+    const highlight = highlightRef.current
+    if (!grid || !highlight) return
+    const onLeave = () => {
+      gsap.to(highlight, { opacity: 0, duration: 0.25, ease: 'power2.out' })
+    }
+    grid.addEventListener('mouseleave', onLeave)
+    return () => grid.removeEventListener('mouseleave', onLeave)
+  }, [])
+  const moveTo = (el: HTMLElement) => {
+    const grid = gridRef.current
+    const highlight = highlightRef.current
+    if (!grid || !highlight) return
+    const r1 = grid.getBoundingClientRect()
+    const r2 = el.getBoundingClientRect()
+    gsap.to(highlight, {
+      x: r2.left - r1.left,
+      y: r2.top - r1.top,
+      width: r2.width,
+      height: r2.height,
+      borderRadius: window.getComputedStyle(el).borderRadius,
+      opacity: 1,
+      duration: 0.35,
+      ease: 'power3.out',
+    })
+  }
   const items = [
-    { name: 'React', desc: 'Frontend', color: '#61DAFB', Icon: Code },
-    { name: 'Vue', desc: 'Frontend', color: '#42B883', Icon: Library },
-    { name: 'React Native', desc: 'Mobile', color: '#61DAFB', Icon: Smartphone },
-    { name: 'Node.js', desc: 'Backend', color: '#68A063', Icon: Server },
-    { name: 'Laravel', desc: 'Backend', color: '#FF2D20', Icon: Database },
-    { name: 'Python', desc: 'Data & Backend', color: '#3776AB', Icon: Cpu },
-    { name: 'Java', desc: 'Backend', color: '#ED8B00', Icon: Coffee },
-    { name: 'Golang', desc: 'Backend', color: '#00ADD8', Icon: Cog },
-    { name: 'JavaScript', desc: 'Full-stack', color: '#F7DF1E', Icon: Code },
-    { name: 'PostgreSQL', desc: 'Banco de dados', color: '#336791', Icon: Database },
-    { name: 'Redis', desc: 'Cache', color: '#D82C20', Icon: Database },
-    { name: 'MySQL', desc: 'Banco de dados', color: '#4479A1', Icon: Database },
-    { name: 'PHP', desc: 'Backend', color: '#777BB4', Icon: Code },
-    { name: 'Docker', desc: 'Containers', color: '#2496ED', Icon: Server },
-    { name: 'Cloudflare', desc: 'CDN', color: '#F38020', Icon: Cloud },
+    { name: 'React', desc: 'Frontend', color: '#61DAFB', Icon: Code, category: 'Frontend' },
+    { name: 'Vue', desc: 'Frontend', color: '#42B883', Icon: Library, category: 'Frontend' },
+    { name: 'React Native', desc: 'Mobile', color: '#61DAFB', Icon: Smartphone, category: 'Mobile' },
+    { name: 'Node.js', desc: 'Backend', color: '#68A063', Icon: Server, category: 'Backend' },
+    { name: 'Laravel', desc: 'Backend', color: '#FF2D20', Icon: Database, category: 'Backend' },
+    { name: 'Python', desc: 'Data & Backend', color: '#3776AB', Icon: Cpu, category: 'Backend' },
+    { name: 'Java', desc: 'Backend', color: '#ED8B00', Icon: Coffee, category: 'Backend' },
+    { name: 'Golang', desc: 'Backend', color: '#00ADD8', Icon: Cog, category: 'Backend' },
+    { name: 'JavaScript', desc: 'Full-stack', color: '#F7DF1E', Icon: Code, category: 'Linguagem' },
+    { name: 'PostgreSQL', desc: 'Banco de dados', color: '#336791', Icon: Database, category: 'Dados' },
+    { name: 'Redis', desc: 'Cache', color: '#D82C20', Icon: Database, category: 'Dados' },
+    { name: 'MySQL', desc: 'Banco de dados', color: '#4479A1', Icon: Database, category: 'Dados' },
+    { name: 'PHP', desc: 'Backend', color: '#777BB4', Icon: Code, category: 'Backend' },
+    { name: 'Docker', desc: 'Containers', color: '#2496ED', Icon: Server, category: 'DevOps' },
+    { name: 'Cloudflare', desc: 'CDN', color: '#F38020', Icon: Cloud, category: 'DevOps' },
   ]
   return (
     <Section id="technologies">
       <h2 className="font-semibold">Tecnologias</h2>
-      <p className="mt-2 text-sm text-muted-foreground">Ferramentas que uso no dia a dia</p>
-      <div className="mt-8 flex flex-wrap gap-3">
-        {items.map(({ name, color, Icon }) => (
-          <Badge key={name} variant="outline" className="border-primary/50 bg-primary/10 hover:bg-primary/20 text-foreground">
-            {name === 'React' ? (
-              <img src="/src/assets/react.svg" alt="React" className="size-4" />
-            ) : name === 'Vue' ? (
-              <svg viewBox="0 0 256 221" xmlns="http://www.w3.org/2000/svg" className="size-4"><path fill="#41B883" d="M204.8 0H256L128 221L0 0h51.2L128 110.592L204.8 0z"/><path fill="#35495E" d="M0 0l128 221L256 0h-51.2L128 110.592L51.2 0H0z"/></svg>
-            ) : (
-              <Icon className="h-4 w-4" style={{ color }} />
-            )}
-            <span className="ml-1 font-medium">{name}</span>
-          </Badge>
+      <p className="mt-2 text-sm text-muted-foreground">Stack que uso para entregar produtos de ponta a ponta.</p>
+      <div ref={gridRef} className="relative mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          ref={highlightRef}
+          aria-hidden
+          className="pointer-events-none absolute z-10 border-2 border-primary/70 shadow-[0_0_28px_rgba(124,58,237,0.35)] rounded-2xl"
+          style={{ opacity: 0 }}
+        />
+        {items.map(({ name, desc, color, Icon, category }, i) => (
+          <div
+            key={name}
+            data-t-index={i}
+            onMouseEnter={(e) => moveTo(e.currentTarget as HTMLElement)}
+            className="group relative overflow-hidden rounded-xl border border-border/80 bg-card/80 p-4 shadow-sm transition-all hover:-translate-y-1 hover:border-primary/70 hover:shadow-[0_0_26px_rgba(124,58,237,0.45)]"
+          >
+            <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary/15 via-transparent to-secondary/10" />
+            <div className="relative flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/15 ring-1 ring-primary/40">
+                {name === 'React' ? (
+                  <img src="/src/assets/react.svg" alt="React" className="size-5" />
+                ) : name === 'Vue' ? (
+                  <svg viewBox="0 0 256 221" xmlns="http://www.w3.org/2000/svg" className="size-5"><path fill="#41B883" d="M204.8 0H256L128 221L0 0h51.2L128 110.592L204.8 0z"/><path fill="#35495E" d="M0 0l128 221L256 0h-51.2L128 110.592L51.2 0H0z"/></svg>
+                ) : (
+                  <Icon className="h-5 w-5" style={{ color }} />
+                )}
+              </div>
+              <div className="flex flex-col">
+                <span className="text-sm font-semibold">{name}</span>
+                <span className="text-xs text-muted-foreground">{category}</span>
+              </div>
+            </div>
+            <p className="relative mt-3 text-xs text-muted-foreground">{descCopy(name, desc)}</p>
+          </div>
         ))}
       </div>
     </Section>
   )
+}
+
+function descCopy(name: string, desc: string) {
+  if (name === 'React') return 'SPA modernas, componentes reutilizáveis e integrações com ecossistema JS.'
+  if (name === 'Vue') return 'Interfaces reativas com foco em legibilidade e produtividade.'
+  if (name === 'React Native') return 'Apps nativos para iOS e Android com o mesmo mindset de React.'
+  if (name === 'Node.js') return 'APIs escaláveis, filas e serviços backend em produção.'
+  if (name === 'Laravel') return 'Backends rápidos com boas práticas, autenticação e filas.'
+  if (name === 'Docker') return 'Ambientes isolados e reproduzíveis para cada projeto.'
+  if (name === 'Cloudflare') return 'CDN, DNS e edge functions para baixa latência.'
+  return desc
 }
 
 function About() {
@@ -93,16 +148,13 @@ function About() {
       <div className="mt-6 grid md:grid-cols-2 gap-10 animate-in fade-in-50">
         <div className="space-y-4">
           <p>
-            Desenvolvedor full-stack, 20 anos, com foco em front-end moderno.
+            Desenvolvedor full‑stack com foco na área de SaaS e automações, responsável por criar e otimizar fluxos de ponta a ponta.
           </p>
           <p>
-            Iniciei em 2023, unindo formação em Sistemas para Internet e aprendizado contínuo em ferramentas modernas.
-          </p>
-          <p>
-            Adaptável e curioso, gosto de construir soluções robustas e intuitivas.
+            Curioso, cativado, crítico e empenhado — gosto de transformar requisitos em produtos funcionais, escaláveis e bem acabados.
           </p>
           <div className="mt-2 rounded-lg border border-primary/50 bg-primary/10 px-4 py-3 text-primary dark:text-white">
-            <span className="font-semibold">Disponível para freelancer:</span> automações com n8n, landing pages e e-commerce.
+            <span className="font-semibold">Disponível para freelancer:</span> SaaS, automações (n8n), integrações e otimização de processos.
           </div>
         </div>
         <div className="rounded-xl border border-border bg-card text-card-foreground p-6">
@@ -133,34 +185,12 @@ function About() {
 }
 
 function Projects() {
-  const mountRef = useRef<HTMLDivElement | null>(null)
-  useEffect(() => {
-    if (mountRef.current) {
-      let app: ReturnType<typeof createApp> | null = null
-      const io = new IntersectionObserver(entries => {
-        for (const e of entries) {
-          if (e.isIntersecting && !app) {
-            import('@/vue/ProjectsWidget.vue').then(mod => {
-              app = createApp(mod.default)
-              app.mount(mountRef.current!)
-            })
-          }
-        }
-      }, { threshold: 0.2 })
-      io.observe(mountRef.current)
-      return () => {
-        io.disconnect()
-        if (app) app.unmount()
-      }
-    }
-  }, [])
   return (
     <Section id="projects">
       <h2 className="font-semibold">Projetos</h2>
       <div className="mt-6">
         <ProjectCarousel />
       </div>
-      <div ref={mountRef} className="mt-10"></div>
     </Section>
   )
 }
@@ -185,6 +215,7 @@ function Contact() {
 }
 
 export default function Home() {
+  useHomeAnimations()
   return (
     <>
       <Hero />
