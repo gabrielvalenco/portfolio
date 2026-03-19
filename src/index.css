@@ -175,6 +175,41 @@ html, body, #root {
   100% { transform: translate3d(0,0,0); }
 }
 
+/* ─── Gradient text ──────────────────────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #7C3AED 0%, #A855F7 45%, #EC4899 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── Tech marquee ───────────────────────────────────────────────────────────── */
+@keyframes marquee-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+/* ─── Aurora orb animations ──────────────────────────────────────────────────── */
+@keyframes orb-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(-50px, -70px) scale(1.12); }
+  66%       { transform: translate(40px, 50px) scale(0.9); }
+}
+@keyframes orb-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(60px, -50px) scale(1.1); }
+}
+@keyframes orb-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25%       { transform: translate(30px, 40px) scale(0.92); }
+  75%       { transform: translate(-40px, -20px) scale(1.08); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-in, .fade-in-50, .transition-transform { transition: none; animation: none; }
+  [style*="marquee-"], [style*="orb-"] { animation: none !important; }
 }
