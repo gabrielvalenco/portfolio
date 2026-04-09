@@ -2,7 +2,7 @@ import LogoGV from './LogoGV'
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-border/50 bg-card/20">
+    <footer className="relative border-t border-border/50 bg-card">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/8 via-transparent to-transparent"

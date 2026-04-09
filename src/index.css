@@ -63,28 +63,28 @@ html, body, #root {
 
 :root {
   --radius: 0.75rem;
-  --background: #f8fafc; /* slate-50 */
+  --background: #f8fafc;
   --foreground: #0a0a0a;
   --dot-color: rgba(109, 40, 217, 0.18);
   --card: #ffffff;
   --card-foreground: #0a0a0a;
   --popover: #ffffff;
   --popover-foreground: #0a0a0a;
-  --primary: #7C3AED; /* purple */
+  --primary: #7C3AED;
   --primary-foreground: #ffffff;
-  --secondary: #A78BFA; /* violet */
+  --secondary: #A78BFA;
   --secondary-foreground: #ffffff;
-  --muted: #f1f5f9; /* slate-100 */
-  --muted-foreground: #4b5563; /* slate-600 */
-  --accent: #8B5CF6; /* purple accent */
+  --muted: #f1f5f9;
+  --muted-foreground: #4b5563;
+  --accent: #8B5CF6;
   --accent-foreground: #ffffff;
   --destructive: #ef4444;
-  --border: #e5e7eb; /* gray-200 */
+  --border: #e5e7eb;
   --input: #e5e7eb;
   --ring: #7C3AED;
   --chart-1: #7C3AED;
   --chart-2: #8B5CF6;
-  --chart-3: #6D28D9; /* deeper purple */
+  --chart-3: #6D28D9;
   --chart-4: #22C55E;
   --chart-5: #F59E0B;
   --sidebar: #ffffff;
@@ -132,6 +132,11 @@ html, body, #root {
   --sidebar-ring: #7C3AED;
 }
 
+::selection {
+  background: rgba(124, 58, 237, 0.35);
+  color: #fafafa;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -139,7 +144,6 @@ html, body, #root {
   body {
     @apply bg-background text-foreground font-sans;
     transition: background-color 300ms ease, color 200ms ease;
-    /* Polka dot pattern (duas camadas defasadas para efeito xadrez) */
     background-image:
       radial-gradient(circle, var(--dot-color) 1.5px, transparent 1.5px),
       radial-gradient(circle, var(--dot-color) 1.5px, transparent 1.5px);
@@ -148,7 +152,7 @@ html, body, #root {
   }
   h1 { @apply text-5xl md:text-7xl font-semibold tracking-tight leading-tight; }
   h2 { @apply text-3xl md:text-4xl font-semibold; }
-  p { @apply leading-relaxed; }
+  p  { @apply leading-relaxed; }
   .container {
     width: 100%;
     max-width: 1200px;
@@ -157,33 +161,75 @@ html, body, #root {
   a {
     @apply text-primary transition-colors underline-offset-4 focus:outline-none focus:ring-2 focus:ring-ring/60 focus:ring-offset-2 focus:ring-offset-background;
   }
-  a:hover {
-    @apply text-primary/80;
-  }
+  a:hover { @apply text-primary/80; }
 }
 
-@keyframes blobMorph {
-  0% { border-radius: 42% 58% 70% 30% / 45% 30% 70% 55%; transform: translate3d(0,0,0) scale(1); }
-  33% { border-radius: 55% 45% 35% 65% / 50% 60% 40% 50%; transform: translate3d(2%, -1%, 0) scale(1.03); }
-  66% { border-radius: 35% 65% 60% 40% / 35% 55% 45% 65%; transform: translate3d(-2%, 1%, 0) scale(0.98); }
-  100% { border-radius: 42% 58% 70% 30% / 45% 30% 70% 55%; transform: translate3d(0,0,0) scale(1); }
+/* ─── Custom cursor ──────────────────────────────────────────────────────────── */
+.has-custom-cursor,
+.has-custom-cursor * {
+  cursor: none !important;
 }
 
-@keyframes floatSlow {
-  0% { transform: translate3d(0,0,0); }
-  50% { transform: translate3d(0,-6px,0); }
-  100% { transform: translate3d(0,0,0); }
-}
-
-/* ─── Gradient text ──────────────────────────────────────────────────────────── */
+/* ─── Animated gradient text ─────────────────────────────────────────────────── */
 .gradient-text {
-  background: linear-gradient(135deg, #7C3AED 0%, #A855F7 45%, #EC4899 100%);
+  background: linear-gradient(
+    135deg,
+    #7C3AED 0%,
+    #A855F7 30%,
+    #EC4899 55%,
+    #A855F7 80%,
+    #7C3AED 100%
+  );
+  background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: gradient-flow 5s linear infinite;
 }
 
-/* ─── Tech marquee ───────────────────────────────────────────────────────────── */
+@keyframes gradient-flow {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ─── Hero line clip reveal (overflow container) ─────────────────────────────── */
+.hero-line-wrap {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em; /* prevent descender clipping */
+}
+
+/* ─── Card shine on hover ────────────────────────────────────────────────────── */
+.card-shine {
+  position: relative;
+  overflow: hidden;
+}
+.card-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255,255,255,0.035) 50%,
+    transparent 60%
+  );
+  transform: translateX(-100%);
+  transition: transform 0s;
+  pointer-events: none;
+}
+.card-shine:hover::after {
+  transform: translateX(100%);
+  transition: transform 0.65s ease;
+}
+
+/* ─── Section reveal utility ─────────────────────────────────────────────────── */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+/* ─── Marquee ────────────────────────────────────────────────────────────────── */
 @keyframes marquee-left {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -193,23 +239,48 @@ html, body, #root {
   100% { transform: translateX(0); }
 }
 
-/* ─── Aurora orb animations ──────────────────────────────────────────────────── */
+/* ─── Aurora orbs ────────────────────────────────────────────────────────────── */
 @keyframes orb-1 {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  33%       { transform: translate(-50px, -70px) scale(1.12); }
-  66%       { transform: translate(40px, 50px) scale(0.9); }
+  33%       { transform: translate(-55px, -75px) scale(1.15); }
+  66%       { transform: translate(45px, 55px) scale(0.88); }
 }
 @keyframes orb-2 {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  50%       { transform: translate(60px, -50px) scale(1.1); }
+  50%       { transform: translate(65px, -55px) scale(1.12); }
 }
 @keyframes orb-3 {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  25%       { transform: translate(30px, 40px) scale(0.92); }
-  75%       { transform: translate(-40px, -20px) scale(1.08); }
+  25%       { transform: translate(35px, 45px) scale(0.9); }
+  75%       { transform: translate(-45px, -25px) scale(1.1); }
 }
 
+/* ─── Misc ───────────────────────────────────────────────────────────────────── */
+@keyframes blobMorph {
+  0%   { border-radius: 42% 58% 70% 30% / 45% 30% 70% 55%; transform: translate3d(0,0,0) scale(1); }
+  33%  { border-radius: 55% 45% 35% 65% / 50% 60% 40% 50%; transform: translate3d(2%, -1%, 0) scale(1.03); }
+  66%  { border-radius: 35% 65% 60% 40% / 35% 55% 45% 65%; transform: translate3d(-2%, 1%, 0) scale(0.98); }
+  100% { border-radius: 42% 58% 70% 30% / 45% 30% 70% 55%; transform: translate3d(0,0,0) scale(1); }
+}
+@keyframes floatSlow {
+  0%   { transform: translate3d(0,0,0); }
+  50%  { transform: translate3d(0,-6px,0); }
+  100% { transform: translate3d(0,0,0); }
+}
+
+/* ─── Scroll indicator pulse ─────────────────────────────────────────────────── */
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0) translateX(-50%); opacity: 0.5; }
+  50%       { transform: translateY(6px) translateX(-50%); opacity: 0.9; }
+}
+.scroll-indicator {
+  animation: scroll-bounce 1.8s ease-in-out infinite;
+}
+
+/* ─── Reduced-motion overrides ───────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .animate-in, .fade-in-50, .transition-transform { transition: none; animation: none; }
+  .animate-in, .fade-in-50, .transition-transform,
+  .gradient-text { animation: none; transition: none; }
   [style*="marquee-"], [style*="orb-"] { animation: none !important; }
+  .scroll-indicator { animation: none; }
 }

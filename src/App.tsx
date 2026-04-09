@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Home from '@/pages/Home'
 import Certificates from '@/pages/Certificates'
+import CustomCursor from '@/components/CustomCursor'
 
 export default function App() {
   useEffect(() => {
@@ -31,6 +32,7 @@ export default function App() {
   }, [])
   return (
     <BrowserRouter>
+      <CustomCursor />
       <div className="min-h-dvh flex flex-col">
         <a href="#home" className="sr-only focus:not-sr-only fixed top-2 left-2 z-[60] px-3 py-2 rounded bg-primary text-primary-foreground">Ir para conteúdo</a>
         <Navbar />
