@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Button } from './ui/button'
 import { Sun, Moon, Menu, X } from 'lucide-react'
-import LogoGV from './LogoGV'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 function Progress() {
@@ -54,8 +53,8 @@ export default function Navbar() {
       <Progress />
       <div className="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => go('home')}>
-          <div className="flex items-center justify-center rounded-full border border-primary/40 bg-primary/10 px-2 py-1 backdrop-blur-sm">
-            <LogoGV className="h-5 w-5 text-primary" />
+          <div className="flex items-center justify-center rounded-full overflow-hidden border border-primary/40 w-8 h-8 backdrop-blur-sm">
+            <img src="/logo.png" alt="Logo Gabriel Valenço" className="w-full h-full object-cover" draggable={false} />
           </div>
           <div className="flex flex-col leading-tight">
             <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Portfolio</span>

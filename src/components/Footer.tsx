@@ -1,5 +1,3 @@
-import LogoGV from './LogoGV'
-
 export default function Footer() {
   return (
     <footer className="relative border-t border-border/50 bg-card">
@@ -12,8 +10,8 @@ export default function Footer() {
           {/* Brand */}
           <div className="space-y-3">
             <div className="flex items-center gap-2">
-              <div className="flex items-center justify-center rounded-full border border-primary/40 bg-primary/10 p-1.5">
-                <LogoGV className="h-4 w-4 text-primary" />
+              <div className="flex items-center justify-center rounded-full overflow-hidden border border-primary/40 w-7 h-7">
+                <img src="/logo.png" alt="Logo" className="w-full h-full object-cover" draggable={false} />
               </div>
               <span className="font-semibold">Gabriel Valenço</span>
             </div>
