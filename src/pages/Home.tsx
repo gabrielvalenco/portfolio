@@ -2,20 +2,15 @@ import React, { useRef } from 'react'
 import { Button } from '@/components/ui/button'
 import {
   Github, Mail, Linkedin, ArrowUpRight,
-  Briefcase, ExternalLink, ChevronDown,
+  Briefcase, ExternalLink,
 } from 'lucide-react'
 import Section from '@/components/Section'
 import TechMarquee from '@/components/TechMarquee'
+import MatrixHero from '@/components/MatrixHero'
 import useHomeAnimations from '@/hooks/useHomeAnimations'
 import { gsap } from '@/lib/gsap'
-import { lazy, Suspense } from 'react'
 
-// Lazy-load Remotion to prevent build breakage if env has issues
-const RemotionHero = lazy(() =>
-  import('@/components/RemotionHero').catch(
-    () => ({ default: (() => null) as unknown as () => React.ReactElement })
-  )
-)
+const LIME = '#9eff00'
 
 // ─── Magnetic button wrapper ───────────────────────────────────────────────────
 
@@ -39,203 +34,6 @@ function Magnetic({ children }: { children: React.ReactNode }) {
     <div ref={ref} onMouseMove={onMove} onMouseLeave={onLeave} style={{ display: 'inline-block' }}>
       {children}
     </div>
-  )
-}
-
-// ─── Hero Photo ────────────────────────────────────────────────────────────────
-
-const PHOTO_SRC = encodeURI('/ChatGPT Image 19 de mar. de 2026, 16_56_27.png')
-
-function HeroPhoto() {
-  const cardRef = useRef<HTMLDivElement>(null)
-
-  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const el = cardRef.current
-    if (!el) return
-    const { left, top, width, height } = el.getBoundingClientRect()
-    const x = (e.clientX - left) / width  - 0.5
-    const y = (e.clientY - top)  / height - 0.5
-    gsap.to(el, {
-      rotateY: x * 18,
-      rotateX: -y * 18,
-      scale: 1.045,
-      duration: 0.4,
-      ease: 'power2.out',
-      transformPerspective: 900,
-    })
-  }
-
-  const onLeave = () => {
-    gsap.to(cardRef.current, {
-      rotateY: 0, rotateX: 0, scale: 1,
-      duration: 0.9, ease: 'power3.out',
-    })
-  }
-
-  return (
-    <div className="flex justify-center" data-hero-photo>
-      <div
-        ref={cardRef}
-        onMouseMove={onMove}
-        onMouseLeave={onLeave}
-        className="relative group cursor-pointer"
-        style={{ transformStyle: 'preserve-3d', willChange: 'transform' }}
-      >
-        {/* Outer glow pulse */}
-        <div className="absolute -inset-[8px] rounded-[30px] bg-gradient-to-br from-primary/40 via-violet-400/20 to-pink-500/40 opacity-0 group-hover:opacity-70 blur-[18px] transition-opacity duration-500" />
-        {/* Tight glow border */}
-        <div className="absolute -inset-[2px] rounded-3xl bg-gradient-to-br from-primary via-violet-400 to-pink-500 opacity-45 group-hover:opacity-90 blur-[3px] transition-opacity duration-300" />
-        {/* Image container */}
-        <div className="relative rounded-3xl overflow-hidden w-60 sm:w-72 md:w-80 ring-1 ring-white/10">
-          <img
-            src={PHOTO_SRC}
-            alt="Gabriel Valenço"
-            className="w-full h-full object-cover block"
-            draggable={false}
-          />
-          {/* Hover color tint */}
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
-          {/* Shine streak */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        </div>
-
-        {/* Floating badge */}
-        <div className="absolute -bottom-3 -left-4 flex items-center gap-1.5 rounded-full border border-emerald-500/40 bg-background/90 px-3 py-1.5 text-xs font-medium text-emerald-500 backdrop-blur-md shadow-lg">
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-          Online
-        </div>
-      </div>
-    </div>
-  )
-}
-
-// ─── Hero ──────────────────────────────────────────────────────────────────────
-
-function Hero() {
-  return (
-    <header id="home" className="relative min-h-screen flex items-center overflow-hidden">
-
-      {/* Remotion animated background (floating code tokens) */}
-      <Suspense fallback={null}>
-        <RemotionHero />
-      </Suspense>
-
-      {/* Aurora orbs — subtle, black-dominant palette */}
-      <div
-        className="pointer-events-none absolute -top-24 -right-24 h-[700px] w-[700px] rounded-full"
-        style={{
-          background: 'radial-gradient(circle at 40% 40%, rgba(124,58,237,0.22) 0%, rgba(168,85,247,0.08) 50%, transparent 70%)',
-          filter: 'blur(110px)',
-          animation: 'orb-1 20s ease-in-out infinite',
-        }}
-      />
-      <div
-        className="pointer-events-none absolute -bottom-36 -left-24 h-[500px] w-[500px] rounded-full"
-        style={{
-          background: 'radial-gradient(circle at 60% 60%, rgba(109,40,217,0.16) 0%, rgba(124,58,237,0.07) 55%, transparent 70%)',
-          filter: 'blur(90px)',
-          animation: 'orb-2 25s ease-in-out infinite',
-        }}
-      />
-
-      {/* Bottom fade into next section */}
-      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background to-transparent" />
-
-      <div className="container mx-auto px-6 pt-24 pb-36 relative z-10">
-        <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-8 items-center">
-
-          {/* Left: text */}
-          <div>
-            {/* Available badge */}
-            <div data-hero-badge className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3.5 py-1.5 text-xs font-medium text-emerald-600 dark:text-emerald-400">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              Disponível para freelancer
-            </div>
-
-            {/* Intro label */}
-            <div className="hero-line-wrap mb-3">
-              <p data-hero-intro className="text-sm font-medium tracking-widest text-primary uppercase">
-                Gabriel Valenço
-              </p>
-            </div>
-
-            {/* Main headline — each line wrapped for clip reveal */}
-            <h1 className="font-bold">
-              <span className="hero-line-wrap">
-                <span data-hero-line className="block">Transformando ideias</span>
-              </span>
-              <span className="hero-line-wrap">
-                <span data-hero-line className="gradient-text block">em produtos digitais.</span>
-              </span>
-            </h1>
-
-            {/* Description */}
-            <p data-hero-desc className="mt-6 max-w-xl text-lg text-muted-foreground leading-relaxed">
-              Desenvolvedor full-stack focado em SaaS, automações e experiências modernas com{' '}
-              <span className="font-semibold text-foreground">React</span>,{' '}
-              <span className="font-semibold text-foreground">Vue</span> e{' '}
-              <span className="font-semibold text-foreground">Laravel</span>.
-            </p>
-
-            {/* CTA buttons — magnetic */}
-            <div className="mt-10 flex flex-wrap gap-3">
-              <Magnetic>
-                <button
-                  data-hero-cta
-                  onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                >
-                  <Button variant="highlight" size="lg" asChild>
-                    <span>
-                      Ver projetos
-                      <ArrowUpRight className="ml-2 h-4 w-4" />
-                    </span>
-                  </Button>
-                </button>
-              </Magnetic>
-              <Magnetic>
-                <button
-                  data-hero-cta
-                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                >
-                  <Button variant="outline" size="lg" asChild>
-                    <span>Contato</span>
-                  </Button>
-                </button>
-              </Magnetic>
-            </div>
-
-            {/* Social links */}
-            <div data-hero-socials className="mt-8 flex items-center gap-3">
-              {[
-                { href: 'https://github.com/gabrielvalenco',                          label: 'GitHub',   Icon: Github   },
-                { href: 'https://www.linkedin.com/in/gabriel-valenço-480b43276',      label: 'LinkedIn', Icon: Linkedin },
-                { href: 'mailto:gabrielvalencoofc@gmail.com',                          label: 'Email',    Icon: Mail     },
-              ].map(({ href, label, Icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target={href.startsWith('mailto') ? undefined : '_blank'}
-                  rel="noreferrer"
-                  aria-label={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-border/60 bg-card/50 text-muted-foreground hover:text-foreground hover:border-primary/60 hover:bg-primary/10 transition-all no-underline"
-                >
-                  <Icon className="h-4 w-4" />
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Right: photo */}
-          <HeroPhoto />
-        </div>
-      </div>
-
-      {/* Scroll indicator */}
-      <div className="scroll-indicator absolute bottom-10 left-1/2 flex flex-col items-center gap-1 opacity-60">
-        <span className="text-xs text-muted-foreground tracking-widest uppercase">scroll</span>
-        <ChevronDown className="h-4 w-4 text-muted-foreground" />
-      </div>
-    </header>
   )
 }
 
@@ -730,12 +528,35 @@ function Contact() {
 export default function Home() {
   useHomeAnimations()
   return (
-    <>
-      <Hero />
-      <Technologies />
-      <About />
-      <Projects />
-      <Contact />
-    </>
+    <div className="relative">
+      <MatrixHero />
+
+      {/* Content slides up over the pinned matrix; the codes disappear beneath it */}
+      <div className="relative z-10 bg-background">
+        {/* Lime feed-glow at the contact line, intensifying with scroll */}
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 z-20">
+          <div
+            className="h-px w-full"
+            style={{
+              background: LIME,
+              opacity: 'calc(0.35 + 0.65 * var(--matrix-glow, 0))',
+              boxShadow: `0 0 18px 1px ${LIME}, 0 0 6px ${LIME}`,
+            }}
+          />
+          <div
+            className="h-36 w-full"
+            style={{
+              background: `linear-gradient(to bottom, ${LIME}2b, transparent)`,
+              opacity: 'calc(0.45 + 0.55 * var(--matrix-glow, 0))',
+            }}
+          />
+        </div>
+
+        <Technologies />
+        <About />
+        <Projects />
+        <Contact />
+      </div>
+    </div>
   )
 }
