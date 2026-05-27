@@ -1,11 +1,6 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useEffect } from 'react'
 import Lenis from 'lenis'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
 import Home from '@/pages/Home'
-import Certificates from '@/pages/Certificates'
-import CustomCursor from '@/components/CustomCursor'
 
 export default function App() {
   useEffect(() => {
@@ -30,20 +25,6 @@ export default function App() {
       lenis.destroy()
     }
   }, [])
-  return (
-    <BrowserRouter>
-      <CustomCursor />
-      <div className="min-h-dvh flex flex-col">
-        <a href="#home" className="sr-only focus:not-sr-only fixed top-2 left-2 z-[60] px-3 py-2 rounded bg-primary text-primary-foreground">Ir para conteúdo</a>
-        <Navbar />
-        <main className="flex-1">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/certificates" element={<Certificates />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </BrowserRouter>
-  )
+
+  return <Home />
 }
