@@ -1,56 +1,15 @@
 import React, { useRef } from 'react'
-import {
-  Github, Mail, Linkedin, ArrowUpRight, ExternalLink,
-} from 'lucide-react'
+import { Github, Mail, Linkedin, ArrowUpRight, User, Briefcase } from 'lucide-react'
 import TechMarquee from '@/components/TechMarquee'
 import MatrixHero from '@/components/MatrixHero'
+import TerminalSection from '@/components/TerminalSection'
+import ProjectWindow from '@/components/ProjectWindow'
+import { TermLink, TermAnchor } from '@/components/TermButton'
 import useHomeAnimations from '@/hooks/useHomeAnimations'
 import { gsap } from '@/lib/gsap'
+import { featuredProjects } from '@/data/projects'
 
 const LIME = '#9eff00'
-
-// ─── Section wrapper (terminal-styled header) ─────────────────────────────────
-
-function TerminalSection({
-  id, index, name, title, subtitle, children,
-}: {
-  id: string
-  index: string
-  name: string
-  title: string
-  subtitle?: string
-  children: React.ReactNode
-}) {
-  return (
-    <section id={id} className="relative border-t border-[#9eff00]/10">
-      <div className="container mx-auto px-6 py-24 md:py-32">
-        <header className="mb-12" data-term-head>
-          <div
-            className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.32em]"
-            data-term-meta
-            style={{ color: LIME }}
-          >
-            <span className="opacity-70">// {index}</span>
-            <span className="h-px w-10 sm:w-16" style={{ background: `${LIME}66` }} />
-            <span>./{name}</span>
-          </div>
-          <h2
-            className="mt-5 font-mono text-3xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight leading-none term-glitch"
-            data-term-title
-          >
-            <span style={{ color: LIME }}>&gt;_</span> <span data-term-text>{title}</span>
-          </h2>
-          {subtitle && (
-            <p className="mt-4 max-w-xl font-mono text-sm text-zinc-400" data-term-sub>
-              <span style={{ color: LIME }}>$</span> {subtitle}
-            </p>
-          )}
-        </header>
-        {children}
-      </div>
-    </section>
-  )
-}
 
 // ─── Magnetic button wrapper ──────────────────────────────────────────────────
 
@@ -180,6 +139,16 @@ function About() {
               ))}
             </ul>
           </div>
+
+          {/* CTAs to deeper pages */}
+          <div className="flex flex-wrap gap-3 pt-2" data-animate-item>
+            <Magnetic>
+              <TermLink to="/about" icon={User}>./about_me --read</TermLink>
+            </Magnetic>
+            <Magnetic>
+              <TermLink to="/experience" icon={Briefcase}>./career --log</TermLink>
+            </Magnetic>
+          </div>
         </div>
 
         {/* Stats + skills */}
@@ -234,221 +203,25 @@ function About() {
 
 // ─── Projects ─────────────────────────────────────────────────────────────────
 
-type Project = {
-  title: string
-  desc:  string
-  href:  string
-  live?: string
-  repo?: string
-  tags?: string[]
-}
-
-const projects: Project[] = [
-  {
-    title: 'EnfantIA',
-    desc: 'Plataforma educacional com experiências interativas, conteúdo dinâmico e design pensado para engajamento infantil.',
-    href: 'https://enfantia.com.br/',
-    live: 'https://enfantia.com.br/',
-    tags: ['Web', 'UI/UX', 'React'],
-  },
-  {
-    title: 'Audio Downloader & Transcriber',
-    desc: 'Baixe áudio com yt-dlp + FFmpeg e transcreva via IA (CLI + Web).',
-    href: 'https://github.com/gabrielvalenco/Audio-Downloader-Transcriber-Web-CLI',
-    repo: 'https://github.com/gabrielvalenco/Audio-Downloader-Transcriber-Web-CLI',
-    tags: ['Python', 'FFmpeg', 'yt-dlp', 'Web UI'],
-  },
-  {
-    title: 'WebhookControl',
-    desc: 'Entrega resiliente de webhooks com retries exponenciais, logs e Horizon.',
-    href: 'https://github.com/gabrielvalenco/WebhookControl-Resilient-Webhook-Delivery-Platform',
-    repo: 'https://github.com/gabrielvalenco/WebhookControl-Resilient-Webhook-Delivery-Platform',
-    tags: ['Laravel', 'Redis', 'Horizon'],
-  },
-  {
-    title: 'Intelligent Inventory',
-    desc: 'Gestão de estoque com IA integrada a n8n e rotinas de automação.',
-    href: 'https://github.com/gabrielvalenco/Intelligent-Inventory-Management-System-with-AI-Integration',
-    repo: 'https://github.com/gabrielvalenco/Intelligent-Inventory-Management-System-with-AI-Integration',
-    tags: ['n8n', 'Automação', 'IA'],
-  },
-  {
-    title: 'Módulo One',
-    desc: 'Landing page para construtora modular com foco em sistemas painelizados e vida leve.',
-    href: 'https://moduloone.com.br/',
-    live: 'https://moduloone.com.br/',
-    tags: ['Landing page', 'SaaS', 'Admin panel'],
-  },
-  {
-    title: 'Rose Valenço',
-    desc: 'Website pessoal e profissional com design moderno, foco em presença digital e conversão.',
-    href: 'https://rosevalenco.com.br/',
-    live: 'https://rosevalenco.com.br/',
-    tags: ['Landing page', 'Web'],
-  },
-  {
-    title: 'Terras de Santa Bárbara',
-    desc: 'Landing page imobiliária para loteamento de alto padrão em Buritama (SP).',
-    href: 'https://terrassantabarbara.com/',
-    live: 'https://terrassantabarbara.com/',
-    tags: ['Landing page', 'Imobiliário'],
-  },
-  {
-    title: 'Colégio Dinâmico',
-    desc: 'Landing page institucional para colégio com 30 anos de tradição e foco em tecnologia.',
-    href: 'https://www.dinamicoetop.com.br/',
-    live: 'https://www.dinamicoetop.com.br/',
-    tags: ['Landing page', 'Educação'],
-  },
-  {
-    title: 'UI Experiments',
-    desc: 'Interações, micro animações e protótipos em React com GSAP.',
-    href: '#',
-    tags: ['React', 'GSAP'],
-  },
-  {
-    title: 'Data Tools',
-    desc: 'Pipelines e ETL para processamento e análise de dados.',
-    href: '#',
-    tags: ['Python', 'ETL'],
-  },
-]
-
-function slugFile(title: string): string {
-  return title.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '') + '.tsx'
-}
-
-function ProjectWindow({ p, featured = false }: { p: Project; featured?: boolean }) {
-  const file = slugFile(p.title)
-  const url = p.live ?? p.repo
-  return (
-    <div
-      data-animate-item
-      className={`terminal-panel corner-brackets group relative flex flex-col font-mono ${featured ? 'md:p-0' : ''}`}
-    >
-      <span className="cb-tl" />
-      <span className="cb-tr" />
-      <span className="cb-bl" />
-      <span className="cb-br" />
-      <div className="scan-sweep" />
-
-      {/* Window title bar */}
-      <div className="flex items-center justify-between border-b border-[#9eff00]/15 px-3 py-2">
-        <div className="flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-[#9eff00]/70 shadow-[0_0_6px_#9eff0080]" />
-          <span className="h-2 w-2 rounded-full bg-[#9eff00]/35" />
-          <span className="h-2 w-2 rounded-full bg-[#9eff00]/15" />
-        </div>
-        <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-500 truncate ml-2">
-          {file}
-        </span>
-        {url && (
-          <a
-            href={url}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={`abrir ${p.title}`}
-            className="ml-3 inline-flex h-5 w-5 items-center justify-center text-zinc-400 hover:text-[#9eff00] no-underline transition-colors"
-          >
-            <ArrowUpRight className="h-3 w-3" />
-          </a>
-        )}
-      </div>
-
-      {/* Body */}
-      <div className={`flex flex-1 flex-col p-5 ${featured ? 'md:p-7' : ''}`}>
-        {featured && (
-          <span
-            className="mb-3 inline-flex w-fit items-center gap-1.5 border px-2 py-0.5 text-[10px] uppercase tracking-[0.22em]"
-            style={{ color: LIME, borderColor: `${LIME}66` }}
-          >
-            <span className="h-1 w-1 rounded-full bg-[#9eff00]" />
-            featured
-          </span>
-        )}
-        <h3 className={`font-bold uppercase tracking-tight text-zinc-100 ${featured ? 'text-xl sm:text-2xl' : 'text-base'}`}>
-          {p.title}
-        </h3>
-        <p className={`mt-2 text-xs leading-relaxed text-zinc-400 ${featured ? 'sm:text-sm' : ''}`}>
-          {p.desc}
-        </p>
-
-        {p.tags && (
-          <div className="mt-4 flex flex-wrap gap-1.5">
-            {p.tags.map(t => (
-              <span
-                key={t}
-                className="border border-[#9eff00]/20 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-zinc-400"
-              >
-                {t}
-              </span>
-            ))}
-          </div>
-        )}
-
-        <div className="mt-auto pt-5 flex items-center justify-between border-t border-dashed border-[#9eff00]/15 text-[11px]">
-          <span style={{ color: LIME }} className="flex items-center gap-1.5">
-            <span className="opacity-70">$</span>
-            <span>{p.live ? 'open --live' : p.repo ? 'open --repo' : 'wip'}</span>
-            <span className="term-blink" style={{ color: LIME }}>_</span>
-          </span>
-          <div className="flex items-center gap-3">
-            {p.live && (
-              <a
-                href={p.live}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-1 text-zinc-400 hover:text-[#9eff00] no-underline transition-colors"
-              >
-                <ExternalLink className="h-3 w-3" /> live
-              </a>
-            )}
-            {p.repo && (
-              <a
-                href={p.repo}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-1 text-zinc-400 hover:text-[#9eff00] no-underline transition-colors"
-              >
-                <Github className="h-3 w-3" /> repo
-              </a>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
 function Projects() {
-  const [featured, ...rest] = projects
   return (
     <TerminalSection
       id="projects"
       index="03"
       name="projects.log"
       title="Projetos"
-      subtitle="tail -n 50 /var/log/projects"
+      subtitle="tail -n 3 /var/log/projects --featured"
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div className="sm:col-span-2 lg:col-span-3">
-          <ProjectWindow p={featured} featured />
-        </div>
-        {rest.map(p => (
-          <ProjectWindow key={p.title} p={p} />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {featuredProjects.map(p => (
+          <ProjectWindow key={p.title} p={p} featured />
         ))}
       </div>
 
       <div className="mt-10 flex justify-center" data-animate-item>
-        <a
-          href="https://github.com/gabrielvalenco"
-          target="_blank"
-          rel="noreferrer"
-          className="group inline-flex items-center gap-2 border border-[#9eff00]/50 px-4 py-2 font-mono text-xs uppercase tracking-[0.24em] text-[#9eff00] no-underline transition-all hover:bg-[#9eff00]/10 hover:border-[#9eff00] hover:shadow-[0_0_24px_rgba(158,255,0,0.25)]"
-        >
-          <span>$ git log --all</span>
-          <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-        </a>
+        <Magnetic>
+          <TermLink to="/projects" icon={ArrowUpRight}>./ls projects --all</TermLink>
+        </Magnetic>
       </div>
     </TerminalSection>
   )
@@ -513,15 +286,9 @@ function Contact() {
           <div className="mt-8 flex flex-wrap gap-3">
             {contactLinks.map(({ href, label, Icon }) => (
               <Magnetic key={label}>
-                <a
-                  href={href}
-                  target={href.startsWith('mailto') ? undefined : '_blank'}
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 border border-[#9eff00]/40 bg-black/60 px-4 py-2.5 font-mono text-xs uppercase tracking-[0.22em] text-zinc-200 no-underline transition-all hover:border-[#9eff00] hover:bg-[#9eff00]/10 hover:text-[#9eff00] hover:shadow-[0_0_28px_rgba(158,255,0,0.3)]"
-                >
-                  <Icon className="h-3.5 w-3.5" />
+                <TermAnchor href={href} target={href.startsWith('mailto') ? undefined : '_blank'} icon={Icon}>
                   {label}
-                </a>
+                </TermAnchor>
               </Magnetic>
             ))}
           </div>

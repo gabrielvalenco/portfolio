@@ -32,12 +32,10 @@ export default function MatrixHero() {
         </p>
 
         <h1
-          className="text-5xl font-bold uppercase leading-none tracking-tight sm:text-7xl md:text-8xl"
+          className="whitespace-nowrap text-4xl font-bold uppercase leading-none tracking-tight sm:text-6xl md:text-7xl lg:text-8xl"
           style={{ color: LIME, textShadow: `0 0 28px ${LIME}66, 0 0 6px ${LIME}aa` }}
         >
-          Gabriel
-          <br />
-          Valenço
+          Gabriel Valenço
         </h1>
 
         <p className="mt-7 max-w-md text-sm text-lime-200/70 sm:text-base">
