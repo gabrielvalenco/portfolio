@@ -13,6 +13,15 @@ const FONT = 16
 const TAIL = 13
 const MOUSE_RADIUS = 130
 const MOUSE_PUSH = 24
+const TRAIL_LEN = 10
+const MAX_PUSH = MOUSE_PUSH * 1.7
+const MAX_PUSH_SQ = MAX_PUSH * MAX_PUSH
+
+// Precomputed trail weights — newest (i=0) at full strength, decaying with age.
+const TRAIL_WEIGHTS: number[] = Array.from(
+  { length: TRAIL_LEN },
+  (_, i) => Math.pow(1 - i / TRAIL_LEN, 1.6),
+)
 
 export default function MatrixRain() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -66,21 +75,19 @@ export default function MatrixRain() {
     let dir = 1
     let raf = 0
 
-    // Mouse "bubble" — smoothed position, off-screen when not present.
+    // Mouse "bubble" + trail — smoothed position, off-screen when not present.
     const OFF = -99999
     let mouseX = OFF
     let mouseY = OFF
     let mouseTargetX = OFF
     let mouseTargetY = OFF
-    const radius2 = MOUSE_RADIUS * MOUSE_RADIUS
+    const trailX = new Float32Array(TRAIL_LEN).fill(OFF)
+    const trailY = new Float32Array(TRAIL_LEN).fill(OFF)
 
     const IDLE = 0.14 // gentle baseline drift (rows/frame) so it feels alive
 
     function paint() {
       ctx.clearRect(0, 0, width, height)
-
-      const mx = mouseX
-      const my = mouseY
 
       for (let c = 0; c < cols; c++) {
         const period = periods[c]
@@ -109,28 +116,46 @@ export default function MatrixRain() {
             alpha = 0.10
           }
 
-          // Mouse bubble: push outward + brighten within radius
-          let dx_ = x - mx
-          let dy_ = y - my
-          const dist2 = dx_ * dx_ + dy_ * dy_
+          // Mouse bubble + trail: each trail point pushes & brightens.
+          let dxSum = 0
+          let dySum = 0
+          let maxEase = 0
+          for (let ti = 0; ti < TRAIL_LEN; ti++) {
+            const tw = TRAIL_WEIGHTS[ti]
+            const tdx = x - trailX[ti]
+            const tdy = y - trailY[ti]
+            const effR = MOUSE_RADIUS * (0.55 + 0.45 * tw)
+            const td2 = tdx * tdx + tdy * tdy
+            if (td2 >= effR * effR) continue
+            const td = Math.sqrt(td2)
+            const t = 1 - td / effR
+            const ease = t * t * (3 - 2 * t) * tw
+            if (ease > maxEase) maxEase = ease
+            if (td > 0.5) {
+              const inv = 1 / td
+              const push = ease * MOUSE_PUSH
+              dxSum += tdx * inv * push
+              dySum += tdy * inv * push
+            }
+          }
 
           let drawX = x
           let drawY = y
-          if (dist2 < radius2) {
-            const dist = Math.sqrt(dist2)
-            const t = 1 - dist / MOUSE_RADIUS
-            const ease = t * t * (3 - 2 * t) // smoothstep
-            const push = ease * MOUSE_PUSH
-            if (dist > 0.5) {
-              const inv = 1 / dist
-              drawX = x + dx_ * inv * push
-              drawY = y + dy_ * inv * push
+          if (maxEase > 0) {
+            // Clamp combined push so overlapping trail points don't explode.
+            const sumSq = dxSum * dxSum + dySum * dySum
+            if (sumSq > MAX_PUSH_SQ) {
+              const k = MAX_PUSH / Math.sqrt(sumSq)
+              dxSum *= k
+              dySum *= k
             }
-            alpha = Math.min(1, alpha + ease * 0.7)
+            drawX = x + dxSum
+            drawY = y + dySum
+            alpha = Math.min(1, alpha + maxEase * 0.7)
             if (!isLead) {
-              cr = (cr + (220 - cr) * ease) | 0
-              cg = (cg + (255 - cg) * ease) | 0
-              cb = (cb + (170 - cb) * ease) | 0
+              cr = (cr + (220 - cr) * maxEase) | 0
+              cg = (cg + (255 - cg) * maxEase) | 0
+              cb = (cb + (170 - cb) * maxEase) | 0
             }
           }
 
@@ -158,6 +183,14 @@ export default function MatrixRain() {
       // Smooth mouse position toward latest event target
       mouseX += (mouseTargetX - mouseX) * 0.3
       mouseY += (mouseTargetY - mouseY) * 0.3
+
+      // Shift trail (newest at index 0) and record current smoothed position
+      for (let i = TRAIL_LEN - 1; i > 0; i--) {
+        trailX[i] = trailX[i - 1]
+        trailY[i] = trailY[i - 1]
+      }
+      trailX[0] = mouseX
+      trailY[0] = mouseY
 
       // flicker a small slice of glyphs each frame
       const n = (chars.length * 0.012) | 0
@@ -190,10 +223,14 @@ export default function MatrixRain() {
     const onMouseMove = (e: MouseEvent) => {
       mouseTargetX = e.clientX
       mouseTargetY = e.clientY
-      // First move: snap so the bubble doesn't fly in from off-screen.
+      // First move: snap so the bubble (and trail) don't fly in from off-screen.
       if (mouseX === OFF) {
         mouseX = mouseTargetX
         mouseY = mouseTargetY
+        for (let i = 0; i < TRAIL_LEN; i++) {
+          trailX[i] = mouseTargetX
+          trailY[i] = mouseTargetY
+        }
       }
     }
     const onMouseLeave = () => {
