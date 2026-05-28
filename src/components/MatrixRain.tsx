@@ -43,6 +43,14 @@ export default function MatrixRain() {
     let periods: number[] = []
     let speeds: number[] = []
     let heads: number[] = []
+    // Per-cell spring state: current offset (offX/offY) + velocity (velX/velY).
+    // Targets are recomputed each frame from the cursor trail; the spring
+    // relaxes back to rest so the "wake" closes gradually.
+    let offX = new Float32Array(0)
+    let offY = new Float32Array(0)
+    let velX = new Float32Array(0)
+    let velY = new Float32Array(0)
+    let bright = new Float32Array(0) // smoothed brightness per cell (0..1)
 
     function build() {
       width = cv.clientWidth
@@ -56,8 +64,9 @@ export default function MatrixRain() {
 
       cols = Math.ceil(width / FONT) + 1
       rows = Math.ceil(height / FONT) + 2
-      chars = new Array(cols * rows)
-      for (let i = 0; i < chars.length; i++) chars[i] = randGlyph()
+      const cellCount = cols * rows
+      chars = new Array(cellCount)
+      for (let i = 0; i < cellCount; i++) chars[i] = randGlyph()
       periods = new Array(cols)
       speeds = new Array(cols)
       heads = new Array(cols)
@@ -66,6 +75,11 @@ export default function MatrixRain() {
         speeds[c] = 0.55 + Math.random() * 0.9
         heads[c] = Math.random() * rows
       }
+      offX = new Float32Array(cellCount)
+      offY = new Float32Array(cellCount)
+      velX = new Float32Array(cellCount)
+      velY = new Float32Array(cellCount)
+      bright = new Float32Array(cellCount)
     }
     build()
 
@@ -86,6 +100,14 @@ export default function MatrixRain() {
 
     const IDLE = 0.14 // gentle baseline drift (rows/frame) so it feels alive
 
+    // Spring tuning: low stiffness + heavy damping = water-like return.
+    // The cell opens fast (target jumps high) but closes slowly (small spring
+    // force back to rest), exactly the "wake closing behind the fish" feel.
+    const SPRING_K = 0.055
+    const SPRING_D = 0.84
+    const BRIGHT_RISE = 0.55  // fast brightening as bubble arrives
+    const BRIGHT_FALL = 0.07  // slow fade as bubble leaves
+
     function paint() {
       ctx.clearRect(0, 0, width, height)
 
@@ -96,13 +118,14 @@ export default function MatrixRain() {
         const base = c * rows
 
         for (let r = 0; r < rows; r++) {
+          const idx = base + r
           const b = mod((head - r) * dir, period) // 0 at the leading char, grows behind
-          const ch = chars[base + r]
+          const ch = chars[idx]
           const y = r * FONT
 
+          // Base color/alpha from rain phase.
           let cr: number, cg: number, cb: number, alpha: number
           let isLead = false
-
           if (b < 1.15) {
             cr = 208; cg = 255; cb = 170
             alpha = 0.95
@@ -116,9 +139,9 @@ export default function MatrixRain() {
             alpha = 0.10
           }
 
-          // Mouse bubble + trail: each trail point pushes & brightens.
-          let dxSum = 0
-          let dySum = 0
+          // Target displacement from cursor trail (sum of radial pushes).
+          let tgtX = 0
+          let tgtY = 0
           let maxEase = 0
           for (let ti = 0; ti < TRAIL_LEN; ti++) {
             const tw = TRAIL_WEIGHTS[ti]
@@ -134,33 +157,51 @@ export default function MatrixRain() {
             if (td > 0.5) {
               const inv = 1 / td
               const push = ease * MOUSE_PUSH
-              dxSum += tdx * inv * push
-              dySum += tdy * inv * push
+              tgtX += tdx * inv * push
+              tgtY += tdy * inv * push
             }
           }
+          // Clamp combined target so overlapping points don't explode.
+          const sumSq = tgtX * tgtX + tgtY * tgtY
+          if (sumSq > MAX_PUSH_SQ) {
+            const k = MAX_PUSH / Math.sqrt(sumSq)
+            tgtX *= k
+            tgtY *= k
+          }
 
-          let drawX = x
-          let drawY = y
-          if (maxEase > 0) {
-            // Clamp combined push so overlapping trail points don't explode.
-            const sumSq = dxSum * dxSum + dySum * dySum
-            if (sumSq > MAX_PUSH_SQ) {
-              const k = MAX_PUSH / Math.sqrt(sumSq)
-              dxSum *= k
-              dySum *= k
-            }
-            drawX = x + dxSum
-            drawY = y + dySum
-            alpha = Math.min(1, alpha + maxEase * 0.7)
+          // Spring step: glyph eases toward the target, slowly returns home.
+          let ox = offX[idx]
+          let oy = offY[idx]
+          let vx = velX[idx]
+          let vy = velY[idx]
+          vx += (tgtX - ox) * SPRING_K - vx * SPRING_D
+          vy += (tgtY - oy) * SPRING_K - vy * SPRING_D
+          ox += vx
+          oy += vy
+          // Snap tiny residuals to zero so cells eventually rest exactly.
+          if (ox * ox + oy * oy < 0.0004 && vx * vx + vy * vy < 0.0004) {
+            ox = 0; oy = 0; vx = 0; vy = 0
+          }
+          offX[idx] = ox; offY[idx] = oy
+          velX[idx] = vx; velY[idx] = vy
+
+          // Smoothed brightness — rises fast, fades slow ("glow lingers in wake").
+          let bg = bright[idx]
+          if (maxEase > bg) bg += (maxEase - bg) * BRIGHT_RISE
+          else              bg += (maxEase - bg) * BRIGHT_FALL
+          bright[idx] = bg
+
+          if (bg > 0) {
+            alpha = Math.min(1, alpha + bg * 0.7)
             if (!isLead) {
-              cr = (cr + (220 - cr) * maxEase) | 0
-              cg = (cg + (255 - cg) * maxEase) | 0
-              cb = (cb + (170 - cb) * maxEase) | 0
+              cr = (cr + (220 - cr) * bg) | 0
+              cg = (cg + (255 - cg) * bg) | 0
+              cb = (cb + (170 - cb) * bg) | 0
             }
           }
 
           ctx.fillStyle = `rgba(${cr},${cg},${cb},${alpha.toFixed(3)})`
-          ctx.fillText(ch, drawX, drawY)
+          ctx.fillText(ch, x + ox, y + oy)
         }
       }
     }
