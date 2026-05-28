@@ -1,35 +1,29 @@
 export default function Footer() {
+  const year = new Date().getFullYear()
   return (
-    <footer className="relative border-t border-border/50 bg-card">
+    <footer className="relative z-10 border-t border-[#9eff00]/15 bg-black">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/8 via-transparent to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px"
+        style={{ background: '#9eff00', opacity: 0.35, boxShadow: '0 0 12px #9eff00' }}
       />
-      <div className="container mx-auto px-6 py-12 relative">
-        <div className="flex flex-col md:flex-row justify-between gap-8">
-          {/* Brand */}
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <div className="flex items-center justify-center rounded-full overflow-hidden border border-primary/40 w-7 h-7">
-                <img src="/logo.png" alt="Logo" className="w-full h-full object-cover" draggable={false} />
-              </div>
-              <span className="font-semibold">Gabriel Valenço</span>
-            </div>
-            <p className="text-sm text-muted-foreground max-w-xs leading-relaxed">
-              Desenvolvedor full-stack focado em SaaS, automações e experiências modernas.
+      <div className="container mx-auto px-6 py-10 font-mono">
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className="space-y-1.5">
+            <p className="text-[11px] uppercase tracking-[0.3em] text-[#9eff00]">
+              Gabriel Valenço
+            </p>
+            <p className="text-xs text-zinc-400">
+              Desenvolvedor Full-Stack, disponível para projetos.
             </p>
           </div>
 
-          {/* Links */}
-          <div className="flex flex-col gap-2 text-sm text-muted-foreground">
-            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">
-              Contato
-            </p>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs uppercase tracking-wider">
             <a
               href="https://github.com/gabrielvalenco"
               target="_blank"
               rel="noreferrer"
-              className="hover:text-foreground transition-colors no-underline"
+              className="text-zinc-400 hover:text-[#9eff00] no-underline transition-colors"
             >
               GitHub
             </a>
@@ -37,23 +31,23 @@ export default function Footer() {
               href="https://www.linkedin.com/in/gabriel-valenço-480b43276"
               target="_blank"
               rel="noreferrer"
-              className="hover:text-foreground transition-colors no-underline"
+              className="text-zinc-400 hover:text-[#9eff00] no-underline transition-colors"
             >
               LinkedIn
             </a>
             <a
               href="mailto:gabrielvalencoofc@gmail.com"
-              className="hover:text-foreground transition-colors no-underline"
+              className="text-zinc-400 hover:text-[#9eff00] no-underline transition-colors"
             >
               Email
             </a>
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-3 border-t border-border/40 pt-6 text-xs text-muted-foreground">
-          <p>© 2025 Gabriel Valenço. Todos os direitos reservados.</p>
-          <p className="italic opacity-70">
-            Every failure carries with it the seed of an equal or greater success.
+        <div className="mt-8 flex flex-col gap-2 border-t border-dashed border-[#9eff00]/15 pt-5 text-[11px] text-zinc-500 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {year} Gabriel Valenço. Todos os direitos reservados.</p>
+          <p className="opacity-70 italic">
+            Toda falha carrega em si a semente de um sucesso igual ou maior.
           </p>
         </div>
       </div>
