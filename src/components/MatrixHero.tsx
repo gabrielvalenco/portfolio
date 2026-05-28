@@ -1,3 +1,4 @@
+import MatrixRain from '@/components/MatrixRain'
 import { ChevronDown } from 'lucide-react'
 
 const LIME = '#9eff00'
@@ -6,9 +7,12 @@ export default function MatrixHero() {
   return (
     <section
       id="home"
-      className="relative z-0 flex h-screen items-center justify-center overflow-hidden bg-black"
+      className="sticky top-0 z-0 flex h-screen items-center justify-center overflow-hidden bg-black"
     >
-      {/* Vignette + center darken for legibility (matrix overlays from above) */}
+      {/* Falling terminal glyphs */}
+      <MatrixRain />
+
+      {/* Vignette + center darken for legibility */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"

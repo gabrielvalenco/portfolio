@@ -89,45 +89,6 @@ export default function MatrixRain() {
     let dir = 1
     let raf = 0
 
-    // ── Section transition ("genie" minimize/maximize) ─────────────────────────
-    // Matrix is fully visible in the hero region. As scroll crosses each section
-    // boundary, the canvas scales toward the top-center of the viewport (where
-    // the next section's top edge lives) — like a Windows minimize. Approaching
-    // the next boundary it grows back from a point (maximize / "spit out").
-    const TRANSITION_RANGE = 240 // px each side of a boundary for the genie
-    let sectionTops: number[] = []
-    function refreshSections() {
-      const els = Array.from(document.querySelectorAll<HTMLElement>('section[id]'))
-      sectionTops = els
-        .map(s => s.getBoundingClientRect().top + window.scrollY)
-        .filter(t => t > 0)
-        .sort((a, b) => a - b)
-    }
-    refreshSections()
-
-    function computeTransition(sy: number) {
-      if (sectionTops.length === 0 || sy <= sectionTops[0]) {
-        // Hero region — matrix at full
-        return { scale: 1, opacity: 1 }
-      }
-      // After the hero exit, the matrix is only visible briefly around each
-      // section boundary, peaking at the boundary itself.
-      let best = 0
-      for (let i = 0; i < sectionTops.length; i++) {
-        const d = Math.abs(sy - sectionTops[i])
-        if (d < TRANSITION_RANGE) {
-          const t = 1 - d / TRANSITION_RANGE
-          const s = t * t * (3 - 2 * t) // smoothstep
-          if (s > best) best = s
-        }
-      }
-      // Scale follows the curve closely; opacity lingers a touch longer so the
-      // glyphs don't pop in/out.
-      const scale = best
-      const opacity = Math.pow(best, 0.7)
-      return { scale, opacity }
-    }
-
     // Mouse "bubble" + trail — smoothed position, off-screen when not present.
     const OFF = -99999
     let mouseX = OFF
@@ -278,11 +239,6 @@ export default function MatrixRain() {
 
       for (let c = 0; c < cols; c++) heads[c] += move * speeds[c]
 
-      // Section-boundary genie effect
-      const tr = computeTransition(sy)
-      cv.style.transform = `scale(${tr.scale.toFixed(4)})`
-      cv.style.opacity = tr.opacity.toFixed(3)
-
       paint()
       raf = requestAnimationFrame(draw)
     }
@@ -298,16 +254,10 @@ export default function MatrixRain() {
       window.clearTimeout(resizeTimer)
       resizeTimer = window.setTimeout(() => {
         build()
-        refreshSections()
         if (prefersReduced) paint()
       }, 150)
     }
     window.addEventListener('resize', onResize)
-
-    // Section positions can shift as fonts load / images settle — recompute
-    // after the first paint and again shortly after.
-    requestAnimationFrame(() => refreshSections())
-    const settleTimer = window.setTimeout(refreshSections, 800)
 
     // The canvas covers the viewport (sticky, top:0, h-screen), so clientX/Y
     // map directly to canvas-local coordinates.
@@ -334,7 +284,6 @@ export default function MatrixRain() {
     return () => {
       cancelAnimationFrame(raf)
       window.clearTimeout(resizeTimer)
-      window.clearTimeout(settleTimer)
       window.removeEventListener('resize', onResize)
       window.removeEventListener('mousemove', onMouseMove)
       document.removeEventListener('mouseleave', onMouseLeave)
@@ -346,15 +295,8 @@ export default function MatrixRain() {
     <canvas
       ref={canvasRef}
       aria-hidden
-      className="fixed inset-0 h-screen w-screen"
-      style={{
-        display: 'block',
-        zIndex: 30,
-        pointerEvents: 'none',
-        mixBlendMode: 'screen',
-        transformOrigin: '50% 0%',
-        willChange: 'transform, opacity',
-      }}
+      className="absolute inset-0 h-full w-full"
+      style={{ display: 'block' }}
     />
   )
 }
