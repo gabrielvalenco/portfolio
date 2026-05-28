@@ -22,11 +22,14 @@ const row2: TechItem[] = [
   { name: 'React Native', tag: 'mobile' },
 ]
 
-function Chip({ name, tag }: TechItem) {
+function Chip({ name }: TechItem) {
   return (
     <div className="group relative shrink-0 select-none border border-[#9eff00]/25 bg-black/60 px-4 py-2.5 font-mono text-xs uppercase tracking-[0.18em] text-zinc-300 transition-colors hover:border-[#9eff00] hover:text-[#9eff00] hover:bg-[#9eff00]/[0.06]">
-      <span className="mr-2 text-[#9eff00] opacity-80">[{tag}]</span>
-      <span>{name}</span>
+      <span
+        className="mr-2 inline-block h-1.5 w-1.5 rounded-full align-middle"
+        style={{ background: '#9eff00', boxShadow: '0 0 6px #9eff00' }}
+      />
+      <span className="align-middle">{name}</span>
     </div>
   )
 }

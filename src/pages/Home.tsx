@@ -40,9 +40,8 @@ function Technologies() {
     <TerminalSection
       id="technologies"
       index="01"
-      name="stack.sh"
       title="Tecnologias"
-      subtitle="ls -la /tools — stack para entregas full-stack"
+      subtitle="Ferramentas que uso no dia a dia para entregar produtos completos, do banco de dados à interface."
     >
       <div className="mt-2" data-animate-item>
         <TechMarquee />
@@ -54,18 +53,18 @@ function Technologies() {
 // ─── About ────────────────────────────────────────────────────────────────────
 
 const stats = [
-  { count: 10, suffix: '+', label: 'projetos' },
-  { count: 15, suffix: '',  label: 'tecnologias' },
-  { count: 4,  suffix: '',  label: 'certificados' },
-  { count: 3,  suffix: '',  label: 'experiências' },
+  { count: 10, suffix: '+', label: 'Projetos' },
+  { count: 15, suffix: '',  label: 'Tecnologias' },
+  { count: 4,  suffix: '',  label: 'Certificados' },
+  { count: 3,  suffix: '',  label: 'Experiências' },
 ]
 
-const skills = ['inglês_avançado', 'oratória', 'criativo', 'cooperativo', 'sociável', 'adaptável']
+const skills = ['Inglês avançado', 'Oratória', 'Criativo', 'Cooperativo', 'Sociável', 'Adaptável']
 
 const experiences = [
-  { company: 'Degiual',       role: 'full stack dev & tech lead', current: true  },
-  { company: 'Grupo Prodemi', role: 'full stack developer',       current: false },
-  { company: 'Jem',           role: 'tráfego pago',               current: false },
+  { company: 'Degiual',       role: 'Full Stack & Tech Lead',   current: true  },
+  { company: 'Grupo Prodemi', role: 'Full Stack Developer',      current: false },
+  { company: 'Jem',           role: 'Tráfego Pago',              current: false },
 ]
 
 function About() {
@@ -73,27 +72,27 @@ function About() {
     <TerminalSection
       id="about"
       index="02"
-      name="whoami"
       title="Sobre"
-      subtitle="cat bio.txt"
+      subtitle="Um pouco da minha trajetória, do que entrego e do que estou disponível para fazer."
     >
       <div className="grid md:grid-cols-2 gap-10 lg:gap-16">
         {/* Bio + experience */}
         <div className="space-y-6 font-mono text-sm leading-relaxed text-zinc-300">
           <p data-animate-item>
-            <span style={{ color: LIME }}>{'>'}</span> dev full-stack com foco em
-            {' '}<span className="text-zinc-100">SaaS</span> e{' '}
-            <span className="text-zinc-100">automações</span> — do banco de dados à interface.
+            Sou desenvolvedor full-stack focado em{' '}
+            <span className="text-zinc-100">SaaS</span> e{' '}
+            <span className="text-zinc-100">automações</span> — cuido de toda a
+            jornada do produto, do banco de dados à interface final.
           </p>
           <p data-animate-item>
-            <span style={{ color: LIME }}>{'>'}</span> atualmente como{' '}
-            <span className="text-zinc-100">full stack & tech lead</span> na{' '}
-            <span className="text-zinc-100">Degiual</span>, liderando soluções digitais para clientes
-            de diferentes segmentos.
+            Atualmente atuo como{' '}
+            <span className="text-zinc-100">Full Stack &amp; Tech Lead</span> na{' '}
+            <span className="text-zinc-100">Degiual</span>, liderando soluções
+            digitais para clientes de diferentes segmentos.
           </p>
           <p data-animate-item>
-            <span style={{ color: LIME }}>{'>'}</span> curioso, crítico e empenhado —
-            transformo requisitos em produtos funcionais, escaláveis e bem acabados.
+            Curioso, crítico e empenhado — transformo requisitos em produtos
+            funcionais, escaláveis e bem acabados.
           </p>
 
           <div
@@ -102,30 +101,27 @@ function About() {
           >
             <div className="flex items-center gap-2 text-xs">
               <span className="h-2 w-2 rounded-full bg-[#9eff00] shadow-[0_0_10px_#9eff00] animate-pulse" />
-              <span style={{ color: LIME }}>STATUS: AVAILABLE</span>
+              <span style={{ color: LIME }}>Disponível para projetos</span>
             </div>
             <p className="mt-1 text-xs text-zinc-400">
-              SaaS, automações (n8n), integrações e otimização de processos.
+              SaaS, automações, integrações e otimização de processos.
             </p>
           </div>
 
           <div className="pt-2" data-animate-item>
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-500 mb-3">
-              // experience
+              Experiência
             </p>
             <ul className="space-y-1.5 font-mono text-xs">
-              {experiences.map((exp, i) => (
+              {experiences.map(exp => (
                 <li
                   key={exp.company}
                   data-animate-item
-                  className="grid grid-cols-[auto_1fr_auto] items-center gap-3 border-b border-dashed border-[#9eff00]/10 py-1.5"
+                  className="grid grid-cols-[1fr_auto] items-center gap-3 border-b border-dashed border-[#9eff00]/10 py-2"
                 >
-                  <span style={{ color: LIME }} className="opacity-70">
-                    [{String(i + 1).padStart(2, '0')}]
-                  </span>
                   <span className="truncate">
                     <span className="text-zinc-100">{exp.company}</span>
-                    <span className="text-zinc-500"> // {exp.role}</span>
+                    <span className="text-zinc-500"> — {exp.role}</span>
                   </span>
                   {exp.current && (
                     <span
@@ -143,10 +139,10 @@ function About() {
           {/* CTAs to deeper pages */}
           <div className="flex flex-wrap gap-3 pt-2" data-animate-item>
             <Magnetic>
-              <TermLink to="/about" icon={User}>./about_me --read</TermLink>
+              <TermLink to="/about" icon={User}>Saiba mais sobre mim</TermLink>
             </Magnetic>
             <Magnetic>
-              <TermLink to="/experience" icon={Briefcase}>./career --log</TermLink>
+              <TermLink to="/experience" icon={Briefcase}>Minha trajetória</TermLink>
             </Magnetic>
           </div>
         </div>
@@ -174,7 +170,7 @@ function About() {
                   0{suffix}
                 </div>
                 <div className="mt-2 text-[10px] uppercase tracking-[0.28em] text-zinc-500">
-                  // {label}
+                  {label}
                 </div>
               </div>
             ))}
@@ -182,15 +178,15 @@ function About() {
 
           <div data-animate-item>
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-500 mb-3">
-              // skills
+              Habilidades
             </p>
             <div className="flex flex-wrap gap-2 font-mono text-xs">
               {skills.map(skill => (
                 <span
                   key={skill}
-                  className="border border-[#9eff00]/25 px-2.5 py-1 text-zinc-300 transition-colors hover:bg-[#9eff00]/10 hover:text-[#9eff00] hover:border-[#9eff00]/70"
+                  className="border border-[#9eff00]/25 px-3 py-1 text-zinc-300 transition-colors hover:bg-[#9eff00]/10 hover:text-[#9eff00] hover:border-[#9eff00]/70"
                 >
-                  [ {skill} ]
+                  {skill}
                 </span>
               ))}
             </div>
@@ -208,9 +204,8 @@ function Projects() {
     <TerminalSection
       id="projects"
       index="03"
-      name="projects.log"
       title="Projetos"
-      subtitle="tail -n 3 /var/log/projects --featured"
+      subtitle="Uma seleção de produtos e experimentos que construí. Há muito mais na página completa."
     >
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {featuredProjects.map(p => (
@@ -220,7 +215,7 @@ function Projects() {
 
       <div className="mt-10 flex justify-center" data-animate-item>
         <Magnetic>
-          <TermLink to="/projects" icon={ArrowUpRight}>./ls projects --all</TermLink>
+          <TermLink to="/projects" icon={ArrowUpRight}>Ver todos os projetos</TermLink>
         </Magnetic>
       </div>
     </TerminalSection>
@@ -230,9 +225,9 @@ function Projects() {
 // ─── Contact ──────────────────────────────────────────────────────────────────
 
 const contactLinks = [
-  { href: 'mailto:gabrielvalencoofc@gmail.com',                       label: './email',    Icon: Mail     },
-  { href: 'https://www.linkedin.com/in/gabriel-valenço-480b43276',    label: './linkedin', Icon: Linkedin },
-  { href: 'https://github.com/gabrielvalenco',                        label: './github',   Icon: Github   },
+  { href: 'mailto:gabrielvalencoofc@gmail.com',                    label: 'Email',    Icon: Mail     },
+  { href: 'https://www.linkedin.com/in/gabriel-valenço-480b43276', label: 'LinkedIn', Icon: Linkedin },
+  { href: 'https://github.com/gabrielvalenco',                     label: 'GitHub',   Icon: Github   },
 ]
 
 function Contact() {
@@ -240,9 +235,8 @@ function Contact() {
     <TerminalSection
       id="contact"
       index="04"
-      name="connect"
-      title="Conectar"
-      subtitle="./establish_connection.sh"
+      title="Contato"
+      subtitle="Tem um projeto em mente? Vamos conversar."
     >
       <div
         data-animate-item
@@ -262,24 +256,17 @@ function Contact() {
           }}
         />
 
-        <div className="relative font-mono text-sm">
-          <p style={{ color: LIME }}>$ ./establish_connection.sh --target=gabriel</p>
-          <p className="mt-2 text-zinc-400">
-            <span style={{ color: LIME }}>&gt;</span> handshake initialized...
-          </p>
-          <p className="text-zinc-400">
-            <span style={{ color: LIME }}>&gt;</span> latency: <span className="text-zinc-100">12ms</span>
-          </p>
-          <p className="text-zinc-400">
-            <span style={{ color: LIME }}>&gt;</span> status: <span style={{ color: LIME }} className="glow-lime">READY</span>
-            <span className="ml-1 term-blink" style={{ color: LIME }}>_</span>
-          </p>
+        <div className="relative font-mono">
+          <div className="inline-flex items-center gap-2 border border-[#9eff00]/40 bg-[#9eff00]/[0.05] px-3 py-1 text-xs">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#9eff00] shadow-[0_0_8px_#9eff00] animate-pulse" />
+            <span style={{ color: LIME }}>Disponível agora</span>
+          </div>
 
-          <h3 className="mt-8 font-mono text-xl sm:text-3xl font-bold uppercase tracking-tight text-zinc-100">
-            vamos trabalhar juntos?
+          <h3 className="mt-6 font-mono text-2xl sm:text-4xl font-bold uppercase tracking-tight text-zinc-100">
+            Vamos trabalhar juntos?
           </h3>
-          <p className="mt-3 max-w-md text-xs sm:text-sm text-zinc-400">
-            disponível para projetos freelancer de SaaS, automações,
+          <p className="mt-4 max-w-md text-sm text-zinc-400">
+            Disponível para projetos freelancer de SaaS, automações,
             integrações e desenvolvimento full-stack.
           </p>
 

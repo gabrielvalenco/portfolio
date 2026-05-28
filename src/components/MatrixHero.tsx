@@ -28,7 +28,7 @@ export default function MatrixHero() {
           className="mb-6 text-xs tracking-[0.35em] sm:text-sm"
           style={{ color: LIME, textShadow: `0 0 12px ${LIME}80` }}
         >
-          root@portfolio:~$ ./init
+          PORTFÓLIO
         </p>
 
         <h1
@@ -38,11 +38,12 @@ export default function MatrixHero() {
           Gabriel Valenço
         </h1>
 
-        <p className="mt-7 max-w-md text-sm text-lime-200/70 sm:text-base">
-          <span className="text-lime-300/90">&gt;</span> full-stack developer
-          <span className="ml-0.5 inline-block animate-pulse" style={{ color: LIME }}>
-            _
-          </span>
+        <p className="mt-7 flex items-center gap-2 text-sm text-zinc-300 sm:text-base">
+          <span
+            className="inline-block h-1.5 w-1.5 rounded-full animate-pulse"
+            style={{ background: LIME, boxShadow: `0 0 8px ${LIME}` }}
+          />
+          Desenvolvedor Full-Stack
         </p>
       </div>
 

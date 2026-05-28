@@ -3,12 +3,7 @@ import type { Project } from '@/data/projects'
 
 const LIME = '#9eff00'
 
-function slugFile(title: string): string {
-  return title.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '') + '.tsx'
-}
-
 export default function ProjectWindow({ p, featured = false }: { p: Project; featured?: boolean }) {
-  const file = slugFile(p.title)
   const url = p.live ?? p.repo
   return (
     <div
@@ -21,23 +16,20 @@ export default function ProjectWindow({ p, featured = false }: { p: Project; fea
       <span className="cb-br" />
       <div className="scan-sweep" />
 
-      {/* Window title bar */}
+      {/* Window title bar (decorative) */}
       <div className="flex items-center justify-between border-b border-[#9eff00]/15 px-3 py-2">
         <div className="flex items-center gap-1.5">
           <span className="h-2 w-2 rounded-full bg-[#9eff00]/70 shadow-[0_0_6px_#9eff0080]" />
           <span className="h-2 w-2 rounded-full bg-[#9eff00]/35" />
           <span className="h-2 w-2 rounded-full bg-[#9eff00]/15" />
         </div>
-        <span className="ml-2 truncate text-[10px] uppercase tracking-[0.22em] text-zinc-500">
-          {file}
-        </span>
         {url && (
           <a
             href={url}
             target="_blank"
             rel="noreferrer"
             aria-label={`abrir ${p.title}`}
-            className="ml-3 inline-flex h-5 w-5 items-center justify-center text-zinc-400 hover:text-[#9eff00] no-underline transition-colors"
+            className="inline-flex h-5 w-5 items-center justify-center text-zinc-400 hover:text-[#9eff00] no-underline transition-colors"
           >
             <ArrowUpRight className="h-3 w-3" />
           </a>
@@ -52,7 +44,7 @@ export default function ProjectWindow({ p, featured = false }: { p: Project; fea
             style={{ color: LIME, borderColor: `${LIME}66` }}
           >
             <span className="h-1 w-1 rounded-full bg-[#9eff00]" />
-            featured
+            Destaque
           </span>
         )}
         <h3
@@ -79,21 +71,16 @@ export default function ProjectWindow({ p, featured = false }: { p: Project; fea
           </div>
         )}
 
-        <div className="mt-auto flex items-center justify-between border-t border-dashed border-[#9eff00]/15 pt-5 text-[11px]">
-          <span style={{ color: LIME }} className="flex items-center gap-1.5">
-            <span className="opacity-70">$</span>
-            <span>{p.live ? 'open --live' : p.repo ? 'open --repo' : 'wip'}</span>
-            <span className="term-blink" style={{ color: LIME }}>_</span>
-          </span>
-          <div className="flex items-center gap-3">
+        {(p.live || p.repo) && (
+          <div className="mt-auto flex items-center justify-end gap-4 border-t border-dashed border-[#9eff00]/15 pt-5 text-[11px]">
             {p.live && (
               <a
                 href={p.live}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1 text-zinc-400 hover:text-[#9eff00] no-underline transition-colors"
+                className="inline-flex items-center gap-1 uppercase tracking-wider text-zinc-400 hover:text-[#9eff00] no-underline transition-colors"
               >
-                <ExternalLink className="h-3 w-3" /> live
+                <ExternalLink className="h-3 w-3" /> Ver site
               </a>
             )}
             {p.repo && (
@@ -101,13 +88,13 @@ export default function ProjectWindow({ p, featured = false }: { p: Project; fea
                 href={p.repo}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1 text-zinc-400 hover:text-[#9eff00] no-underline transition-colors"
+                className="inline-flex items-center gap-1 uppercase tracking-wider text-zinc-400 hover:text-[#9eff00] no-underline transition-colors"
               >
-                <Github className="h-3 w-3" /> repo
+                <Github className="h-3 w-3" /> Código
               </a>
             )}
           </div>
-        </div>
+        )}
       </div>
     </div>
   )

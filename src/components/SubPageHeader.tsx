@@ -4,8 +4,8 @@ import { ArrowLeft } from 'lucide-react'
 const LIME = '#9eff00'
 
 export default function SubPageHeader({
-  index, name, title, subtitle,
-}: { index: string; name: string; title: string; subtitle?: string }) {
+  index, title, subtitle,
+}: { index: string; name?: string; title: string; subtitle?: string }) {
   return (
     <header
       className="relative border-b border-[#9eff00]/15 bg-black"
@@ -23,28 +23,27 @@ export default function SubPageHeader({
           className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-400 no-underline transition-colors hover:text-[#9eff00]"
         >
           <ArrowLeft className="h-3 w-3" />
-          $ cd ..
+          Voltar
         </Link>
       </div>
       <div className="container mx-auto px-6 pb-12 pt-2">
         <div
-          className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.32em]"
+          className="flex items-center gap-4 font-mono text-[11px] tracking-[0.32em]"
           data-term-meta
           style={{ color: LIME }}
         >
-          <span className="opacity-70">// {index}</span>
-          <span className="h-px w-10 sm:w-16" style={{ background: `${LIME}66` }} />
-          <span>./{name}</span>
+          <span>{index}</span>
+          <span className="h-px w-16 sm:w-24" style={{ background: `${LIME}66` }} />
         </div>
         <h1
-          className="mt-5 font-mono text-3xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight leading-none term-glitch"
+          className="mt-5 font-mono text-3xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight leading-none"
           data-term-title
         >
-          <span style={{ color: LIME }}>&gt;_</span> <span data-term-text>{title}</span>
+          <span data-term-text>{title}</span>
         </h1>
         {subtitle && (
           <p className="mt-4 max-w-xl font-mono text-sm text-zinc-400" data-term-sub>
-            <span style={{ color: LIME }}>$</span> {subtitle}
+            {subtitle}
           </p>
         )}
       </div>

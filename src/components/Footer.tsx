@@ -11,24 +11,21 @@ export default function Footer() {
         <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1.5">
             <p className="text-[11px] uppercase tracking-[0.3em] text-[#9eff00]">
-              gabriel@portfolio:~$
+              Gabriel Valenço
             </p>
             <p className="text-xs text-zinc-400">
-              built with <span className="text-zinc-100">react</span> ·{' '}
-              <span className="text-zinc-100">gsap</span> ·{' '}
-              <span className="text-zinc-100">tailwind</span>
-              <span className="ml-1 term-blink" style={{ color: '#9eff00' }}>_</span>
+              Desenvolvedor Full-Stack — disponível para projetos.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs uppercase tracking-wider">
             <a
               href="https://github.com/gabrielvalenco"
               target="_blank"
               rel="noreferrer"
               className="text-zinc-400 hover:text-[#9eff00] no-underline transition-colors"
             >
-              ./github
+              GitHub
             </a>
             <a
               href="https://www.linkedin.com/in/gabriel-valenço-480b43276"
@@ -36,21 +33,21 @@ export default function Footer() {
               rel="noreferrer"
               className="text-zinc-400 hover:text-[#9eff00] no-underline transition-colors"
             >
-              ./linkedin
+              LinkedIn
             </a>
             <a
               href="mailto:gabrielvalencoofc@gmail.com"
               className="text-zinc-400 hover:text-[#9eff00] no-underline transition-colors"
             >
-              ./email
+              Email
             </a>
           </div>
         </div>
 
         <div className="mt-8 flex flex-col gap-2 border-t border-dashed border-[#9eff00]/15 pt-5 text-[11px] text-zinc-500 sm:flex-row sm:items-center sm:justify-between">
-          <p>// © {year} gabriel valenço — all systems nominal</p>
-          <p className="opacity-70">
-            every failure carries with it the seed of an equal or greater success
+          <p>© {year} Gabriel Valenço — Todos os direitos reservados.</p>
+          <p className="opacity-70 italic">
+            Toda falha carrega em si a semente de um sucesso igual ou maior.
           </p>
         </div>
       </div>

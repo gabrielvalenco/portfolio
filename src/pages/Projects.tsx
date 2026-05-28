@@ -11,9 +11,8 @@ export default function ProjectsPage() {
     <div className="relative z-10 min-h-dvh bg-black">
       <SubPageHeader
         index="03"
-        name="projects.log"
-        title="Todos os projetos"
-        subtitle={`ls /var/log/projects | wc -l → ${projects.length}`}
+        title="Projetos"
+        subtitle={`Todos os ${projects.length} projetos que já construí — em destaque e arquivo.`}
       />
 
       <main className="container mx-auto px-6 py-16">
@@ -23,7 +22,7 @@ export default function ProjectsPage() {
             className="mb-5 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-500"
             data-animate-item
           >
-            // featured
+            Em destaque
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {featuredProjects.map(p => (
@@ -38,7 +37,7 @@ export default function ProjectsPage() {
             className="mb-5 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-500"
             data-animate-item
           >
-            // archive
+            Outros projetos
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {otherProjects.map(p => (
@@ -53,7 +52,7 @@ export default function ProjectsPage() {
             target="_blank"
             icon={Github}
           >
-            ./git log --all
+            Ver no GitHub
           </TermAnchor>
         </div>
       </main>
