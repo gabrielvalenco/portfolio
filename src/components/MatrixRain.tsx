@@ -11,6 +11,8 @@ const mod = (n: number, m: number) => ((n % m) + m) % m
 
 const FONT = 16
 const TAIL = 13
+const MOUSE_RADIUS = 130
+const MOUSE_PUSH = 24
 
 export default function MatrixRain() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -64,10 +66,21 @@ export default function MatrixRain() {
     let dir = 1
     let raf = 0
 
+    // Mouse "bubble" — smoothed position, off-screen when not present.
+    const OFF = -99999
+    let mouseX = OFF
+    let mouseY = OFF
+    let mouseTargetX = OFF
+    let mouseTargetY = OFF
+    const radius2 = MOUSE_RADIUS * MOUSE_RADIUS
+
     const IDLE = 0.14 // gentle baseline drift (rows/frame) so it feels alive
 
     function paint() {
       ctx.clearRect(0, 0, width, height)
+
+      const mx = mouseX
+      const my = mouseY
 
       for (let c = 0; c < cols; c++) {
         const period = periods[c]
@@ -80,18 +93,49 @@ export default function MatrixRain() {
           const ch = chars[base + r]
           const y = r * FONT
 
+          let cr: number, cg: number, cb: number, alpha: number
+          let isLead = false
+
           if (b < 1.15) {
-            // bright leading head — near-white lime
-            ctx.fillStyle = 'rgba(208,255,170,0.95)'
-            ctx.fillText(ch, x, y)
+            cr = 208; cg = 255; cb = 170
+            alpha = 0.95
+            isLead = true
           } else if (b < TAIL) {
             const lead = 1 - b / TAIL
-            ctx.fillStyle = `rgba(120,235,70,${(0.12 + lead * 0.72).toFixed(3)})`
-            ctx.fillText(ch, x, y)
+            cr = 120; cg = 235; cb = 70
+            alpha = 0.12 + lead * 0.72
           } else {
-            ctx.fillStyle = 'rgba(46,140,58,0.10)'
-            ctx.fillText(ch, x, y)
+            cr = 46; cg = 140; cb = 58
+            alpha = 0.10
           }
+
+          // Mouse bubble: push outward + brighten within radius
+          let dx_ = x - mx
+          let dy_ = y - my
+          const dist2 = dx_ * dx_ + dy_ * dy_
+
+          let drawX = x
+          let drawY = y
+          if (dist2 < radius2) {
+            const dist = Math.sqrt(dist2)
+            const t = 1 - dist / MOUSE_RADIUS
+            const ease = t * t * (3 - 2 * t) // smoothstep
+            const push = ease * MOUSE_PUSH
+            if (dist > 0.5) {
+              const inv = 1 / dist
+              drawX = x + dx_ * inv * push
+              drawY = y + dy_ * inv * push
+            }
+            alpha = Math.min(1, alpha + ease * 0.7)
+            if (!isLead) {
+              cr = (cr + (220 - cr) * ease) | 0
+              cg = (cg + (255 - cg) * ease) | 0
+              cb = (cb + (170 - cb) * ease) | 0
+            }
+          }
+
+          ctx.fillStyle = `rgba(${cr},${cg},${cb},${alpha.toFixed(3)})`
+          ctx.fillText(ch, drawX, drawY)
         }
       }
     }
@@ -110,6 +154,10 @@ export default function MatrixRain() {
       const target = Math.min(1, Math.abs(vel) * 0.45)
       glow += (target - glow) * 0.12
       document.documentElement.style.setProperty('--matrix-glow', glow.toFixed(3))
+
+      // Smooth mouse position toward latest event target
+      mouseX += (mouseTargetX - mouseX) * 0.3
+      mouseY += (mouseTargetY - mouseY) * 0.3
 
       // flicker a small slice of glyphs each frame
       const n = (chars.length * 0.012) | 0
@@ -137,10 +185,30 @@ export default function MatrixRain() {
     }
     window.addEventListener('resize', onResize)
 
+    // The canvas covers the viewport (sticky, top:0, h-screen), so clientX/Y
+    // map directly to canvas-local coordinates.
+    const onMouseMove = (e: MouseEvent) => {
+      mouseTargetX = e.clientX
+      mouseTargetY = e.clientY
+      // First move: snap so the bubble doesn't fly in from off-screen.
+      if (mouseX === OFF) {
+        mouseX = mouseTargetX
+        mouseY = mouseTargetY
+      }
+    }
+    const onMouseLeave = () => {
+      mouseTargetX = OFF
+      mouseTargetY = OFF
+    }
+    window.addEventListener('mousemove', onMouseMove, { passive: true })
+    document.addEventListener('mouseleave', onMouseLeave)
+
     return () => {
       cancelAnimationFrame(raf)
       window.clearTimeout(resizeTimer)
       window.removeEventListener('resize', onResize)
+      window.removeEventListener('mousemove', onMouseMove)
+      document.removeEventListener('mouseleave', onMouseLeave)
       document.documentElement.style.removeProperty('--matrix-glow')
     }
   }, [])
