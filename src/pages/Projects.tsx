@@ -12,7 +12,7 @@ export default function ProjectsPage() {
       <SubPageHeader
         index="03"
         title="Projetos"
-        subtitle={`Todos os ${projects.length} projetos que já construí — em destaque e arquivo.`}
+        subtitle={`Todos os ${projects.length} projetos que já construí, em destaque e arquivo.`}
       />
 
       <main className="container mx-auto px-6 py-16">

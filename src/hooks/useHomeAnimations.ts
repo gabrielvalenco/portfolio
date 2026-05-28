@@ -45,10 +45,9 @@ export default function useHomeAnimations() {
             chars,
             {
               opacity: 0,
-              y: 14,
-              filter: 'blur(6px)',
-              duration: 0.55,
-              stagger: { each: 0.025, from: 'start' },
+              y: 10,
+              duration: 0.45,
+              stagger: { each: 0.022, from: 'start' },
               ease: 'power2.out',
             },
             '-=0.25',
@@ -92,24 +91,6 @@ export default function useHomeAnimations() {
             el.textContent = String(Math.round(obj.val)).padStart(2, '0') + suffix
           },
         })
-      })
-
-      // ── Section dividers: subtle parallax of the lime border line ─────────
-      gsap.utils.toArray<HTMLElement>('section[id]').forEach(sec => {
-        gsap.fromTo(
-          sec,
-          { backgroundPositionY: '0px' },
-          {
-            backgroundPositionY: '40px',
-            ease: 'none',
-            scrollTrigger: {
-              trigger: sec,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: true,
-            },
-          },
-        )
       })
 
       // Refresh once after layout settles (fonts, marquee).

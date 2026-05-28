@@ -18,11 +18,11 @@ const roles: Role[] = [
   {
     company: 'Degiual',
     role: 'Full Stack Developer & Tech Lead',
-    period: '2024 — atual',
+    period: '2024 - atual',
     current: true,
     bullets: [
       'Lidero o desenvolvimento técnico de produtos digitais para clientes de diferentes segmentos.',
-      'Arquiteto soluções full-stack — front-end, API, banco de dados e automações — alinhadas com objetivos de negócio.',
+      'Arquiteto soluções full-stack: front-end, API, banco de dados e automações, alinhadas com objetivos de negócio.',
       'Estabeleço padrões de qualidade, revisão de código e processos de entrega contínua.',
       'Faço mentoria técnica para devs juniores e sirvo de ponte com as áreas de design e tráfego pago.',
     ],
@@ -31,7 +31,7 @@ const roles: Role[] = [
   {
     company: 'Grupo Prodemi',
     role: 'Full Stack Developer',
-    period: '2023 — 2024',
+    period: '2023 - 2024',
     bullets: [
       'Desenvolvimento de sistemas internos e integrações entre plataformas do grupo.',
       'Manutenção e evolução de aplicações em produção, com foco em estabilidade e performance.',
@@ -42,7 +42,7 @@ const roles: Role[] = [
   {
     company: 'Jem',
     role: 'Tráfego Pago',
-    period: '2022 — 2023',
+    period: '2022 - 2023',
     bullets: [
       'Planejamento e gestão de campanhas em Meta Ads e Google Ads para clientes B2C.',
       'Análise de funil, otimização de criativos e relatórios orientados a métricas-chave.',

@@ -6,7 +6,7 @@ import { Briefcase, Mail } from 'lucide-react'
 const LIME = '#9eff00'
 
 const focus = [
-  { tag: 'SaaS',         desc: 'Produtos web completos — autenticação, pagamentos, painéis e área administrativa.' },
+  { tag: 'SaaS',         desc: 'Produtos web completos: autenticação, pagamentos, painéis e área administrativa.' },
   { tag: 'Automação',    desc: 'Fluxos automatizados, integrações entre sistemas e otimização de processos repetitivos.' },
   { tag: 'Front-end',    desc: 'Interfaces modernas em React e Vue, com animações sob medida e foco em usabilidade.' },
   { tag: 'Back-end',     desc: 'APIs escaláveis em Laravel e Node, com banco de dados e cache para alta performance.' },
@@ -14,7 +14,7 @@ const focus = [
 
 const principles = [
   'Entregar valor em iterações curtas, não ferramentas em iterações longas.',
-  'Código que se lê em voz alta — clareza acima de esperteza.',
+  'Código que se lê em voz alta, clareza acima de esperteza.',
   'Medir antes de otimizar; respeitar limites da máquina e do humano.',
   'Design e experiência do usuário são problemas de engenharia, não decoração.',
 ]
@@ -49,7 +49,7 @@ export default function AboutPage() {
               <p>
                 Me chamo <span className="text-zinc-100">Gabriel Valenço</span>, sou
                 desenvolvedor full-stack focado em criar produtos digitais que
-                entregam valor real — não só telas bonitas.
+                entregam valor real, não só telas bonitas.
               </p>
               <p className="mt-3">
                 Meu trabalho passa por SaaS, automações, landing pages de alto
@@ -64,7 +64,7 @@ export default function AboutPage() {
                 Trajetória
               </p>
               <p>
-                Comecei a programar por curiosidade — querendo entender como as
+                Comecei a programar por curiosidade, querendo entender como as
                 coisas funcionavam por dentro. Antes do desenvolvimento, passei
                 por <span className="text-zinc-100">tráfego pago</span>, onde
                 aprendi a medir tudo. Esse hábito virou o filtro que uso para

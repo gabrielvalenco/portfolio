@@ -20,9 +20,9 @@ export default function App() {
     if (prefersReduced || isTouch) return
 
     const lenis = new Lenis({
-      duration: 1.05,
+      duration: 0.7,
       smoothWheel: true,
-      syncTouch: true,
+      syncTouch: false,
       autoResize: true,
     })
     let rafId: number | null = null

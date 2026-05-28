@@ -18,6 +18,32 @@ html, body, #root {
   height: 100%;
 }
 
+/* ─── Custom scrollbar ───────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+::-webkit-scrollbar-thumb {
+  background: #9eff00;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b8ff3d;
+  box-shadow: 0 0 8px rgba(158, 255, 0, 0.6);
+}
+::-webkit-scrollbar-corner {
+  background: #000000;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #9eff00 #000000;
+}
+
 .theme-light {
   --color-background: #ffffff;
   --color-foreground: #0a0a0a;
@@ -145,6 +171,13 @@ html, body, #root {
   body {
     @apply bg-background text-foreground font-mono;
     transition: background-color 300ms ease, color 200ms ease;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
     background-image:
       linear-gradient(rgba(158, 255, 0, 0.035) 1px, transparent 1px),
       linear-gradient(90deg, rgba(158, 255, 0, 0.035) 1px, transparent 1px);
@@ -166,8 +199,11 @@ html, body, #root {
 }
 
 /* ─── Custom cursor ──────────────────────────────────────────────────────────── */
-.has-custom-cursor,
-.has-custom-cursor * {
+html.has-custom-cursor,
+html.has-custom-cursor *,
+html.has-custom-cursor canvas,
+html.has-custom-cursor a,
+html.has-custom-cursor button {
   cursor: none !important;
 }
 

@@ -33,7 +33,7 @@ export default function MatrixRain() {
     const ctx = cv.getContext('2d', { alpha: true })!
 
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const dpr = Math.min(window.devicePixelRatio || 1, 2)
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5)
 
     let width = 0
     let height = 0
@@ -296,7 +296,7 @@ export default function MatrixRain() {
       ref={canvasRef}
       aria-hidden
       className="absolute inset-0 h-full w-full"
-      style={{ display: 'block' }}
+      style={{ display: 'block', willChange: 'contents', contain: 'strict' }}
     />
   )
 }

@@ -81,7 +81,7 @@ function About() {
           <p data-animate-item>
             Sou desenvolvedor full-stack focado em{' '}
             <span className="text-zinc-100">SaaS</span> e{' '}
-            <span className="text-zinc-100">automações</span> — cuido de toda a
+            <span className="text-zinc-100">automações</span>, cuido de toda a
             jornada do produto, do banco de dados à interface final.
           </p>
           <p data-animate-item>
@@ -91,7 +91,7 @@ function About() {
             digitais para clientes de diferentes segmentos.
           </p>
           <p data-animate-item>
-            Curioso, crítico e empenhado — transformo requisitos em produtos
+            Curioso, crítico e empenhado, transformo requisitos em produtos
             funcionais, escaláveis e bem acabados.
           </p>
 
@@ -121,7 +121,7 @@ function About() {
                 >
                   <span className="truncate">
                     <span className="text-zinc-100">{exp.company}</span>
-                    <span className="text-zinc-500"> — {exp.role}</span>
+                    <span className="text-zinc-500"> · {exp.role}</span>
                   </span>
                   {exp.current && (
                     <span
