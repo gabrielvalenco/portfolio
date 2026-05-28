@@ -61,11 +61,11 @@ function StreamCanvas() {
     let mouseX = OFF, mouseY = OFF
 
     function build() {
-      const rect = cv.getBoundingClientRect()
+      const rect = cv!.getBoundingClientRect()
       width = rect.width
       height = rect.height
-      cv.width = Math.floor(width * dpr)
-      cv.height = Math.floor(height * dpr)
+      cv!.width = Math.floor(width * dpr)
+      cv!.height = Math.floor(height * dpr)
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       ctx.font = `${FONT}px ui-monospace,"JetBrains Mono","SFMono-Regular",Menlo,monospace`
       ctx.textBaseline = 'top'
