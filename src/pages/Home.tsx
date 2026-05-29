@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { Github, Mail, Linkedin, ArrowUpRight, User, Briefcase } from 'lucide-react'
 import TechMarquee from '@/components/TechMarquee'
-import MatrixHero from '@/components/MatrixHero'
+import ScrollVideoHero from '@/components/ScrollVideoHero'
 import TerminalSection from '@/components/TerminalSection'
 import ProjectWindow from '@/components/ProjectWindow'
 import { TermLink, TermAnchor } from '@/components/TermButton'
@@ -291,9 +291,9 @@ export default function Home() {
   useHomeAnimations()
   return (
     <div className="relative">
-      <MatrixHero />
+      <ScrollVideoHero />
 
-      {/* Content slides up over the pinned matrix; the codes disappear beneath it */}
+      {/* Content scrolls in after the pinned scrub region */}
       <div className="relative z-10 bg-black">
         {/* Lime feed-glow at the contact line, intensifying with scroll */}
         <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 z-20">

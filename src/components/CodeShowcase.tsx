@@ -40,8 +40,9 @@ function StreamCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
-    const cv = canvasRef.current
-    if (!cv) return
+    const el = canvasRef.current
+    if (!el) return
+    const cv = el
     const ctx = cv.getContext('2d', { alpha: true })!
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const dpr = Math.min(window.devicePixelRatio || 1, 2)
