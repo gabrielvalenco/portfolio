@@ -2,6 +2,7 @@ import React, { useRef } from 'react'
 import { Github, Mail, Linkedin, ArrowUpRight, User, Briefcase } from 'lucide-react'
 import TechMarquee from '@/components/TechMarquee'
 import ScrollVideoHero from '@/components/ScrollVideoHero'
+import MatrixInterlude from '@/components/MatrixInterlude'
 import TerminalSection from '@/components/TerminalSection'
 import ProjectWindow from '@/components/ProjectWindow'
 import { TermLink, TermAnchor } from '@/components/TermButton'
@@ -316,6 +317,7 @@ export default function Home() {
 
         <Technologies />
         <About />
+        <MatrixInterlude />
         <Projects />
         <Contact />
       </div>
