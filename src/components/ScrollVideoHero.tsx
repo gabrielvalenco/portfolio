@@ -4,9 +4,11 @@ import { ChevronDown } from 'lucide-react'
 const LIME = '#9eff00'
 
 // How tall the section is (in viewport heights). With sticky inside, the
-// excess height becomes the "scrub range" the user scrolls through to play
-// the whole video. h=220vh → 120vh of scroll drives the full clip.
-const SECTION_VH = 220
+// excess height (SECTION_VH - 100vh) becomes the "scrub range" the user
+// scrolls through to play the whole video. Calibrated for a ~5s clip:
+// 250vh ⇒ 150vh of scroll = ~30vh per second, feels deliberate without
+// dragging.
+const SECTION_VH = 250
 
 // How aggressively the scrub catches up to scroll. Lower = smoother but laggier.
 const LERP = 0.18
