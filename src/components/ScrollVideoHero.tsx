@@ -11,7 +11,12 @@ const LIME = '#9eff00'
 const SECTION_VH = 250
 
 // How aggressively the scrub catches up to scroll. Lower = smoother but laggier.
-const LERP = 0.18
+// With an all-keyframes re-encode, seeks are instant so we can be snappier.
+const LERP = 0.32
+
+// Skip setting currentTime if the delta is below this — avoids hammering the
+// decoder with redundant assignments and trims a lot of jank on slow GPUs.
+const TIME_EPS = 1 / 120 // half a frame at 60fps
 
 export default function ScrollVideoHero() {
   const wrapperRef = useRef<HTMLDivElement>(null)
@@ -27,17 +32,39 @@ export default function ScrollVideoHero() {
     const video = videoEl
 
     video.pause()
+    // Hint the decoder to warm up so the first scroll feels instant.
+    const warm = () => {
+      const p = video.play()
+      if (p && typeof p.then === 'function') p.then(() => video.pause()).catch(() => {})
+      else video.pause()
+    }
 
     let duration = 0
     let current = 0
+    let lastApplied = -1
     let raf = 0
     let lastY = window.scrollY
     let vel = 0
     let glow = 0
 
-    const setMeta = () => { duration = video.duration || 0 }
+    const setMeta = () => { duration = video.duration || 0; warm() }
     video.addEventListener('loadedmetadata', setMeta)
     if (video.readyState >= 1) setMeta()
+    // Some browsers fire `loadeddata` even when metadata was already cached.
+    const setReady = () => { if (video.readyState >= 2 && duration > 0) warm() }
+    video.addEventListener('loadeddata', setReady)
+
+    // fastSeek is much cheaper than currentTime= for scrubbing when available.
+    // It's Chrome/Firefox-only; Safari falls back to currentTime.
+    const supportsFastSeek =
+      typeof (video as HTMLVideoElement & { fastSeek?: (t: number) => void }).fastSeek === 'function'
+    const seek = supportsFastSeek
+      ? (t: number) => {
+          try {
+            ;(video as HTMLVideoElement & { fastSeek: (t: number) => void }).fastSeek(t)
+          } catch { /* mid-seek */ }
+        }
+      : (t: number) => { try { video.currentTime = t } catch { /* mid-seek */ } }
 
     function tick() {
       const wrapRect = wrap.getBoundingClientRect()
@@ -49,13 +76,13 @@ export default function ScrollVideoHero() {
       const raw = (sy - sectionTop) / scrubRange
       const progress = Math.min(1, Math.max(0, raw))
 
-      // Drive video frame via lerped currentTime for smoothness on jittery scroll.
-      if (duration > 0) {
+      // Drive video frame via lerped time for smoothness on jittery scroll.
+      if (duration > 0 && video.readyState >= 2) {
         const target = progress * duration
         current += (target - current) * LERP
-        // Avoid setting currentTime if the video isn't ready, or it can throw.
-        if (video.readyState >= 2) {
-          try { video.currentTime = current } catch { /* seeking briefly */ }
+        if (Math.abs(current - lastApplied) >= TIME_EPS) {
+          seek(current)
+          lastApplied = current
         }
       }
 
@@ -82,6 +109,7 @@ export default function ScrollVideoHero() {
     return () => {
       cancelAnimationFrame(raf)
       video.removeEventListener('loadedmetadata', setMeta)
+      video.removeEventListener('loadeddata', setReady)
       document.documentElement.style.removeProperty('--matrix-glow')
     }
   }, [])
