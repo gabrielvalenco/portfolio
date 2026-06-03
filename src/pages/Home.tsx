@@ -7,6 +7,7 @@ import TerminalSection from '@/components/TerminalSection'
 import ProjectWindow from '@/components/ProjectWindow'
 import { TermLink, TermAnchor } from '@/components/TermButton'
 import useHomeAnimations from '@/hooks/useHomeAnimations'
+import NerdEmoji3D from '@/components/NerdEmoji3D'
 import { gsap } from '@/lib/gsap'
 import { featuredProjects } from '@/data/projects'
 
@@ -43,6 +44,7 @@ function Technologies() {
       index="01"
       title="Tecnologias"
       subtitle="Ferramentas que uso no dia a dia para entregar produtos completos, do banco de dados à interface."
+      compact
     >
       <div className="mt-2" data-animate-item>
         <TechMarquee />
@@ -75,6 +77,8 @@ function About() {
       index="02"
       title="Sobre"
       subtitle="Um pouco da minha trajetória, do que entrego e do que estou disponível para fazer."
+      noBorder
+      compact
     >
       <div className="grid md:grid-cols-2 gap-10 lg:gap-16">
         {/* Bio + experience */}
@@ -316,6 +320,7 @@ export default function Home() {
         </div>
 
         <Technologies />
+        <NerdEmoji3D />
         <About />
         <MatrixInterlude />
         <Projects />

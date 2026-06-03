@@ -41,7 +41,7 @@ export default function MatrixInterlude() {
         }}
       />
 
-      <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center font-mono">
+      <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center font-mono pointer-events-none">
         <p
           className="mb-3 text-[11px] uppercase tracking-[0.32em]"
           style={{ color: LIME, textShadow: `0 0 12px ${LIME}66` }}

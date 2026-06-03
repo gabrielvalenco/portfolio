@@ -83,8 +83,6 @@ export default function MatrixRain() {
     }
     build()
 
-    let lastScrollY = window.scrollY
-    let vel = 0
     let glow = 0
     let dir = 1
     let raf = 0
@@ -207,18 +205,9 @@ export default function MatrixRain() {
     }
 
     function draw() {
-      const sy = window.scrollY
-      const delta = sy - lastScrollY
-      lastScrollY = sy
-
-      vel += delta * 0.05
-      vel *= 0.88
-
-      const move = IDLE + vel
-      if (Math.abs(move) > 0.001) dir = move >= 0 ? 1 : -1
-
-      const target = Math.min(1, Math.abs(vel) * 0.45)
-      glow += (target - glow) * 0.12
+      // Animação contínua sem influência do scroll
+      const move = IDLE
+      glow += (0 - glow) * 0.12
       document.documentElement.style.setProperty('--matrix-glow', glow.toFixed(3))
 
       // Smooth mouse position toward latest event target
@@ -259,18 +248,28 @@ export default function MatrixRain() {
     }
     window.addEventListener('resize', onResize)
 
-    // The canvas covers the viewport (sticky, top:0, h-screen), so clientX/Y
-    // map directly to canvas-local coordinates.
+    // Only track mouse when over the canvas, with coordinates relative to canvas
     const onMouseMove = (e: MouseEvent) => {
-      mouseTargetX = e.clientX
-      mouseTargetY = e.clientY
+      const rect = cv.getBoundingClientRect()
+      // Check if mouse is actually over the canvas
+      if (e.clientX < rect.left || e.clientX > rect.right ||
+          e.clientY < rect.top || e.clientY > rect.bottom) {
+        mouseTargetX = OFF
+        mouseTargetY = OFF
+        return
+      }
+      // Convert to canvas-local coordinates
+      const localX = e.clientX - rect.left
+      const localY = e.clientY - rect.top
+      mouseTargetX = localX
+      mouseTargetY = localY
       // First move: snap so the bubble (and trail) don't fly in from off-screen.
       if (mouseX === OFF) {
-        mouseX = mouseTargetX
-        mouseY = mouseTargetY
+        mouseX = localX
+        mouseY = localY
         for (let i = 0; i < TRAIL_LEN; i++) {
-          trailX[i] = mouseTargetX
-          trailY[i] = mouseTargetY
+          trailX[i] = localX
+          trailY[i] = localY
         }
       }
     }
@@ -278,15 +277,15 @@ export default function MatrixRain() {
       mouseTargetX = OFF
       mouseTargetY = OFF
     }
-    window.addEventListener('mousemove', onMouseMove, { passive: true })
-    document.addEventListener('mouseleave', onMouseLeave)
+    cv.addEventListener('mousemove', onMouseMove, { passive: true })
+    cv.addEventListener('mouseleave', onMouseLeave)
 
     return () => {
       cancelAnimationFrame(raf)
       window.clearTimeout(resizeTimer)
       window.removeEventListener('resize', onResize)
-      window.removeEventListener('mousemove', onMouseMove)
-      document.removeEventListener('mouseleave', onMouseLeave)
+      cv.removeEventListener('mousemove', onMouseMove)
+      cv.removeEventListener('mouseleave', onMouseLeave)
       document.documentElement.style.removeProperty('--matrix-glow')
     }
   }, [])
