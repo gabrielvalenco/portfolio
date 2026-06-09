@@ -17,6 +17,9 @@
 html, body, #root {
   height: 100%;
 }
+body {
+  overflow-x: hidden;
+}
 
 /* ─── Custom scrollbar ───────────────────────────────────────────────────────── */
 ::-webkit-scrollbar {
@@ -44,11 +47,6 @@ html, body, #root {
   scrollbar-color: #9eff00 #000000;
 }
 
-.theme-light {
-  --color-background: #ffffff;
-  --color-foreground: #0a0a0a;
-  --color-muted: #f4f4f5;
-}
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);

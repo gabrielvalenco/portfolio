@@ -6,14 +6,18 @@ import { useNavigate, useLocation } from 'react-router-dom'
 function Progress() {
   const [progress, setProgress] = useState(0)
   useEffect(() => {
+    let raf = 0
     const onScroll = () => {
-      const h = document.documentElement.scrollHeight - window.innerHeight
-      const y = window.scrollY
-      setProgress(h > 0 ? Math.min(100, Math.max(0, (y / h) * 100)) : 0)
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(() => {
+        const h = document.documentElement.scrollHeight - window.innerHeight
+        const y = window.scrollY
+        setProgress(h > 0 ? Math.min(100, Math.max(0, (y / h) * 100)) : 0)
+      })
     }
     onScroll()
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(raf) }
   }, [])
   return (
     <div className="fixed top-0 left-0 w-full h-1 bg-neutral-800">

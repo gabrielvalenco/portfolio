@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 
 const LIME = '#9eff00'
@@ -18,12 +18,30 @@ const LERP = 0.32
 // decoder with redundant assignments and trims a lot of jank on slow GPUs.
 const TIME_EPS = 1 / 120 // half a frame at 60fps
 
+function useIsMobile() {
+  const [mobile, setMobile] = useState(() =>
+    typeof window !== 'undefined'
+      ? window.innerWidth < 768 || /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
+      : false,
+  )
+  useEffect(() => {
+    const check = () =>
+      setMobile(window.innerWidth < 768 || /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent))
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+  return mobile
+}
+
 export default function ScrollVideoHero() {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const textRef = useRef<HTMLDivElement>(null)
+  const isMobile = useIsMobile()
 
+  // ── Desktop: scroll-scrubbed video ──────────────────────────────────────────
   useEffect(() => {
+    if (isMobile) return
     const wrapEl = wrapperRef.current
     const videoEl = videoRef.current
     const text = textRef.current
@@ -112,14 +130,26 @@ export default function ScrollVideoHero() {
       video.removeEventListener('loadeddata', setReady)
       document.documentElement.style.removeProperty('--matrix-glow')
     }
-  }, [])
+  }, [isMobile])
+
+  // ── Mobile: autoplay the video normally with loop ───────────────────────────
+  useEffect(() => {
+    if (!isMobile) return
+    const video = videoRef.current
+    if (!video) return
+    video.loop = true
+    video.muted = true
+    const p = video.play()
+    if (p && typeof p.then === 'function') p.catch(() => {})
+    return () => { video.pause() }
+  }, [isMobile])
 
   return (
     <section
       ref={wrapperRef}
       id="home"
       className="relative bg-black"
-      style={{ height: `${SECTION_VH}vh` }}
+      style={{ height: isMobile ? '100vh' : `${SECTION_VH}vh` }}
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         {/* Scroll-scrubbed video */}
@@ -128,8 +158,8 @@ export default function ScrollVideoHero() {
           src="/hero.mp4"
           muted
           playsInline
-          preload="auto"
-          // poster avoids a blank frame while the file loads
+          preload={isMobile ? 'metadata' : 'auto'}
+          {...(isMobile ? { autoPlay: true, loop: true } : {})}
           aria-hidden
           className="absolute inset-0 h-full w-full object-cover"
         />

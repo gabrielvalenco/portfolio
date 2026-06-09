@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, lazy, Suspense } from 'react'
 import { Github, Mail, Linkedin, ArrowUpRight, User, Briefcase } from 'lucide-react'
 import TechMarquee from '@/components/TechMarquee'
 import ScrollVideoHero from '@/components/ScrollVideoHero'
@@ -7,9 +7,10 @@ import TerminalSection from '@/components/TerminalSection'
 import ProjectWindow from '@/components/ProjectWindow'
 import { TermLink, TermAnchor } from '@/components/TermButton'
 import useHomeAnimations from '@/hooks/useHomeAnimations'
-import NerdEmoji3D from '@/components/NerdEmoji3D'
 import { gsap } from '@/lib/gsap'
 import { featuredProjects } from '@/data/projects'
+
+const NerdEmoji3D = lazy(() => import('@/components/NerdEmoji3D'))
 
 const LIME = '#9eff00'
 
@@ -320,7 +321,9 @@ export default function Home() {
         </div>
 
         <Technologies />
-        <NerdEmoji3D />
+        <Suspense fallback={null}>
+          <NerdEmoji3D />
+        </Suspense>
         <About />
         <MatrixInterlude />
         <Projects />
