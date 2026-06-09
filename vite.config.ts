@@ -14,9 +14,6 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
-          if (id.includes('@react-three/rapier') || id.includes('@dimforge') || id.includes('rapier')) {
-            return 'vendor-rapier'
-          }
           if (id.includes('three') || id.includes('@react-three')) {
             return 'vendor-three'
           }
