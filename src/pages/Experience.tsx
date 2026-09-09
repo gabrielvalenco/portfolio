@@ -16,10 +16,21 @@ type Role = {
 
 const roles: Role[] = [
   {
-    company: 'Degiual',
-    role: 'Full Stack Developer & Tech Lead',
-    period: '2024 - atual',
+    company: 'OneMoving',
+    role: 'Dev Sênior',
+    period: '2025 - atual',
     current: true,
+    bullets: [
+      'Responsável pelo desenvolvimento do sistema principal da empresa, desde a arquitetura até as entregas em produção.',
+      'Desenvolvimento de aplicativos integrados ao sistema, conectando operações, clientes e parceiros em uma mesma plataforma.',
+      'Liderança técnica na evolução do produto, definição de padrões de código e integração de novas funcionalidades.',
+    ],
+    stack: ['React', 'React Native', 'Node.js', 'API', 'PostgreSQL'],
+  },
+  {
+    company: 'Desigual',
+    role: 'Full Stack Developer & Tech Lead',
+    period: '2024 - 29/07/2025',
     bullets: [
       'Lidero o desenvolvimento técnico de produtos digitais para clientes de diferentes segmentos.',
       'Arquiteto soluções full-stack: front-end, API, banco de dados e automações, alinhadas com objetivos de negócio.',

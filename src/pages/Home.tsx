@@ -60,13 +60,14 @@ const stats = [
   { count: 10, suffix: '+', label: 'Projetos' },
   { count: 15, suffix: '',  label: 'Tecnologias' },
   { count: 4,  suffix: '',  label: 'Certificados' },
-  { count: 3,  suffix: '',  label: 'Experiências' },
+  { count: 4,  suffix: '',  label: 'Experiências' },
 ]
 
 const skills = ['Inglês avançado', 'Oratória', 'Criativo', 'Cooperativo', 'Sociável', 'Adaptável']
 
 const experiences = [
-  { company: 'Degiual',       role: 'Full Stack & Tech Lead',   current: true  },
+  { company: 'OneMoving',     role: 'Dev Sênior',                current: true  },
+  { company: 'Desigual',      role: 'Full Stack & Tech Lead',    current: false },
   { company: 'Grupo Prodemi', role: 'Full Stack Developer',      current: false },
   { company: 'Jem',           role: 'Tráfego Pago',              current: false },
 ]
@@ -92,9 +93,9 @@ function About() {
           </p>
           <p data-animate-item>
             Atualmente atuo como{' '}
-            <span className="text-zinc-100">Full Stack &amp; Tech Lead</span> na{' '}
-            <span className="text-zinc-100">Degiual</span>, liderando soluções
-            digitais para clientes de diferentes segmentos.
+            <span className="text-zinc-100">Dev Sênior</span> na{' '}
+            <span className="text-zinc-100">OneMoving</span>, responsável pelo
+            desenvolvimento do sistema e dos aplicativos ligados à plataforma.
           </p>
           <p data-animate-item>
             Curioso, crítico e empenhado, transformo requisitos em produtos
@@ -221,7 +222,7 @@ function Projects() {
 
       <div className="mt-10 flex justify-center" data-animate-item>
         <Magnetic>
-          <TermLink to="/projects" icon={ArrowUpRight}>Ver todos os projetos</TermLink>
+          <TermLink to="/more-projects" icon={ArrowUpRight}>Ver mais projetos</TermLink>
         </Magnetic>
       </div>
     </TerminalSection>

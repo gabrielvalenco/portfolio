@@ -73,8 +73,10 @@ export default function AboutPage() {
               </p>
               <p className="mt-3">
                 Migrei para desenvolvimento full-stack em equipes pequenas, onde
-                pude tocar do banco de dados ao deploy. Hoje lidero entregas
-                técnicas na <span className="text-zinc-100">Degiual</span>.
+                pude tocar do banco de dados ao deploy. Hoje atuo como Dev Sênior
+                na <span className="text-zinc-100">OneMoving</span>, responsável
+                pelo desenvolvimento do sistema e dos aplicativos ligados à
+                plataforma.
               </p>
             </section>
 
@@ -147,8 +149,8 @@ export default function AboutPage() {
                 No momento
               </p>
               <p className="text-xs text-zinc-300">
-                Liderando projetos full-stack na Degiual e aceitando freelas
-                selecionados em SaaS e automações.
+                Liderando o desenvolvimento do sistema e dos aplicativos na
+                OneMoving e aceitando freelas selecionados em SaaS e automações.
               </p>
               <p className="mt-3 text-xs text-zinc-300">
                 Estudando arquitetura de sistemas distribuídos e métricas de

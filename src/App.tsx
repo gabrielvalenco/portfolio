@@ -7,6 +7,7 @@ import CustomCursor from '@/components/CustomCursor'
 const Home = lazy(() => import('@/pages/Home'))
 const Certificates = lazy(() => import('@/pages/Certificates'))
 const ProjectsPage = lazy(() => import('@/pages/Projects'))
+const MoreProjects = lazy(() => import('@/pages/MoreProjects'))
 const AboutPage = lazy(() => import('@/pages/About'))
 const ExperiencePage = lazy(() => import('@/pages/Experience'))
 
@@ -48,6 +49,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/more-projects" element={<MoreProjects />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/experience" element={<ExperiencePage />} />
               <Route path="/certificates" element={<Certificates />} />
