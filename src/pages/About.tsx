@@ -114,8 +114,23 @@ export default function AboutPage() {
             </section>
           </article>
 
-          {/* Right column: facts + CTAs */}
+          {/* Right column: photo + facts + CTAs */}
           <aside className="space-y-8">
+            <div
+              data-animate-item
+              className="terminal-panel corner-brackets relative overflow-hidden p-0"
+            >
+              <span className="cb-tl" />
+              <span className="cb-tr" />
+              <span className="cb-bl" />
+              <span className="cb-br" />
+              <img
+                src="/ChatGPT%20Image%2019%20de%20mar.%20de%202026%2C%2016_56_27.png"
+                alt="Gabriel Valenço"
+                className="h-auto w-full object-cover"
+              />
+            </div>
+
             <div
               data-animate-item
               className="terminal-panel corner-brackets relative p-6 font-mono"

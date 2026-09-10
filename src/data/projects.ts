@@ -4,8 +4,8 @@ export type Project = {
   href:  string
   live?: string
   repo?: string
-  image?: string
   tags?: string[]
+  image?: string
 }
 
 export const projects: Project[] = [
@@ -15,6 +15,7 @@ export const projects: Project[] = [
     href: 'https://www.golfo-oeg.com/',
     live: 'https://www.golfo-oeg.com/',
     tags: ['Web', 'Institucional'],
+    image: 'https://placehold.co/1200x700/0a0a0a/9eff00?text=Golfo+OEG',
   },
   {
     title: 'Pecuária pelo Clima',
@@ -22,6 +23,7 @@ export const projects: Project[] = [
     href: 'https://preview.pecuariapeloclima.org/',
     live: 'https://preview.pecuariapeloclima.org/',
     tags: ['Landing page', 'Web'],
+    image: 'https://placehold.co/1200x700/0a0a0a/9eff00?text=Pecuaria+pelo+Clima',
   },
   {
     title: 'Rose Valenço',
@@ -29,6 +31,7 @@ export const projects: Project[] = [
     href: 'https://rosevalenco.com.br/',
     live: 'https://rosevalenco.com.br/',
     tags: ['Website', 'Web'],
+    image: 'https://placehold.co/1200x700/0a0a0a/9eff00?text=Rose+Valenco',
   },
   {
     title: 'Dinâmico e Top',
@@ -36,6 +39,7 @@ export const projects: Project[] = [
     href: 'https://www.dinamicoetop.com.br/',
     live: 'https://www.dinamicoetop.com.br/',
     tags: ['Landing page', 'Educação'],
+    image: 'https://placehold.co/1200x700/0a0a0a/9eff00?text=Dinamico+e+Top',
   },
   {
     title: 'Terras de Santa Bárbara',
@@ -43,6 +47,7 @@ export const projects: Project[] = [
     href: 'https://terrassantabarbara.com/',
     live: 'https://terrassantabarbara.com/',
     tags: ['Landing page', 'Imobiliário'],
+    image: 'https://placehold.co/1200x700/0a0a0a/9eff00?text=Terras+de+Santa+Barbara',
   },
   {
     title: 'Módulo One',
@@ -50,6 +55,7 @@ export const projects: Project[] = [
     href: 'https://www.moduloone.com.br/',
     live: 'https://www.moduloone.com.br/',
     tags: ['Landing page', 'SaaS', 'Admin panel'],
+    image: 'https://placehold.co/1200x700/0a0a0a/9eff00?text=Modulo+One',
   },
 ]
 
