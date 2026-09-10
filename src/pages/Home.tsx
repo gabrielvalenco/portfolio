@@ -81,7 +81,7 @@ function About() {
       noBorder
       compact
     >
-      <div className="grid items-start md:grid-cols-2 gap-10 lg:gap-16">
+      <div className="grid items-end md:grid-cols-2 gap-10 lg:gap-16">
         {/* Bio + experience */}
         <div className="space-y-6 font-mono text-sm leading-relaxed text-zinc-300">
           <p data-animate-item>
@@ -154,7 +154,7 @@ function About() {
         </div>
 
         {/* Stats + skills */}
-        <div className="space-y-8 self-end">
+        <div className="space-y-8">
           <div data-animate-item>
             <KermitModel3D />
           </div>

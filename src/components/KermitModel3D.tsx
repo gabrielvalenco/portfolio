@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useMemo, useRef } from 'react'
 import { Canvas, useGraph } from '@react-three/fiber'
-import { useGLTF, useAnimations, Environment } from '@react-three/drei'
+import { useGLTF, useAnimations, Environment, OrbitControls } from '@react-three/drei'
 import { SkeletonUtils } from 'three-stdlib'
 import * as THREE from 'three'
 
@@ -93,6 +93,7 @@ export default function KermitModel3D() {
         <directionalLight position={[5, 10, 7]} intensity={1.2} />
         <directionalLight position={[-5, -5, -5]} intensity={0.4} />
         <Environment preset="city" />
+        <OrbitControls enableZoom={false} enablePan={false} />
         <Suspense fallback={null}>
           <Model scale={1.2} position={[0, -1.2, 0]} />
         </Suspense>
