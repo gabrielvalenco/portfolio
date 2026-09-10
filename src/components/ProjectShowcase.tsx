@@ -17,7 +17,7 @@ function ProjectSlide({ p, step, onExpand }: { p: Project; step: number; onExpan
         <span className="cb-br" />
         <div className="scan-sweep" />
 
-        <div className="grid md:grid-cols-2">
+        <div className="grid md:grid-cols-[3fr_2fr]">
           <div className="relative w-full overflow-hidden bg-black aspect-[4/3] md:aspect-auto md:h-[26rem]">
             {p.image ? (
               <img
