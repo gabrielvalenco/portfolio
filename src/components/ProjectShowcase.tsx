@@ -115,19 +115,33 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
     if (prefersReduced) return
 
     const ctx = gsap.context(() => {
+      const hold = 2.5
+      const transition = 1.0
+      const finalHold = 1.5
+
+      const holdStarts: number[] = []
+      let cursor = 0
+      holdStarts.push(cursor)
+      cursor += hold
+      for (let i = 0; i < steps - 1; i++) {
+        cursor += transition
+        holdStarts.push(cursor)
+        cursor += (i === steps - 2 ? finalHold : hold)
+      }
+      const totalDuration = cursor
+      const snapPoints = [...holdStarts.map(t => t / totalDuration), 1]
+      const snapTo = gsap.utils.snap(snapPoints)
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: 'top top',
-          end: '+=240%',
+          end: '+=300%',
           pin: true,
-          scrub: 0.3,
+          scrub: 1,
           snap: {
-            snapTo: (value: number) => {
-              const step = 1 / steps
-              return Math.round(value / step) * step
-            },
-            duration: { min: 0.1, max: 0.2 },
+            snapTo: (value: number) => snapTo(value),
+            duration: { min: 0.4, max: 0.7 },
             ease: 'power2.inOut',
             delay: 0,
           },
@@ -138,16 +152,12 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
       })
 
       const step = 100 / steps
-      const hold = 1.5
-      const transition = 0.5
-      const finalHold = 2.0
-
       tl.to({}, { duration: hold }) // pausa no primeiro projeto
       for (let i = 0; i < steps - 1; i++) {
         tl.to(track, {
           xPercent: -(i + 1) * step,
           duration: transition,
-          ease: 'power2.inOut',
+          ease: 'power3.inOut',
         })
         tl.to({}, { duration: i === steps - 2 ? finalHold : hold })
       }
