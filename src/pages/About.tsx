@@ -1,7 +1,5 @@
 import SubPageHeader from '@/components/SubPageHeader'
-import { TermAnchor, TermLink } from '@/components/TermButton'
 import useHomeAnimations from '@/hooks/useHomeAnimations'
-import { Briefcase, Mail } from 'lucide-react'
 
 const LIME = '#9eff00'
 
@@ -19,13 +17,6 @@ const principles = [
   'Design e experiência do usuário são problemas de engenharia, não decoração.',
 ]
 
-const facts = [
-  { k: 'Localização',  v: 'Brasil (trabalho remoto)' },
-  { k: 'Idiomas',      v: 'Português · Inglês avançado' },
-  { k: 'Disponível',   v: 'Freelancer / contrato' },
-  { k: 'Hobbies',      v: 'Leitura · escrita · cinema · academia' },
-]
-
 export default function AboutPage() {
   useHomeAnimations()
   return (
@@ -37,9 +28,7 @@ export default function AboutPage() {
       />
 
       <main className="container mx-auto px-6 py-16">
-        <div className="grid lg:grid-cols-[1.4fr_1fr] gap-12">
-          {/* Left column: long-form bio */}
-          <article className="space-y-10 font-mono text-sm leading-relaxed text-zinc-300">
+        <article className="max-w-4xl space-y-10 font-mono text-sm leading-relaxed text-zinc-300">
             <section data-animate-item>
               <p
                 className="mb-3 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-500"
@@ -112,73 +101,7 @@ export default function AboutPage() {
                 ))}
               </ul>
             </section>
-          </article>
-
-          {/* Right column: photo + facts + CTAs */}
-          <aside className="space-y-8">
-            <div
-              data-animate-item
-              className="terminal-panel corner-brackets relative overflow-hidden p-0"
-            >
-              <span className="cb-tl" />
-              <span className="cb-tr" />
-              <span className="cb-bl" />
-              <span className="cb-br" />
-              <img
-                src="/ChatGPT%20Image%2019%20de%20mar.%20de%202026%2C%2016_56_27.png"
-                alt="Gabriel Valenço"
-                className="h-auto w-full object-cover"
-              />
-            </div>
-
-            <div
-              data-animate-item
-              className="terminal-panel corner-brackets relative p-6 font-mono"
-            >
-              <span className="cb-tl" />
-              <span className="cb-tr" />
-              <span className="cb-bl" />
-              <span className="cb-br" />
-              <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-500">
-                Resumo rápido
-              </p>
-              <dl className="space-y-2.5 text-xs">
-                {facts.map(({ k, v }) => (
-                  <div key={k} className="grid grid-cols-[7rem_1fr] gap-3 border-b border-dashed border-[#9eff00]/10 pb-2 last:border-0 last:pb-0">
-                    <dt style={{ color: LIME }} className="opacity-80 uppercase tracking-wider">{k}</dt>
-                    <dd className="text-zinc-300">{v}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-
-            <div
-              data-animate-item
-              className="terminal-panel corner-brackets relative p-6 font-mono"
-            >
-              <span className="cb-tl" />
-              <span className="cb-tr" />
-              <span className="cb-bl" />
-              <span className="cb-br" />
-              <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-500">
-                No momento
-              </p>
-              <p className="text-xs text-zinc-300">
-                Liderando o desenvolvimento do sistema e dos aplicativos na
-                OneMoving e aceitando freelas selecionados em SaaS e automações.
-              </p>
-              <p className="mt-3 text-xs text-zinc-300">
-                Estudando arquitetura de sistemas distribuídos e métricas de
-                experiência do usuário.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-3" data-animate-item>
-              <TermLink to="/experience" icon={Briefcase}>Minha trajetória</TermLink>
-              <TermAnchor href="mailto:gabrielvalencoofc@gmail.com" icon={Mail}>Fale comigo</TermAnchor>
-            </div>
-          </aside>
-        </div>
+        </article>
       </main>
     </div>
   )
