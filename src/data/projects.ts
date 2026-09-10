@@ -15,7 +15,7 @@ export const projects: Project[] = [
     href: 'https://www.golfo-oeg.com/',
     live: 'https://www.golfo-oeg.com/',
     tags: ['Web', 'Institucional'],
-    image: 'https://placehold.co/1200x700/0a0a0a/9eff00?text=Golfo+OEG',
+    image: '/golfo.png',
   },
   {
     title: 'Pecuária pelo Clima',
@@ -23,7 +23,7 @@ export const projects: Project[] = [
     href: 'https://preview.pecuariapeloclima.org/',
     live: 'https://preview.pecuariapeloclima.org/',
     tags: ['Landing page', 'Web'],
-    image: 'https://placehold.co/1200x700/0a0a0a/9eff00?text=Pecuaria+pelo+Clima',
+    image: '/pecuaria.png',
   },
   {
     title: 'Rose Valenço',
@@ -31,7 +31,7 @@ export const projects: Project[] = [
     href: 'https://rosevalenco.com.br/',
     live: 'https://rosevalenco.com.br/',
     tags: ['Website', 'Web'],
-    image: 'https://placehold.co/1200x700/0a0a0a/9eff00?text=Rose+Valenco',
+    image: '/rose.png',
   },
   {
     title: 'Dinâmico e Top',
