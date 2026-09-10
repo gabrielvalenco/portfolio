@@ -136,12 +136,24 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
         scrollTrigger: {
           trigger: section,
           start: 'top top',
-          end: '+=300%',
+          end: '+=120%',
           pin: true,
-          scrub: 1,
+          scrub: 0.4,
           snap: {
-            snapTo: (value: number) => snapTo(value),
-            duration: { min: 0.4, max: 0.7 },
+            snapTo: (value: number, target: any) => {
+              const current = target.progress
+              const dir = target.direction
+              if (dir > 0) {
+                const next = snapPoints.find((p) => p > current + 0.001) ?? 1
+                return next
+              }
+              if (dir < 0) {
+                const prev = [...snapPoints].reverse().find((p) => p < current - 0.001) ?? 0
+                return prev
+              }
+              return snapTo(value)
+            },
+            duration: { min: 0.25, max: 0.4 },
             ease: 'power2.inOut',
             delay: 0,
           },
