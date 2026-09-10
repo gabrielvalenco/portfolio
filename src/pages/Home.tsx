@@ -5,6 +5,7 @@ import ScrollVideoHero from '@/components/ScrollVideoHero'
 import MatrixInterlude from '@/components/MatrixInterlude'
 import TerminalSection from '@/components/TerminalSection'
 import ProjectShowcase from '@/components/ProjectShowcase'
+import KermitModel3D from '@/components/KermitModel3D'
 import { TermLink, TermAnchor } from '@/components/TermButton'
 import useHomeAnimations from '@/hooks/useHomeAnimations'
 import { gsap } from '@/lib/gsap'
@@ -80,7 +81,7 @@ function About() {
       noBorder
       compact
     >
-      <div className="grid md:grid-cols-2 gap-10 lg:gap-16">
+      <div className="grid items-start md:grid-cols-2 gap-10 lg:gap-16">
         {/* Bio + experience */}
         <div className="space-y-6 font-mono text-sm leading-relaxed text-zinc-300">
           <p data-animate-item>
@@ -153,7 +154,11 @@ function About() {
         </div>
 
         {/* Stats + skills */}
-        <div className="space-y-8">
+        <div className="space-y-8 self-end">
+          <div data-animate-item>
+            <KermitModel3D />
+          </div>
+
           <div className="grid grid-cols-2 gap-3">
             {stats.map(({ suffix, label, count }) => (
               <div
