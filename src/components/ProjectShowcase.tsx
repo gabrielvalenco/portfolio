@@ -9,7 +9,7 @@ const LIME = '#9eff00'
 function ProjectSlide({ p, step }: { p: Project; step: number }) {
   const url = p.live ?? p.href
   return (
-    <div className="relative h-full w-screen shrink-0 flex items-center justify-center px-6">
+    <div data-slide data-step={step} className="relative h-full w-screen shrink-0 flex items-center justify-center px-6">
       <div className="terminal-panel corner-brackets relative w-full max-w-5xl overflow-hidden font-mono">
         <span className="cb-tl" />
         <span className="cb-tr" />
@@ -115,30 +115,39 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
     if (prefersReduced) return
 
     const ctx = gsap.context(() => {
-      const hold = 2.5
-      const transition = 1.0
-      const finalHold = 1.5
+      const intro = 1.4
+      const hold = 3.5
+      const transition = 1.5
+      const finalHold = 2.5
+      const slideStep = 100 / steps
 
-      const holdStarts: number[] = []
+      const slides = track.querySelectorAll<HTMLElement>('[data-slide]')
+      const firstPanel = slides[0]?.querySelector<HTMLElement>('.terminal-panel')
+
+      const settleTimes: number[] = []
       let cursor = 0
-      holdStarts.push(cursor)
+
+      cursor += intro
+      settleTimes.push(cursor)
       cursor += hold
+
       for (let i = 0; i < steps - 1; i++) {
         cursor += transition
-        holdStarts.push(cursor)
+        settleTimes.push(cursor)
         cursor += (i === steps - 2 ? finalHold : hold)
       }
+
       const totalDuration = cursor
-      const snapPoints = [...holdStarts.map(t => t / totalDuration), 1]
+      const snapPoints = settleTimes.map(t => t / totalDuration)
       const snapTo = gsap.utils.snap(snapPoints)
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: 'top top',
-          end: '+=120%',
+          end: '+=300%',
           pin: true,
-          scrub: 0.4,
+          scrub: 0.8,
           snap: {
             snapTo: (value: number, target: any) => {
               const current = target.progress
@@ -148,12 +157,12 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
                 return next
               }
               if (dir < 0) {
-                const prev = [...snapPoints].reverse().find((p) => p < current - 0.001) ?? 0
-                return prev
+                const prev = [...snapPoints].reverse().find((p) => p < current - 0.001)
+                return prev ?? snapPoints[0]
               }
               return snapTo(value)
             },
-            duration: { min: 0.25, max: 0.4 },
+            duration: { min: 0.4, max: 0.7 },
             ease: 'power2.inOut',
             delay: 0,
           },
@@ -163,13 +172,25 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
         },
       })
 
-      const step = 100 / steps
-      tl.to({}, { duration: hold }) // pausa no primeiro projeto
+      if (firstPanel) {
+        tl.from(firstPanel, {
+          autoAlpha: 0,
+          y: 50,
+          scale: 0.96,
+          duration: intro,
+          ease: 'power2.out',
+        })
+      } else {
+        tl.to({}, { duration: intro })
+      }
+
+      tl.to({}, { duration: hold })
+
       for (let i = 0; i < steps - 1; i++) {
         tl.to(track, {
-          xPercent: -(i + 1) * step,
+          xPercent: -(i + 1) * slideStep,
           duration: transition,
-          ease: 'power3.inOut',
+          ease: 'power2.inOut',
         })
         tl.to({}, { duration: i === steps - 2 ? finalHold : hold })
       }
