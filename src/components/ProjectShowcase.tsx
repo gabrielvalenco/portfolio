@@ -34,7 +34,7 @@ function ProjectSlide({ p, step, onExpand }: { p: Project; step: number; onExpan
             )}
           </div>
 
-          <div className="flex flex-col p-6 md:p-8">
+          <div className="flex flex-col p-6 md:h-[26rem] md:p-8">
             <div className="flex items-center justify-between border-b border-[#9eff00]/15 pb-3">
               <span className="text-[10px] uppercase tracking-[0.22em]" style={{ color: LIME }}>
                 Destaque
