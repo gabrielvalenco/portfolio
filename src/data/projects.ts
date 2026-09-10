@@ -14,7 +14,7 @@ export const projects: Project[] = [
     desc: 'Plataforma institucional e hub digital para o Grupo Golfo OEG, com foco em comunicação corporativa e presença online.',
     href: 'https://www.golfo-oeg.com/',
     live: 'https://www.golfo-oeg.com/',
-    tags: ['Web', 'Institucional'],
+    tags: ['React', 'Shadcn', 'PostgreSQL'],
     image: '/golfo.png',
   },
   {
@@ -22,7 +22,7 @@ export const projects: Project[] = [
     desc: 'Site de prévia e divulgação do projeto Pecuária pelo Clima, conectando conteúdo e engajamento do setor agropecuário.',
     href: 'https://preview.pecuariapeloclima.org/',
     live: 'https://preview.pecuariapeloclima.org/',
-    tags: ['Landing page', 'Web'],
+    tags: ['PHP', 'CSS', 'JavaScript'],
     image: '/pecuaria.png',
   },
   {
@@ -30,7 +30,7 @@ export const projects: Project[] = [
     desc: 'Website pessoal e profissional com design moderno, foco em presença digital e conversão.',
     href: 'https://rosevalenco.com.br/',
     live: 'https://rosevalenco.com.br/',
-    tags: ['Website', 'Web'],
+    tags: ['React', 'Shadcn', 'Vercel', 'PostgreSQL'],
     image: '/rose.png',
   },
   {
