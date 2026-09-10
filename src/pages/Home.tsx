@@ -1,10 +1,10 @@
 import React, { useRef, lazy, Suspense } from 'react'
-import { Github, Mail, Linkedin, ArrowUpRight, User, Briefcase } from 'lucide-react'
+import { Github, Mail, Linkedin, User, Briefcase } from 'lucide-react'
 import TechMarquee from '@/components/TechMarquee'
 import ScrollVideoHero from '@/components/ScrollVideoHero'
 import MatrixInterlude from '@/components/MatrixInterlude'
 import TerminalSection from '@/components/TerminalSection'
-import ProjectWindow from '@/components/ProjectWindow'
+import ProjectShowcase from '@/components/ProjectShowcase'
 import { TermLink, TermAnchor } from '@/components/TermButton'
 import useHomeAnimations from '@/hooks/useHomeAnimations'
 import { gsap } from '@/lib/gsap'
@@ -207,26 +207,7 @@ function About() {
 // ─── Projects ─────────────────────────────────────────────────────────────────
 
 function Projects() {
-  return (
-    <TerminalSection
-      id="projects"
-      index="03"
-      title="Projetos"
-      subtitle="Uma seleção de produtos e experimentos que construí. Há muito mais na página completa."
-    >
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {featuredProjects.map(p => (
-          <ProjectWindow key={p.title} p={p} featured />
-        ))}
-      </div>
-
-      <div className="mt-10 flex justify-center" data-animate-item>
-        <Magnetic>
-          <TermLink to="/more-projects" icon={ArrowUpRight}>Ver mais projetos</TermLink>
-        </Magnetic>
-      </div>
-    </TerminalSection>
-  )
+  return <ProjectShowcase projects={featuredProjects} />
 }
 
 // ─── Contact ──────────────────────────────────────────────────────────────────

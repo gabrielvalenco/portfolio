@@ -4,6 +4,7 @@ export type Project = {
   href:  string
   live?: string
   repo?: string
+  image?: string
   tags?: string[]
 }
 
