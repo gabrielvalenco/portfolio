@@ -119,15 +119,15 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
         scrollTrigger: {
           trigger: section,
           start: 'top top',
-          end: '+=400%',
+          end: '+=240%',
           pin: true,
-          scrub: 1,
+          scrub: 0.3,
           snap: {
             snapTo: (value: number) => {
               const step = 1 / steps
               return Math.round(value / step) * step
             },
-            duration: { min: 0.15, max: 0.3 },
+            duration: { min: 0.1, max: 0.2 },
             ease: 'power2.inOut',
             delay: 0,
           },
@@ -137,14 +137,20 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
         },
       })
 
+      const step = 100 / steps
+      const hold = 1.5
+      const transition = 0.5
+      const finalHold = 2.0
+
+      tl.to({}, { duration: hold }) // pausa no primeiro projeto
       for (let i = 0; i < steps - 1; i++) {
         tl.to(track, {
-          xPercent: -(i + 1) * (100 / steps),
-          duration: 1,
-          ease: 'none',
+          xPercent: -(i + 1) * step,
+          duration: transition,
+          ease: 'power2.inOut',
         })
+        tl.to({}, { duration: i === steps - 2 ? finalHold : hold })
       }
-      tl.to({}, { duration: 1 })
     }, section)
 
     return () => ctx.revert()
