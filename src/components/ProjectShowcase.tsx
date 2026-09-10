@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from 'react'
+import { useLayoutEffect, useRef, useState, useEffect } from 'react'
 import { gsap } from '@/lib/gsap'
 import type { Project } from '@/data/projects'
 import { ExternalLink, ArrowUpRight } from 'lucide-react'
@@ -6,7 +6,7 @@ import { TermLink } from '@/components/TermButton'
 
 const LIME = '#9eff00'
 
-function ProjectSlide({ p, step }: { p: Project; step: number }) {
+function ProjectSlide({ p, step, onExpand }: { p: Project; step: number; onExpand?: () => void }) {
   const url = p.live ?? p.href
   return (
     <div data-slide data-step={step} className="relative h-full w-screen shrink-0 flex items-center justify-center px-6">
@@ -18,9 +18,15 @@ function ProjectSlide({ p, step }: { p: Project; step: number }) {
         <div className="scan-sweep" />
 
         <div className="grid md:grid-cols-2">
-          <div className="relative w-full overflow-hidden bg-zinc-900/50 aspect-[4/3] md:aspect-auto md:h-[26rem]">
+          <div className="relative w-full overflow-hidden bg-black aspect-[4/3] md:aspect-auto md:h-[26rem]">
             {p.image ? (
-              <img src={p.image} alt={p.title} className="h-full w-full object-cover" />
+              <img
+                src={p.image}
+                alt={p.title}
+                onClick={onExpand}
+                className="h-full w-full cursor-pointer object-contain transition-transform duration-500 hover:scale-[1.02]"
+                title="Clique para ampliar"
+              />
             ) : (
               <div className="flex h-full w-full items-center justify-center text-[11px] uppercase tracking-widest text-zinc-600">
                 Imagem do projeto
@@ -103,6 +109,15 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
   const trackRef = useRef<HTMLDivElement>(null)
   const progressRef = useRef<HTMLDivElement>(null)
   const steps = projects.length + 1
+
+  const [expanded, setExpanded] = useState<{ title: string; src: string } | null>(null)
+
+  useEffect(() => {
+    if (!expanded) return
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setExpanded(null) }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [expanded])
 
   useLayoutEffect(() => {
     if (typeof window === 'undefined') return
@@ -232,7 +247,12 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
       <div className="absolute inset-x-0 top-48 bottom-12 overflow-hidden md:top-56">
         <div ref={trackRef} className="flex h-full w-fit">
           {projects.map((p, i) => (
-            <ProjectSlide key={p.title} p={p} step={i + 1} />
+            <ProjectSlide
+              key={p.title}
+              p={p}
+              step={i + 1}
+              onExpand={() => p.image && setExpanded({ title: p.title, src: p.image })}
+            />
           ))}
           <FinalSlide />
         </div>
@@ -243,6 +263,28 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
           <div ref={progressRef} className="h-1 bg-[#9eff00]" style={{ width: '0%' }} />
         </div>
       </div>
+
+      {expanded && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-6 backdrop-blur-sm"
+          onClick={() => setExpanded(null)}
+        >
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); setExpanded(null) }}
+            className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center border border-[#9eff00]/40 bg-black/60 font-mono text-sm text-zinc-200 transition-all hover:border-[#9eff00] hover:bg-[#9eff00]/10 hover:text-[#9eff00]"
+            aria-label="Fechar"
+          >
+            ×
+          </button>
+          <img
+            src={expanded.src}
+            alt={expanded.title}
+            className="max-h-full max-w-full object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </section>
   )
 }
