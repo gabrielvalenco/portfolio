@@ -3,7 +3,7 @@ import type { ReactNode } from 'react'
 const LIME = '#9eff00'
 
 export default function TerminalSection({
-  id, index, title, subtitle, children, noBorder, compact,
+  id, index, title, subtitle, children, noBorder, compact, headerClassName = 'mb-12',
 }: {
   id: string
   index: string
@@ -14,11 +14,12 @@ export default function TerminalSection({
   children: ReactNode
   noBorder?: boolean
   compact?: boolean
+  headerClassName?: string
 }) {
   return (
     <section id={id} className={`relative${noBorder ? '' : ' border-t border-[#9eff00]/10'}`}>
       <div className={`container mx-auto px-6 ${compact ? 'py-10 md:py-14' : 'py-24 md:py-32'}`}>
-        <header className="mb-12" data-term-head>
+        <header className={headerClassName} data-term-head>
           <div
             className="flex items-center gap-4 font-mono text-[11px] tracking-[0.32em]"
             data-term-meta

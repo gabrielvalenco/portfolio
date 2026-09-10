@@ -80,6 +80,7 @@ function About() {
       subtitle="Um pouco da minha trajetória, do que entrego e do que estou disponível para fazer."
       noBorder
       compact
+      headerClassName=""
     >
       <div className="grid items-end md:grid-cols-2 gap-10 lg:gap-16">
         {/* Bio + experience */}
