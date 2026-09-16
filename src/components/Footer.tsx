@@ -44,9 +44,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col gap-2 border-t border-dashed border-[#9eff00]/15 pt-5 text-[11px] text-zinc-500 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-8 flex flex-col gap-2 border-t border-dashed border-[#9eff00]/15 pt-5 text-[11px] text-zinc-400 sm:flex-row sm:items-center sm:justify-between">
           <p>© {year} Gabriel Valenço. Todos os direitos reservados.</p>
-          <p className="opacity-70 italic">
+          <p className="italic">
             Toda falha carrega em si a semente de um sucesso igual ou maior.
           </p>
         </div>

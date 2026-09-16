@@ -19,7 +19,7 @@ export default function ProjectsPage() {
         {/* Featured row first */}
         <div className="mb-12">
           <p
-            className="mb-5 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-500"
+            className="mb-5 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-400"
             data-animate-item
           >
             Em destaque
@@ -34,7 +34,7 @@ export default function ProjectsPage() {
         {/* The rest */}
         <div>
           <p
-            className="mb-5 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-500"
+            className="mb-5 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-400"
             data-animate-item
           >
             Outros projetos

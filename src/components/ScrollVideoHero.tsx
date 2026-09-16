@@ -18,6 +18,12 @@ const LERP = 0.32
 // decoder with redundant assignments and trims a lot of jank on slow GPUs.
 const TIME_EPS = 1 / 120 // half a frame at 60fps
 
+// Below this the scrub and the glow are considered settled and the rAF loop stops.
+const SETTLE_EPS = 0.002
+
+const POSTER_DESKTOP = '/hero-poster.webp'
+const POSTER_MOBILE = '/hero-poster-mobile.webp'
+
 function useIsMobile() {
   const [mobile, setMobile] = useState(() =>
     typeof window !== 'undefined'
@@ -33,11 +39,46 @@ function useIsMobile() {
   return mobile
 }
 
+/**
+ * The hero video is 8.7 MB (all-keyframes encode for instant scrubbing).
+ * Loading it on page load kept the network busy for seconds and made
+ * PageSpeed give up on the site. Now the poster (the video's first frame)
+ * shows first and the video only starts downloading on the first sign of
+ * intent: scroll, touch, click or key. Visitors who asked for reduced motion
+ * or data saving keep the poster.
+ */
+function useVideoIntent() {
+  const [wanted, setWanted] = useState(false)
+  useEffect(() => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData
+    if (reduced || saveData) return
+
+    const events = ['scroll', 'wheel', 'pointerdown', 'touchstart', 'keydown'] as const
+    const go = () => {
+      setWanted(true)
+      events.forEach(e => window.removeEventListener(e, go))
+    }
+    events.forEach(e => window.addEventListener(e, go, { passive: true, once: true }))
+    return () => events.forEach(e => window.removeEventListener(e, go))
+  }, [])
+  return wanted
+}
+
 export default function ScrollVideoHero() {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const textRef = useRef<HTMLDivElement>(null)
   const isMobile = useIsMobile()
+  const videoWanted = useVideoIntent()
+
+  // ── Start downloading the video once there is intent ────────────────────────
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video || !videoWanted) return
+    video.preload = 'auto'
+    video.load()
+  }, [videoWanted])
 
   // ── Desktop: scroll-scrubbed video ──────────────────────────────────────────
   useEffect(() => {
@@ -64,12 +105,13 @@ export default function ScrollVideoHero() {
     let lastY = window.scrollY
     let vel = 0
     let glow = 0
+    let lastGlow = ''
 
-    const setMeta = () => { duration = video.duration || 0; warm() }
+    const setMeta = () => { duration = video.duration || 0; warm(); start() }
     video.addEventListener('loadedmetadata', setMeta)
     if (video.readyState >= 1) setMeta()
     // Some browsers fire `loadeddata` even when metadata was already cached.
-    const setReady = () => { if (video.readyState >= 2 && duration > 0) warm() }
+    const setReady = () => { if (video.readyState >= 2 && duration > 0) { warm(); start() } }
     video.addEventListener('loadeddata', setReady)
 
     // fastSeek is much cheaper than currentTime= for scrubbing when available.
@@ -95,8 +137,9 @@ export default function ScrollVideoHero() {
       const progress = Math.min(1, Math.max(0, raw))
 
       // Drive video frame via lerped time for smoothness on jittery scroll.
+      let target = current
       if (duration > 0 && video.readyState >= 2) {
-        const target = progress * duration
+        target = progress * duration
         current += (target - current) * LERP
         if (Math.abs(current - lastApplied) >= TIME_EPS) {
           seek(current)
@@ -118,31 +161,61 @@ export default function ScrollVideoHero() {
       vel *= 0.88
       const targetGlow = Math.min(1, Math.abs(vel) * 0.45)
       glow += (targetGlow - glow) * 0.12
-      document.documentElement.style.setProperty('--matrix-glow', glow.toFixed(3))
+      const glowValue = glow.toFixed(3)
+      // Writing a custom property on <html> restyles the whole page: only when it changed.
+      if (glowValue !== lastGlow) {
+        document.documentElement.style.setProperty('--matrix-glow', glowValue)
+        lastGlow = glowValue
+      }
 
-      raf = requestAnimationFrame(tick)
+      // Idle page = no loop. It restarts on the next scroll.
+      const settled =
+        Math.abs(target - current) < SETTLE_EPS &&
+        Math.abs(vel) < SETTLE_EPS &&
+        glow < SETTLE_EPS
+      raf = settled ? 0 : requestAnimationFrame(tick)
     }
-    raf = requestAnimationFrame(tick)
+
+    function start() {
+      if (!raf) raf = requestAnimationFrame(tick)
+    }
+    window.addEventListener('scroll', start, { passive: true })
+    window.addEventListener('resize', start, { passive: true })
+    start()
 
     return () => {
       cancelAnimationFrame(raf)
+      window.removeEventListener('scroll', start)
+      window.removeEventListener('resize', start)
       video.removeEventListener('loadedmetadata', setMeta)
       video.removeEventListener('loadeddata', setReady)
       document.documentElement.style.removeProperty('--matrix-glow')
     }
   }, [isMobile])
 
-  // ── Mobile: autoplay the video normally with loop ───────────────────────────
+  // ── Mobile: autoplay the video normally with loop, only while on screen ─────
   useEffect(() => {
-    if (!isMobile) return
+    if (!isMobile || !videoWanted) return
     const video = videoRef.current
-    if (!video) return
+    const wrap = wrapperRef.current
+    if (!video || !wrap) return
     video.loop = true
     video.muted = true
-    const p = video.play()
-    if (p && typeof p.then === 'function') p.catch(() => {})
-    return () => { video.pause() }
-  }, [isMobile])
+
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry?.isIntersecting) {
+        const p = video.play()
+        if (p && typeof p.then === 'function') p.catch(() => {})
+      } else {
+        video.pause()
+      }
+    })
+    io.observe(wrap)
+    return () => {
+      io.disconnect()
+      video.pause()
+    }
+  }, [isMobile, videoWanted])
 
   return (
     <section
@@ -152,14 +225,14 @@ export default function ScrollVideoHero() {
       style={{ height: isMobile ? '100vh' : `${SECTION_VH}vh` }}
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
-        {/* Scroll-scrubbed video */}
+        {/* Scroll-scrubbed video. The poster is its first frame. */}
         <video
           ref={videoRef}
           src="/hero.mp4"
+          poster={isMobile ? POSTER_MOBILE : POSTER_DESKTOP}
           muted
           playsInline
-          preload={isMobile ? 'metadata' : 'auto'}
-          {...(isMobile ? { autoPlay: true, loop: true } : {})}
+          preload="none"
           aria-hidden
           className="absolute inset-0 h-full w-full object-cover"
         />

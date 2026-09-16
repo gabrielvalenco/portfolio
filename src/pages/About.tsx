@@ -42,7 +42,7 @@ export default function AboutPage() {
           <article className="space-y-10 font-mono text-sm leading-relaxed text-zinc-300">
             <section data-animate-item>
               <p
-                className="mb-3 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-500"
+                className="mb-3 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-400"
               >
                 Apresentação
               </p>
@@ -60,7 +60,7 @@ export default function AboutPage() {
             </section>
 
             <section data-animate-item>
-              <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-500">
+              <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-400">
                 Trajetória
               </p>
               <p>
@@ -81,7 +81,7 @@ export default function AboutPage() {
             </section>
 
             <section data-animate-item>
-              <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-500">
+              <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-400">
                 Áreas de foco
               </p>
               <ul className="space-y-3">
@@ -97,7 +97,7 @@ export default function AboutPage() {
             </section>
 
             <section data-animate-item>
-              <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-500">
+              <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-400">
                 Como penso
               </p>
               <ul className="space-y-2 text-zinc-300">
@@ -125,8 +125,11 @@ export default function AboutPage() {
               <span className="cb-bl" />
               <span className="cb-br" />
               <img
-                src="dist/pfp.png"
+                src="/pfp.webp"
                 alt="Gabriel Valenço"
+                width={800}
+                height={1200}
+                decoding="async"
                 className="h-auto w-full object-cover"
               />
             </div>
@@ -139,7 +142,7 @@ export default function AboutPage() {
               <span className="cb-tr" />
               <span className="cb-bl" />
               <span className="cb-br" />
-              <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-500">
+              <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-400">
                 Resumo rápido
               </p>
               <dl className="space-y-2.5 text-xs">
@@ -160,7 +163,7 @@ export default function AboutPage() {
               <span className="cb-tr" />
               <span className="cb-bl" />
               <span className="cb-br" />
-              <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-500">
+              <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-400">
                 No momento
               </p>
               <p className="text-xs text-zinc-300">

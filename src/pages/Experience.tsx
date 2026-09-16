@@ -112,7 +112,7 @@ export default function ExperiencePage() {
                         atual
                       </span>
                     )}
-                    <span className="ml-auto font-mono text-[11px] uppercase tracking-[0.22em] text-zinc-500">
+                    <span className="ml-auto font-mono text-[11px] uppercase tracking-[0.22em] text-zinc-400">
                       {r.period}
                     </span>
                   </div>

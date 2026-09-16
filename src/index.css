@@ -4,8 +4,8 @@
 @plugin "tailwindcss-animate";
 
 @theme {
-  --font-sans: 'JetBrains Mono', ui-monospace, "SFMono-Regular", Menlo, monospace;
-  --font-mono: 'JetBrains Mono', ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-sans: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, "SFMono-Regular", Menlo, monospace;
   --color-primary: #9eff00;
   --color-primary-foreground: #000000;
   --color-ring: #9eff00;

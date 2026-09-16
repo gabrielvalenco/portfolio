@@ -1,6 +1,6 @@
-import { Suspense, useEffect, useMemo, useRef } from 'react'
+import { Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import { Canvas, useGraph } from '@react-three/fiber'
-import { useGLTF, useAnimations, Environment, OrbitControls } from '@react-three/drei'
+import { useGLTF, useAnimations, Environment, Lightformer, OrbitControls } from '@react-three/drei'
 import { SkeletonUtils } from 'three-stdlib'
 import * as THREE from 'three'
 
@@ -79,12 +79,25 @@ function Model(props: any) {
   )
 }
 
-useGLTF.preload('/vibe_kermit.glb')
 
 export default function KermitModel3D() {
+  const wrapRef = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(false)
+
+  // Renderiza so enquanto esta na tela: parado fora dela, o navegador fica ocioso.
+  useEffect(() => {
+    const el = wrapRef.current
+    if (!el) return
+    const io = new IntersectionObserver(([entry]) => setVisible(entry?.isIntersecting ?? false))
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
   return (
-    <div className="relative h-96 w-full overflow-hidden">
+    <div ref={wrapRef} className="relative h-96 w-full overflow-hidden">
       <Canvas
+        frameloop={visible ? 'always' : 'never'}
+        dpr={[1, 1.5]}
         camera={{ position: [0, 0, 7], fov: 45 }}
         gl={{ antialias: true, alpha: true }}
         style={{ width: '100%', height: '100%', background: 'transparent' }}
@@ -92,7 +105,13 @@ export default function KermitModel3D() {
         <ambientLight intensity={0.8} />
         <directionalLight position={[5, 10, 7]} intensity={1.2} />
         <directionalLight position={[-5, -5, -5]} intensity={0.4} />
-        <Environment preset="city" />
+        {/* Reflexos gerados localmente. O preset "city" baixava 1,5 MB de HDR do GitHub. */}
+        <Environment resolution={64}>
+          <Lightformer intensity={2} position={[0, 5, -9]} scale={[10, 10, 1]} />
+          <Lightformer intensity={1} position={[-5, 1, -1]} rotation-y={Math.PI / 2} scale={[10, 2, 1]} />
+          <Lightformer intensity={1} position={[5, 1, -1]} rotation-y={-Math.PI / 2} scale={[10, 2, 1]} />
+          <Lightformer intensity={0.6} position={[0, -4, 3]} rotation-x={-Math.PI / 2} scale={[10, 10, 1]} />
+        </Environment>
         <OrbitControls enableZoom={false} enablePan={false} />
         <Suspense fallback={null}>
           <Model scale={1.2} position={[0, -1.2, 0]} />

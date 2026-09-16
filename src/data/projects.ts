@@ -15,7 +15,7 @@ export const projects: Project[] = [
     href: 'https://www.golfo-oeg.com/',
     live: 'https://www.golfo-oeg.com/',
     tags: ['React', 'Shadcn', 'PostgreSQL'],
-    image: '/golfo.png',
+    image: '/golfo.webp',
   },
   {
     title: 'Pecuária pelo Clima',
@@ -23,7 +23,7 @@ export const projects: Project[] = [
     href: 'https://preview.pecuariapeloclima.org/',
     live: 'https://preview.pecuariapeloclima.org/',
     tags: ['PHP', 'CSS', 'JavaScript'],
-    image: '/pecuaria.png',
+    image: '/pecuaria.webp',
   },
   {
     title: 'Rose Valenço',
@@ -31,7 +31,7 @@ export const projects: Project[] = [
     href: 'https://rosevalenco.com.br/',
     live: 'https://rosevalenco.com.br/',
     tags: ['React', 'Shadcn', 'Vercel', 'PostgreSQL'],
-    image: '/rose.png',
+    image: '/rose.webp',
   },
   {
     title: 'Dinâmico e Top',

@@ -23,12 +23,16 @@ function ProjectSlide({ p, step, onExpand }: { p: Project; step: number; onExpan
               <img
                 src={p.image}
                 alt={p.title}
+                width={1600}
+                height={909}
+                loading="lazy"
+                decoding="async"
                 onClick={onExpand}
                 className="h-full w-full cursor-pointer object-contain transition-transform duration-500 hover:scale-[1.02]"
                 title="Clique para ampliar"
               />
             ) : (
-              <div className="flex h-full w-full items-center justify-center text-[11px] uppercase tracking-widest text-zinc-600">
+              <div className="flex h-full w-full items-center justify-center text-[11px] uppercase tracking-widest text-zinc-400">
                 Imagem do projeto
               </div>
             )}
@@ -39,7 +43,7 @@ function ProjectSlide({ p, step, onExpand }: { p: Project; step: number; onExpan
               <span className="text-[10px] uppercase tracking-[0.22em]" style={{ color: LIME }}>
                 Destaque
               </span>
-              <span className="font-mono text-[11px] uppercase tracking-wider text-zinc-500">
+              <span className="font-mono text-[11px] uppercase tracking-wider text-zinc-400">
                 0{step} / 03
               </span>
             </div>

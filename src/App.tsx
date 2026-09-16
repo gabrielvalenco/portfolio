@@ -44,8 +44,10 @@ export default function App() {
       <ScrollToTop />
       <div className="min-h-dvh flex flex-col">
         <a href="#home" className="sr-only focus:not-sr-only fixed top-2 left-2 z-[60] px-3 py-2 rounded bg-primary text-primary-foreground">Ir para conteúdo</a>
-        <main className="flex-1">
-          <Suspense fallback={null}>
+        {/* O rodape fica dentro do Suspense: antes ele aparecia no topo enquanto
+            a pagina carregava e depois era empurrado pra baixo (CLS alto). */}
+        <Suspense fallback={<RouteFallback />}>
+          <main className="flex-1">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/projects" element={<ProjectsPage />} />
@@ -54,12 +56,18 @@ export default function App() {
               <Route path="/experience" element={<ExperiencePage />} />
               <Route path="/certificates" element={<Certificates />} />
             </Routes>
-          </Suspense>
-        </main>
-        <Footer />
+          </main>
+          <Footer />
+        </Suspense>
       </div>
     </BrowserRouter>
   )
+}
+
+/** Enquanto a pagina carrega: na home, a mesma casca do topo do index.html; nas outras, fundo preto. */
+function RouteFallback() {
+  const { pathname } = useLocation()
+  return <div className={pathname === '/' ? 'boot-hero' : 'min-h-dvh bg-black'} aria-hidden />
 }
 
 function ScrollToTop() {

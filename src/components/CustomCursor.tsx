@@ -99,7 +99,7 @@ export default function CustomCursor() {
     let rx = -200, ry = -200
     let raf = 0
 
-    const onMove  = (e: MouseEvent) => { tx = e.clientX; ty = e.clientY }
+    const onMove  = (e: MouseEvent) => { tx = e.clientX; ty = e.clientY; start() }
     const onClick = (e: MouseEvent) => spawnBurst(e.clientX, e.clientY)
     window.addEventListener('mousemove', onMove,  { passive: true })
     window.addEventListener('click',    onClick)
@@ -109,9 +109,13 @@ export default function CustomCursor() {
       ry += (ty - ry) * 0.18
       dot!.style.transform  = `translate3d(${tx - 4}px,${ty - 4}px,0)`
       ring!.style.transform = `translate3d(${rx - 18}px,${ry - 18}px,0)`
-      raf = requestAnimationFrame(tick)
+      // Anel alcancou o ponteiro: para o loop ate o proximo movimento.
+      const settled = Math.abs(tx - rx) < 0.1 && Math.abs(ty - ry) < 0.1
+      raf = settled ? 0 : requestAnimationFrame(tick)
     }
-    raf = requestAnimationFrame(tick)
+    function start() {
+      if (!raf) raf = requestAnimationFrame(tick)
+    }
 
     return () => {
       cancelAnimationFrame(raf)

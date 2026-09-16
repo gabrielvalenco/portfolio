@@ -1,17 +1,49 @@
-import React, { useRef } from 'react'
+import React, { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { Github, Mail, Linkedin, User, Briefcase } from 'lucide-react'
 import TechMarquee from '@/components/TechMarquee'
 import ScrollVideoHero from '@/components/ScrollVideoHero'
 import MatrixInterlude from '@/components/MatrixInterlude'
 import TerminalSection from '@/components/TerminalSection'
 import ProjectShowcase from '@/components/ProjectShowcase'
-import KermitModel3D from '@/components/KermitModel3D'
 import { TermLink, TermAnchor } from '@/components/TermButton'
 import useHomeAnimations from '@/hooks/useHomeAnimations'
 import { gsap } from '@/lib/gsap'
 import { featuredProjects } from '@/data/projects'
 
 const LIME = '#9eff00'
+
+// three.js (~280 KB gzip) e o modelo so baixam quando a secao Sobre se aproxima.
+const KermitModel3D = lazy(() => import('@/components/KermitModel3D'))
+
+function DeferredKermit() {
+  const ref = useRef<HTMLDivElement>(null)
+  const [near, setNear] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          setNear(true)
+          io.disconnect()
+        }
+      },
+      { rootMargin: '400px 0px' },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+  // Mesma altura do canvas (h-96): trocar o espaco reservado pelo 3D nao move nada.
+  return (
+    <div ref={ref} className="h-96 w-full">
+      {near ? (
+        <Suspense fallback={null}>
+          <KermitModel3D />
+        </Suspense>
+      ) : null}
+    </div>
+  )
+}
 
 // ─── Magnetic button wrapper ──────────────────────────────────────────────────
 
@@ -116,7 +148,7 @@ function About() {
           </div>
 
           <div className="pt-2" data-animate-item>
-            <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-500 mb-3">
+            <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-400 mb-3">
               Experiência
             </p>
             <ul className="space-y-1.5 font-mono text-xs">
@@ -128,7 +160,7 @@ function About() {
                 >
                   <span className="truncate">
                     <span className="text-zinc-100">{exp.company}</span>
-                    <span className="text-zinc-500"> · {exp.role}</span>
+                    <span className="text-zinc-400"> · {exp.role}</span>
                   </span>
                   {exp.current && (
                     <span
@@ -157,7 +189,7 @@ function About() {
         {/* Stats + skills */}
         <div className="space-y-8">
           <div data-animate-item>
-            <KermitModel3D />
+            <DeferredKermit />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
@@ -180,7 +212,7 @@ function About() {
                 >
                   0{suffix}
                 </div>
-                <div className="mt-2 text-[10px] uppercase tracking-[0.28em] text-zinc-500">
+                <div className="mt-2 text-[10px] uppercase tracking-[0.28em] text-zinc-400">
                   {label}
                 </div>
               </div>
@@ -188,7 +220,7 @@ function About() {
           </div>
 
           <div data-animate-item>
-            <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-500 mb-3">
+            <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-400 mb-3">
               Habilidades
             </p>
             <div className="flex flex-wrap gap-2 font-mono text-xs">
