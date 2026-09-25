@@ -277,7 +277,7 @@ export default function ScrollVideoHero() {
 
         {/* Scroll hint */}
         <div
-          className="scroll-indicator absolute bottom-10 left-1/2 z-10 flex flex-col items-center gap-1"
+          className="scroll-indicator absolute bottom-10 left-1/2 z-10 hidden flex-col items-center gap-1 md:flex"
           style={{ color: LIME }}
         >
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] opacity-70">scroll</span>
