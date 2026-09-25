@@ -1,10 +1,25 @@
 import { useLayoutEffect, useRef, useState, useEffect } from 'react'
 import { gsap } from '@/lib/gsap'
+import type { ScrollTrigger } from 'gsap/ScrollTrigger'
 import type { Project } from '@/data/projects'
 import { ExternalLink, ArrowUpRight } from 'lucide-react'
 import { TermLink } from '@/components/TermButton'
 
 const LIME = '#9eff00'
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' && window.innerWidth < 768,
+  )
+  useEffect(() => {
+    const m = window.matchMedia('(max-width: 767px)')
+    const update = () => setIsMobile(m.matches)
+    update()
+    m.addEventListener('change', update)
+    return () => m.removeEventListener('change', update)
+  }, [])
+  return isMobile
+}
 
 function ProjectSlide({ p, step, onExpand }: { p: Project; step: number; onExpand?: () => void }) {
   const url = p.live ?? p.href
@@ -108,6 +123,129 @@ function FinalSlide() {
   )
 }
 
+function MobileProjectCard({
+  p,
+  step,
+  onExpand,
+}: {
+  p: Project
+  step: number
+  onExpand?: () => void
+}) {
+  const url = p.live ?? p.href
+  return (
+    <article data-animate-item className="terminal-panel corner-brackets relative overflow-hidden font-mono">
+      <span className="cb-tl" />
+      <span className="cb-tr" />
+      <span className="cb-bl" />
+      <span className="cb-br" />
+      <div className="scan-sweep" />
+
+      <div className="relative w-full overflow-hidden bg-black aspect-[16/10]">
+        {p.image ? (
+          <img
+            src={p.image}
+            alt={p.title}
+            loading="lazy"
+            decoding="async"
+            onClick={onExpand}
+            className="h-full w-full cursor-pointer object-contain transition-transform duration-500 hover:scale-[1.02]"
+            title="Clique para ampliar"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center text-[11px] uppercase tracking-widest text-zinc-400">
+            Imagem do projeto
+          </div>
+        )}
+      </div>
+
+      <div className="flex flex-col p-5">
+        <div className="flex items-center justify-between border-b border-[#9eff00]/15 pb-3">
+          <span className="text-[10px] uppercase tracking-[0.22em]" style={{ color: LIME }}>
+            Destaque
+          </span>
+          <span className="font-mono text-[11px] uppercase tracking-wider text-zinc-400">
+            0{step} / 03
+          </span>
+        </div>
+
+        <h3 className="mt-4 text-xl font-bold uppercase tracking-tight text-zinc-100">
+          {p.title}
+        </h3>
+        <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+          {p.desc}
+        </p>
+
+        {p.tags && (
+          <div className="mt-4 flex flex-wrap gap-2">
+            {p.tags.map(t => (
+              <span
+                key={t}
+                className="border border-[#9eff00]/20 px-2 py-1 text-[10px] uppercase tracking-wider text-zinc-400"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        )}
+
+        <div className="mt-5">
+          {url && (
+            <a
+              href={url}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 border border-[#9eff00]/40 bg-black/60 px-4 py-2.5 font-mono text-xs uppercase tracking-[0.22em] text-zinc-200 no-underline transition-all hover:border-[#9eff00] hover:bg-[#9eff00]/10 hover:text-[#9eff00] hover:shadow-[0_0_28px_rgba(158,255,0,0.3)]"
+            >
+              <ExternalLink className="h-3.5 w-3.5" /> Acessar projeto
+            </a>
+          )}
+        </div>
+      </div>
+    </article>
+  )
+}
+
+function MobileProjectList({
+  projects,
+  onExpand,
+}: {
+  projects: Project[]
+  onExpand: (p: Project) => void
+}) {
+  return (
+    <div className="container mx-auto px-6 pb-16">
+      <div className="grid gap-8">
+        {projects.map((p, i) => (
+          <MobileProjectCard key={p.title} p={p} step={i + 1} onExpand={() => onExpand(p)} />
+        ))}
+
+        <div data-animate-item className="terminal-panel corner-brackets relative p-6 text-center">
+          <span className="cb-tl" />
+          <span className="cb-tr" />
+          <span className="cb-bl" />
+          <span className="cb-br" />
+          <div className="scan-sweep" />
+          <p className="font-mono text-[11px] uppercase tracking-[0.32em]" style={{ color: LIME }}>
+            04 / 04
+          </p>
+          <h3 className="mt-3 font-mono text-xl font-bold uppercase tracking-tight text-zinc-100">
+            Quer ver mais?
+          </h3>
+          <p className="mx-auto mt-2 max-w-md text-sm text-zinc-400">
+            Há outros projetos desenvolvidos com foco em landing pages, presença digital e conversão.
+          </p>
+          <div className="mt-5">
+            <TermLink to="/more-projects" icon={ArrowUpRight}>
+              Ver mais projetos
+            </TermLink>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function ProjectShowcase({ projects }: { projects: Project[] }) {
   const sectionRef = useRef<HTMLElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
@@ -115,6 +253,7 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
   const steps = projects.length + 1
 
   const [expanded, setExpanded] = useState<{ title: string; src: string } | null>(null)
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     if (!expanded) return
@@ -125,6 +264,7 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
 
   useLayoutEffect(() => {
     if (typeof window === 'undefined') return
+    if (isMobile) return
     const section = sectionRef.current
     const track = trackRef.current
     const progress = progressRef.current
@@ -168,7 +308,8 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
           pin: true,
           scrub: 0.8,
           snap: {
-            snapTo: (value: number, target: any) => {
+            snapTo: (value: number, target: ScrollTrigger | undefined) => {
+              if (!target) return value
               const current = target.progress
               const dir = target.direction
               if (dir > 0) {
@@ -216,21 +357,21 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
     }, section)
 
     return () => ctx.revert()
-  }, [projects, steps])
+  }, [projects, steps, isMobile])
 
   return (
     <section
       ref={sectionRef}
       id="projects"
-      className="relative z-10 h-screen w-full overflow-hidden bg-black"
+      className={`relative z-10 w-full bg-black ${isMobile ? 'py-16' : 'h-screen overflow-hidden'}`}
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-px"
+        className={`pointer-events-none absolute inset-x-0 top-0 h-px ${isMobile ? 'hidden' : ''}`}
         style={{ background: LIME, opacity: 0.4, boxShadow: '0 0 16px #9eff00' }}
       />
 
-      <div className="container mx-auto px-6 pt-16 md:pt-24">
+      <div className="container mx-auto px-6 pt-12 pb-10 md:pt-24 md:pb-0">
         <header>
           <div
             className="flex items-center gap-4 font-mono text-[11px] tracking-[0.32em]"
@@ -243,30 +384,41 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
             Projetos
           </h2>
           <p className="mt-4 max-w-xl font-mono text-sm text-zinc-400">
-            Uma seleção do que já construí. Role para conferir cada projeto.
+            {isMobile
+              ? 'Uma seleção do que já construí. Toque em um projeto para ampliar a imagem.'
+              : 'Uma seleção do que já construí. Role para conferir cada projeto.'}
           </p>
         </header>
       </div>
 
-      <div className="absolute inset-x-0 top-48 bottom-12 overflow-hidden md:top-56">
-        <div ref={trackRef} className="flex h-full w-fit">
-          {projects.map((p, i) => (
-            <ProjectSlide
-              key={p.title}
-              p={p}
-              step={i + 1}
-              onExpand={() => p.image && setExpanded({ title: p.title, src: p.image })}
-            />
-          ))}
-          <FinalSlide />
-        </div>
-      </div>
+      {isMobile ? (
+        <MobileProjectList
+          projects={projects}
+          onExpand={(p) => p.image && setExpanded({ title: p.title, src: p.image })}
+        />
+      ) : (
+        <>
+          <div className="absolute inset-x-0 top-48 bottom-12 overflow-hidden md:top-56">
+            <div ref={trackRef} className="flex h-full w-fit">
+              {projects.map((p, i) => (
+                <ProjectSlide
+                  key={p.title}
+                  p={p}
+                  step={i + 1}
+                  onExpand={() => p.image && setExpanded({ title: p.title, src: p.image })}
+                />
+              ))}
+              <FinalSlide />
+            </div>
+          </div>
 
-      <div className="absolute bottom-6 left-0 right-0 z-20 flex justify-center">
-        <div className="w-48 overflow-hidden rounded bg-zinc-800">
-          <div ref={progressRef} className="h-1 bg-[#9eff00]" style={{ width: '0%' }} />
-        </div>
-      </div>
+          <div className="absolute bottom-6 left-0 right-0 z-20 flex justify-center">
+            <div className="w-48 overflow-hidden rounded bg-zinc-800">
+              <div ref={progressRef} className="h-1 bg-[#9eff00]" style={{ width: '0%' }} />
+            </div>
+          </div>
+        </>
+      )}
 
       {expanded && (
         <div

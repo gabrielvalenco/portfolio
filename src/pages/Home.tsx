@@ -33,9 +33,9 @@ function DeferredKermit() {
     io.observe(el)
     return () => io.disconnect()
   }, [])
-  // Mesma altura do canvas (h-96): trocar o espaco reservado pelo 3D nao move nada.
+  // Mesma altura do canvas: trocar o espaco reservado pelo 3D nao move nada.
   return (
-    <div ref={ref} className="h-96 w-full">
+    <div ref={ref} className="h-48 w-full md:h-96">
       {near ? (
         <Suspense fallback={null}>
           <KermitModel3D />

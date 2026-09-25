@@ -84,7 +84,7 @@ export default function MatrixRain() {
     build()
 
     let glow = 0
-    let dir = 1
+    const dir = 1
     let raf = 0
 
     // Mouse "bubble" + trail — smoothed position, off-screen when not present.
