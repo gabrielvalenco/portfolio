@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const GLYPHS = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄ0123456789<>/\\[]{}()=+*-!?$#@%&;:.~^'
 const randGlyph = () => GLYPHS[(Math.random() * GLYPHS.length) | 0]
@@ -80,14 +80,22 @@ function spawnBurst(x: number, y: number) {
 export default function CustomCursor() {
   const dotRef  = useRef<HTMLDivElement>(null)
   const ringRef = useRef<HTMLDivElement>(null)
+  const [isTouch, setIsTouch] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches,
+  )
 
   useEffect(() => {
-    const isTouch = window.matchMedia('(pointer: coarse)').matches
-    if (isTouch) return
+    const m = window.matchMedia('(pointer: coarse)')
+    const update = () => setIsTouch(m.matches)
+    m.addEventListener('change', update)
+
+    if (m.matches) {
+      return () => m.removeEventListener('change', update)
+    }
 
     const dot  = dotRef.current
     const ring = ringRef.current
-    if (!dot || !ring) return
+    if (!dot || !ring) return () => m.removeEventListener('change', update)
 
     document.documentElement.classList.add('has-custom-cursor')
     document.documentElement.style.cursor = 'none'
@@ -124,8 +132,11 @@ export default function CustomCursor() {
       document.documentElement.classList.remove('has-custom-cursor')
       document.documentElement.style.cursor = ''
       document.body.style.cursor = ''
+      m.removeEventListener('change', update)
     }
   }, [])
+
+  if (isTouch) return null
 
   return (
     <>
