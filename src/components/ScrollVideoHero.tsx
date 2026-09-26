@@ -224,7 +224,7 @@ export default function ScrollVideoHero() {
       className="relative bg-black"
       style={{ height: isMobile ? '100vh' : `${SECTION_VH}vh` }}
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+      <div className={`${isMobile ? 'relative h-dvh' : 'sticky top-0 h-screen'} w-full overflow-hidden`}>
         {/* Scroll-scrubbed video. The poster is its first frame. */}
         <video
           ref={videoRef}
