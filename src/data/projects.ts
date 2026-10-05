@@ -11,11 +11,11 @@ export type Project = {
 export const projects: Project[] = [
   {
     title: 'Estante',
-    desc: 'App mobile de diário de leituras no estilo Letterboxd, só que para livros: estante, reviews, clubes de leitura e discussões sem spoiler. Mesma conta e dados do site.',
-    href: 'https://github.com/gabrielvalenco/estante-app',
-    live: 'https://estante-pink.vercel.app',
-    repo: 'https://github.com/gabrielvalenco/estante-app',
-    tags: ['Expo', 'React Native', 'TypeScript', 'TanStack Query'],
+    desc: 'Diário de leitura social no estilo Letterboxd, só que para livros: estante, reviews, perfis, clubes de leitura e discussões sem spoiler. Também disponível como app mobile.',
+    href: 'https://estante-pink.vercel.app/',
+    live: 'https://estante-pink.vercel.app/',
+    repo: 'https://github.com/gabrielvalenco/estante',
+    tags: ['Next.js', 'TypeScript', 'Tailwind', 'PostgreSQL', 'Expo'],
     image: '/estante.webp',
   },
   {

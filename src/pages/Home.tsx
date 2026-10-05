@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { Github, Mail, Linkedin, User, Briefcase } from 'lucide-react'
-import TechMarquee from '@/components/TechMarquee'
+import TechStack, { techCount } from '@/components/TechStack'
 import ScrollVideoHero from '@/components/ScrollVideoHero'
 import MatrixInterlude from '@/components/MatrixInterlude'
 import TerminalSection from '@/components/TerminalSection'
@@ -75,11 +75,11 @@ function Technologies() {
       id="technologies"
       index="01"
       title="Tecnologias"
-      subtitle="Ferramentas que uso no dia a dia para entregar produtos completos, do banco de dados à interface."
+      subtitle="Ferramentas que uso no dia a dia para entregar produtos completos, do banco de dados à interface. As em destaque são as que mais uso."
       compact
     >
       <div className="mt-2" data-animate-item>
-        <TechMarquee />
+        <TechStack />
       </div>
     </TerminalSection>
   )
@@ -89,7 +89,7 @@ function Technologies() {
 
 const stats = [
   { count: 10, suffix: '+', label: 'Projetos' },
-  { count: 15, suffix: '',  label: 'Tecnologias' },
+  { count: techCount, suffix: '',  label: 'Tecnologias' },
   { count: 4,  suffix: '',  label: 'Certificados' },
   { count: 4,  suffix: '',  label: 'Experiências' },
 ]

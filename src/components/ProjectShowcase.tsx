@@ -43,7 +43,7 @@ function ProjectSlide({ p, step, onExpand }: { p: Project; step: number; onExpan
                 loading="lazy"
                 decoding="async"
                 onClick={onExpand}
-                className="h-full w-full cursor-pointer object-contain transition-transform duration-500 hover:scale-[1.02]"
+                className="h-full w-full cursor-pointer object-cover object-top transition-transform duration-500 hover:scale-[1.02]"
                 title="Clique para ampliar"
               />
             ) : (
@@ -149,7 +149,7 @@ function MobileProjectCard({
             loading="lazy"
             decoding="async"
             onClick={onExpand}
-            className="h-full w-full cursor-pointer object-contain transition-transform duration-500 hover:scale-[1.02]"
+            className="h-full w-full cursor-pointer object-cover object-top transition-transform duration-500 hover:scale-[1.02]"
             title="Clique para ampliar"
           />
         ) : (
