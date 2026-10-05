@@ -1,9 +1,9 @@
 import SubPageHeader from '@/components/SubPageHeader'
 import ProjectWindow from '@/components/ProjectWindow'
-import { TermLink } from '@/components/TermButton'
+import { TermLink, TermAnchor } from '@/components/TermButton'
 import useHomeAnimations from '@/hooks/useHomeAnimations'
 import { moreProjects } from '@/data/projects'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, Github } from 'lucide-react'
 
 export default function MoreProjects() {
   useHomeAnimations()
@@ -23,6 +23,16 @@ export default function MoreProjects() {
         </div>
 
         <div className="mt-14 flex justify-center" data-animate-item>
+          <TermAnchor
+            href="https://github.com/gabrielvalenco"
+            target="_blank"
+            icon={Github}
+          >
+            Ver no GitHub
+          </TermAnchor>
+        </div>
+
+        <div className="mt-4 flex justify-center" data-animate-item>
           <TermLink to="/" icon={ArrowLeft}>Voltar para o início</TermLink>
         </div>
       </main>
