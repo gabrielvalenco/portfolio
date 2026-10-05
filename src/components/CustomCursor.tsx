@@ -79,7 +79,6 @@ function spawnBurst(x: number, y: number) {
 
 export default function CustomCursor() {
   const dotRef  = useRef<HTMLDivElement>(null)
-  const ringRef = useRef<HTMLDivElement>(null)
   const [isTouch, setIsTouch] = useState(() =>
     typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches,
   )
@@ -94,8 +93,7 @@ export default function CustomCursor() {
     }
 
     const dot  = dotRef.current
-    const ring = ringRef.current
-    if (!dot || !ring) return () => m.removeEventListener('change', update)
+    if (!dot) return () => m.removeEventListener('change', update)
 
     document.documentElement.classList.add('has-custom-cursor')
     document.documentElement.style.cursor = 'none'
@@ -103,8 +101,6 @@ export default function CustomCursor() {
 
     // Target position (updated on every mousemove)
     let tx = -200, ty = -200
-    // Ring lags behind with lerp
-    let rx = -200, ry = -200
     let raf = 0
 
     const onMove  = (e: MouseEvent) => { tx = e.clientX; ty = e.clientY; start() }
@@ -113,13 +109,8 @@ export default function CustomCursor() {
     window.addEventListener('click',    onClick)
 
     function tick() {
-      rx += (tx - rx) * 0.18
-      ry += (ty - ry) * 0.18
       dot!.style.transform  = `translate3d(${tx - 4}px,${ty - 4}px,0)`
-      ring!.style.transform = `translate3d(${rx - 18}px,${ry - 18}px,0)`
-      // Anel alcancou o ponteiro: para o loop ate o proximo movimento.
-      const settled = Math.abs(tx - rx) < 0.1 && Math.abs(ty - ry) < 0.1
-      raf = settled ? 0 : requestAnimationFrame(tick)
+      raf = 0
     }
     function start() {
       if (!raf) raf = requestAnimationFrame(tick)
@@ -148,18 +139,6 @@ export default function CustomCursor() {
           width: 8, height: 8, borderRadius: '50%',
           background: 'var(--primary)',
           pointerEvents: 'none', zIndex: 9999,
-          willChange: 'transform',
-        }}
-      />
-      <div
-        ref={ringRef}
-        aria-hidden
-        style={{
-          position: 'fixed', top: 0, left: 0,
-          width: 36, height: 36, borderRadius: '50%',
-          border: '1.5px solid rgba(158,255,0,0.45)',
-          pointerEvents: 'none', zIndex: 9998,
-          opacity: 0.35,
           willChange: 'transform',
         }}
       />
