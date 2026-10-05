@@ -21,13 +21,6 @@ export default function ProjectCarousel() {
         tags: ['Python', 'FFmpeg', 'yt-dlp', 'Web UI'],
       },
       {
-        title: 'EnfantIA',
-        desc: 'Plataforma educacional com experiências interativas e conteúdo dinâmico.',
-        href: 'https://enfantia.com.br/',
-        live: 'https://enfantia.com.br/',
-        tags: ['Web', 'UI/UX'],
-      },
-      {
         title: 'WebhookControl',
         desc: 'Entrega resiliente de webhooks com retries exponenciais, logs e Horizon.',
         href: 'https://github.com/gabrielvalenco/WebhookControl-Resilient-Webhook-Delivery-Platform',

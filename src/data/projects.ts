@@ -10,6 +10,24 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    title: 'Estante',
+    desc: 'App mobile de diário de leituras no estilo Letterboxd, só que para livros: estante, reviews, clubes de leitura e discussões sem spoiler. Mesma conta e dados do site.',
+    href: 'https://github.com/gabrielvalenco/estante-app',
+    live: 'https://estante-pink.vercel.app',
+    repo: 'https://github.com/gabrielvalenco/estante-app',
+    tags: ['Expo', 'React Native', 'TypeScript', 'TanStack Query'],
+    image: '/estante.webp',
+  },
+  {
+    title: 'Farol',
+    desc: 'O raio-x do seu site em menos de um minuto: análise de performance, SEO e acessibilidade com nota de 0 a 100 e relatório visual em português.',
+    href: 'https://farol-5vre.vercel.app/',
+    live: 'https://farol-5vre.vercel.app/',
+    repo: 'https://github.com/gabrielvalenco/farol',
+    tags: ['Next.js', 'TypeScript', 'Tailwind', 'PostgreSQL', 'Upstash'],
+    image: '/farol.webp',
+  },
+  {
     title: 'Golfo OEG',
     desc: 'Plataforma institucional e hub digital para o Grupo Golfo OEG, com foco em comunicação corporativa e presença online.',
     href: 'https://www.golfo-oeg.com/',
@@ -57,14 +75,20 @@ export const projects: Project[] = [
     tags: ['Landing page', 'SaaS', 'Admin panel'],
     image: 'https://placehold.co/1200x700/0a0a0a/9eff00?text=Modulo+One',
   },
+  {
+    title: 'EnfantIA',
+    desc: 'Plataforma educacional com experiências interativas e conteúdo dinâmico. Projeto encerrado, fora do ar.',
+    href: '#',
+    tags: ['Web', 'UI/UX', 'Educação'],
+  },
 ]
 
 const FEATURED = new Set([
+  'Estante',
+  'Farol',
   'Golfo OEG',
-  'Pecuária pelo Clima',
-  'Rose Valenço',
 ])
 
 export const featuredProjects = projects.filter(p => FEATURED.has(p.title))
 export const otherProjects    = projects.filter(p => !FEATURED.has(p.title))
-export const moreProjects     = projects.slice(3, 6)
+export const moreProjects     = projects.filter(p => !FEATURED.has(p.title))
