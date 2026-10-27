@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import MatrixRain from '@/components/MatrixRain'
+import { useLang } from '@/i18n/context'
 
 const LIME = '#9eff00'
 
@@ -10,6 +11,7 @@ const LIME = '#9eff00'
  * when the user is scrolled away.
  */
 export default function MatrixInterlude() {
+  const { t } = useLang()
   const sectionRef = useRef<HTMLElement>(null)
   const [active, setActive] = useState(false)
 
@@ -46,13 +48,13 @@ export default function MatrixInterlude() {
           className="mb-3 text-[11px] uppercase tracking-[0.32em]"
           style={{ color: LIME, textShadow: `0 0 12px ${LIME}66` }}
         >
-          O que isso vira
+          {t.interlude.kicker}
         </p>
         <h2
           className="text-3xl font-bold uppercase tracking-tight sm:text-5xl md:text-6xl"
           style={{ color: LIME, textShadow: `0 0 24px ${LIME}55, 0 0 4px ${LIME}aa` }}
         >
-          Onde o código vira produto.
+          {t.interlude.title}
         </h2>
       </div>
     </section>

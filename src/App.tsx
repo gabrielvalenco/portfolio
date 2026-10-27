@@ -3,6 +3,8 @@ import { useEffect, lazy, Suspense } from 'react'
 import Lenis from 'lenis'
 import Footer from '@/components/Footer'
 import CustomCursor from '@/components/CustomCursor'
+import LanguageSwitcher from '@/components/LanguageSwitcher'
+import { useLang } from '@/i18n/context'
 
 const Home = lazy(() => import('@/pages/Home'))
 const Certificates = lazy(() => import('@/pages/Certificates'))
@@ -12,6 +14,7 @@ const AboutPage = lazy(() => import('@/pages/About'))
 const ExperiencePage = lazy(() => import('@/pages/Experience'))
 
 export default function App() {
+  const { t } = useLang()
   useEffect(() => {
     document.documentElement.classList.add('dark')
   }, [])
@@ -42,8 +45,9 @@ export default function App() {
     <BrowserRouter>
       <CustomCursor />
       <ScrollToTop />
+      <LanguageSwitcher />
       <div className="min-h-dvh flex flex-col">
-        <a href="#home" className="sr-only focus:not-sr-only fixed top-2 left-2 z-[60] px-3 py-2 rounded bg-primary text-primary-foreground">Ir para conteúdo</a>
+        <a href="#home" className="sr-only focus:not-sr-only fixed top-2 left-2 z-[60] px-3 py-2 rounded bg-primary text-primary-foreground">{t.common.skip}</a>
         {/* O rodape fica dentro do Suspense: antes ele aparecia no topo enquanto
             a pagina carregava e depois era empurrado pra baixo (CLS alto). */}
         <Suspense fallback={<RouteFallback />}>

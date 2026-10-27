@@ -1,9 +1,11 @@
 import { Github, ArrowUpRight, ExternalLink } from 'lucide-react'
 import type { Project } from '@/data/projects'
+import { useLang } from '@/i18n/context'
 
 const LIME = '#9eff00'
 
 export default function ProjectWindow({ p, featured = false }: { p: Project; featured?: boolean }) {
+  const { lang, t } = useLang()
   const url = p.live ?? p.repo
   return (
     <div
@@ -28,7 +30,7 @@ export default function ProjectWindow({ p, featured = false }: { p: Project; fea
             href={url}
             target="_blank"
             rel="noreferrer"
-            aria-label={`abrir ${p.title}`}
+            aria-label={`${t.common.open} ${p.title}`}
             className="inline-flex h-5 w-5 items-center justify-center text-zinc-400 hover:text-[#9eff00] no-underline transition-colors"
           >
             <ArrowUpRight className="h-3 w-3" />
@@ -44,7 +46,7 @@ export default function ProjectWindow({ p, featured = false }: { p: Project; fea
             style={{ color: LIME, borderColor: `${LIME}66` }}
           >
             <span className="h-1 w-1 rounded-full bg-[#9eff00]" />
-            Destaque
+            {t.common.featured}
           </span>
         )}
         <h3
@@ -55,17 +57,17 @@ export default function ProjectWindow({ p, featured = false }: { p: Project; fea
           {p.title}
         </h3>
         <p className={`mt-2 text-xs leading-relaxed text-zinc-400 ${featured ? 'sm:text-sm' : ''}`}>
-          {p.desc}
+          {p.desc[lang]}
         </p>
 
         {p.tags && (
           <div className="mt-4 flex flex-wrap gap-1.5">
-            {p.tags.map(t => (
+            {p.tags.map(tag => (
               <span
-                key={t}
+                key={tag}
                 className="border border-[#9eff00]/20 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-zinc-400"
               >
-                {t}
+                {t.common.tags[tag] ?? tag}
               </span>
             ))}
           </div>
@@ -80,7 +82,7 @@ export default function ProjectWindow({ p, featured = false }: { p: Project; fea
                 rel="noreferrer"
                 className="inline-flex items-center gap-1 uppercase tracking-wider text-zinc-400 hover:text-[#9eff00] no-underline transition-colors"
               >
-                <ExternalLink className="h-3 w-3" /> Ver site
+                <ExternalLink className="h-3 w-3" /> {t.common.visitSite}
               </a>
             )}
             {p.repo && (
@@ -90,7 +92,7 @@ export default function ProjectWindow({ p, featured = false }: { p: Project; fea
                 rel="noreferrer"
                 className="inline-flex items-center gap-1 uppercase tracking-wider text-zinc-400 hover:text-[#9eff00] no-underline transition-colors"
               >
-                <Github className="h-3 w-3" /> Código
+                <Github className="h-3 w-3" /> {t.common.code}
               </a>
             )}
           </div>

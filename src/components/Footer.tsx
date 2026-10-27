@@ -1,4 +1,7 @@
+import { useLang } from '@/i18n/context'
+
 export default function Footer() {
+  const { t } = useLang()
   const year = new Date().getFullYear()
   return (
     <footer className="relative z-10 border-t border-[#9eff00]/15 bg-black">
@@ -14,7 +17,7 @@ export default function Footer() {
               Gabriel Valenço
             </p>
             <p className="text-xs text-zinc-400">
-              Desenvolvedor Full-Stack, disponível para projetos.
+              {t.footer.tagline}
             </p>
           </div>
 
@@ -39,15 +42,15 @@ export default function Footer() {
               href="mailto:gabrielvalencoofc@gmail.com"
               className="text-zinc-400 hover:text-[#9eff00] no-underline transition-colors"
             >
-              Email
+              {t.contact.email}
             </a>
           </div>
         </div>
 
         <div className="mt-8 flex flex-col gap-2 border-t border-dashed border-[#9eff00]/15 pt-5 text-[11px] text-zinc-400 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {year} Gabriel Valenço. Todos os direitos reservados.</p>
+          <p>© {year} Gabriel Valenço. {t.footer.rights}</p>
           <p className="italic">
-            Toda falha carrega em si a semente de um sucesso igual ou maior.
+            {t.footer.quote}
           </p>
         </div>
       </div>

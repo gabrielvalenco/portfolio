@@ -9,6 +9,8 @@ import { TermLink, TermAnchor } from '@/components/TermButton'
 import useHomeAnimations from '@/hooks/useHomeAnimations'
 import { gsap } from '@/lib/gsap'
 import { featuredProjects } from '@/data/projects'
+import { useLang } from '@/i18n/context'
+import Rich from '@/i18n/Rich'
 
 const LIME = '#9eff00'
 
@@ -70,12 +72,13 @@ function Magnetic({ children }: { children: React.ReactNode }) {
 // ─── Technologies ─────────────────────────────────────────────────────────────
 
 function Technologies() {
+  const { t } = useLang()
   return (
     <TerminalSection
       id="technologies"
       index="01"
-      title="Tecnologias"
-      subtitle="Ferramentas que uso no dia a dia para entregar produtos completos, do banco de dados à interface. As em destaque são as que mais uso."
+      title={t.tech.title}
+      subtitle={t.tech.subtitle}
       compact
     >
       <div className="mt-2" data-animate-item>
@@ -88,28 +91,27 @@ function Technologies() {
 // ─── About ────────────────────────────────────────────────────────────────────
 
 const stats = [
-  { count: 10, suffix: '+', label: 'Projetos' },
-  { count: techCount, suffix: '',  label: 'Tecnologias' },
-  { count: 4,  suffix: '',  label: 'Certificados' },
-  { count: 4,  suffix: '',  label: 'Experiências' },
-]
-
-const skills = ['Inglês avançado', 'Oratória', 'Criativo', 'Cooperativo', 'Sociável', 'Adaptável']
+  { count: 10, suffix: '+', id: 'projects' },
+  { count: techCount, suffix: '',  id: 'tech' },
+  { count: 4,  suffix: '',  id: 'certs' },
+  { count: 4,  suffix: '',  id: 'exp' },
+] as const
 
 const experiences = [
-  { company: 'OneMoving',     role: 'Dev Sênior',                current: true  },
-  { company: 'Desigual',      role: 'Full Stack & Tech Lead',    current: false },
-  { company: 'Grupo Prodemi', role: 'Full Stack Developer',      current: false },
-  { company: 'Jem',           role: 'Tráfego Pago',              current: false },
+  { company: 'OneMoving',     role: 'onemoving', current: true  },
+  { company: 'Desigual',      role: 'desigual',  current: false },
+  { company: 'Grupo Prodemi', role: 'prodemi',   current: false },
+  { company: 'Jem',           role: 'jem',       current: false },
 ]
 
 function About() {
+  const { t } = useLang()
   return (
     <TerminalSection
       id="about"
       index="02"
-      title="Sobre"
-      subtitle="Um pouco da minha trajetória, do que entrego e do que estou disponível para fazer."
+      title={t.home.aboutTitle}
+      subtitle={t.home.aboutSubtitle}
       noBorder
       compact
       headerClassName=""
@@ -118,20 +120,13 @@ function About() {
         {/* Bio + experience */}
         <div className="space-y-6 font-mono text-sm leading-relaxed text-zinc-300">
           <p data-animate-item>
-            Sou desenvolvedor full-stack focado em{' '}
-            <span className="text-zinc-100">SaaS</span> e{' '}
-            <span className="text-zinc-100">automações</span>, cuido de toda a
-            jornada do produto, do banco de dados à interface final.
+            <Rich text={t.home.p1} />
           </p>
           <p data-animate-item>
-            Atualmente atuo como{' '}
-            <span className="text-zinc-100">Dev Sênior</span> na{' '}
-            <span className="text-zinc-100">OneMoving</span>, responsável pelo
-            desenvolvimento do sistema e dos aplicativos ligados à plataforma.
+            <Rich text={t.home.p2} />
           </p>
           <p data-animate-item>
-            Curioso, crítico e empenhado, transformo requisitos em produtos
-            funcionais, escaláveis e bem acabados.
+            {t.home.p3}
           </p>
 
           <div
@@ -140,16 +135,16 @@ function About() {
           >
             <div className="flex items-center gap-2 text-xs">
               <span className="h-2 w-2 rounded-full bg-[#9eff00] shadow-[0_0_10px_#9eff00] animate-pulse" />
-              <span style={{ color: LIME }}>Disponível para projetos</span>
+              <span style={{ color: LIME }}>{t.home.available}</span>
             </div>
             <p className="mt-1 text-xs text-zinc-400">
-              SaaS, automações, integrações e otimização de processos.
+              {t.home.availableDesc}
             </p>
           </div>
 
           <div className="pt-2" data-animate-item>
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-400 mb-3">
-              Experiência
+              {t.home.experience}
             </p>
             <ul className="space-y-1.5 font-mono text-xs">
               {experiences.map(exp => (
@@ -160,14 +155,14 @@ function About() {
                 >
                   <span className="truncate">
                     <span className="text-zinc-100">{exp.company}</span>
-                    <span className="text-zinc-400"> · {exp.role}</span>
+                    <span className="text-zinc-400"> · {t.home.roles[exp.role]}</span>
                   </span>
                   {exp.current && (
                     <span
                       className="text-[10px] uppercase tracking-widest border px-1.5 py-0.5"
                       style={{ color: LIME, borderColor: `${LIME}66` }}
                     >
-                      atual
+                      {t.common.current}
                     </span>
                   )}
                 </li>
@@ -178,10 +173,10 @@ function About() {
           {/* CTAs to deeper pages */}
           <div className="flex flex-wrap gap-3 pt-2" data-animate-item>
             <Magnetic>
-              <TermLink to="/about" icon={User}>Saiba mais sobre mim</TermLink>
+              <TermLink to="/about" icon={User}>{t.home.learnMore}</TermLink>
             </Magnetic>
             <Magnetic>
-              <TermLink to="/experience" icon={Briefcase}>Minha trajetória</TermLink>
+              <TermLink to="/experience" icon={Briefcase}>{t.home.journey}</TermLink>
             </Magnetic>
           </div>
         </div>
@@ -193,9 +188,9 @@ function About() {
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            {stats.map(({ suffix, label, count }) => (
+            {stats.map(({ suffix, id, count }) => (
               <div
-                key={label}
+                key={id}
                 data-animate-item
                 className="terminal-panel relative corner-brackets group p-5 font-mono"
               >
@@ -213,7 +208,7 @@ function About() {
                   0{suffix}
                 </div>
                 <div className="mt-2 text-[10px] uppercase tracking-[0.28em] text-zinc-400">
-                  {label}
+                  {t.home.stats[id]}
                 </div>
               </div>
             ))}
@@ -221,10 +216,10 @@ function About() {
 
           <div data-animate-item>
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-400 mb-3">
-              Habilidades
+              {t.home.skillsTitle}
             </p>
             <div className="flex flex-wrap gap-2 font-mono text-xs">
-              {skills.map(skill => (
+              {t.home.skills.map(skill => (
                 <span
                   key={skill}
                   className="border border-[#9eff00]/25 px-3 py-1 text-zinc-300 transition-colors hover:bg-[#9eff00]/10 hover:text-[#9eff00] hover:border-[#9eff00]/70"
@@ -255,12 +250,13 @@ const contactLinks = [
 ]
 
 function Contact() {
+  const { t } = useLang()
   return (
     <TerminalSection
       id="contact"
       index="04"
-      title="Contato"
-      subtitle="Tem um projeto em mente? Vamos conversar."
+      title={t.contact.title}
+      subtitle={t.contact.subtitle}
     >
       <div
         data-animate-item
@@ -283,15 +279,14 @@ function Contact() {
         <div className="relative font-mono">
           <div className="inline-flex items-center gap-2 border border-[#9eff00]/40 bg-[#9eff00]/[0.05] px-3 py-1 text-xs">
             <span className="h-1.5 w-1.5 rounded-full bg-[#9eff00] shadow-[0_0_8px_#9eff00] animate-pulse" />
-            <span style={{ color: LIME }}>Disponível agora</span>
+            <span style={{ color: LIME }}>{t.contact.availableNow}</span>
           </div>
 
           <h3 className="mt-6 font-mono text-2xl sm:text-4xl font-bold uppercase tracking-tight text-zinc-100">
-            Vamos trabalhar juntos?
+            {t.contact.heading}
           </h3>
           <p className="mt-4 max-w-md text-sm text-zinc-400">
-            Disponível para projetos freelancer de SaaS, automações,
-            integrações e desenvolvimento full-stack.
+            {t.contact.text}
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">

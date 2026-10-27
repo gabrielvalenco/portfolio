@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
+import { useLang } from '@/i18n/context'
 
 const LIME = '#9eff00'
 
 export default function SubPageHeader({
   index, title, subtitle,
 }: { index: string; name?: string; title: string; subtitle?: string }) {
+  const { t } = useLang()
   return (
     <header
       className="relative border-b border-[#9eff00]/15 bg-black"
@@ -23,7 +25,7 @@ export default function SubPageHeader({
           className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-400 no-underline transition-colors hover:text-[#9eff00]"
         >
           <ArrowLeft className="h-3 w-3" />
-          Voltar
+          {t.common.back}
         </Link>
       </div>
       <div className="container mx-auto px-6 pb-12 pt-2">

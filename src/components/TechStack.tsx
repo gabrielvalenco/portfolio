@@ -1,5 +1,7 @@
 type Group = { id: string; title: string; hint: string; items: string[]; main: string[] }
 
+import { useLang } from '@/i18n/context'
+
 export const techGroups: Group[] = [
   {
     id: 'frontend',
@@ -40,6 +42,7 @@ export const techGroups: Group[] = [
 export const techCount = new Set(techGroups.flatMap(g => g.items)).size
 
 export default function TechStack() {
+  const { t } = useLang()
   return (
     <div className="grid gap-4 md:grid-cols-2">
       {techGroups.map((g, i) => (
@@ -54,12 +57,12 @@ export default function TechStack() {
           <span className="cb-br" />
 
           <div className="flex items-center justify-between border-b border-[#9eff00]/15 pb-3">
-            <h3 className="text-sm font-bold uppercase tracking-[0.22em] text-zinc-100">{g.title}</h3>
+            <h3 className="text-sm font-bold uppercase tracking-[0.22em] text-zinc-100">{t.tech.groups[g.id]?.title ?? g.title}</h3>
             <span className="text-[10px] uppercase tracking-wider text-zinc-500">
               0{i + 1} / 0{techGroups.length}
             </span>
           </div>
-          <p className="mt-3 text-[11px] uppercase tracking-[0.2em] text-zinc-500">{g.hint}</p>
+          <p className="mt-3 text-[11px] uppercase tracking-[0.2em] text-zinc-500">{t.tech.groups[g.id]?.hint ?? g.hint}</p>
 
           <div className="mt-4 flex flex-wrap gap-2">
             {g.items.map(t => {

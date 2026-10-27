@@ -4,6 +4,7 @@ import type { ScrollTrigger } from 'gsap/ScrollTrigger'
 import type { Project } from '@/data/projects'
 import { ExternalLink, ArrowUpRight } from 'lucide-react'
 import { TermLink } from '@/components/TermButton'
+import { useLang } from '@/i18n/context'
 
 const LIME = '#9eff00'
 
@@ -22,6 +23,7 @@ function useIsMobile() {
 }
 
 function ProjectSlide({ p, step, onExpand }: { p: Project; step: number; onExpand?: () => void }) {
+  const { lang, t: tr } = useLang()
   const url = p.live ?? p.href
   return (
     <div data-slide data-step={step} className="relative h-full w-screen shrink-0 flex items-center justify-center px-6">
@@ -44,11 +46,11 @@ function ProjectSlide({ p, step, onExpand }: { p: Project; step: number; onExpan
                 decoding="async"
                 onClick={onExpand}
                 className="h-full w-full cursor-pointer object-cover object-top transition-transform duration-500 hover:scale-[1.02]"
-                title="Clique para ampliar"
+                title={tr.common.zoom}
               />
             ) : (
               <div className="flex h-full w-full items-center justify-center text-[11px] uppercase tracking-widest text-zinc-400">
-                Imagem do projeto
+                {tr.common.projectImage}
               </div>
             )}
           </div>
@@ -56,7 +58,7 @@ function ProjectSlide({ p, step, onExpand }: { p: Project; step: number; onExpan
           <div className="flex flex-col p-6 md:h-[22rem] md:p-8">
             <div className="flex items-center justify-between border-b border-[#9eff00]/15 pb-3">
               <span className="text-[10px] uppercase tracking-[0.22em]" style={{ color: LIME }}>
-                Destaque
+                {tr.common.featured}
               </span>
               <span className="font-mono text-[11px] uppercase tracking-wider text-zinc-400">
                 0{step} / 03
@@ -67,7 +69,7 @@ function ProjectSlide({ p, step, onExpand }: { p: Project; step: number; onExpan
               {p.title}
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-zinc-400 md:text-base">
-              {p.desc}
+              {p.desc[lang]}
             </p>
 
             {p.tags && (
@@ -77,7 +79,7 @@ function ProjectSlide({ p, step, onExpand }: { p: Project; step: number; onExpan
                     key={t}
                     className="border border-[#9eff00]/20 px-2 py-1 text-[10px] uppercase tracking-wider text-zinc-400"
                   >
-                    {t}
+                    {tr.common.tags[t] ?? t}
                   </span>
                 ))}
               </div>
@@ -91,7 +93,7 @@ function ProjectSlide({ p, step, onExpand }: { p: Project; step: number; onExpan
                   rel="noreferrer"
                   className="inline-flex items-center gap-2 border border-[#9eff00]/40 bg-black/60 px-4 py-2.5 font-mono text-xs uppercase tracking-[0.22em] text-zinc-200 no-underline transition-all hover:border-[#9eff00] hover:bg-[#9eff00]/10 hover:text-[#9eff00] hover:shadow-[0_0_28px_rgba(158,255,0,0.3)]"
                 >
-                  <ExternalLink className="h-3.5 w-3.5" /> Acessar projeto
+                  <ExternalLink className="h-3.5 w-3.5" /> {tr.common.visitProject}
                 </a>
               )}
             </div>
@@ -103,20 +105,21 @@ function ProjectSlide({ p, step, onExpand }: { p: Project; step: number; onExpan
 }
 
 function FinalSlide() {
+  const { t: tr } = useLang()
   return (
     <div className="relative h-full w-screen shrink-0 flex flex-col items-center justify-center px-6 text-center">
       <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.32em]" style={{ color: LIME }}>
         04 / 04
       </p>
       <h3 className="font-mono text-3xl font-bold uppercase tracking-tight text-zinc-100 sm:text-5xl">
-        Quer ver mais?
+        {tr.showcase.moreTitle}
       </h3>
       <p className="mx-auto mt-4 max-w-md text-sm text-zinc-400">
-        Há outros projetos desenvolvidos com foco em landing pages, presença digital e conversão.
+        {tr.showcase.moreDesc}
       </p>
       <div className="mt-8">
         <TermLink to="/more-projects" icon={ArrowUpRight}>
-          Ver mais projetos
+          {tr.showcase.moreCta}
         </TermLink>
       </div>
     </div>
@@ -132,6 +135,7 @@ function MobileProjectCard({
   step: number
   onExpand?: () => void
 }) {
+  const { lang, t: tr } = useLang()
   const url = p.live ?? p.href
   return (
     <article data-animate-item className="terminal-panel corner-brackets relative overflow-hidden font-mono">
@@ -150,11 +154,11 @@ function MobileProjectCard({
             decoding="async"
             onClick={onExpand}
             className="h-full w-full cursor-pointer object-cover object-top transition-transform duration-500 hover:scale-[1.02]"
-            title="Clique para ampliar"
+            title={tr.common.zoom}
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center text-[11px] uppercase tracking-widest text-zinc-400">
-            Imagem do projeto
+            {tr.common.projectImage}
           </div>
         )}
       </div>
@@ -162,7 +166,7 @@ function MobileProjectCard({
       <div className="flex flex-col p-5">
         <div className="flex items-center justify-between border-b border-[#9eff00]/15 pb-3">
           <span className="text-[10px] uppercase tracking-[0.22em]" style={{ color: LIME }}>
-            Destaque
+            {tr.common.featured}
           </span>
           <span className="font-mono text-[11px] uppercase tracking-wider text-zinc-400">
             0{step} / 03
@@ -173,7 +177,7 @@ function MobileProjectCard({
           {p.title}
         </h3>
         <p className="mt-2 text-sm leading-relaxed text-zinc-400">
-          {p.desc}
+          {p.desc[lang]}
         </p>
 
         {p.tags && (
@@ -183,7 +187,7 @@ function MobileProjectCard({
                 key={t}
                 className="border border-[#9eff00]/20 px-2 py-1 text-[10px] uppercase tracking-wider text-zinc-400"
               >
-                {t}
+                {tr.common.tags[t] ?? t}
               </span>
             ))}
           </div>
@@ -197,7 +201,7 @@ function MobileProjectCard({
               rel="noreferrer"
               className="inline-flex items-center gap-2 border border-[#9eff00]/40 bg-black/60 px-4 py-2.5 font-mono text-xs uppercase tracking-[0.22em] text-zinc-200 no-underline transition-all hover:border-[#9eff00] hover:bg-[#9eff00]/10 hover:text-[#9eff00] hover:shadow-[0_0_28px_rgba(158,255,0,0.3)]"
             >
-              <ExternalLink className="h-3.5 w-3.5" /> Acessar projeto
+              <ExternalLink className="h-3.5 w-3.5" /> {tr.common.visitProject}
             </a>
           )}
         </div>
@@ -213,6 +217,7 @@ function MobileProjectList({
   projects: Project[]
   onExpand: (p: Project) => void
 }) {
+  const { t: tr } = useLang()
   return (
     <div className="container mx-auto px-6 pb-16">
       <div className="grid gap-8">
@@ -230,14 +235,14 @@ function MobileProjectList({
             04 / 04
           </p>
           <h3 className="mt-3 font-mono text-xl font-bold uppercase tracking-tight text-zinc-100">
-            Quer ver mais?
+            {tr.showcase.moreTitle}
           </h3>
           <p className="mx-auto mt-2 max-w-md text-sm text-zinc-400">
-            Há outros projetos desenvolvidos com foco em landing pages, presença digital e conversão.
+            {tr.showcase.moreDesc}
           </p>
           <div className="mt-5">
             <TermLink to="/more-projects" icon={ArrowUpRight}>
-              Ver mais projetos
+              {tr.showcase.moreCta}
             </TermLink>
           </div>
         </div>
@@ -251,6 +256,7 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
   const trackRef = useRef<HTMLDivElement>(null)
   const progressRef = useRef<HTMLDivElement>(null)
   const steps = projects.length + 1
+  const { t: tr } = useLang()
 
   const [expanded, setExpanded] = useState<{ title: string; src: string } | null>(null)
   const isMobile = useIsMobile()
@@ -381,12 +387,12 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
             <span className="h-px w-16 sm:w-24" style={{ background: `${LIME}66` }} />
           </div>
           <h2 className="mt-5 font-mono text-3xl font-bold uppercase tracking-tight leading-none text-zinc-100 sm:text-5xl md:text-6xl">
-            Projetos
+            {tr.showcase.title}
           </h2>
           <p className="mt-4 max-w-xl font-mono text-sm text-zinc-400">
             {isMobile
-              ? 'Uma seleção do que já construí. Toque em um projeto para ampliar a imagem.'
-              : 'Uma seleção do que já construí. Role para conferir cada projeto.'}
+              ? tr.showcase.subMobile
+              : tr.showcase.subDesktop}
           </p>
         </header>
       </div>
@@ -429,7 +435,7 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
             type="button"
             onClick={(e) => { e.stopPropagation(); setExpanded(null) }}
             className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center border border-[#9eff00]/40 bg-black/60 font-mono text-sm text-zinc-200 transition-all hover:border-[#9eff00] hover:bg-[#9eff00]/10 hover:text-[#9eff00]"
-            aria-label="Fechar"
+            aria-label={tr.common.close}
           >
             ×
           </button>
