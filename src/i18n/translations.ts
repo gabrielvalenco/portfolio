@@ -240,6 +240,38 @@ const pt = {
           'Spring Boot e JavaFX',
         ],
       },
+      {
+        description: 'Formação para auditar Sistemas de Gestão Integrados com base nas normas ISO 9001, 14001 e 45001.',
+        topics: [
+          'Qualidade (ISO 9001), Meio Ambiente (ISO 14001) e Saúde e Segurança (ISO 45001)',
+          'Princípios e planejamento de auditorias internas',
+          'Execução de auditorias e relato de não conformidades',
+        ],
+      },
+      {
+        description: 'Curso de depuração (debug) em SAP, partindo do zero até a análise de programas ABAP.',
+        topics: [
+          'Fundamentos do debugger do SAP',
+          'Breakpoints e análise do fluxo de execução',
+          'Inspeção de variáveis e tabelas internas',
+        ],
+      },
+      {
+        description: 'Curso de ABAP com Orientação a Objetos, aplicando POO no ecossistema SAP.',
+        topics: [
+          'Classes, objetos e métodos em ABAP',
+          'Herança, polimorfismo e interfaces',
+          'Boas práticas de ABAP orientado a objetos',
+        ],
+      },
+      {
+        description: 'Curso de ABAP partindo do zero, a linguagem de programação do SAP.',
+        topics: [
+          'Fundamentos da linguagem ABAP',
+          'Tipos de dados, estruturas e tabelas internas',
+          'Acesso ao banco de dados e relatórios',
+        ],
+      },
     ],
   },
 
@@ -492,6 +524,38 @@ const en: Dict = {
           'Exception handling and file manipulation',
           'JDBC, JPA / Hibernate, Spring Data JPA/MongoDB',
           'Spring Boot and JavaFX',
+        ],
+      },
+      {
+        description: 'Training to audit Integrated Management Systems based on ISO 9001, 14001 and 45001.',
+        topics: [
+          'Quality (ISO 9001), Environment (ISO 14001) and Health & Safety (ISO 45001)',
+          'Internal audit principles and planning',
+          'Conducting audits and reporting nonconformities',
+        ],
+      },
+      {
+        description: 'SAP debugging course, from zero to analyzing ABAP programs.',
+        topics: [
+          'SAP debugger fundamentals',
+          'Breakpoints and execution flow analysis',
+          'Inspecting variables and internal tables',
+        ],
+      },
+      {
+        description: 'Object-Oriented ABAP course, applying OOP within the SAP ecosystem.',
+        topics: [
+          'Classes, objects and methods in ABAP',
+          'Inheritance, polymorphism and interfaces',
+          'Object-oriented ABAP best practices',
+        ],
+      },
+      {
+        description: 'ABAP course starting from zero, the programming language of SAP.',
+        topics: [
+          'ABAP language fundamentals',
+          'Data types, structures and internal tables',
+          'Database access and reports',
         ],
       },
     ],

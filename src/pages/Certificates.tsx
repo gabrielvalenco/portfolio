@@ -8,6 +8,10 @@ const courseTitles = [
   'Node.js do Zero a Maestria com diversos Projetos',
   'Aprenda Golang do Zero! Desenvolva uma APLICAÇÃO COMPLETA!',
   'Java COMPLETO Programação Orientada a Objetos + Projetos',
+  'Auditor Interno do SGI (ISO 9001 + ISO 14001 + ISO 45001)',
+  'SAP Debug - Aprenda partindo do zero 2026',
+  'SAP ABAP OO - Orientação a Objetos',
+  'SAP ABAP - Aprenda partindo do zero 2026',
 ]
 
 const gradients = [
@@ -15,6 +19,10 @@ const gradients = [
   'from-emerald-600/30 to-teal-500/20',
   'from-sky-600/30 to-blue-500/20',
   'from-amber-500/30 to-orange-400/20',
+  'from-violet-600/30 to-fuchsia-500/20',
+  'from-yellow-500/30 to-amber-400/20',
+  'from-cyan-600/30 to-sky-500/20',
+  'from-rose-600/30 to-pink-500/20',
 ]
 
 export default function Certificates() {
