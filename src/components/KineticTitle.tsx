@@ -27,7 +27,8 @@ export default function KineticTitle({
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    if (immediate || typeof IntersectionObserver === 'undefined') {
+    if (immediate) return
+    if (typeof IntersectionObserver === 'undefined') {
       const id = requestAnimationFrame(() => el.classList.add('is-visible'))
       return () => cancelAnimationFrame(id)
     }
@@ -45,7 +46,7 @@ export default function KineticTitle({
   }, [immediate])
 
   return (
-    <Tag ref={ref} aria-label={text} className={cn('kinetic', className)} style={{ '--kd': `${delayMs}ms` } as CSSProperties}>
+    <Tag ref={ref} aria-label={text} className={cn('kinetic', immediate && 'kinetic-now', className)} style={{ '--kd': `${delayMs}ms` } as CSSProperties}>
       {text.split(' ').map((word, i) => (
         <span key={`${word}-${i}`} aria-hidden>
           {i > 0 && ' '}

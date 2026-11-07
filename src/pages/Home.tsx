@@ -63,14 +63,14 @@ function Hero() {
           </div>
         </div>
 
-        <div className="hero-in mx-auto w-full max-w-[19rem] lg:max-w-sm lg:justify-self-end" style={delay(200)}>
+        <div className="hero-in mx-auto w-full max-w-[19rem] lg:max-w-sm lg:justify-self-end" style={delay(60)}>
           <div className="relative">
           <div className="portrait">
             <img
-              src="/pfp.webp"
+              src="/pfp-hero.webp"
               alt="Gabriel Valenço"
-              width={800}
-              height={1200}
+              width={640}
+              height={800}
               fetchPriority="high"
               className="relative aspect-[4/5] w-full rounded-3xl object-cover object-top"
             />

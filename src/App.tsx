@@ -2,10 +2,10 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect, lazy, Suspense } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import Home from '@/pages/Home'
 import Backdrop from '@/components/Backdrop'
 import { useLang } from '@/i18n/context'
 
-const Home = lazy(() => import('@/pages/Home'))
 const Certificates = lazy(() => import('@/pages/Certificates'))
 const ProjectsPage = lazy(() => import('@/pages/Projects'))
 const MoreProjects = lazy(() => import('@/pages/MoreProjects'))

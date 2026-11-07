@@ -34,9 +34,11 @@ export default function ProjectCard({ p, index = 0 }: { p: Project; index?: numb
           <div className="aspect-[3/2] overflow-hidden border-b border-border">
             <img
               src={p.image}
+              srcSet={`${p.image.replace('.webp', '-640.webp')} 640w, ${p.image.replace('.webp', '-800.webp')} 800w, ${p.image} 1200w`}
+              sizes="(min-width: 1024px) 370px, (min-width: 768px) 45vw, 100vw"
               alt={p.title}
-              width={1500}
-              height={1000}
+              width={1200}
+              height={800}
               loading="lazy"
               decoding="async"
               className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
