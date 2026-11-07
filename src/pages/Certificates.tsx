@@ -36,7 +36,7 @@ export default function Certificates() {
             <ul className="space-y-2">
               {cert.topics.map(topic => (
                 <li key={topic} className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <Check className="mt-0.5 size-4 shrink-0 text-accent" />
+                  <Check className="mt-0.5 size-4 shrink-0 text-accent-ink" />
                   <span>{topic}</span>
                 </li>
               ))}

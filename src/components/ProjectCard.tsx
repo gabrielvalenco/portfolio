@@ -5,7 +5,7 @@ import type { Project } from '@/data/projects'
 import { useLang } from '@/i18n/context'
 
 const link =
-  'group/link inline-flex items-center gap-1 text-sm font-medium text-accent no-underline underline-offset-4 hover:underline'
+  'group/link inline-flex items-center gap-1 text-sm font-medium text-accent-ink no-underline underline-offset-4 hover:underline'
 const arrow =
   'size-3.5 transition-transform duration-150 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5'
 

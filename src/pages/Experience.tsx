@@ -32,7 +32,7 @@ export default function ExperiencePage() {
                   <h2>
                     {c.company}
                     {c.current && (
-                      <span className="ml-3 align-middle text-xs font-medium text-accent">{t.common.current}</span>
+                      <span className="ml-3 align-middle text-xs font-medium text-accent-ink">{t.common.current}</span>
                     )}
                   </h2>
                   <span className="text-sm text-muted-foreground">{text.period}</span>
@@ -66,7 +66,7 @@ export default function ExperiencePage() {
               href="https://unisalesiano.com.br/"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1 text-accent no-underline underline-offset-4 hover:underline"
+              className="inline-flex items-center gap-1 text-accent-ink no-underline underline-offset-4 hover:underline"
             >
               <ExternalLink className="size-3.5" /> unisalesiano.com.br
             </a>

@@ -12,7 +12,7 @@ const buttonVariants = cva(
         default: "shine bg-primary text-primary-foreground hover:bg-primary/85",
         outline: "border border-border-strong bg-transparent text-foreground hover:bg-foreground/5",
         ghost: "text-muted-foreground hover:text-foreground hover:bg-foreground/5",
-        link: "text-accent underline-offset-4 hover:underline",
+        link: "text-accent-ink underline-offset-4 hover:underline",
       },
       size: {
         default: "h-10 px-4",
