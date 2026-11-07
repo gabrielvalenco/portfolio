@@ -108,15 +108,13 @@ html {
 /* ─── Reveal no scroll (ver components/Reveal.tsx) ───────────────────────────── */
 .reveal {
   opacity: 0;
-  transform: translateY(24px) scale(0.98);
-  filter: blur(4px);
-  transition: opacity 700ms ease-out, transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1), filter 700ms ease-out;
+  transform: translateY(16px);
+  transition: opacity 450ms ease-out, transform 450ms cubic-bezier(0.2, 0.7, 0.2, 1);
   transition-delay: var(--reveal-delay, 0ms);
 }
 .reveal.is-visible {
   opacity: 1;
   transform: none;
-  filter: none;
 }
 
 /* ─── Entrada do hero ao carregar ────────────────────────────────────────────── */
@@ -265,8 +263,8 @@ html {
   display: inline-block;
   transform: translateY(115%) rotate(5deg);
   transform-origin: 0 100%;
-  transition: transform 900ms cubic-bezier(0.2, 0.8, 0.2, 1);
-  transition-delay: calc(var(--i, 0) * 80ms + var(--kd, 0ms));
+  transition: transform 600ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition-delay: calc(var(--i, 0) * 50ms + var(--kd, 0ms));
 }
 .kinetic.is-visible .kw-in {
   transform: none;
@@ -312,47 +310,51 @@ html {
 }
 
 /* ─── Faixas gigantes de texto ───────────────────────────────────────────────── */
+/* A linha desliza com o scroll (onde suportado); a trilha corre sozinha o tempo todo. */
 .big-track {
   display: flex;
   width: max-content;
-  animation: big-marquee 55s linear infinite;
+  animation: big-marquee 40s linear infinite;
 }
 .big-track-rev {
   animation-direction: reverse;
+}
+.big-row:hover .big-track {
+  animation-play-state: paused;
 }
 .big-text {
   font-size: clamp(3.25rem, 9vw, 7.5rem);
   font-weight: 800;
   line-height: 1;
   letter-spacing: -0.03em;
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--foreground);
-}
-.big-text-fill {
   color: var(--foreground);
-  -webkit-text-stroke: 0;
+  transition: color 250ms ease;
+}
+.big-text-ghost {
+  color: color-mix(in srgb, var(--foreground) 16%, transparent);
+}
+.big-row:hover .big-text-ghost {
+  color: var(--accent);
 }
 @keyframes big-marquee {
   to { transform: translateX(-50%); }
 }
-/* Onde ha scroll-driven animations, as faixas andam junto com o scroll. */
 @supports (animation-timeline: view()) {
-  .big-track {
+  .big-row {
     animation: big-slide linear both;
     animation-timeline: view();
     animation-range: entry 0% exit 100%;
   }
-  .big-track-rev {
+  .big-row-rev {
     animation-name: big-slide-rev;
-    animation-direction: normal;
   }
   @keyframes big-slide {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-38%); }
+    from { transform: translateX(6%); }
+    to   { transform: translateX(-18%); }
   }
   @keyframes big-slide-rev {
-    from { transform: translateX(-38%); }
-    to   { transform: translateX(0); }
+    from { transform: translateX(-18%); }
+    to   { transform: translateX(6%); }
   }
 }
 
@@ -424,7 +426,7 @@ html {
     animation: none;
   }
   .orb, .gradient-text, .portrait, .portrait::before, .pulse-dot::after,
-  .chip, .chip-float, .big-track, .word-rotator-item {
+  .chip, .chip-float, .big-track, .big-row, .word-rotator-item {
     animation: none;
   }
   .chip { opacity: 1; transform: rotate(var(--rot, 0deg)); }

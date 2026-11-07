@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils'
 type Props = {
   children: ReactNode
   as?: 'div' | 'li' | 'article' | 'section' | 'header' | 'p'
-  /** Posicao na fila, para o stagger (60 ms por item, no maximo 5). */
+  /** Posicao na fila, para o stagger (40 ms por item, no maximo 3). */
   index?: number
   className?: string
 }
@@ -28,7 +28,7 @@ export default function Reveal({ children, as = 'div', index = 0, className }: P
           io.disconnect()
         }
       },
-      { rootMargin: '0px 0px -8% 0px', threshold: 0.05 },
+      { rootMargin: '0px 0px 8% 0px', threshold: 0 },
     )
     io.observe(el)
     return () => io.disconnect()
@@ -38,7 +38,7 @@ export default function Reveal({ children, as = 'div', index = 0, className }: P
     <Tag
       ref={ref}
       className={cn('reveal', className)}
-      style={{ '--reveal-delay': `${Math.min(index, 5) * 60}ms` } as CSSProperties}
+      style={{ '--reveal-delay': `${Math.min(index, 3) * 40}ms` } as CSSProperties}
     >
       {children}
     </Tag>
