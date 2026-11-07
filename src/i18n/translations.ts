@@ -23,6 +23,7 @@ const pt = {
     projects: 'Projetos',
     about: 'Sobre',
     experience: 'Experiência',
+    courses: 'Cursos',
     contact: 'Contato',
     resume: 'Currículo',
     main: 'Navegação principal',
@@ -61,6 +62,14 @@ const pt = {
     learnMore: 'Saiba mais sobre mim',
     experienceTitle: 'Experiência',
     allExperience: 'Ver trajetória completa',
+  },
+
+  courses: {
+    title: 'Cursos',
+    subtitle: 'Formações e cursos concluídos, com certificado quando disponível.',
+    done: 'Concluído',
+    certificate: 'Ver certificado',
+    more: 'Ver detalhes dos cursos',
   },
 
   contact: {
@@ -285,6 +294,7 @@ const en: Dict = {
     projects: 'Projects',
     about: 'About',
     experience: 'Experience',
+    courses: 'Courses',
     contact: 'Contact',
     resume: 'Resume',
     main: 'Main navigation',
@@ -323,6 +333,14 @@ const en: Dict = {
     learnMore: 'More about me',
     experienceTitle: 'Experience',
     allExperience: 'See full journey',
+  },
+
+  courses: {
+    title: 'Courses',
+    subtitle: 'Completed courses and training, with the certificate when available.',
+    done: 'Completed',
+    certificate: 'View certificate',
+    more: 'See course details',
   },
 
   contact: {

@@ -11,6 +11,7 @@ const links = [
   { hash: 'projects', key: 'projects' },
   { hash: 'about', key: 'about' },
   { hash: 'experience', key: 'experience' },
+  { hash: 'courses', key: 'courses' },
   { hash: 'contact', key: 'contact' },
 ] as const
 

@@ -11,6 +11,7 @@ import HeroChips from '@/components/HeroChips'
 import BigMarquee from '@/components/BigMarquee'
 import SideDecor from '@/components/SideDecor'
 import CodeCard from '@/components/CodeCard'
+import CourseList from '@/components/CourseList'
 import { Button } from '@/components/ui/button'
 import { featuredProjects } from '@/data/projects'
 import { companies } from '@/data/experience'
@@ -162,6 +163,21 @@ function Experience() {
   )
 }
 
+function Courses() {
+  const { t } = useLang()
+  return (
+    <Section id="courses" title={t.courses.title} subtitle={t.courses.subtitle}>
+      <CourseList />
+      <Reveal className="mt-8">
+        <Link to="/certificates" className={moreLink}>
+          {t.courses.more}
+          <ArrowRight className={moreArrow} />
+        </Link>
+      </Reveal>
+    </Section>
+  )
+}
+
 function Stack() {
   const { t } = useLang()
   return (
@@ -208,6 +224,7 @@ export default function Home() {
         <Projects />
         <About />
         <Experience />
+        <Courses />
         <Stack />
         <Contact />
       </div>
