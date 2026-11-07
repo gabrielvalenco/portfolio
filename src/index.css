@@ -358,6 +358,22 @@ html {
   }
 }
 
+/* ─── Elementos decorativos laterais (SideDecor) ─────────────────────────────── */
+.decor-float {
+  transform: rotate(var(--rot, 0deg));
+  animation: decor-float 8s ease-in-out infinite;
+}
+@keyframes decor-float {
+  0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+  50%      { transform: translateY(-14px) rotate(calc(var(--rot, 0deg) * -0.5)); }
+}
+.decor-ring {
+  animation: spin-slow 60s linear infinite;
+}
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
 /* ─── Cards: holofote que segue o mouse ──────────────────────────────────────── */
 .spotlight {
   position: relative;
@@ -426,7 +442,7 @@ html {
     animation: none;
   }
   .orb, .gradient-text, .portrait, .portrait::before, .pulse-dot::after,
-  .chip, .chip-float, .big-track, .big-row, .word-rotator-item {
+  .chip, .chip-float, .big-track, .big-row, .word-rotator-item, .decor-float, .decor-ring {
     animation: none;
   }
   .chip { opacity: 1; transform: rotate(var(--rot, 0deg)); }

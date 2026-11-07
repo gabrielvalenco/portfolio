@@ -9,6 +9,8 @@ import KineticTitle from '@/components/KineticTitle'
 import WordRotator from '@/components/WordRotator'
 import HeroChips from '@/components/HeroChips'
 import BigMarquee from '@/components/BigMarquee'
+import SideDecor from '@/components/SideDecor'
+import CodeCard from '@/components/CodeCard'
 import { Button } from '@/components/ui/button'
 import { featuredProjects } from '@/data/projects'
 import { companies } from '@/data/experience'
@@ -109,6 +111,8 @@ function About() {
   const { t } = useLang()
   return (
     <Section id="about" title={t.home.aboutTitle}>
+      <div className="grid items-center gap-12 lg:grid-cols-[1.2fr_1fr]">
+      <div>
       <div className="max-w-[65ch] space-y-5 text-lg text-muted-foreground">
         <Reveal as="p">
           <Rich text={t.home.p1} />
@@ -123,6 +127,9 @@ function About() {
           <ArrowRight className={moreArrow} />
         </Link>
       </Reveal>
+      </div>
+      <CodeCard />
+      </div>
     </Section>
   )
 }
@@ -193,14 +200,17 @@ function Contact() {
 
 export default function Home() {
   return (
-    <>
-      <Hero />
-      <BigMarquee />
-      <Projects />
-      <About />
-      <Experience />
-      <Stack />
-      <Contact />
-    </>
+    <div className="relative">
+      <SideDecor />
+      <div className="relative z-10">
+        <Hero />
+        <BigMarquee />
+        <Projects />
+        <About />
+        <Experience />
+        <Stack />
+        <Contact />
+      </div>
+    </div>
   )
 }
