@@ -16,7 +16,7 @@ const links = [
 ] as const
 
 const navLink =
-  'rounded-md px-2 py-1 text-sm text-muted-foreground no-underline transition-colors duration-150 hover:text-foreground'
+  'whitespace-nowrap rounded-md px-2 py-1 text-sm text-muted-foreground no-underline transition-colors duration-150 hover:text-foreground'
 
 export default function Header() {
   const { lang, t } = useLang()
@@ -43,7 +43,7 @@ export default function Header() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-6">
-        <Link to="/" className="text-sm font-semibold text-foreground no-underline">
+        <Link to="/" className="whitespace-nowrap text-sm font-semibold text-foreground no-underline">
           Gabriel Valenço
         </Link>
 
@@ -59,9 +59,14 @@ export default function Header() {
           <LanguageSwitcher />
           <ThemeToggle />
           <Button asChild variant="outline" size="sm">
-            <a href={`/valenco-resume-${lang}.pdf`} target="_blank" rel="noreferrer">
+            <a
+              href={`/valenco-resume-${lang === 'pt' ? 'pt' : 'en'}.pdf`}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={t.nav.resume}
+            >
               <FileText />
-              {t.nav.resume}
+              <span className="hidden sm:inline">{t.nav.resume}</span>
             </a>
           </Button>
         </div>

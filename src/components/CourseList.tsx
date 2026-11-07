@@ -6,14 +6,15 @@ import { useLang } from '@/i18n/context'
 
 export default function CourseList() {
   const { lang, t } = useLang()
-  const fmt = new Intl.DateTimeFormat(lang === 'pt' ? 'pt-BR' : 'en-US', { month: 'short', year: 'numeric' })
+  const locale = { pt: 'pt-BR', en: 'en-US', es: 'es-ES' }[lang]
+  const fmt = new Intl.DateTimeFormat(locale, { month: 'short', year: 'numeric' })
 
   return (
     <ul className="grid gap-3 md:grid-cols-2">
       {courses.map((c, i) => {
         const meta = [
           c.date ? fmt.format(new Date(`${c.date}-15T12:00:00`)) : null,
-          c.hours ? `${c.hours.toLocaleString(lang === 'pt' ? 'pt-BR' : 'en-US')} h` : null,
+          c.hours ? `${c.hours.toLocaleString(locale)} h` : null,
         ].filter(Boolean)
         return (
           <Reveal as="li" key={c.title} index={i % 2}>

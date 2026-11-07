@@ -1,7 +1,7 @@
 import { useLang } from '@/i18n/context'
 import type { Lang } from '@/i18n/translations'
 
-const OPTIONS: Lang[] = ['pt', 'en']
+const OPTIONS: Lang[] = ['pt', 'en', 'es']
 
 export default function LanguageSwitcher() {
   const { lang, setLang, t } = useLang()

@@ -1,4 +1,4 @@
-export type Lang = 'pt' | 'en'
+export type Lang = 'pt' | 'en' | 'es'
 
 // Trechos entre ** viram destaque (ver Rich.tsx).
 const pt = {
@@ -81,6 +81,7 @@ const pt = {
 
   footer: {
     rights: 'Todos os direitos reservados.',
+    top: 'Voltar ao topo',
   },
 
   about: {
@@ -352,6 +353,7 @@ const en: Dict = {
 
   footer: {
     rights: 'All rights reserved.',
+    top: 'Back to top',
   },
 
   about: {
@@ -539,4 +541,272 @@ const en: Dict = {
   },
 }
 
-export const translations: Record<Lang, Dict> = { pt, en }
+const es: Dict = {
+  meta: {
+    title: 'Gabriel Valenço | Full Stack Developer',
+    description:
+      'Gabriel Valenço, Full Stack Developer. Construyo aplicaciones web, móviles y con IA para pequeños negocios y clientes remotos.',
+  },
+
+  common: {
+    skip: 'Ir al contenido',
+    back: 'Volver',
+    current: 'actual',
+    visitSite: 'Ver sitio',
+    code: 'Código',
+    viewGithub: 'Ver en GitHub',
+    langLabel: 'Idioma',
+    tags: { 'Educação': 'Educación', 'Imobiliário': 'Inmobiliario' },
+  },
+
+  nav: {
+    projects: 'Proyectos',
+    about: 'Sobre mí',
+    experience: 'Experiencia',
+    courses: 'Cursos',
+    contact: 'Contacto',
+    resume: 'Currículum',
+    main: 'Navegación principal',
+    theme: 'Cambiar tema claro/oscuro',
+  },
+
+  hero: {
+    role: 'Full Stack Developer',
+    lead: 'Construyo',
+    words: ['aplicaciones web', 'apps móviles', 'soluciones con IA', 'SaaS'],
+    tail: 'para pequeños negocios y clientes remotos.',
+    available: 'Disponible para nuevos proyectos',
+    ctaProjects: 'Ver proyectos',
+    ctaContact: 'Contactar',
+  },
+
+  tech: {
+    title: 'Stack',
+    subtitle: 'Herramientas que uso a diario, de la base de datos a la interfaz.',
+    groups: {
+      frontend: 'Frontend',
+      backend: 'Backend',
+      mobile: 'Mobile',
+      data: 'Datos',
+      infra: 'Infra',
+    },
+  },
+
+  home: {
+    projectsTitle: 'Proyectos seleccionados',
+    projectsSubtitle: 'Algunos de los productos que construí, del SaaS al sitio institucional.',
+    allProjects: 'Ver todos los proyectos',
+    aboutTitle: 'Sobre mí',
+    p1: 'Soy desarrollador full-stack y me ocupo de todo el ciclo del producto, de la base de datos a la interfaz. Trabajo con SaaS, automatizaciones e integraciones, siempre buscando soluciones fáciles de mantener.',
+    p2: 'Hoy soy desarrollador de nivel intermedio en **OneMoving**, donde respondo por el sistema y por las aplicaciones de la plataforma. También acepto proyectos freelance seleccionados.',
+    learnMore: 'Más sobre mí',
+    experienceTitle: 'Experiencia',
+    allExperience: 'Ver trayectoria completa',
+  },
+
+  courses: {
+    title: 'Cursos',
+    subtitle: 'Formaciones y cursos completados, con certificado cuando está disponible.',
+    done: 'Completado',
+    certificate: 'Ver certificado',
+    more: 'Ver detalles de los cursos',
+  },
+
+  contact: {
+    title: 'Contacto',
+    heading: '¿Trabajamos juntos?',
+    text: 'Estoy disponible para proyectos freelance de SaaS, automatizaciones, integraciones y desarrollo full-stack. Escríbeme y te respondo pronto.',
+    email: 'Email',
+  },
+
+  footer: {
+    rights: 'Todos los derechos reservados.',
+    top: 'Volver arriba',
+  },
+
+  about: {
+    title: 'Sobre mí',
+    subtitle: 'Quién soy, qué entrego y cómo llegué hasta aquí.',
+    introTitle: 'Presentación',
+    intro1:
+      'Me llamo **Gabriel Valenço**, soy desarrollador full-stack enfocado en crear productos digitales que aportan valor real, no solo pantallas bonitas.',
+    intro2:
+      'Mi trabajo abarca SaaS, automatizaciones, landing pages de alto rendimiento y herramientas internas. Me gustan los problemas donde el front-end y el back-end se encuentran: paneles, integraciones y pipelines de datos.',
+    pathTitle: 'Trayectoria',
+    path1:
+      'Empecé a programar por curiosidad, queriendo entender cómo funcionaban las cosas por dentro. Antes del desarrollo trabajé en **tráfico pago**, donde aprendí a medirlo todo. Ese hábito se convirtió en el filtro con el que escribo software hoy: si no se puede observar, no se puede mejorar.',
+    path2:
+      'Pasé al desarrollo full-stack en equipos pequeños, donde pude tocar desde la base de datos hasta el despliegue. Hoy trabajo como desarrollador de nivel intermedio en **OneMoving**, responsable del desarrollo del sistema y de las aplicaciones de la plataforma.',
+    focusTitle: 'Áreas de enfoque',
+    focus: [
+      { tag: 'SaaS', desc: 'Productos web completos: autenticación, pagos, paneles y área administrativa.' },
+      { tag: 'Automatización', desc: 'Flujos automatizados, integraciones entre sistemas y optimización de procesos repetitivos.' },
+      { tag: 'Front-end', desc: 'Interfaces modernas en React y Vue, con animaciones a medida y foco en la usabilidad.' },
+      { tag: 'Back-end', desc: 'APIs escalables en Laravel y Node, con base de datos y caché para alto rendimiento.' },
+    ],
+    thinkTitle: 'Cómo pienso',
+    principles: [
+      'Entregar valor en iteraciones cortas, no herramientas en iteraciones largas.',
+      'Código que se lee en voz alta: claridad por encima de ingenio.',
+      'Medir antes de optimizar; respetar los límites de la máquina y del humano.',
+      'El diseño y la experiencia de usuario son problemas de ingeniería, no decoración.',
+    ],
+    quickTitle: 'Resumen rápido',
+    facts: [
+      { k: 'Ubicación', v: 'Brasil (trabajo remoto)' },
+      { k: 'Formación', v: 'Tecnología en Desarrollo de Sistemas (TDS) · Unisalesiano, 2021–2025' },
+      { k: 'Idiomas', v: 'Portugués · Inglés avanzado' },
+      { k: 'Disponible', v: 'Freelance / contrato' },
+      { k: 'Hobbies', v: 'Lectura · escritura · cine · gimnasio' },
+    ],
+    nowTitle: 'Ahora',
+    now1: 'Desarrollando el sistema y las apps en OneMoving y aceptando trabajos freelance selectos en SaaS y automatizaciones.',
+    now2: 'Estudiando arquitectura de sistemas distribuidos y métricas de experiencia de usuario.',
+    ctaJourney: 'Mi trayectoria',
+    ctaContact: 'Contactar',
+  },
+
+  experience: {
+    title: 'Trayectoria',
+    subtitle: 'Las experiencias profesionales que me trajeron hasta aquí.',
+    roles: [
+      {
+        role: 'Desarrollador de nivel intermedio',
+        period: '2026 - actual',
+        bullets: [
+          'Responsable del desarrollo del sistema principal de la empresa, desde la arquitectura hasta las entregas en producción.',
+          'Desarrollo de aplicaciones integradas al sistema, conectando operaciones, clientes y socios en una misma plataforma.',
+          'Responsabilidad técnica en la evolución del producto, definición de estándares de código e integración de nuevas funcionalidades.',
+        ],
+      },
+      {
+        role: 'Full Stack Developer & Tech Lead',
+        period: '2025 - 29/07/2026',
+        bullets: [
+          'Lideré el desarrollo técnico de productos digitales para clientes de distintos sectores.',
+          'Diseñé soluciones full-stack: front-end, API, base de datos y automatizaciones, alineadas con los objetivos del negocio.',
+          'Establecí estándares de calidad, revisión de código y procesos de entrega continua.',
+          'Hice mentoría técnica a devs junior y actué como puente con las áreas de diseño y tráfico pago.',
+        ],
+      },
+      {
+        role: 'Full Stack Developer',
+        period: '2023 - 2024',
+        bullets: [
+          'Desarrollo de sistemas internos e integraciones entre plataformas del grupo.',
+          'Mantenimiento y evolución de aplicaciones en producción, con foco en estabilidad y rendimiento.',
+          'Colaboración directa con áreas operativas para entender requisitos y proponer mejoras.',
+        ],
+      },
+      {
+        role: 'Tráfico pago',
+        period: '2024 - 2025',
+        bullets: [
+          'Planificación y gestión de campañas en Meta Ads y Google Ads para clientes B2C.',
+          'Análisis de embudo, optimización de creativos e informes orientados a métricas clave.',
+          'La lectura crítica de datos de ese período se convirtió en la base de cómo mido producto hasta hoy.',
+        ],
+      },
+    ],
+    educationTitle: 'Formación académica',
+    degree: 'Tecnología en Desarrollo de Sistemas (TDS)',
+    graduated: 'Graduado',
+    ctaAbout: 'Sobre mí',
+  },
+
+  certificates: {
+    title: 'Certificados',
+    subtitle: 'Cursos y especializaciones que moldearon mi base técnica.',
+    learned: 'Contenido aprendido',
+    items: [
+      {
+        description: 'Curso completo centrado en SQL, desde consultas básicas hasta modelado complejo e informes.',
+        topics: [
+          'Consultas a bases de datos con SQL',
+          'Creación e interacción con bases de datos',
+          'Consultas complejas en varias tablas (Joins, Subqueries)',
+          'Modelado de datos del mundo real y generación de informes',
+        ],
+      },
+      {
+        description: 'Formación amplia en el ecosistema Node.js, cubriendo backend, APIs y bases de datos.',
+        topics: [
+          'Express, Handlebars (motor de plantillas)',
+          'MongoDB (NoSQL) y Mongoose (ODM)',
+          'MySQL (SQL) y Sequelize (ORM)',
+          'APIs RESTful y patrón MVC',
+          'Fundamentos de Node.js y Core Modules',
+          'NPM y creación de aplicaciones sin frameworks',
+        ],
+      },
+      {
+        description: 'Desarrollo de aplicaciones robustas y escalables con Go, incluyendo una red social completa.',
+        topics: [
+          'Desarrollo de una red social (Front-end y Back-end con Go)',
+          'Concurrencia (Goroutines, Channels)',
+          'Aplicaciones de línea de comandos (CLI)',
+          'APIs robustas y escalables con buenas prácticas',
+          'Fundamentos avanzados del lenguaje Go',
+        ],
+      },
+      {
+        description: 'Curso exhaustivo de Java y POO, desde la sintaxis básica hasta frameworks del mercado.',
+        topics: [
+          'Lógica de programación y sintaxis de Java',
+          'POO: Clases, Herencia, Polimorfismo, Interfaces',
+          'Estructuras de datos (Collections), Generics, Stream API',
+          'Manejo de excepciones y manipulación de archivos',
+          'JDBC, JPA / Hibernate, Spring Data JPA/MongoDB',
+          'Spring Boot y JavaFX',
+        ],
+      },
+      {
+        description: 'Formación para auditar Sistemas de Gestión Integrados basada en las normas ISO 9001, 14001 y 45001.',
+        topics: [
+          'Calidad (ISO 9001), Medio Ambiente (ISO 14001) y Salud y Seguridad (ISO 45001)',
+          'Principios y planificación de auditorías internas',
+          'Ejecución de auditorías y reporte de no conformidades',
+        ],
+      },
+      {
+        description: 'Curso de depuración (debug) en SAP, desde cero hasta el análisis de programas ABAP.',
+        topics: [
+          'Fundamentos del debugger de SAP',
+          'Breakpoints y análisis del flujo de ejecución',
+          'Inspección de variables y tablas internas',
+        ],
+      },
+      {
+        description: 'Curso de ABAP con Orientación a Objetos, aplicando POO en el ecosistema SAP.',
+        topics: [
+          'Clases, objetos y métodos en ABAP',
+          'Herencia, polimorfismo e interfaces',
+          'Buenas prácticas de ABAP orientado a objetos',
+        ],
+      },
+      {
+        description: 'Curso de ABAP desde cero, el lenguaje de programación de SAP.',
+        topics: [
+          'Fundamentos del lenguaje ABAP',
+          'Tipos de datos, estructuras y tablas internas',
+          'Acceso a la base de datos e informes',
+        ],
+      },
+    ],
+  },
+
+  projectsPage: {
+    title: 'Proyectos',
+    subtitle: (n: number) => `Los ${n} proyectos que construí, destacados y archivo.`,
+    featured: 'Destacados',
+    others: 'Otros proyectos',
+  },
+
+  moreProjects: {
+    title: 'Más proyectos',
+    subtitle: 'Otros proyectos desarrollados con foco en landing pages, presencia digital y conversión.',
+    backHome: 'Volver al inicio',
+  },
+}
+
+export const translations: Record<Lang, Dict> = { pt, en, es }

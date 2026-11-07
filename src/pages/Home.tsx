@@ -9,7 +9,6 @@ import KineticTitle from '@/components/KineticTitle'
 import WordRotator from '@/components/WordRotator'
 import HeroChips from '@/components/HeroChips'
 import BigMarquee from '@/components/BigMarquee'
-import SideDecor from '@/components/SideDecor'
 import CodeCard from '@/components/CodeCard'
 import CourseList from '@/components/CourseList'
 import { Button } from '@/components/ui/button'
@@ -217,7 +216,6 @@ function Contact() {
 export default function Home() {
   return (
     <div className="relative">
-      <SideDecor />
       <div className="relative z-10">
         <Hero />
         <BigMarquee />
