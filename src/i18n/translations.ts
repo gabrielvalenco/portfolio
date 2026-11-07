@@ -30,6 +30,7 @@ const pt = {
 
   hero: {
     role: 'Full Stack Developer',
+    tagline: 'Construo aplicações web, mobile e com IA para pequenos negócios e clientes remotos.',
     available: 'Disponível para novos projetos',
     ctaProjects: 'Ver projetos',
     ctaContact: 'Entrar em contato',
@@ -288,6 +289,7 @@ const en: Dict = {
 
   hero: {
     role: 'Full Stack Developer',
+    tagline: 'I build web, mobile and AI-powered applications for small businesses and remote clients.',
     available: 'Available for new projects',
     ctaProjects: 'View projects',
     ctaContact: 'Get in touch',
