@@ -1,54 +1,29 @@
+import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import { useLang } from '@/i18n/context'
 
-const LIME = '#9eff00'
+const delay = (ms: number) => ({ '--hero-delay': `${ms}ms` }) as CSSProperties
 
-export default function SubPageHeader({
-  index, title, subtitle,
-}: { index: string; name?: string; title: string; subtitle?: string }) {
+export default function SubPageHeader({ title, subtitle }: { title: string; subtitle?: string }) {
   const { t } = useLang()
   return (
-    <header
-      className="relative border-b border-[#9eff00]/15 bg-black"
-      data-term-head
-    >
-      {/* Top lime glow line (matches matrix feed glow style) */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-px"
-        style={{ background: LIME, opacity: 0.6, boxShadow: '0 0 16px 1px #9eff00' }}
-      />
-      <div className="container mx-auto px-6 py-6">
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-400 no-underline transition-colors hover:text-[#9eff00]"
-        >
-          <ArrowLeft className="h-3 w-3" />
-          {t.common.back}
-        </Link>
-      </div>
-      <div className="container mx-auto px-6 pb-12 pt-2">
-        <div
-          className="flex items-center gap-4 font-mono text-[11px] tracking-[0.32em]"
-          data-term-meta
-          style={{ color: LIME }}
-        >
-          <span>{index}</span>
-          <span className="h-px w-16 sm:w-24" style={{ background: `${LIME}66` }} />
-        </div>
-        <h1
-          className="mt-5 font-mono text-3xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight leading-none"
-          data-term-title
-        >
-          <span data-term-text>{title}</span>
-        </h1>
-        {subtitle && (
-          <p className="mt-4 max-w-xl font-mono text-sm text-zinc-400" data-term-sub>
-            {subtitle}
-          </p>
-        )}
-      </div>
+    <header className="mx-auto max-w-5xl px-6 pb-12 pt-32 md:pt-36">
+      <Link
+        to="/"
+        className="hero-in inline-flex items-center gap-2 text-sm text-muted-foreground no-underline transition-colors duration-150 hover:text-foreground"
+      >
+        <ArrowLeft className="size-4" />
+        {t.common.back}
+      </Link>
+      <h1 className="hero-in mt-6" style={delay(80)}>
+        {title}
+      </h1>
+      {subtitle && (
+        <p className="hero-in mt-4 max-w-[65ch] text-lg text-muted-foreground" style={delay(160)}>
+          {subtitle}
+        </p>
+      )}
     </header>
   )
 }

@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#000000" />
-    <meta name="description" content="Portfólio de Gabriel Valenço — Desenvolvedor Full-Stack especializado em SaaS, automações e interfaces modernas." />
+    <meta name="theme-color" content="#0b0b0c" />
+    <meta name="description" content="Gabriel Valenço, Full Stack Developer. Construo aplicações web, mobile e com IA para pequenos negócios e clientes remotos." />
     <link rel="canonical" href="https://www.gabrielvalenco.com.br/" />
-    <meta property="og:title" content="Portfólio | Gabriel Valenço" />
-    <meta property="og:description" content="Desenvolvedor Full-Stack especializado em SaaS, automações e interfaces modernas." />
+    <meta property="og:title" content="Gabriel Valenço | Full Stack Developer" />
+    <meta property="og:description" content="Construo aplicações web, mobile e com IA para pequenos negócios e clientes remotos." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.gabrielvalenco.com.br/" />
     <meta property="og:image" content="https://www.gabrielvalenco.com.br/og-image.jpg" />
@@ -16,18 +16,11 @@
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://www.gabrielvalenco.com.br/og-image.jpg" />
-    <title>Portfólio | Gabriel Valenço</title>
-    <!-- Poster do video do topo: e o primeiro conteudo grande da pagina. -->
-    <link rel="preload" as="image" href="/hero-poster-mobile.webp" media="(max-width: 767px)" fetchpriority="high" />
-    <link rel="preload" as="image" href="/hero-poster.webp" media="(min-width: 768px)" fetchpriority="high" />
-    <style>
-      /* Casca do topo, pintada antes do JavaScript. O React substitui ao montar. */
-      .boot-hero { position: relative; height: 100vh; background: #000 center / cover no-repeat url("/hero-poster.webp"); }
-      @media (max-width: 767px) { .boot-hero { background-image: url("/hero-poster-mobile.webp"); } }
-    </style>
+    <title>Gabriel Valenço | Full Stack Developer</title>
+    <style>html,body{background:#0b0b0c}</style>
   </head>
-  <body class="bg-background text-foreground">
-    <div id="root" class="min-h-dvh"><div class="boot-hero" aria-hidden="true"></div></div>
+  <body>
+    <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

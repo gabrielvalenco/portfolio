@@ -77,7 +77,6 @@ export const projects: Project[] = [
     href: 'https://www.dinamicoetop.com.br/',
     live: 'https://www.dinamicoetop.com.br/',
     tags: ['Landing page', 'Educação'],
-    image: 'https://placehold.co/1200x700/0a0a0a/9eff00?text=Dinamico+e+Top',
   },
   {
     title: 'Terras de Santa Bárbara',
@@ -88,7 +87,6 @@ export const projects: Project[] = [
     href: 'https://terrassantabarbara.com/',
     live: 'https://terrassantabarbara.com/',
     tags: ['Landing page', 'Imobiliário'],
-    image: 'https://placehold.co/1200x700/0a0a0a/9eff00?text=Terras+de+Santa+Barbara',
   },
   {
     title: 'Módulo One',
@@ -99,7 +97,6 @@ export const projects: Project[] = [
     href: 'https://www.moduloone.com.br/',
     live: 'https://www.moduloone.com.br/',
     tags: ['Landing page', 'SaaS', 'Admin panel'],
-    image: 'https://placehold.co/1200x700/0a0a0a/9eff00?text=Modulo+One',
   },
   {
     title: 'EnfantIA',

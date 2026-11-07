@@ -45,8 +45,6 @@ export default function LangProvider({ children }: { children: ReactNode }) {
     document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en'
     document.title = meta.title
     document.querySelector('meta[name="description"]')?.setAttribute('content', meta.description)
-    // Textos de tamanhos diferentes mudam a altura da pagina: o ScrollTrigger recalcula no resize.
-    window.dispatchEvent(new Event('resize'))
   }, [lang])
 
   const value = useMemo(() => ({ lang, setLang, t: translations[lang] }), [lang, setLang])

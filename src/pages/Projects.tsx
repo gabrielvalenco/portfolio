@@ -1,63 +1,52 @@
-import SubPageHeader from '@/components/SubPageHeader'
-import ProjectWindow from '@/components/ProjectWindow'
-import { TermAnchor } from '@/components/TermButton'
-import useHomeAnimations from '@/hooks/useHomeAnimations'
-import { projects, featuredProjects, otherProjects } from '@/data/projects'
 import { Github } from 'lucide-react'
+import SubPageHeader from '@/components/SubPageHeader'
+import ProjectCard from '@/components/ProjectCard'
+import Reveal from '@/components/Reveal'
+import { Button } from '@/components/ui/button'
+import { projects, featuredProjects, otherProjects } from '@/data/projects'
+import { links } from '@/data/links'
 import { useLang } from '@/i18n/context'
+
+const grid = 'grid gap-6 md:grid-cols-2 lg:grid-cols-3'
 
 export default function ProjectsPage() {
   const { t } = useLang()
-  useHomeAnimations()
   return (
-    <div className="relative z-10 min-h-dvh bg-black">
-      <SubPageHeader
-        index="03"
-        title={t.projectsPage.title}
-        subtitle={t.projectsPage.subtitle(projects.length)}
-      />
+    <>
+      <SubPageHeader title={t.projectsPage.title} subtitle={t.projectsPage.subtitle(projects.length)} />
 
-      <main className="container mx-auto px-6 py-16">
-        {/* Featured row first */}
-        <div className="mb-12">
-          <p
-            className="mb-5 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-400"
-            data-animate-item
-          >
-            {t.projectsPage.featured}
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {featuredProjects.map(p => (
-              <ProjectWindow key={p.title} p={p} featured />
+      <div className="mx-auto max-w-5xl space-y-16 px-6 pb-24 md:pb-32">
+        <section>
+          <Reveal as="header" className="mb-6">
+            <h2>{t.projectsPage.featured}</h2>
+          </Reveal>
+          <div className={grid}>
+            {featuredProjects.map((p, i) => (
+              <ProjectCard key={p.title} p={p} index={i} />
             ))}
           </div>
-        </div>
+        </section>
 
-        {/* The rest */}
-        <div>
-          <p
-            className="mb-5 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-400"
-            data-animate-item
-          >
-            {t.projectsPage.others}
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {otherProjects.map(p => (
-              <ProjectWindow key={p.title} p={p} />
+        <section>
+          <Reveal as="header" className="mb-6">
+            <h2>{t.projectsPage.others}</h2>
+          </Reveal>
+          <div className={grid}>
+            {otherProjects.map((p, i) => (
+              <ProjectCard key={p.title} p={p} index={i % 3} />
             ))}
           </div>
-        </div>
+        </section>
 
-        <div className="mt-14 flex justify-center" data-animate-item>
-          <TermAnchor
-            href="https://github.com/gabrielvalenco"
-            target="_blank"
-            icon={Github}
-          >
-            {t.common.viewGithub}
-          </TermAnchor>
-        </div>
-      </main>
-    </div>
+        <Reveal>
+          <Button asChild variant="outline" size="lg">
+            <a href={links.github} target="_blank" rel="noreferrer">
+              <Github />
+              {t.common.viewGithub}
+            </a>
+          </Button>
+        </Reveal>
+      </div>
+    </>
   )
 }

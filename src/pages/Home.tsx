@@ -1,344 +1,181 @@
-import React, { lazy, Suspense, useEffect, useRef, useState } from 'react'
-import { Github, Mail, Linkedin, User, Briefcase } from 'lucide-react'
-import TechStack, { techCount } from '@/components/TechStack'
-import ScrollVideoHero from '@/components/ScrollVideoHero'
-import MatrixInterlude from '@/components/MatrixInterlude'
-import TerminalSection from '@/components/TerminalSection'
-import ProjectShowcase from '@/components/ProjectShowcase'
-import { TermLink, TermAnchor } from '@/components/TermButton'
-import useHomeAnimations from '@/hooks/useHomeAnimations'
-import { gsap } from '@/lib/gsap'
+import type { CSSProperties } from 'react'
+import { Link } from 'react-router-dom'
+import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react'
+import Section from '@/components/Section'
+import Reveal from '@/components/Reveal'
+import ProjectCard from '@/components/ProjectCard'
+import TechStack from '@/components/TechStack'
+import { Button } from '@/components/ui/button'
 import { featuredProjects } from '@/data/projects'
+import { companies } from '@/data/experience'
+import { links } from '@/data/links'
 import { useLang } from '@/i18n/context'
 import Rich from '@/i18n/Rich'
 
-const LIME = '#9eff00'
+const delay = (ms: number) => ({ '--hero-delay': `${ms}ms` }) as CSSProperties
 
-// three.js (~280 KB gzip) e o modelo so baixam quando a secao Sobre se aproxima.
-const KermitModel3D = lazy(() => import('@/components/KermitModel3D'))
+const moreLink =
+  'group/link inline-flex items-center gap-1 text-sm font-medium text-accent no-underline underline-offset-4 hover:underline'
+const moreArrow = 'size-4 transition-transform duration-150 group-hover/link:translate-x-0.5'
 
-function DeferredKermit() {
-  const ref = useRef<HTMLDivElement>(null)
-  const [near, setNear] = useState(false)
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setNear(true)
-          io.disconnect()
-        }
-      },
-      { rootMargin: '400px 0px' },
-    )
-    io.observe(el)
-    return () => io.disconnect()
-  }, [])
-  // Mesma altura do canvas: trocar o espaco reservado pelo 3D nao move nada.
-  return (
-    <div ref={ref} className="h-48 w-full md:h-96">
-      {near ? (
-        <Suspense fallback={null}>
-          <KermitModel3D />
-        </Suspense>
-      ) : null}
-    </div>
-  )
-}
-
-// ─── Magnetic button wrapper ──────────────────────────────────────────────────
-
-function Magnetic({ children }: { children: React.ReactNode }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const el = ref.current
-    if (!el) return
-    const rect = el.getBoundingClientRect()
-    const x = (e.clientX - rect.left - rect.width / 2) * 0.32
-    const y = (e.clientY - rect.top - rect.height / 2) * 0.26
-    gsap.to(el, { x, y, duration: 0.35, ease: 'power2.out', overwrite: true })
-  }
-  const onLeave = () => {
-    gsap.to(ref.current, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1.1, 0.5)', overwrite: true })
-  }
-  return (
-    <div ref={ref} onMouseMove={onMove} onMouseLeave={onLeave} style={{ display: 'inline-block' }}>
-      {children}
-    </div>
-  )
-}
-
-// ─── Technologies ─────────────────────────────────────────────────────────────
-
-function Technologies() {
+function Hero() {
   const { t } = useLang()
   return (
-    <TerminalSection
-      id="technologies"
-      index="01"
-      title={t.tech.title}
-      subtitle={t.tech.subtitle}
-      compact
-    >
-      <div className="mt-2" data-animate-item>
-        <TechStack />
+    <section className="mx-auto max-w-5xl px-6 pb-24 pt-40 md:pb-32 md:pt-48">
+      <div className="hero-in flex items-center gap-4">
+        <img
+          src="/pfp.webp"
+          alt="Gabriel Valenço"
+          width={800}
+          height={1200}
+          fetchPriority="high"
+          className="size-16 rounded-full object-cover object-top"
+        />
+        <p className="flex items-center gap-2 text-sm text-muted-foreground">
+          <span aria-hidden className="size-2 rounded-full bg-accent" />
+          {t.hero.available}
+        </p>
       </div>
-    </TerminalSection>
+      <h1 className="hero-in mt-8" style={delay(80)}>
+        Gabriel Valenço
+      </h1>
+      <p className="hero-in mt-3 text-xl text-muted-foreground md:text-2xl" style={delay(140)}>
+        {t.hero.role}
+      </p>
+      <p className="hero-in mt-6 max-w-[55ch] text-lg" style={delay(200)}>
+        {t.hero.tagline}
+      </p>
+      <div className="hero-in mt-10 flex flex-wrap gap-3" style={delay(260)}>
+        <Button asChild size="lg">
+          <Link to={{ pathname: '/', hash: 'projects' }}>{t.hero.ctaProjects}</Link>
+        </Button>
+        <Button asChild variant="outline" size="lg">
+          <Link to={{ pathname: '/', hash: 'contact' }}>{t.hero.ctaContact}</Link>
+        </Button>
+      </div>
+    </section>
   )
 }
 
-// ─── About ────────────────────────────────────────────────────────────────────
-
-const stats = [
-  { count: 10, suffix: '+', id: 'projects' },
-  { count: techCount, suffix: '',  id: 'tech' },
-  { count: 4,  suffix: '',  id: 'certs' },
-  { count: 4,  suffix: '',  id: 'exp' },
-] as const
-
-const experiences = [
-  { company: 'OneMoving',     role: 'onemoving', current: true  },
-  { company: 'Desigual',      role: 'desigual',  current: false },
-  { company: 'Grupo Prodemi', role: 'prodemi',   current: false },
-  { company: 'Jem',           role: 'jem',       current: false },
-]
+function Projects() {
+  const { t } = useLang()
+  return (
+    <Section
+      id="projects"
+      title={t.home.projectsTitle}
+      subtitle={t.home.projectsSubtitle}
+      className="pt-0 md:pt-0"
+    >
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {featuredProjects.map((p, i) => (
+          <ProjectCard key={p.title} p={p} index={i} />
+        ))}
+      </div>
+      <Reveal className="mt-10">
+        <Link to="/projects" className={moreLink}>
+          {t.home.allProjects}
+          <ArrowRight className={moreArrow} />
+        </Link>
+      </Reveal>
+    </Section>
+  )
+}
 
 function About() {
   const { t } = useLang()
   return (
-    <TerminalSection
-      id="about"
-      index="02"
-      title={t.home.aboutTitle}
-      subtitle={t.home.aboutSubtitle}
-      noBorder
-      compact
-      headerClassName=""
-    >
-      <div className="grid items-end md:grid-cols-2 gap-10 lg:gap-16">
-        {/* Bio + experience */}
-        <div className="space-y-6 font-mono text-sm leading-relaxed text-zinc-300">
-          <p data-animate-item>
-            <Rich text={t.home.p1} />
-          </p>
-          <p data-animate-item>
-            <Rich text={t.home.p2} />
-          </p>
-          <p data-animate-item>
-            {t.home.p3}
-          </p>
-
-          <div
-            data-animate-item
-            className="relative border border-[#9eff00]/30 bg-[#9eff00]/[0.04] px-4 py-3"
-          >
-            <div className="flex items-center gap-2 text-xs">
-              <span className="h-2 w-2 rounded-full bg-[#9eff00] shadow-[0_0_10px_#9eff00] animate-pulse" />
-              <span style={{ color: LIME }}>{t.home.available}</span>
-            </div>
-            <p className="mt-1 text-xs text-zinc-400">
-              {t.home.availableDesc}
-            </p>
-          </div>
-
-          <div className="pt-2" data-animate-item>
-            <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-400 mb-3">
-              {t.home.experience}
-            </p>
-            <ul className="space-y-1.5 font-mono text-xs">
-              {experiences.map(exp => (
-                <li
-                  key={exp.company}
-                  data-animate-item
-                  className="grid grid-cols-[1fr_auto] items-center gap-3 border-b border-dashed border-[#9eff00]/10 py-2"
-                >
-                  <span className="truncate">
-                    <span className="text-zinc-100">{exp.company}</span>
-                    <span className="text-zinc-400"> · {t.home.roles[exp.role]}</span>
-                  </span>
-                  {exp.current && (
-                    <span
-                      className="text-[10px] uppercase tracking-widest border px-1.5 py-0.5"
-                      style={{ color: LIME, borderColor: `${LIME}66` }}
-                    >
-                      {t.common.current}
-                    </span>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* CTAs to deeper pages */}
-          <div className="flex flex-wrap gap-3 pt-2" data-animate-item>
-            <Magnetic>
-              <TermLink to="/about" icon={User}>{t.home.learnMore}</TermLink>
-            </Magnetic>
-            <Magnetic>
-              <TermLink to="/experience" icon={Briefcase}>{t.home.journey}</TermLink>
-            </Magnetic>
-          </div>
-        </div>
-
-        {/* Stats + skills */}
-        <div className="space-y-8">
-          <div data-animate-item>
-            <DeferredKermit />
-          </div>
-
-          <div className="grid grid-cols-2 gap-3">
-            {stats.map(({ suffix, id, count }) => (
-              <div
-                key={id}
-                data-animate-item
-                className="terminal-panel relative corner-brackets group p-5 font-mono"
-              >
-                <span className="cb-tl" />
-                <span className="cb-tr" />
-                <span className="cb-bl" />
-                <span className="cb-br" />
-                <div className="scan-sweep" />
-                <div
-                  className="text-4xl font-bold tabular-nums glow-lime"
-                  data-count={count}
-                  data-suffix={suffix}
-                  style={{ color: LIME }}
-                >
-                  0{suffix}
-                </div>
-                <div className="mt-2 text-[10px] uppercase tracking-[0.28em] text-zinc-400">
-                  {t.home.stats[id]}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div data-animate-item>
-            <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-400 mb-3">
-              {t.home.skillsTitle}
-            </p>
-            <div className="flex flex-wrap gap-2 font-mono text-xs">
-              {t.home.skills.map(skill => (
-                <span
-                  key={skill}
-                  className="border border-[#9eff00]/25 px-3 py-1 text-zinc-300 transition-colors hover:bg-[#9eff00]/10 hover:text-[#9eff00] hover:border-[#9eff00]/70"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
+    <Section id="about" title={t.home.aboutTitle}>
+      <div className="max-w-[65ch] space-y-5 text-lg text-muted-foreground">
+        <Reveal as="p">
+          <Rich text={t.home.p1} />
+        </Reveal>
+        <Reveal as="p" index={1}>
+          <Rich text={t.home.p2} />
+        </Reveal>
       </div>
-    </TerminalSection>
+      <Reveal className="mt-8" index={2}>
+        <Link to="/about" className={moreLink}>
+          {t.home.learnMore}
+          <ArrowRight className={moreArrow} />
+        </Link>
+      </Reveal>
+    </Section>
   )
 }
 
-// ─── Projects ─────────────────────────────────────────────────────────────────
-
-function Projects() {
-  return <ProjectShowcase projects={featuredProjects} />
+function Experience() {
+  const { t } = useLang()
+  return (
+    <Section id="experience" title={t.home.experienceTitle}>
+      <ul className="divide-y divide-border border-y border-border">
+        {companies.map((c, i) => {
+          const role = t.experience.roles[i]
+          return (
+            <Reveal as="li" key={c.company} index={i} className="grid gap-1 py-5 sm:grid-cols-[1fr_auto] sm:items-baseline sm:gap-8">
+              <div>
+                <span className="font-medium">{c.company}</span>
+                <span className="text-muted-foreground"> · {role.role}</span>
+              </div>
+              <span className="text-sm text-muted-foreground">{role.period}</span>
+            </Reveal>
+          )
+        })}
+      </ul>
+      <Reveal className="mt-8">
+        <Link to="/experience" className={moreLink}>
+          {t.home.allExperience}
+          <ArrowRight className={moreArrow} />
+        </Link>
+      </Reveal>
+    </Section>
+  )
 }
 
-// ─── Contact ──────────────────────────────────────────────────────────────────
-
-const contactLinks = [
-  { href: 'mailto:gabrielvalencoofc@gmail.com',                    label: 'Email',    Icon: Mail     },
-  { href: 'https://www.linkedin.com/in/gabriel-valenço-480b43276', label: 'LinkedIn', Icon: Linkedin },
-  { href: 'https://github.com/gabrielvalenco',                     label: 'GitHub',   Icon: Github   },
-]
+function Stack() {
+  const { t } = useLang()
+  return (
+    <Section id="stack" title={t.tech.title} subtitle={t.tech.subtitle}>
+      <TechStack />
+    </Section>
+  )
+}
 
 function Contact() {
   const { t } = useLang()
+  const items = [
+    { href: links.email, label: 'Email', Icon: Mail, external: false },
+    { href: links.linkedin, label: 'LinkedIn', Icon: Linkedin, external: true },
+    { href: links.github, label: 'GitHub', Icon: Github, external: true },
+  ]
   return (
-    <TerminalSection
-      id="contact"
-      index="04"
-      title={t.contact.title}
-      subtitle={t.contact.subtitle}
-    >
-      <div
-        data-animate-item
-        className="terminal-panel corner-brackets relative overflow-hidden p-8 md:p-14"
-      >
-        <span className="cb-tl" />
-        <span className="cb-tr" />
-        <span className="cb-bl" />
-        <span className="cb-br" />
-        <div aria-hidden className="pointer-events-none absolute inset-0 crt-lines opacity-50" />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -inset-32 -z-10"
-          style={{
-            background:
-              'radial-gradient(ellipse at 50% 0%, rgba(158,255,0,0.18), transparent 60%)',
-          }}
-        />
-
-        <div className="relative font-mono">
-          <div className="inline-flex items-center gap-2 border border-[#9eff00]/40 bg-[#9eff00]/[0.05] px-3 py-1 text-xs">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#9eff00] shadow-[0_0_8px_#9eff00] animate-pulse" />
-            <span style={{ color: LIME }}>{t.contact.availableNow}</span>
-          </div>
-
-          <h3 className="mt-6 font-mono text-2xl sm:text-4xl font-bold uppercase tracking-tight text-zinc-100">
-            {t.contact.heading}
-          </h3>
-          <p className="mt-4 max-w-md text-sm text-zinc-400">
-            {t.contact.text}
-          </p>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            {contactLinks.map(({ href, label, Icon }) => (
-              <Magnetic key={label}>
-                <TermAnchor href={href} target={href.startsWith('mailto') ? undefined : '_blank'} icon={Icon}>
-                  {label}
-                </TermAnchor>
-              </Magnetic>
-            ))}
-          </div>
-        </div>
-      </div>
-    </TerminalSection>
+    <Section id="contact" title={t.contact.title}>
+      <Reveal>
+        <h3 className="text-xl font-semibold tracking-tight md:text-2xl">{t.contact.heading}</h3>
+        <p className="mt-3 max-w-[65ch] text-muted-foreground">{t.contact.text}</p>
+      </Reveal>
+      <Reveal className="mt-8 flex flex-wrap gap-3" index={1}>
+        {items.map(({ href, label, Icon, external }, i) => (
+          <Button key={label} asChild variant={i === 0 ? 'default' : 'outline'} size="lg">
+            <a href={href} {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}>
+              <Icon />
+              {label}
+            </a>
+          </Button>
+        ))}
+      </Reveal>
+    </Section>
   )
 }
 
-// ─── Home ─────────────────────────────────────────────────────────────────────
-
 export default function Home() {
-  useHomeAnimations()
   return (
-    <div className="relative">
-      <ScrollVideoHero />
-
-      {/* Content scrolls in after the pinned scrub region */}
-      <div className="relative z-10 bg-black">
-        {/* Lime feed-glow at the contact line, intensifying with scroll */}
-        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 z-20">
-          <div
-            className="h-px w-full"
-            style={{
-              background: LIME,
-              opacity: 'calc(0.35 + 0.65 * var(--matrix-glow, 0))',
-              boxShadow: `0 0 18px 1px ${LIME}, 0 0 6px ${LIME}`,
-            }}
-          />
-          <div
-            className="h-36 w-full"
-            style={{
-              background: `linear-gradient(to bottom, ${LIME}2b, transparent)`,
-              opacity: 'calc(0.45 + 0.55 * var(--matrix-glow, 0))',
-            }}
-          />
-        </div>
-
-        <Technologies />
-        <About />
-        <MatrixInterlude />
-        <Projects />
-        <Contact />
-      </div>
-    </div>
+    <>
+      <Hero />
+      <Projects />
+      <About />
+      <Experience />
+      <Stack />
+      <Contact />
+    </>
   )
 }

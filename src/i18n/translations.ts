@@ -3,102 +3,73 @@ export type Lang = 'pt' | 'en'
 // Trechos entre ** viram destaque (ver Rich.tsx).
 const pt = {
   meta: {
-    title: 'Portfólio | Gabriel Valenço',
+    title: 'Gabriel Valenço | Full Stack Developer',
     description:
-      'Portfólio de Gabriel Valenço — Desenvolvedor Full-Stack especializado em SaaS, automações e interfaces modernas.',
+      'Gabriel Valenço, Full Stack Developer. Construo aplicações web, mobile e com IA para pequenos negócios e clientes remotos.',
   },
 
   common: {
     skip: 'Ir para conteúdo',
     back: 'Voltar',
     current: 'atual',
-    featured: 'Destaque',
     visitSite: 'Ver site',
     code: 'Código',
-    open: 'abrir',
-    visitProject: 'Acessar projeto',
-    projectImage: 'Imagem do projeto',
-    zoom: 'Clique para ampliar',
-    close: 'Fechar',
     viewGithub: 'Ver no GitHub',
     langLabel: 'Idioma',
     tags: {} as Record<string, string>,
   },
 
-  hero: {
-    kicker: 'PORTFÓLIO',
-    role: 'Desenvolvedor Full-Stack',
-    scroll: 'scroll',
+  nav: {
+    projects: 'Projetos',
+    about: 'Sobre',
+    experience: 'Experiência',
+    contact: 'Contato',
+    resume: 'Currículo',
+    main: 'Navegação principal',
   },
 
-  interlude: {
-    kicker: 'O que isso vira',
-    title: 'Onde o código vira produto.',
+  hero: {
+    role: 'Full Stack Developer',
+    tagline: 'Construo aplicações web, mobile e com IA para pequenos negócios e clientes remotos.',
+    available: 'Disponível para novos projetos',
+    ctaProjects: 'Ver projetos',
+    ctaContact: 'Entrar em contato',
   },
 
   tech: {
-    title: 'Tecnologias',
-    subtitle:
-      'Ferramentas que uso no dia a dia para entregar produtos completos, do banco de dados à interface. As em destaque são as que mais uso.',
+    title: 'Stack',
+    subtitle: 'Ferramentas que uso no dia a dia, do banco de dados à interface.',
     groups: {
-      frontend: { title: 'Front-end', hint: 'interfaces e mobile' },
-      backend: { title: 'Back-end', hint: 'APIs e regras de negócio' },
-      data: { title: 'Banco de dados', hint: 'persistência e cache' },
-      devops: { title: 'DevOps & Cloud', hint: 'infra, deploy e automação' },
-    } as Record<string, { title: string; hint: string }>,
+      frontend: 'Frontend',
+      backend: 'Backend',
+      mobile: 'Mobile',
+      data: 'Dados',
+      infra: 'Infra',
+    } as Record<string, string>,
   },
 
   home: {
+    projectsTitle: 'Projetos selecionados',
+    projectsSubtitle: 'Alguns dos produtos que construí, do SaaS ao site institucional.',
+    allProjects: 'Ver todos os projetos',
     aboutTitle: 'Sobre',
-    aboutSubtitle:
-      'Um pouco da minha trajetória, do que entrego e do que estou disponível para fazer.',
-    p1: 'Sou desenvolvedor full-stack focado em **SaaS** e **automações**, cuido de toda a jornada do produto, do banco de dados à interface final.',
-    p2: 'Atualmente atuo como **Dev Sênior** na **OneMoving**, responsável pelo desenvolvimento do sistema e dos aplicativos ligados à plataforma.',
-    p3: 'Curioso, crítico e empenhado, transformo requisitos em produtos funcionais, escaláveis e bem acabados.',
-    available: 'Disponível para projetos',
-    availableDesc: 'SaaS, automações, integrações e otimização de processos.',
-    experience: 'Experiência',
-    roles: {
-      onemoving: 'Dev Sênior',
-      desigual: 'Full Stack & Tech Lead',
-      prodemi: 'Full Stack Developer',
-      jem: 'Tráfego Pago',
-    } as Record<string, string>,
+    p1: 'Sou desenvolvedor full-stack e cuido de todo o ciclo do produto, do banco de dados à interface. Trabalho com SaaS, automações e integrações, sempre buscando soluções simples de manter.',
+    p2: 'Hoje sou desenvolvedor pleno na **OneMoving**, onde respondo pelo sistema e pelos aplicativos da plataforma. Também aceito projetos freelancer selecionados.',
     learnMore: 'Saiba mais sobre mim',
-    journey: 'Minha trajetória',
-    stats: {
-      projects: 'Projetos',
-      tech: 'Tecnologias',
-      certs: 'Certificados',
-      exp: 'Experiências',
-    },
-    skillsTitle: 'Habilidades',
-    skills: ['Inglês avançado', 'Oratória', 'Criativo', 'Cooperativo', 'Sociável', 'Adaptável'],
-  },
-
-  showcase: {
-    title: 'Projetos',
-    subDesktop: 'Uma seleção do que já construí. Role para conferir cada projeto.',
-    subMobile: 'Uma seleção do que já construí. Toque em um projeto para ampliar a imagem.',
-    moreTitle: 'Quer ver mais?',
-    moreDesc:
-      'Há outros projetos desenvolvidos com foco em landing pages, presença digital e conversão.',
-    moreCta: 'Ver mais projetos',
+    experienceTitle: 'Experiência',
+    allExperience: 'Ver trajetória completa',
   },
 
   contact: {
     title: 'Contato',
-    subtitle: 'Tem um projeto em mente? Vamos conversar.',
-    availableNow: 'Disponível agora',
     heading: 'Vamos trabalhar juntos?',
-    text: 'Disponível para projetos freelancer de SaaS, automações, integrações e desenvolvimento full-stack.',
+    text: 'Estou disponível para projetos freelancer de SaaS, automações, integrações e desenvolvimento full-stack. Me escreva e eu respondo em breve.',
     email: 'Email',
   },
 
   footer: {
-    tagline: 'Desenvolvedor Full-Stack, disponível para projetos.',
+    tagline: 'Full Stack Developer, disponível para projetos.',
     rights: 'Todos os direitos reservados.',
-    quote: 'Toda falha carrega em si a semente de um sucesso igual ou maior.',
   },
 
   about: {
@@ -113,7 +84,7 @@ const pt = {
     path1:
       'Comecei a programar por curiosidade, querendo entender como as coisas funcionavam por dentro. Antes do desenvolvimento, passei por **tráfego pago**, onde aprendi a medir tudo. Esse hábito virou o filtro que uso para escrever software hoje: se não dá para observar, não dá para melhorar.',
     path2:
-      'Migrei para desenvolvimento full-stack em equipes pequenas, onde pude tocar do banco de dados ao deploy. Hoje atuo como Dev Sênior na **OneMoving**, responsável pelo desenvolvimento do sistema e dos aplicativos ligados à plataforma.',
+      'Migrei para desenvolvimento full-stack em equipes pequenas, onde pude tocar do banco de dados ao deploy. Hoje atuo como desenvolvedor pleno na **OneMoving**, responsável pelo desenvolvimento do sistema e dos aplicativos ligados à plataforma.',
     focusTitle: 'Áreas de foco',
     focus: [
       { tag: 'SaaS', desc: 'Produtos web completos: autenticação, pagamentos, painéis e área administrativa.' },
@@ -137,7 +108,7 @@ const pt = {
       { k: 'Hobbies', v: 'Leitura · escrita · cinema · academia' },
     ],
     nowTitle: 'No momento',
-    now1: 'Liderando o desenvolvimento do sistema e dos aplicativos na OneMoving e aceitando freelas selecionados em SaaS e automações.',
+    now1: 'Desenvolvendo do sistema e dos aplicativos na OneMoving e aceitando freelas selecionados em SaaS e automações.',
     now2: 'Estudando arquitetura de sistemas distribuídos e métricas de experiência do usuário.',
     ctaJourney: 'Minha trajetória',
     ctaContact: 'Fale comigo',
@@ -149,7 +120,7 @@ const pt = {
     // Mesma ordem de `roles` em pages/Experience.tsx.
     roles: [
       {
-        role: 'Dev Sênior',
+        role: 'Desenvolvedor Pleno',
         period: '2026 - atual',
         bullets: [
           'Responsável pelo desenvolvimento do sistema principal da empresa, desde a arquitetura até as entregas em produção.',
@@ -293,100 +264,73 @@ export type Dict = typeof pt
 
 const en: Dict = {
   meta: {
-    title: 'Portfolio | Gabriel Valenço',
+    title: 'Gabriel Valenço | Full Stack Developer',
     description:
-      'Portfolio of Gabriel Valenço — Full-Stack Developer specialized in SaaS, automation and modern interfaces.',
+      'Gabriel Valenço, Full Stack Developer. I build web, mobile and AI-powered applications for small businesses and remote clients.',
   },
 
   common: {
     skip: 'Skip to content',
     back: 'Back',
     current: 'current',
-    featured: 'Featured',
     visitSite: 'Visit site',
     code: 'Code',
-    open: 'open',
-    visitProject: 'Visit project',
-    projectImage: 'Project image',
-    zoom: 'Click to enlarge',
-    close: 'Close',
     viewGithub: 'View on GitHub',
     langLabel: 'Language',
     tags: { 'Educação': 'Education', 'Imobiliário': 'Real estate' },
   },
 
-  hero: {
-    kicker: 'PORTFOLIO',
-    role: 'Full-Stack Developer',
-    scroll: 'scroll',
+  nav: {
+    projects: 'Projects',
+    about: 'About',
+    experience: 'Experience',
+    contact: 'Contact',
+    resume: 'Resume',
+    main: 'Main navigation',
   },
 
-  interlude: {
-    kicker: 'What it becomes',
-    title: 'Where code becomes product.',
+  hero: {
+    role: 'Full Stack Developer',
+    tagline: 'I build web, mobile and AI-powered applications for small businesses and remote clients.',
+    available: 'Available for new projects',
+    ctaProjects: 'View projects',
+    ctaContact: 'Get in touch',
   },
 
   tech: {
-    title: 'Technologies',
-    subtitle:
-      'Tools I use every day to deliver complete products, from the database to the interface. The highlighted ones are what I use the most.',
+    title: 'Stack',
+    subtitle: 'Tools I use every day, from the database to the interface.',
     groups: {
-      frontend: { title: 'Front-end', hint: 'interfaces and mobile' },
-      backend: { title: 'Back-end', hint: 'APIs and business logic' },
-      data: { title: 'Databases', hint: 'persistence and cache' },
-      devops: { title: 'DevOps & Cloud', hint: 'infra, deploy and automation' },
+      frontend: 'Frontend',
+      backend: 'Backend',
+      mobile: 'Mobile',
+      data: 'Data',
+      infra: 'Infra',
     },
   },
 
   home: {
+    projectsTitle: 'Selected projects',
+    projectsSubtitle: "A few products I've built, from SaaS to institutional websites.",
+    allProjects: 'View all projects',
     aboutTitle: 'About',
-    aboutSubtitle: 'A bit about my journey, what I deliver and what I am available to do.',
-    p1: "I'm a full-stack developer focused on **SaaS** and **automation**, taking care of the whole product journey, from the database to the final interface.",
-    p2: 'I currently work as a **Senior Dev** at **OneMoving**, responsible for developing the system and the apps tied to the platform.',
-    p3: 'Curious, critical and committed, I turn requirements into functional, scalable and polished products.',
-    available: 'Available for projects',
-    availableDesc: 'SaaS, automation, integrations and process optimization.',
-    experience: 'Experience',
-    roles: {
-      onemoving: 'Senior Dev',
-      desigual: 'Full Stack & Tech Lead',
-      prodemi: 'Full Stack Developer',
-      jem: 'Paid Traffic',
-    },
+    p1: "I'm a full-stack developer and I take care of the whole product cycle, from the database to the interface. I work on SaaS, automation and integrations, always aiming for solutions that are easy to maintain.",
+    p2: "I'm currently a mid-level developer at **OneMoving**, where I'm responsible for the system and the apps on the platform. I also take on selected freelance projects.",
     learnMore: 'More about me',
-    journey: 'My journey',
-    stats: {
-      projects: 'Projects',
-      tech: 'Technologies',
-      certs: 'Certificates',
-      exp: 'Experiences',
-    },
-    skillsTitle: 'Skills',
-    skills: ['Advanced English', 'Public speaking', 'Creative', 'Cooperative', 'Sociable', 'Adaptable'],
-  },
-
-  showcase: {
-    title: 'Projects',
-    subDesktop: "A selection of what I've built. Scroll to check out each project.",
-    subMobile: "A selection of what I've built. Tap a project to enlarge its image.",
-    moreTitle: 'Want to see more?',
-    moreDesc: "There are other projects I've built, focused on landing pages, digital presence and conversion.",
-    moreCta: 'See more projects',
+    experienceTitle: 'Experience',
+    allExperience: 'See full journey',
   },
 
   contact: {
     title: 'Contact',
-    subtitle: "Have a project in mind? Let's talk.",
-    availableNow: 'Available now',
     heading: "Let's work together?",
-    text: 'Available for freelance projects in SaaS, automation, integrations and full-stack development.',
+    text: "I'm available for freelance projects in SaaS, automation, integrations and full-stack development. Send me a message and I'll get back to you soon.",
     email: 'Email',
   },
 
   footer: {
-    tagline: 'Full-Stack Developer, available for projects.',
+    tagline: 'Full Stack Developer, available for projects.',
     rights: 'All rights reserved.',
-    quote: 'Every failure carries within it the seed of an equal or greater success.',
   },
 
   about: {
@@ -401,7 +345,7 @@ const en: Dict = {
     path1:
       'I started programming out of curiosity, wanting to understand how things worked on the inside. Before development, I worked in **paid traffic**, where I learned to measure everything. That habit became the filter I use to write software today: if you can\'t observe it, you can\'t improve it.',
     path2:
-      'I moved into full-stack development in small teams, where I got to touch everything from the database to deployment. Today I work as a Senior Dev at **OneMoving**, responsible for developing the system and the apps tied to the platform.',
+      'I moved into full-stack development in small teams, where I got to touch everything from the database to deployment. Today I work as a mid-level developer at **OneMoving**, responsible for developing the system and the apps tied to the platform.',
     focusTitle: 'Focus areas',
     focus: [
       { tag: 'SaaS', desc: 'Complete web products: authentication, payments, dashboards and admin area.' },
@@ -425,7 +369,7 @@ const en: Dict = {
       { k: 'Hobbies', v: 'Reading · writing · movies · gym' },
     ],
     nowTitle: 'Right now',
-    now1: 'Leading the development of the system and apps at OneMoving and taking on selected freelance work in SaaS and automation.',
+    now1: 'Developing the system and apps at OneMoving and taking on selected freelance work in SaaS and automation.',
     now2: 'Studying distributed systems architecture and user experience metrics.',
     ctaJourney: 'My journey',
     ctaContact: 'Get in touch',
@@ -436,7 +380,7 @@ const en: Dict = {
     subtitle: 'The professional experiences that brought me here.',
     roles: [
       {
-        role: 'Senior Dev',
+        role: 'Mid-level Developer',
         period: '2026 - present',
         bullets: [
           "Responsible for developing the company's main system, from architecture to production releases.",

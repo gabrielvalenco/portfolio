@@ -1,155 +1,109 @@
-import SubPageHeader from '@/components/SubPageHeader'
-import { TermAnchor, TermLink } from '@/components/TermButton'
-import useHomeAnimations from '@/hooks/useHomeAnimations'
+import { Link } from 'react-router-dom'
 import { Briefcase, Mail } from 'lucide-react'
+import SubPageHeader from '@/components/SubPageHeader'
+import Reveal from '@/components/Reveal'
+import { Button } from '@/components/ui/button'
+import { links } from '@/data/links'
 import { useLang } from '@/i18n/context'
 import Rich from '@/i18n/Rich'
 
-const LIME = '#9eff00'
+const label = 'mb-4 text-sm font-medium text-foreground'
 
 export default function AboutPage() {
-  useHomeAnimations()
   const { t } = useLang()
   const a = t.about
   return (
-    <div className="relative z-10 min-h-dvh bg-black">
-      <SubPageHeader
-        index="02"
-        title={a.title}
-        subtitle={a.subtitle}
-      />
+    <>
+      <SubPageHeader title={a.title} subtitle={a.subtitle} />
 
-      <main className="container mx-auto px-6 py-16">
-        <div className="grid lg:grid-cols-[1.4fr_1fr] gap-12">
-          {/* Left column: long-form bio */}
-          <article className="space-y-10 font-mono text-sm leading-relaxed text-zinc-300">
-            <section data-animate-item>
-              <p
-                className="mb-3 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-400"
-              >
-                {a.introTitle}
-              </p>
-              <p>
-                <Rich text={a.intro1} />
-              </p>
-              <p className="mt-3">
-                {a.intro2}
-              </p>
-            </section>
+      <div className="mx-auto grid max-w-5xl gap-14 px-6 pb-24 md:pb-32 lg:grid-cols-[1.5fr_1fr]">
+        <article className="max-w-[65ch] space-y-12 text-muted-foreground">
+          <Reveal>
+            <h2 className={label}>{a.introTitle}</h2>
+            <p>
+              <Rich text={a.intro1} />
+            </p>
+            <p className="mt-4">{a.intro2}</p>
+          </Reveal>
 
-            <section data-animate-item>
-              <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-400">
-                {a.pathTitle}
-              </p>
-              <p>
-                <Rich text={a.path1} />
-              </p>
-              <p className="mt-3">
-                <Rich text={a.path2} />
-              </p>
-            </section>
+          <Reveal>
+            <h2 className={label}>{a.pathTitle}</h2>
+            <p>
+              <Rich text={a.path1} />
+            </p>
+            <p className="mt-4">
+              <Rich text={a.path2} />
+            </p>
+          </Reveal>
 
-            <section data-animate-item>
-              <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-400">
-                {a.focusTitle}
-              </p>
-              <ul className="space-y-3">
-                {a.focus.map(f => (
-                  <li key={f.tag} className="border-l-2 border-[#9eff00]/40 pl-4" data-animate-item>
-                    <span style={{ color: LIME }} className="block text-xs uppercase tracking-[0.22em]">
-                      {f.tag}
-                    </span>
-                    <span className="text-zinc-300">{f.desc}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
+          <Reveal>
+            <h2 className={label}>{a.focusTitle}</h2>
+            <ul className="space-y-4">
+              {a.focus.map(f => (
+                <li key={f.tag}>
+                  <span className="font-medium text-foreground">{f.tag}</span>
+                  <span className="block">{f.desc}</span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
 
-            <section data-animate-item>
-              <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-400">
-                {a.thinkTitle}
-              </p>
-              <ul className="space-y-2 text-zinc-300">
-                {a.principles.map(p => (
-                  <li key={p} className="flex gap-3" data-animate-item>
-                    <span
-                      className="mt-2 inline-block h-1 w-1 shrink-0 rounded-full"
-                      style={{ background: LIME, boxShadow: `0 0 6px ${LIME}` }}
-                    />
-                    <span>{p}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          </article>
+          <Reveal>
+            <h2 className={label}>{a.thinkTitle}</h2>
+            <ul className="list-disc space-y-2 pl-5 marker:text-border-strong">
+              {a.principles.map(p => (
+                <li key={p}>{p}</li>
+              ))}
+            </ul>
+          </Reveal>
+        </article>
 
-          {/* Right column: photo + facts + CTAs */}
-          <aside className="space-y-8">
-            <div
-              data-animate-item
-              className="terminal-panel corner-brackets relative overflow-hidden p-0"
-            >
-              <span className="cb-tl" />
-              <span className="cb-tr" />
-              <span className="cb-bl" />
-              <span className="cb-br" />
-              <img
-                src="/pfp.webp"
-                alt="Gabriel Valenço"
-                width={800}
-                height={1200}
-                decoding="async"
-                className="h-auto w-full object-cover"
-              />
-            </div>
+        <aside className="space-y-8">
+          <Reveal>
+            <img
+              src="/pfp.webp"
+              alt="Gabriel Valenço"
+              width={800}
+              height={1200}
+              decoding="async"
+              className="aspect-[4/5] w-full rounded-xl border border-border object-cover object-top"
+            />
+          </Reveal>
 
-            <div
-              data-animate-item
-              className="terminal-panel corner-brackets relative p-6 font-mono"
-            >
-              <span className="cb-tl" />
-              <span className="cb-tr" />
-              <span className="cb-bl" />
-              <span className="cb-br" />
-              <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-400">
-                {a.quickTitle}
-              </p>
-              <dl className="space-y-2.5 text-xs">
-                {a.facts.map(({ k, v }) => (
-                  <div key={k} className="grid grid-cols-[7rem_1fr] gap-3 border-b border-dashed border-[#9eff00]/10 pb-2 last:border-0 last:pb-0">
-                    <dt style={{ color: LIME }} className="opacity-80 uppercase tracking-wider">{k}</dt>
-                    <dd className="text-zinc-300">{v}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
+          <Reveal className="rounded-xl border border-border bg-surface p-6">
+            <h2 className={label}>{a.quickTitle}</h2>
+            <dl className="space-y-3 text-sm">
+              {a.facts.map(({ k, v }) => (
+                <div key={k} className="grid grid-cols-[6.5rem_1fr] gap-3">
+                  <dt className="text-muted-foreground">{k}</dt>
+                  <dd>{v}</dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
 
-            <div
-              data-animate-item
-              className="terminal-panel corner-brackets relative p-6 font-mono"
-            >
-              <span className="cb-tl" />
-              <span className="cb-tr" />
-              <span className="cb-bl" />
-              <span className="cb-br" />
-              <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-400">
-                {a.nowTitle}
-              </p>
-              <p className="text-xs text-zinc-300">
-                {a.now1}
-              </p>
-              <p className="mt-3 text-xs text-zinc-300">
-                {a.now2}
-              </p>
-            </div>
+          <Reveal className="rounded-xl border border-border bg-surface p-6">
+            <h2 className={label}>{a.nowTitle}</h2>
+            <p className="text-sm text-muted-foreground">{a.now1}</p>
+            <p className="mt-3 text-sm text-muted-foreground">{a.now2}</p>
+          </Reveal>
 
-            <div className="flex flex-wrap gap-3" data-animate-item>
-              <TermLink to="/experience" icon={Briefcase}>{a.ctaJourney}</TermLink>
-              <TermAnchor href="mailto:gabrielvalencoofc@gmail.com" icon={Mail}>{a.ctaContact}</TermAnchor>
-            </div>
-          </aside>
-        </div>
-      </main>
-    </div>
+          <Reveal className="flex flex-wrap gap-3">
+            <Button asChild variant="outline">
+              <Link to="/experience">
+                <Briefcase />
+                {a.ctaJourney}
+              </Link>
+            </Button>
+            <Button asChild>
+              <a href={links.email}>
+                <Mail />
+                {a.ctaContact}
+              </a>
+            </Button>
+          </Reveal>
+        </aside>
+      </div>
+    </>
   )
 }
