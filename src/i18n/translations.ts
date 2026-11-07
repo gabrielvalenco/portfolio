@@ -30,7 +30,6 @@ const pt = {
 
   hero: {
     role: 'Full Stack Developer',
-    tagline: 'Construo aplicações web, mobile e com IA para pequenos negócios e clientes remotos.',
     available: 'Disponível para novos projetos',
     ctaProjects: 'Ver projetos',
     ctaContact: 'Entrar em contato',
@@ -68,7 +67,6 @@ const pt = {
   },
 
   footer: {
-    tagline: 'Full Stack Developer, disponível para projetos.',
     rights: 'Todos os direitos reservados.',
   },
 
@@ -125,17 +123,17 @@ const pt = {
         bullets: [
           'Responsável pelo desenvolvimento do sistema principal da empresa, desde a arquitetura até as entregas em produção.',
           'Desenvolvimento de aplicativos integrados ao sistema, conectando operações, clientes e parceiros em uma mesma plataforma.',
-          'Liderança técnica na evolução do produto, definição de padrões de código e integração de novas funcionalidades.',
+          'Responsabilidade técnica pela evolução do produto, definição de padrões de código e integração de novas funcionalidades.',
         ],
       },
       {
         role: 'Full Stack Developer & Tech Lead',
         period: '2025 - 29/07/2026',
         bullets: [
-          'Lidero o desenvolvimento técnico de produtos digitais para clientes de diferentes segmentos.',
-          'Arquiteto soluções full-stack: front-end, API, banco de dados e automações, alinhadas com objetivos de negócio.',
-          'Estabeleço padrões de qualidade, revisão de código e processos de entrega contínua.',
-          'Faço mentoria técnica para devs juniores e sirvo de ponte com as áreas de design e tráfego pago.',
+          'Liderei o desenvolvimento técnico de produtos digitais para clientes de diferentes segmentos.',
+          'Arquitetei soluções full-stack: front-end, API, banco de dados e automações, alinhadas aos objetivos de negócio.',
+          'Estabeleci padrões de qualidade, revisão de código e processos de entrega contínua.',
+          'Fiz mentoria técnica para devs juniores e atuei como ponte com as áreas de design e tráfego pago.',
         ],
       },
       {
@@ -164,7 +162,6 @@ const pt = {
   },
 
   certificates: {
-    badge: 'Aprendizado contínuo',
     title: 'Certificados',
     subtitle: 'Cursos e especializações que moldaram minha base técnica.',
     learned: 'Conteúdo aprendido',
@@ -291,7 +288,6 @@ const en: Dict = {
 
   hero: {
     role: 'Full Stack Developer',
-    tagline: 'I build web, mobile and AI-powered applications for small businesses and remote clients.',
     available: 'Available for new projects',
     ctaProjects: 'View projects',
     ctaContact: 'Get in touch',
@@ -329,7 +325,6 @@ const en: Dict = {
   },
 
   footer: {
-    tagline: 'Full Stack Developer, available for projects.',
     rights: 'All rights reserved.',
   },
 
@@ -385,7 +380,7 @@ const en: Dict = {
         bullets: [
           "Responsible for developing the company's main system, from architecture to production releases.",
           'Development of apps integrated with the system, connecting operations, clients and partners on a single platform.',
-          'Technical leadership in the product evolution, defining code standards and integrating new features.',
+          'Technical ownership of the product evolution, defining code standards and integrating new features.',
         ],
       },
       {
@@ -424,7 +419,6 @@ const en: Dict = {
   },
 
   certificates: {
-    badge: 'Continuous learning',
     title: 'Certificates',
     subtitle: 'Courses and specializations that shaped my technical foundation.',
     learned: 'What I learned',

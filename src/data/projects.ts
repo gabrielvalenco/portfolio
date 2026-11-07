@@ -87,6 +87,7 @@ export const projects: Project[] = [
     href: 'https://terrassantabarbara.com/',
     live: 'https://terrassantabarbara.com/',
     tags: ['Landing page', 'Imobiliário'],
+    image: '/terras.webp',
   },
   {
     title: 'Módulo One',
@@ -97,6 +98,7 @@ export const projects: Project[] = [
     href: 'https://www.moduloone.com.br/',
     live: 'https://www.moduloone.com.br/',
     tags: ['Landing page', 'SaaS', 'Admin panel'],
+    image: '/modulo.webp',
   },
   {
     title: 'EnfantIA',
