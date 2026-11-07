@@ -24,10 +24,10 @@ function Hero() {
     <section className="mx-auto max-w-5xl px-6 pb-24 pt-40 md:pb-32 md:pt-48">
       <div className="hero-in flex items-center gap-4">
         <img
-          src="/pfp.webp"
+          src="/pfp-sm.webp"
           alt="Gabriel Valenço"
-          width={800}
-          height={1200}
+          width={128}
+          height={128}
           fetchPriority="high"
           className="size-16 rounded-full object-cover object-top"
         />
