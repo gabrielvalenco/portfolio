@@ -26,11 +26,14 @@ const pt = {
     contact: 'Contato',
     resume: 'Currículo',
     main: 'Navegação principal',
+    theme: 'Alternar tema claro/escuro',
   },
 
   hero: {
     role: 'Full Stack Developer',
-    tagline: 'Construo aplicações web, mobile e com IA para pequenos negócios e clientes remotos.',
+    lead: 'Construo',
+    words: ['aplicações web', 'apps mobile', 'soluções com IA', 'SaaS'],
+    tail: 'para pequenos negócios e clientes remotos.',
     available: 'Disponível para novos projetos',
     ctaProjects: 'Ver projetos',
     ctaContact: 'Entrar em contato',
@@ -285,11 +288,14 @@ const en: Dict = {
     contact: 'Contact',
     resume: 'Resume',
     main: 'Main navigation',
+    theme: 'Toggle light/dark theme',
   },
 
   hero: {
     role: 'Full Stack Developer',
-    tagline: 'I build web, mobile and AI-powered applications for small businesses and remote clients.',
+    lead: 'I build',
+    words: ['web apps', 'mobile apps', 'AI solutions', 'SaaS'],
+    tail: 'for small businesses and remote clients.',
     available: 'Available for new projects',
     ctaProjects: 'View projects',
     ctaContact: 'Get in touch',

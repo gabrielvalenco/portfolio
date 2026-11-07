@@ -13,7 +13,23 @@ export default function ProjectCard({ p, index = 0 }: { p: Project; index?: numb
   const { lang, t } = useLang()
   return (
     <Reveal as="article" index={index} className="h-full">
-      <div className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-surface transition-colors duration-200 hover:border-border-strong">
+      <div
+        onMouseMove={e => {
+          const el = e.currentTarget
+          const r = el.getBoundingClientRect()
+          const x = e.clientX - r.left
+          const y = e.clientY - r.top
+          el.style.setProperty('--mx', `${x}px`)
+          el.style.setProperty('--my', `${y}px`)
+          el.style.setProperty('--ry', `${(x / r.width - 0.5) * 8}deg`)
+          el.style.setProperty('--rx', `${(0.5 - y / r.height) * 8}deg`)
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.setProperty('--rx', '0deg')
+          e.currentTarget.style.setProperty('--ry', '0deg')
+        }}
+        className="spotlight tilt group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-surface hover:border-border-strong hover:shadow-2xl hover:shadow-black/15"
+      >
         {p.image && (
           <div className="aspect-[3/2] overflow-hidden border-b border-border">
             <img
@@ -23,7 +39,7 @@ export default function ProjectCard({ p, index = 0 }: { p: Project; index?: numb
               height={1000}
               loading="lazy"
               decoding="async"
-              className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]"
+              className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
             />
           </div>
         )}

@@ -15,7 +15,7 @@ export default function ExperiencePage() {
     <>
       <SubPageHeader title={e.title} subtitle={e.subtitle} />
 
-      <div className="mx-auto max-w-5xl px-6 pb-24 md:pb-32">
+      <div className="mx-auto max-w-6xl px-6 pb-24 md:pb-32">
         {/* Timeline: linha vertical fina, um marcador por experiencia. */}
         <ol className="relative space-y-12 border-l border-border pl-8">
           {companies.map((c, i) => {

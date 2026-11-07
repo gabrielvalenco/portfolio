@@ -16,7 +16,7 @@ export default function AboutPage() {
     <>
       <SubPageHeader title={a.title} subtitle={a.subtitle} />
 
-      <div className="mx-auto grid max-w-5xl gap-14 px-6 pb-24 md:pb-32 lg:grid-cols-[1.5fr_1fr]">
+      <div className="mx-auto grid max-w-6xl gap-14 px-6 pb-24 md:pb-32 lg:grid-cols-[1.5fr_1fr]">
         <article className="max-w-[65ch] space-y-12 text-muted-foreground">
           <Reveal>
             <h2 className={label}>{a.introTitle}</h2>
@@ -66,7 +66,7 @@ export default function AboutPage() {
               width={800}
               height={1200}
               decoding="async"
-              className="aspect-[4/5] w-full rounded-xl border border-border object-cover object-top"
+              className="aspect-[4/5] w-full rounded-2xl border border-border object-cover object-top"
             />
           </Reveal>
 

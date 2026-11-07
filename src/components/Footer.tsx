@@ -6,7 +6,7 @@ export default function Footer() {
   const link = 'text-muted-foreground no-underline transition-colors duration-150 hover:text-foreground'
   return (
     <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-5xl flex-col gap-4 px-6 py-10 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-10 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
         <p>
           © {new Date().getFullYear()} Gabriel Valenço. {t.footer.rights}
         </p>

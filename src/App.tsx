@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect, lazy, Suspense } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import Backdrop from '@/components/Backdrop'
 import { useLang } from '@/i18n/context'
 
 const Home = lazy(() => import('@/pages/Home'))
@@ -16,6 +17,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <Backdrop />
       <div className="flex min-h-dvh flex-col">
         <a
           href="#main"

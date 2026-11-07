@@ -22,7 +22,7 @@ export default function Certificates() {
     <>
       <SubPageHeader title={c.title} subtitle={c.subtitle} />
 
-      <div className="mx-auto grid max-w-5xl gap-6 px-6 pb-24 md:grid-cols-2 md:pb-32">
+      <div className="mx-auto grid max-w-6xl gap-6 px-6 pb-24 md:grid-cols-2 md:pb-32">
         {c.items.map((cert, i) => (
           <Reveal
             as="article"

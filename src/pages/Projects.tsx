@@ -15,7 +15,7 @@ export default function ProjectsPage() {
     <>
       <SubPageHeader title={t.projectsPage.title} subtitle={t.projectsPage.subtitle(projects.length)} />
 
-      <div className="mx-auto max-w-5xl space-y-16 px-6 pb-24 md:pb-32">
+      <div className="mx-auto max-w-6xl space-y-16 px-6 pb-24 md:pb-32">
         <section>
           <Reveal as="header" className="mb-6">
             <h2>{t.projectsPage.featured}</h2>

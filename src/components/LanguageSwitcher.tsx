@@ -19,7 +19,7 @@ export default function LanguageSwitcher() {
           aria-pressed={lang === code}
           lang={code}
           className={`rounded-md px-2 py-1 transition-colors duration-150 ${
-            lang === code ? 'bg-white/10 text-foreground' : 'text-muted-foreground hover:text-foreground'
+            lang === code ? 'bg-foreground/10 text-foreground' : 'text-muted-foreground hover:text-foreground'
           }`}
         >
           {code}

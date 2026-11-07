@@ -5,6 +5,10 @@ import Section from '@/components/Section'
 import Reveal from '@/components/Reveal'
 import ProjectCard from '@/components/ProjectCard'
 import TechStack from '@/components/TechStack'
+import KineticTitle from '@/components/KineticTitle'
+import WordRotator from '@/components/WordRotator'
+import HeroChips from '@/components/HeroChips'
+import BigMarquee from '@/components/BigMarquee'
 import { Button } from '@/components/ui/button'
 import { featuredProjects } from '@/data/projects'
 import { companies } from '@/data/experience'
@@ -21,37 +25,57 @@ const moreArrow = 'size-4 transition-transform duration-150 group-hover/link:tra
 function Hero() {
   const { t } = useLang()
   return (
-    <section className="mx-auto max-w-5xl px-6 pb-24 pt-40 md:pb-32 md:pt-48">
-      <div className="hero-in flex items-center gap-4">
-        <img
-          src="/pfp-sm.webp"
-          alt="Gabriel Valenço"
-          width={128}
-          height={128}
-          fetchPriority="high"
-          className="size-16 rounded-full object-cover object-top"
-        />
-        <p className="flex items-center gap-2 text-sm text-muted-foreground">
-          <span aria-hidden className="size-2 rounded-full bg-accent" />
-          {t.hero.available}
-        </p>
-      </div>
-      <h1 className="hero-in mt-8" style={delay(80)}>
-        Gabriel Valenço
-      </h1>
-      <p className="hero-in mt-3 text-xl text-muted-foreground md:text-2xl" style={delay(140)}>
-        {t.hero.role}
-      </p>
-      <p className="hero-in mt-6 max-w-[55ch] text-lg" style={delay(200)}>
-        {t.hero.tagline}
-      </p>
-      <div className="hero-in mt-10 flex flex-wrap gap-3" style={delay(260)}>
-        <Button asChild size="lg">
-          <Link to={{ pathname: '/', hash: 'projects' }}>{t.hero.ctaProjects}</Link>
-        </Button>
-        <Button asChild variant="outline" size="lg">
-          <Link to={{ pathname: '/', hash: 'contact' }}>{t.hero.ctaContact}</Link>
-        </Button>
+    <section className="mx-auto max-w-6xl px-6 pb-16 pt-36 md:pb-24 md:pt-44">
+      <div className="grid items-center gap-14 lg:grid-cols-[1.25fr_1fr]">
+        <div>
+          <p className="hero-in inline-flex items-center gap-2.5 rounded-full border border-border bg-surface/70 px-3.5 py-1.5 text-sm text-muted-foreground backdrop-blur">
+            <span aria-hidden className="pulse-dot size-2 rounded-full bg-accent" />
+            {t.hero.available}
+          </p>
+          <KineticTitle
+            as="h1"
+            text="Gabriel Valenço"
+            immediate
+            delayMs={150}
+            wordClassName="gradient-text"
+            className="mt-8 text-5xl md:text-7xl"
+          />
+          <p className="hero-in mt-4 text-xl text-muted-foreground md:text-2xl" style={delay(140)}>
+            {t.hero.role}
+          </p>
+          <p className="hero-in mt-6 max-w-[55ch] text-lg md:text-xl" style={delay(200)}>
+            <span className="sr-only">
+              {t.hero.lead} {t.hero.words.join(', ')} {t.hero.tail}
+            </span>
+            <span aria-hidden>
+              {t.hero.lead} <WordRotator words={t.hero.words} /> {t.hero.tail}
+            </span>
+          </p>
+          <div className="hero-in mt-10 flex flex-wrap gap-3" style={delay(260)}>
+            <Button asChild size="lg">
+              <Link to={{ pathname: '/', hash: 'projects' }}>{t.hero.ctaProjects}</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <Link to={{ pathname: '/', hash: 'contact' }}>{t.hero.ctaContact}</Link>
+            </Button>
+          </div>
+        </div>
+
+        <div className="hero-in mx-auto w-full max-w-[19rem] lg:max-w-sm lg:justify-self-end" style={delay(200)}>
+          <div className="relative">
+          <div className="portrait">
+            <img
+              src="/pfp.webp"
+              alt="Gabriel Valenço"
+              width={800}
+              height={1200}
+              fetchPriority="high"
+              className="relative aspect-[4/5] w-full rounded-3xl object-cover object-top"
+            />
+          </div>
+            <HeroChips />
+          </div>
+        </div>
       </div>
     </section>
   )
@@ -171,6 +195,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <BigMarquee />
       <Projects />
       <About />
       <Experience />
