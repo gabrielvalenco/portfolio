@@ -1,5 +1,6 @@
 import { useEffect, useRef, type CSSProperties, type ReactNode } from 'react'
 import { cn } from '@/lib/utils'
+import { onceInView } from '@/lib/inView'
 
 type Props = {
   children: ReactNode
@@ -17,21 +18,7 @@ export default function Reveal({ children, as = 'div', index = 0, className }: P
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    if (typeof IntersectionObserver === 'undefined') {
-      el.classList.add('is-visible')
-      return
-    }
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          el.classList.add('is-visible')
-          io.disconnect()
-        }
-      },
-      { rootMargin: '0px 0px 8% 0px', threshold: 0 },
-    )
-    io.observe(el)
-    return () => io.disconnect()
+    return onceInView(el, () => el.classList.add('is-visible'))
   }, [])
 
   return (

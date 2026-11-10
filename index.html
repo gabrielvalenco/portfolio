@@ -6,22 +6,47 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#dfe5eb" />
+    <meta name="theme-color" content="#0a0a11" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="author" content="Gabriel Valenço" />
     <meta name="description" content="Gabriel Valenço, Full Stack Developer. Construo aplicações web, mobile e com IA para pequenos negócios e clientes remotos." />
     <link rel="canonical" href="https://www.gabrielvalenco.com.br/" />
     <meta property="og:title" content="Gabriel Valenço | Full Stack Developer" />
     <meta property="og:description" content="Construo aplicações web, mobile e com IA para pequenos negócios e clientes remotos." />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Gabriel Valenço" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:locale:alternate" content="en_US" />
     <meta property="og:url" content="https://www.gabrielvalenco.com.br/" />
     <meta property="og:image" content="https://www.gabrielvalenco.com.br/og-image.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Gabriel Valenço | Full Stack Developer" />
+    <meta name="twitter:description" content="Construo aplicações web, mobile e com IA para pequenos negócios e clientes remotos." />
     <meta name="twitter:image" content="https://www.gabrielvalenco.com.br/og-image.jpg" />
     <link rel="preload" as="image" href="/pfp-hero.webp" type="image/webp" fetchpriority="high" />
     <title>Gabriel Valenço | Full Stack Developer</title>
-    <script>try{if(localStorage.getItem("theme")==="dark")document.documentElement.classList.add("dark")}catch(e){}</script>
-    <style>html,body{background:#dfe5eb}html.dark,html.dark body{background:#111217}</style>
+    <!-- Tema escuro por padrao; so fica claro se o visitante escolheu. Roda antes do primeiro paint para nao piscar. -->
+    <script>(function(){var t=null;try{t=localStorage.getItem("theme")}catch(e){}if(t!=="light")document.documentElement.classList.add("dark");else document.querySelector('meta[name="theme-color"]').setAttribute("content","#f2efe6")})()</script>
+    <style>html,body{background:#f2efe6}html.dark,html.dark body{background:#0a0a11}</style>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Gabriel Valenço",
+        "url": "https://www.gabrielvalenco.com.br/",
+        "image": "https://www.gabrielvalenco.com.br/pfp.webp",
+        "jobTitle": "Full Stack Developer",
+        "worksFor": { "@type": "Organization", "name": "OneMoving" },
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Unisalesiano" },
+        "knowsAbout": ["React", "Next.js", "TypeScript", "Node.js", "Laravel", "React Native", "Expo", "PostgreSQL", "SaaS"],
+        "sameAs": [
+          "https://github.com/gabrielvalenco",
+          "https://www.linkedin.com/in/gabriel-valen%C3%A7o-31a58942b/"
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

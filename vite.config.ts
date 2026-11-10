@@ -21,6 +21,15 @@ function inlineCss(): Plugin {
         src = src.replace(link, () => `<style>${String(file.source)}</style>`)
         delete bundle[name]
       }
+      // A fonte do titulo do hero (o maior texto da primeira dobra) entra em preload:
+      // sem isso ela so comeca a baixar depois do CSS ser lido e o nome "pisca" ao trocar.
+      const display = Object.keys(bundle).find(name => /bricolage-grotesque-latin-wght-normal.*\.woff2$/.test(name))
+      if (display) {
+        src = src.replace(
+          '</title>',
+          `</title><link rel="preload" as="font" type="font/woff2" href="/${display}" crossorigin>`,
+        )
+      }
       html.source = src
     },
   }

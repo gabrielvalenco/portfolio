@@ -45,7 +45,6 @@ export default function LangProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const { meta } = translations[lang]
     document.documentElement.lang = { pt: 'pt-BR', en: 'en', es: 'es' }[lang]
-    document.title = meta.title
     document.querySelector('meta[name="description"]')?.setAttribute('content', meta.description)
   }, [lang])
 

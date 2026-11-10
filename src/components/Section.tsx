@@ -5,6 +5,8 @@ import { cn } from '@/lib/utils'
 
 type Props = {
   id?: string
+  /** Numero da secao, exibido como etiqueta acima do titulo (ex.: "01"). */
+  index?: string
   title?: string
   subtitle?: string
   /** Link discreto no canto direito do cabecalho. */
@@ -13,15 +15,21 @@ type Props = {
   children: ReactNode
 }
 
-export default function Section({ id, title, subtitle, action, className, children }: Props) {
+export default function Section({ id, index, title, subtitle, action, className, children }: Props) {
   return (
-    <section id={id} className={cn('mx-auto w-full max-w-6xl px-6 py-24 md:py-32', className)}>
+    <section id={id} className={cn('mx-auto w-full max-w-6xl px-5 py-20 md:px-6 md:py-28', className)}>
       {title && (
-        <div className="mb-10 flex flex-wrap items-end justify-between gap-4 md:mb-14">
+        <div className="mb-10 flex flex-wrap items-end justify-between gap-6 md:mb-16">
           <div>
-            <KineticTitle text={title} className="text-3xl md:text-5xl" />
+            {index && (
+              <Reveal as="p" className="mb-4 flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-accent-ink">
+                <span aria-hidden className="h-px w-10 bg-current" />
+                {index}
+              </Reveal>
+            )}
+            <KineticTitle text={title} className="text-5xl md:text-7xl" />
             {subtitle && (
-              <Reveal as="p" index={1} className="mt-3 max-w-[65ch] text-muted-foreground">
+              <Reveal as="p" index={1} className="mt-5 max-w-[60ch] text-lg text-muted-foreground">
                 {subtitle}
               </Reveal>
             )}

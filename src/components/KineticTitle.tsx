@@ -1,5 +1,6 @@
 import { useEffect, useRef, type CSSProperties } from 'react'
 import { cn } from '@/lib/utils'
+import { onceInView } from '@/lib/inView'
 
 type Props = {
   text: string
@@ -26,23 +27,8 @@ export default function KineticTitle({
 
   useEffect(() => {
     const el = ref.current
-    if (!el) return
-    if (immediate) return
-    if (typeof IntersectionObserver === 'undefined') {
-      const id = requestAnimationFrame(() => el.classList.add('is-visible'))
-      return () => cancelAnimationFrame(id)
-    }
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          el.classList.add('is-visible')
-          io.disconnect()
-        }
-      },
-      { rootMargin: '0px 0px 8% 0px' },
-    )
-    io.observe(el)
-    return () => io.disconnect()
+    if (!el || immediate) return
+    return onceInView(el, () => el.classList.add('is-visible'))
   }, [immediate])
 
   return (

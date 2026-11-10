@@ -1,6 +1,7 @@
 import { Check } from 'lucide-react'
 import SubPageHeader from '@/components/SubPageHeader'
 import Reveal from '@/components/Reveal'
+import CourseList from '@/components/CourseList'
 import { useLang } from '@/i18n/context'
 
 // Nomes dos cursos ficam no original; descricao e topicos vem de `translations.certificates.items`, na mesma ordem.
@@ -21,6 +22,11 @@ export default function Certificates() {
   return (
     <>
       <SubPageHeader title={c.title} subtitle={c.subtitle} />
+
+      {/* Todos os cursos, com os certificados em PDF; abaixo, o detalhe do que foi estudado. */}
+      <div className="mx-auto max-w-6xl px-6 pb-16">
+        <CourseList />
+      </div>
 
       <div className="mx-auto grid max-w-6xl gap-6 px-6 pb-24 md:grid-cols-2 md:pb-32">
         {c.items.map((cert, i) => (

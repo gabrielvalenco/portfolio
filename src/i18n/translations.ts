@@ -28,6 +28,8 @@ const pt = {
     resume: 'Currículo',
     main: 'Navegação principal',
     theme: 'Alternar tema claro/escuro',
+    menu: 'Abrir menu',
+    close: 'Fechar menu',
   },
 
   hero: {
@@ -70,6 +72,8 @@ const pt = {
     done: 'Concluído',
     certificate: 'Ver certificado',
     more: 'Ver detalhes dos cursos',
+    prev: 'Cursos anteriores',
+    next: 'Próximos cursos',
   },
 
   contact: {
@@ -82,6 +86,12 @@ const pt = {
   footer: {
     rights: 'Todos os direitos reservados.',
     top: 'Voltar ao topo',
+  },
+
+  notFound: {
+    title: 'Página não encontrada',
+    text: 'Esse endereço não existe ou mudou de lugar.',
+    back: 'Voltar para o início',
   },
 
   about: {
@@ -300,6 +310,8 @@ const en: Dict = {
     resume: 'Resume',
     main: 'Main navigation',
     theme: 'Toggle light/dark theme',
+    menu: 'Open menu',
+    close: 'Close menu',
   },
 
   hero: {
@@ -342,6 +354,8 @@ const en: Dict = {
     done: 'Completed',
     certificate: 'View certificate',
     more: 'See course details',
+    prev: 'Previous courses',
+    next: 'Next courses',
   },
 
   contact: {
@@ -354,6 +368,12 @@ const en: Dict = {
   footer: {
     rights: 'All rights reserved.',
     top: 'Back to top',
+  },
+
+  notFound: {
+    title: 'Page not found',
+    text: 'This address does not exist or has moved.',
+    back: 'Back to home',
   },
 
   about: {
@@ -568,6 +588,8 @@ const es: Dict = {
     resume: 'Currículum',
     main: 'Navegación principal',
     theme: 'Cambiar tema claro/oscuro',
+    menu: 'Abrir menú',
+    close: 'Cerrar menú',
   },
 
   hero: {
@@ -610,6 +632,8 @@ const es: Dict = {
     done: 'Completado',
     certificate: 'Ver certificado',
     more: 'Ver detalles de los cursos',
+    prev: 'Cursos anteriores',
+    next: 'Cursos siguientes',
   },
 
   contact: {
@@ -622,6 +646,12 @@ const es: Dict = {
   footer: {
     rights: 'Todos los derechos reservados.',
     top: 'Volver arriba',
+  },
+
+  notFound: {
+    title: 'Página no encontrada',
+    text: 'Esta dirección no existe o cambió de lugar.',
+    back: 'Volver al inicio',
   },
 
   about: {

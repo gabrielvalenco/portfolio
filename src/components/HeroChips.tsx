@@ -1,18 +1,16 @@
 import type { CSSProperties } from 'react'
-import { useLang } from '@/i18n/context'
 
-// Cartoes no estilo de paleta de cores: nome grande, legenda pequena.
+// Adesivos colados em volta do retrato.
 const chips = [
-  { name: 'React', group: 'frontend', tone: 'bg-[#111217] text-white', pos: 'right-[-1.5rem] top-[8%] lg:right-[-3rem]', rot: -5 },
-  { name: 'Laravel', group: 'backend', tone: 'bg-[#dfe5eb] text-[#111217]', pos: 'left-[-1.5rem] top-[38%] lg:left-[-3.5rem]', rot: 4 },
-  { name: 'Expo', group: 'mobile', tone: 'bg-[#d4182f] text-white', pos: 'right-[-1rem] top-[58%] lg:right-[-2.5rem]', rot: 5 },
-  { name: 'PostgreSQL', group: 'data', tone: 'bg-foreground text-background', pos: 'left-[-0.5rem] bottom-[-1.5rem] lg:left-[-2rem]', rot: -4 },
+  { name: 'React', tone: 'bg-lime text-ink', pos: '-left-10 top-[10%]', rot: -8 },
+  { name: 'Laravel', tone: 'bg-paper text-ink', pos: '-right-6 top-[36%]', rot: 6 },
+  { name: 'React Native', tone: 'bg-pink text-ink', pos: '-left-16 top-[62%]', rot: 5 },
+  { name: 'PostgreSQL', tone: 'bg-violet text-paper', pos: '-right-4 -bottom-4', rot: -5 },
 ] as const
 
 export default function HeroChips() {
-  const { t } = useLang()
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0">
+    <div aria-hidden className="pointer-events-none absolute inset-0 hidden lg:block">
       {chips.map((c, i) => (
         <div
           key={c.name}
@@ -20,12 +18,10 @@ export default function HeroChips() {
           style={{ '--rot': `${c.rot}deg`, '--d': `${700 + i * 160}ms` } as CSSProperties}
         >
           <div
-            className={`chip-float w-28 rounded-xl p-3 shadow-xl shadow-black/15 ring-1 ring-foreground/15 ${c.tone}`}
+            className={`chip-float rounded-full border-2 border-ink px-3.5 py-1.5 font-display text-sm font-bold shadow-[3px_3px_0_0_var(--ink)] ${c.tone}`}
             style={{ animationDuration: `${5 + i}s`, animationDelay: `${i * -1.3}s` }}
           >
-            <p className="text-sm font-semibold leading-tight">{c.name}</p>
-            <div className="my-1.5 h-px w-6 bg-current opacity-40" />
-            <p className="font-mono text-[11px]">{t.tech.groups[c.group]}</p>
+            {c.name}
           </div>
         </div>
       ))}

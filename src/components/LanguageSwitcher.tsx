@@ -9,7 +9,7 @@ export default function LanguageSwitcher() {
     <div
       role="group"
       aria-label={t.common.langLabel}
-      className="flex items-center rounded-lg border border-border p-0.5 text-xs font-medium uppercase"
+      className="flex items-center rounded-full border border-border p-0.5 text-xs font-semibold uppercase"
     >
       {OPTIONS.map(code => (
         <button
@@ -18,8 +18,8 @@ export default function LanguageSwitcher() {
           onClick={() => setLang(code)}
           aria-pressed={lang === code}
           lang={code}
-          className={`rounded-md px-2 py-1 transition-colors duration-150 ${
-            lang === code ? 'bg-foreground/10 text-foreground' : 'text-muted-foreground hover:text-foreground'
+          className={`rounded-full px-2 py-1.5 transition-colors duration-150 ${
+            lang === code ? 'bg-foreground text-background' : 'text-muted-foreground hover:text-foreground'
           }`}
         >
           {code}

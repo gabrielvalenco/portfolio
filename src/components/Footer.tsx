@@ -5,10 +5,10 @@ import { links } from '@/data/links'
 
 export default function Footer() {
   const { t } = useLang()
-  const link = 'text-muted-foreground no-underline transition-colors duration-150 hover:text-foreground'
+  const link = 'text-muted-foreground no-underline underline-offset-4 transition-colors duration-150 hover:text-foreground hover:underline'
   return (
-    <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-10 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+    <footer className="overflow-hidden">
+      <div className="mx-auto flex max-w-6xl flex-col gap-5 px-5 pb-8 pt-14 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between md:px-6">
         <p>
           © {new Date().getFullYear()} Gabriel Valenço. {t.footer.rights}
         </p>
@@ -29,6 +29,10 @@ export default function Footer() {
           </Button>
         </div>
       </div>
+      {/* Assinatura decorativa: o nome ja aparece no texto acima. */}
+      <p aria-hidden className="wordmark select-none px-3 pb-[0.16em] text-center">
+        Gabriel Valenço
+      </p>
     </footer>
   )
 }
