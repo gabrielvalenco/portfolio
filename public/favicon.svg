@@ -1,7 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="18" fill="#0a0a11"/>
-  <g fill="none" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M30.4 24.9A11 11 0 1 0 33 32H25" stroke="#f2efe6"/>
-    <path d="M38 21 45 43 52 21" stroke="#c6ff3a"/>
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="1024" height="1024">
+  <title>GV developer monogram</title>
+  <rect width="1024" height="1024" rx="160" fill="#0a0a11" />
+  <g id="monogram">
+    <path id="g" fill="#f2efe6" d="M553 186H394C226 186 91 322 91 490S226 794 394 794H637L556 663H394C297 663 218 586 218 490S297 321 394 321H553C590 321 620 291 620 254S590 186 553 186Z" />
+    <path id="v" fill="#c6ff3a" d="M485 548H640L687 626L791 452Q806 427 835 427H884C923 427 946 466 926 500L723 817Q711 839 687 839Q663 839 650 817Z" />
+    <path id="inner-bar" fill="#f2efe6" d="M357 427H524Q567 427 591 467L640 548H357C324 548 297 521 297 488S324 427 357 427Z" />
   </g>
 </svg>

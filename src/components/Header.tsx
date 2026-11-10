@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { FileText, Menu, X } from 'lucide-react'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import ThemeToggle from '@/components/ThemeToggle'
+import Logo from '@/components/Logo'
 import { Button } from '@/components/ui/button'
 import { useLang } from '@/i18n/context'
 import { cn } from '@/lib/utils'
@@ -99,12 +100,7 @@ export default function Header() {
       <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-3 pt-4 md:px-6 md:pt-6">
         <div className="pointer-events-auto mx-auto flex h-14 max-w-5xl items-center justify-between gap-2 rounded-full border border-border bg-background/80 pl-2 pr-2 shadow-lg shadow-black/10 backdrop-blur-xl">
           <Link to="/" aria-label="Gabriel Valenço" className="group/logo flex items-center gap-2.5 rounded-full pr-2 text-foreground no-underline">
-            <span
-              aria-hidden
-              className="grid size-10 place-items-center rounded-full bg-lime font-display text-sm font-extrabold tracking-tighter text-ink transition-transform duration-300 group-hover/logo:rotate-[-12deg]"
-            >
-              GV
-            </span>
+            <Logo className="size-10 shrink-0 transition-transform duration-300 group-hover/logo:rotate-[-8deg]" />
             <span aria-hidden className="hidden whitespace-nowrap font-display text-base font-bold tracking-tight sm:inline">
               Gabriel Valenço
             </span>
