@@ -2,19 +2,11 @@ import { Check } from 'lucide-react'
 import SubPageHeader from '@/components/SubPageHeader'
 import Reveal from '@/components/Reveal'
 import CourseList from '@/components/CourseList'
+import { detailedCourses } from '@/data/courses'
 import { useLang } from '@/i18n/context'
 
 // Nomes dos cursos ficam no original; descricao e topicos vem de `translations.certificates.items`, na mesma ordem.
-const courseTitles = [
-  'Banco de Dados SQL do Zero ao Avançado + Projetos Reais',
-  'Node.js do Zero a Maestria com diversos Projetos',
-  'Aprenda Golang do Zero! Desenvolva uma APLICAÇÃO COMPLETA!',
-  'Java COMPLETO Programação Orientada a Objetos + Projetos',
-  'Auditor Interno do SGI (ISO 9001 + ISO 14001 + ISO 45001)',
-  'SAP Debug - Aprenda partindo do zero 2026',
-  'SAP ABAP OO - Orientação a Objetos',
-  'SAP ABAP - Aprenda partindo do zero 2026',
-]
+const courseTitles = detailedCourses
 
 export default function Certificates() {
   const { t } = useLang()

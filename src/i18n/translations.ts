@@ -71,6 +71,9 @@ const pt = {
     subtitle: 'Formações e cursos concluídos, com certificado quando disponível.',
     done: 'Concluído',
     certificate: 'Ver certificado',
+    completedOn: 'Conclusão',
+    workload: 'Carga horária',
+    platform: 'Plataforma',
     more: 'Ver detalhes dos cursos',
     prev: 'Cursos anteriores',
     next: 'Próximos cursos',
@@ -189,7 +192,7 @@ const pt = {
     title: 'Certificados',
     subtitle: 'Cursos e especializações que moldaram minha base técnica.',
     learned: 'Conteúdo aprendido',
-    // Mesma ordem de `certificates` em pages/Certificates.tsx.
+    // Mesma ordem de `detailedCourses` em data/courses.ts.
     items: [
       {
         description: 'Curso completo focado em SQL, desde consultas básicas até modelagem complexa e relatórios.',
@@ -262,6 +265,15 @@ const pt = {
           'Fundamentos da linguagem ABAP',
           'Tipos de dados, estruturas e tabelas internas',
           'Acesso ao banco de dados e relatórios',
+        ],
+      },
+      {
+        description: 'Evento prático da Rocketseat sobre o mercado de IA e a criação de automações inteligentes com n8n.',
+        topics: [
+          'Mercado de Inteligência Artificial e suas oportunidades reais',
+          'Criação de workflows no n8n',
+          'Integração e conexão entre serviços',
+          'Automações inteligentes com boas práticas de design e implementação',
         ],
       },
     ],
@@ -353,6 +365,9 @@ const en: Dict = {
     subtitle: 'Completed courses and training, with the certificate when available.',
     done: 'Completed',
     certificate: 'View certificate',
+    completedOn: 'Completed in',
+    workload: 'Workload',
+    platform: 'Platform',
     more: 'See course details',
     prev: 'Previous courses',
     next: 'Next courses',
@@ -544,6 +559,15 @@ const en: Dict = {
           'Database access and reports',
         ],
       },
+      {
+        description: 'Hands-on Rocketseat event on the AI market and building intelligent automations with n8n.',
+        topics: [
+          'The Artificial Intelligence market and its real opportunities',
+          'Building workflows in n8n',
+          'Integrating and connecting services',
+          'Intelligent automations with design and implementation best practices',
+        ],
+      },
     ],
   },
 
@@ -631,6 +655,9 @@ const es: Dict = {
     subtitle: 'Formaciones y cursos completados, con certificado cuando está disponible.',
     done: 'Completado',
     certificate: 'Ver certificado',
+    completedOn: 'Finalización',
+    workload: 'Carga horaria',
+    platform: 'Plataforma',
     more: 'Ver detalles de los cursos',
     prev: 'Cursos anteriores',
     next: 'Cursos siguientes',
@@ -820,6 +847,15 @@ const es: Dict = {
           'Fundamentos del lenguaje ABAP',
           'Tipos de datos, estructuras y tablas internas',
           'Acceso a la base de datos e informes',
+        ],
+      },
+      {
+        description: 'Evento práctico de Rocketseat sobre el mercado de IA y la creación de automatizaciones inteligentes con n8n.',
+        topics: [
+          'Mercado de Inteligencia Artificial y sus oportunidades reales',
+          'Creación de workflows en n8n',
+          'Integración y conexión entre servicios',
+          'Automatizaciones inteligentes con buenas prácticas de diseño e implementación',
         ],
       },
     ],

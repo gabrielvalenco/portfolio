@@ -23,3 +23,16 @@ export const courses: Course[] = [
   { title: 'Auditor Interno do SGI (ISO 9001 + ISO 14001 + ISO 45001)', provider: 'Udemy' },
   { title: 'SAP Debug - Aprenda partindo do zero 2026', provider: 'Udemy' },
 ]
+
+/** Cursos com descricao e topicos em `translations.certificates.items`, na mesma ordem. */
+export const detailedCourses = [
+  'Banco de Dados SQL do Zero ao Avançado + Projetos Reais',
+  'Node.js do Zero a Maestria com diversos Projetos',
+  'Aprenda Golang do Zero! Desenvolva uma APLICAÇÃO COMPLETA!',
+  'Java COMPLETO Programação Orientada a Objetos + Projetos',
+  'Auditor Interno do SGI (ISO 9001 + ISO 14001 + ISO 45001)',
+  'SAP Debug - Aprenda partindo do zero 2026',
+  'SAP ABAP OO - Orientação a Objetos',
+  'SAP ABAP - Aprenda partindo do zero 2026',
+  'Carreira IA: do zero ao primeiro agente automático com n8n',
+]
