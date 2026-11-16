@@ -5,39 +5,48 @@ import { cn } from '@/lib/utils'
 
 type Props = {
   id?: string
-  /** Numero da secao, exibido como etiqueta acima do titulo (ex.: "01"). */
+  /** Numero da secao, exibido acima do titulo (ex.: "01"). */
   index?: string
   title?: string
   subtitle?: string
-  /** Link discreto no canto direito do cabecalho. */
+  /** Link ou botao exibido abaixo do titulo, na coluna da esquerda. */
   action?: ReactNode
   className?: string
   children: ReactNode
 }
 
+/**
+ * Secao em duas colunas: titulo fixo a esquerda (acompanha o scroll) e conteudo a direita.
+ * Assim a largura da tela e usada de ponta a ponta, sem um bloco estreito no centro.
+ */
 export default function Section({ id, index, title, subtitle, action, className, children }: Props) {
   return (
-    <section id={id} className={cn('mx-auto w-full max-w-6xl px-5 py-20 md:px-6 md:py-28', className)}>
-      {title && (
-        <div className="mb-10 flex flex-wrap items-end justify-between gap-6 md:mb-16">
-          <div>
-            {index && (
-              <Reveal as="p" className="mb-4 flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-accent-ink">
-                <span aria-hidden className="h-px w-10 bg-current" />
-                {index}
-              </Reveal>
-            )}
-            <KineticTitle text={title} className="text-5xl md:text-7xl" />
-            {subtitle && (
-              <Reveal as="p" index={1} className="mt-5 max-w-[60ch] text-lg text-muted-foreground">
-                {subtitle}
-              </Reveal>
-            )}
-          </div>
-          {action}
-        </div>
-      )}
-      {children}
+    <section id={id} className={cn('wrap border-t border-border py-16 md:py-24', className)}>
+      <div className="grid gap-x-12 gap-y-10 lg:grid-cols-12">
+        {title && (
+          <header className="lg:col-span-4">
+            <div className="lg:sticky lg:top-28">
+              {index && (
+                <Reveal as="p" className="mb-4 font-mono text-xs text-accent-ink">
+                  {index}
+                </Reveal>
+              )}
+              <KineticTitle text={title} className="text-4xl md:text-5xl" />
+              {subtitle && (
+                <Reveal as="p" index={1} className="mt-4 max-w-[38ch] text-muted-foreground">
+                  {subtitle}
+                </Reveal>
+              )}
+              {action && (
+                <Reveal index={2} className="mt-6">
+                  {action}
+                </Reveal>
+              )}
+            </div>
+          </header>
+        )}
+        <div className={title ? 'lg:col-span-8' : 'lg:col-span-12'}>{children}</div>
+      </div>
     </section>
   )
 }

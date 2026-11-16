@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@/lib/router'
 import { ArrowLeft, Github } from 'lucide-react'
 import SubPageHeader from '@/components/SubPageHeader'
 import ProjectCard from '@/components/ProjectCard'
@@ -14,7 +14,7 @@ export default function MoreProjects() {
     <>
       <SubPageHeader title={t.moreProjects.title} subtitle={t.moreProjects.subtitle} />
 
-      <div className="mx-auto max-w-6xl px-6 pb-24 md:pb-32">
+      <div className="wrap pb-24 md:pb-32">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {moreProjects.map((p, i) => (
             <ProjectCard key={p.title} p={p} index={i % 3} />

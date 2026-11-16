@@ -6,7 +6,6 @@ import { useLang } from '@/i18n/context'
 
 // De cima para baixo, como numa aplicacao de verdade: o que o usuario ve ate onde tudo roda.
 const ORDER = ['frontend', 'mobile', 'backend', 'data', 'infra']
-const TONES = ['lime', 'pink', 'violet', 'lime', 'pink']
 
 const layers = ORDER.map(id => stackGroups.find(g => g.id === id)).filter(g => g !== undefined)
 
@@ -98,38 +97,32 @@ export default function StackScene() {
   }, [])
 
   return (
-    <div ref={ref} className="stack-scene" data-exploded={active >= 0}>
+    <div ref={ref} className="stack-scene border-t border-border">
       <div className="sticky top-0 flex h-svh items-center overflow-hidden">
-        <div className="mx-auto grid w-full max-w-6xl items-center gap-x-10 gap-y-4 px-5 pt-20 md:px-6 lg:grid-cols-[1fr_1.1fr] lg:pt-16">
-          <div className="order-2 lg:order-1">
-            <Reveal as="p" className="mb-3 hidden items-center gap-3 font-mono text-xs uppercase tracking-widest text-accent-ink sm:flex lg:mb-4">
-              <span aria-hidden className="h-px w-10 bg-current" />
+        <div className="wrap grid items-center gap-x-12 gap-y-4 pt-16 lg:grid-cols-12">
+          <div className="order-2 lg:order-1 lg:col-span-5">
+            <Reveal as="p" className="mb-4 hidden font-mono text-xs text-accent-ink sm:block">
               05
             </Reveal>
-            <KineticTitle text={t.tech.title} className="text-4xl md:text-6xl lg:text-7xl" />
-            <Reveal as="p" index={1} className="mt-4 hidden max-w-[44ch] text-lg text-muted-foreground lg:block">
+            <KineticTitle text={t.tech.title} className="text-4xl md:text-5xl" />
+            <Reveal as="p" index={1} className="mt-4 hidden max-w-[44ch] text-muted-foreground lg:block">
               {t.tech.subtitle}
             </Reveal>
 
             <ol className="mt-4 border-t border-border lg:mt-8">
               {layers.map((g, i) => (
-                <li
-                  key={g.id}
-                  data-active={i === active}
-                  className="stack-row border-b border-border"
-                  style={{ '--tone': `var(--${TONES[i]})` } as CSSProperties}
-                >
+                <li key={g.id} data-active={i === active} className="stack-row border-b border-border">
                   <div className="flex items-center gap-4 py-2 lg:py-3">
                     <span className="font-mono text-xs">{String(i + 1).padStart(2, '0')}</span>
-                    <h3 className="font-display text-xl font-bold leading-none lg:text-2xl">{t.tech.groups[g.id]}</h3>
-                    <span aria-hidden className="stack-row-dot ml-auto size-2.5 rounded-full" />
+                    <h3 className="text-lg font-semibold leading-none lg:text-xl">{t.tech.groups[g.id]}</h3>
+                    <span aria-hidden className="stack-row-dot ml-auto size-2 rounded-full" />
                   </div>
                   <div className="stack-row-body">
                     <ul className="flex flex-wrap gap-1.5 lg:gap-2">
                       {g.items.map(item => (
                         <li
                           key={item}
-                          className="rounded-full border-[1.5px] border-border-strong px-3 py-1 text-xs font-medium text-foreground last:mb-3 lg:px-3.5 lg:py-1.5 lg:text-sm"
+                          className="rounded-md border border-border-strong px-2.5 py-1 text-xs font-medium text-foreground last:mb-3 lg:px-3 lg:py-1.5 lg:text-sm"
                         >
                           {item}
                         </li>
@@ -142,7 +135,7 @@ export default function StackScene() {
           </div>
 
           {/* O bloco em si e decorativo: o conteudo esta na lista ao lado. */}
-          <div aria-hidden className="stack-stage order-1 lg:order-2">
+          <div aria-hidden className="stack-stage order-1 lg:order-2 lg:col-span-7">
             <div className="stack-3d">
               {layers.map((g, i) => (
                 <div
@@ -154,7 +147,6 @@ export default function StackScene() {
                     {
                       // Niveis simetricos em torno do meio: o bloco abre para cima e para baixo sem sair do centro.
                       '--level': (layers.length - 1) / 2 - i,
-                      '--tone': `var(--${TONES[i]})`,
                       zIndex: layers.length - i,
                     } as CSSProperties
                   }

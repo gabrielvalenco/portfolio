@@ -24,11 +24,11 @@ export default function Certificates() {
       <SubPageHeader title={c.title} subtitle={c.subtitle} />
 
       {/* Todos os cursos, com os certificados em PDF; abaixo, o detalhe do que foi estudado. */}
-      <div className="mx-auto max-w-6xl px-6 pb-16">
+      <div className="wrap pb-16">
         <CourseList />
       </div>
 
-      <div className="mx-auto grid max-w-6xl gap-6 px-6 pb-24 md:grid-cols-2 md:pb-32">
+      <div className="wrap grid gap-6 pb-24 md:grid-cols-2 md:pb-32 xl:grid-cols-3">
         {c.items.map((cert, i) => (
           <Reveal
             as="article"

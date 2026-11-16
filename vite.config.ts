@@ -2,7 +2,7 @@ import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import { fileURLToPath, URL } from 'node:url'
 
-const REACT_PACKAGES = new Set(['react', 'react-dom', 'scheduler', 'react-router', 'react-router-dom'])
+const REACT_PACKAGES = new Set(['react', 'react-dom', 'scheduler'])
 
 /** Embute o CSS no HTML: o navegador nao espera um arquivo extra antes de pintar. */
 function inlineCss(): Plugin {
@@ -21,9 +21,9 @@ function inlineCss(): Plugin {
         src = src.replace(link, () => `<style>${String(file.source)}</style>`)
         delete bundle[name]
       }
-      // A fonte do titulo do hero (o maior texto da primeira dobra) entra em preload:
-      // sem isso ela so comeca a baixar depois do CSS ser lido e o nome "pisca" ao trocar.
-      const display = Object.keys(bundle).find(name => /bricolage-grotesque-latin-wght-normal.*\.woff2$/.test(name))
+      // A fonte do site (Inter, subconjunto latin) entra em preload:
+      // sem isso ela so comeca a baixar depois do CSS ser lido e o texto "pisca" ao trocar.
+      const display = Object.keys(bundle).find(name => /inter-latin-wght-normal.*\.woff2$/.test(name))
       if (display) {
         src = src.replace(
           '</title>',
@@ -50,7 +50,7 @@ export default defineConfig({
           // Vite entrega os ids com "/" mesmo no Windows.
           const pkg = id.match(/\/node_modules\/((?:@[^/]+\/)?[^/]+)\//)?.[1]
           if (!pkg) return
-          // React e router num chunk proprio, cacheavel entre deploys.
+          // React num chunk proprio, cacheavel entre deploys.
           if (REACT_PACKAGES.has(pkg)) return 'vendor-react'
         },
       },

@@ -4,7 +4,7 @@ import { Moon, Sun } from 'lucide-react'
 import { useLang } from '@/i18n/context'
 
 // Mesmas cores de fundo de index.css; pintam a barra do navegador no celular.
-const THEME_COLOR = { dark: '#0a0a11', light: '#f2efe6' }
+const THEME_COLOR = { dark: '#111217', light: '#dfe5eb' }
 
 export default function ThemeToggle() {
   const { t } = useLang()
@@ -47,7 +47,7 @@ export default function ThemeToggle() {
       onClick={toggle}
       aria-label={t.nav.theme}
       aria-pressed={dark}
-      className="inline-flex size-9 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors duration-150 hover:border-foreground hover:text-foreground"
+      className="inline-flex size-9 shrink-0 items-center justify-center rounded-md border border-border text-muted-foreground transition-colors duration-150 hover:border-foreground hover:text-foreground"
     >
       {dark ? <Sun className="size-4" /> : <Moon className="size-4" />}
     </button>

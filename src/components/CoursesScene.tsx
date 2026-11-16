@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from '@/lib/router'
 import { ArrowRight } from 'lucide-react'
 import Reveal from '@/components/Reveal'
 import KineticTitle from '@/components/KineticTitle'
@@ -82,17 +82,20 @@ export default function CoursesScene() {
   const rest = courses.length - SHOWN
 
   return (
-    <section id="courses" ref={sceneRef} className="courses-scene">
+    <section ref={sceneRef} className="courses-scene border-t border-border">
       <div className="courses-pin">
-        <div className="mx-auto w-full max-w-6xl px-5 md:px-6">
-          <Reveal as="p" className="mb-4 flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-accent-ink">
-            <span aria-hidden className="h-px w-10 bg-current" />
-            04
-          </Reveal>
-          <KineticTitle text={t.courses.title} className="text-5xl md:text-7xl" />
-          <Reveal as="p" index={1} className="mt-5 max-w-[60ch] text-lg text-muted-foreground">
-            {t.courses.subtitle}
-          </Reveal>
+        <div className="wrap">
+          <div className="grid gap-x-12 gap-y-4 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-4">
+              <Reveal as="p" className="mb-4 font-mono text-xs text-accent-ink">
+                04
+              </Reveal>
+              <KineticTitle text={t.courses.title} className="text-4xl md:text-5xl" />
+            </div>
+            <Reveal as="p" index={1} className="max-w-[52ch] text-muted-foreground lg:col-span-8">
+              {t.courses.subtitle}
+            </Reveal>
+          </div>
 
           <div ref={viewportRef} className="mt-8 md:mt-12">
             <ul ref={trackRef} className="courses-track">
@@ -104,13 +107,12 @@ export default function CoursesScene() {
               <li className="courses-item">
                 <Link
                   to="/certificates"
-                  className="card-pop group flex h-full min-h-56 flex-col justify-between rounded-[1.5rem] border-[1.5px] border-ink bg-lime p-5 text-ink no-underline"
-                  style={{ ['--tone' as string]: 'var(--violet)' }}
+                  className="lift group flex h-full min-h-56 flex-col justify-between rounded-lg border border-primary bg-primary p-5 text-primary-foreground no-underline"
                 >
-                  <span className="font-display text-6xl font-extrabold leading-none tracking-tighter">+{rest}</span>
-                  <span className="flex items-center justify-between gap-3 font-display text-xl font-bold leading-tight">
+                  <span className="text-6xl font-semibold leading-none tracking-tighter">+{rest}</span>
+                  <span className="flex items-center justify-between gap-3 text-lg font-medium leading-tight">
                     {t.courses.more}
-                    <span className="grid size-11 shrink-0 place-items-center rounded-full bg-ink text-lime transition-transform duration-300 group-hover:translate-x-1">
+                    <span className="grid size-10 shrink-0 place-items-center rounded-md bg-accent text-accent-foreground transition-transform duration-300 group-hover:translate-x-1">
                       <ArrowRight className="size-5" />
                     </span>
                   </span>

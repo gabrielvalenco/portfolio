@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@/lib/router'
 import { Briefcase, Mail } from 'lucide-react'
 import SubPageHeader from '@/components/SubPageHeader'
 import Reveal from '@/components/Reveal'
@@ -16,7 +16,7 @@ export default function AboutPage() {
     <>
       <SubPageHeader title={a.title} subtitle={a.subtitle} />
 
-      <div className="mx-auto grid max-w-6xl gap-14 px-6 pb-24 md:pb-32 lg:grid-cols-[1.5fr_1fr]">
+      <div className="wrap grid gap-14 pb-24 md:pb-32 lg:grid-cols-[1.5fr_1fr]">
         <article className="max-w-[65ch] space-y-12 text-muted-foreground">
           <Reveal>
             <h2 className={label}>{a.introTitle}</h2>

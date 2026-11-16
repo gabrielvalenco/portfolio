@@ -6,7 +6,6 @@
 
 @theme inline {
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-display: 'Bricolage Grotesque Variable', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, 'SFMono-Regular', Menlo, monospace;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -33,89 +32,56 @@
   --color-border-strong: var(--border-strong);
   --color-input: var(--border);
   --color-ring: var(--accent);
-  /* Paleta fixa: igual nos dois temas. */
-  --color-ink: var(--ink);
-  --color-paper: var(--paper);
-  --color-lime: var(--lime);
-  --color-violet: var(--violet);
-  --color-pink: var(--pink);
 }
 
 /*
-  Paleta "tinta eletrica": preto-azulado + papel quente, com tres cores que brigam por atencao.
-  O tema escuro e o padrao (ver index.html); `.dark` troca os tokens e tambem serve para
-  travar um bloco no escuro (o palco do hero usa isso).
+  Tres cores: Obsidian Black (#111217), Ice Grey (#dfe5eb) e Racing Red (#ef233c).
+  O vermelho e pontual (marcadores, links, estados ativos); texto e botoes ficam em preto/cinza.
+  Tema claro e o padrao; `.dark` troca os tokens e tambem trava um bloco no escuro (contato).
 */
 :root {
-  --ink: #0a0a11;
-  --paper: #f2efe6;
-  --lime: #c6ff3a;
-  --violet: #7c5cff;
-  --pink: #ff4d9d;
-
-  --radius: 1rem;
-  --background: #f2efe6;
-  --surface: #fbf9f4;
-  --foreground: #0a0a11;
-  --muted-foreground: #4b4956;
-  --border: rgba(10, 10, 17, 0.14);
-  --border-strong: rgba(10, 10, 17, 0.55);
-  --accent: #5a3df0;
-  --accent-foreground: #ffffff;
-  --accent-ink: #4a2ee0;
-  --primary: #0a0a11;
-  --primary-foreground: #c6ff3a;
-  --secondary: #e4e0d4;
-  --secondary-foreground: #0a0a11;
-  --destructive: #c2185b;
-  --pop: #0a0a11;
-  --glow-a: rgba(124, 92, 255, 0.2);
-  --glow-b: rgba(255, 77, 157, 0.16);
-  --grid-line: rgba(10, 10, 17, 0.06);
+  --radius: 0.5rem;
+  --background: #dfe5eb;
+  --surface: #edf1f5;
+  --foreground: #111217;
+  --muted-foreground: #474c57;
+  --border: rgba(17, 18, 23, 0.12);
+  --border-strong: rgba(17, 18, 23, 0.32);
+  --accent: #ef233c;
+  /* Texto sobre o vermelho fica em preto: branco nao atinge contraste AA em tamanho pequeno. */
+  --accent-foreground: #111217;
+  --accent-ink: #b8111f;
+  --primary: #111217;
+  --primary-foreground: #dfe5eb;
+  --secondary: #cfd6de;
+  --secondary-foreground: #111217;
+  --destructive: #b8111f;
+  --grid-line: rgba(17, 18, 23, 0.05);
   color-scheme: light;
 }
 
 .dark {
-  --background: #0a0a11;
-  --surface: #13131c;
-  --foreground: #f2efe6;
-  --muted-foreground: #a5a3b3;
-  --border: rgba(242, 239, 230, 0.12);
-  --border-strong: rgba(242, 239, 230, 0.4);
-  --accent: #c6ff3a;
-  --accent-foreground: #0a0a11;
-  --accent-ink: #c6ff3a;
-  --primary: #c6ff3a;
-  --primary-foreground: #0a0a11;
-  --secondary: #1c1c28;
-  --secondary-foreground: #f2efe6;
-  --destructive: #ff4d9d;
-  --pop: #7c5cff;
-  --glow-a: rgba(124, 92, 255, 0.2);
-  --glow-b: rgba(198, 255, 58, 0.08);
-  --grid-line: rgba(242, 239, 230, 0.045);
+  --background: #111217;
+  --surface: #191b22;
+  --foreground: #dfe5eb;
+  --muted-foreground: #9aa1ad;
+  --border: rgba(223, 229, 235, 0.11);
+  --border-strong: rgba(223, 229, 235, 0.3);
+  --accent: #ef233c;
+  --accent-foreground: #111217;
+  --accent-ink: #ff5468;
+  --primary: #dfe5eb;
+  --primary-foreground: #111217;
+  --secondary: #20232b;
+  --secondary-foreground: #dfe5eb;
+  --destructive: #ff5468;
+  --grid-line: rgba(223, 229, 235, 0.04);
   color-scheme: dark;
-}
-
-/* Bloco em fundo limao (contato): texto e botoes sempre em tinta. */
-.on-lime {
-  --background: #c6ff3a;
-  --foreground: #0a0a11;
-  --muted-foreground: #2b2d1c;
-  --border: rgba(10, 10, 17, 0.2);
-  --border-strong: rgba(10, 10, 17, 0.7);
-  --accent: #0a0a11;
-  --accent-foreground: #c6ff3a;
-  --accent-ink: #0a0a11;
-  --primary: #0a0a11;
-  --primary-foreground: #c6ff3a;
-  --pop: #7c5cff;
-  color: var(--foreground);
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 6rem;
+  scroll-padding-top: 5.5rem;
 }
 
 @layer base {
@@ -128,30 +94,36 @@ html {
     transition: background-color 250ms ease, color 250ms ease;
   }
   h1, h2 {
-    font-family: var(--font-display);
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: -0.035em;
-    line-height: 1;
+    line-height: 1.02;
   }
   h1 { @apply text-5xl md:text-7xl; }
   h2 { @apply text-3xl md:text-4xl; }
-  h3 { letter-spacing: -0.01em; }
+  h3 { letter-spacing: -0.015em; }
   p  { @apply leading-relaxed; }
   :focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 3px;
-    border-radius: 6px;
+    border-radius: 4px;
   }
   ::selection {
-    background: var(--lime);
-    color: var(--ink);
+    background: color-mix(in srgb, var(--accent) 28%, transparent);
   }
+}
+
+/* ─── Largura util: o conteudo ocupa a tela, com respiro lateral proporcional ── */
+.wrap {
+  width: 100%;
+  max-width: 104rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4.5vw, 4.5rem);
 }
 
 /* ─── Reveal no scroll (ver components/Reveal.tsx) ───────────────────────────── */
 .reveal {
   opacity: 0;
-  transform: translateY(18px);
+  transform: translateY(16px);
   transition: opacity 500ms ease-out, transform 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
   transition-delay: var(--reveal-delay, 0ms);
 }
@@ -170,83 +142,14 @@ html {
   animation-delay: var(--hero-delay, 0ms);
 }
 
-/* ─── Fundo fixo: grade + duas manchas de cor ────────────────────────────────── */
-.backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  overflow: hidden;
-  pointer-events: none;
-  background:
-    radial-gradient(60vw 60vw at 100% 0%, var(--glow-a), transparent 65%),
-    radial-gradient(50vw 50vw at 0% 100%, var(--glow-b), transparent 65%);
-}
-.backdrop::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(var(--grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-  background-size: 64px 64px;
-}
-/* ─── Palco do hero: painel sempre escuro com video ou animacao WebGL ────────── */
-.stage {
-  /* Aparece enquanto o WebGL nao sobe (ou se nao houver suporte). */
-  background:
-    radial-gradient(70% 90% at 85% 15%, rgba(124, 92, 255, 0.55), transparent 60%),
-    radial-gradient(60% 70% at 70% 90%, rgba(255, 77, 157, 0.35), transparent 60%),
-    radial-gradient(40% 50% at 100% 60%, rgba(198, 255, 58, 0.25), transparent 60%),
-    var(--ink);
-}
-.stage-media {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 900ms ease;
-}
-.stage-media.is-ready {
-  opacity: 1;
-}
-/* Escurece onde o texto fica (base e lateral esquerda) sem apagar a animacao. */
-.stage-scrim {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    linear-gradient(to top, rgba(10, 10, 17, 0.88) 0%, rgba(10, 10, 17, 0.35) 42%, transparent 70%),
-    linear-gradient(to right, rgba(10, 10, 17, 0.55) 0%, transparent 55%);
-}
-
 .hero-title {
-  font-size: clamp(3.2rem, 19vw, 9rem);
-  font-weight: 800;
-  line-height: 0.9;
-  letter-spacing: -0.055em;
-  text-transform: uppercase;
+  font-size: clamp(3.1rem, 15vw, 7rem);
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.05em;
 }
 @media (min-width: 1024px) {
-  .hero-title { font-size: clamp(8rem, 13.2vw, 15.5rem); }
-}
-
-/* ─── Retrato: adesivo inclinado que se endireita no hover ───────────────────── */
-.portrait {
-  position: relative;
-  overflow: hidden;
-  border-radius: 1.75rem;
-  border: 2px solid var(--paper);
-  transform: rotate(4deg);
-  box-shadow: 10px 10px 0 0 var(--lime);
-  transition: transform 350ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 350ms cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.portrait-wrap:hover .portrait {
-  transform: rotate(0deg) scale(1.02);
-  box-shadow: 14px 14px 0 0 var(--pink);
+  .hero-title { font-size: clamp(6rem, 8.6vw, 11rem); }
 }
 
 /* ─── Indicador de disponibilidade ───────────────────────────────────────────── */
@@ -273,13 +176,9 @@ html {
   padding: 0.06em 0.04em 0.16em 0;
   margin: -0.06em -0.04em -0.16em 0;
 }
-.kw-block {
-  display: block;
-}
 .kw-in {
   display: inline-block;
-  transform: translateY(115%) rotate(5deg);
-  transform-origin: 0 100%;
+  transform: translateY(115%);
   transition: transform 650ms cubic-bezier(0.2, 0.8, 0.2, 1);
   transition-delay: calc(var(--i, 0) * 60ms + var(--kd, 0ms));
 }
@@ -294,7 +193,7 @@ html {
   animation-delay: calc(var(--i, 0) * 90ms + var(--kd, 0ms));
 }
 @keyframes kw-rise {
-  from { transform: translateY(70%) rotate(3deg); }
+  from { transform: translateY(70%); }
   to { transform: none; }
 }
 
@@ -305,7 +204,7 @@ html {
   vertical-align: bottom;
   padding-bottom: 0.15em;
   margin-bottom: -0.15em;
-  color: var(--accent-ink);
+  color: var(--foreground);
   font-weight: 600;
 }
 .word-rotator-item {
@@ -320,137 +219,63 @@ html {
   25%, 100% { transform: translateY(-110%); opacity: 0; }
 }
 
-/* ─── Adesivos de stack em volta do retrato ──────────────────────────────────── */
-.chip {
-  animation: chip-pop 800ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
-  animation-delay: var(--d, 600ms);
-}
-@keyframes chip-pop {
-  from { opacity: 0; transform: scale(0.3) rotate(calc(var(--rot, 0deg) - 30deg)) translateY(30px); }
-  to   { opacity: 1; transform: scale(1) rotate(var(--rot, 0deg)); }
-}
-.chip-float {
-  animation: chip-float 6s ease-in-out infinite;
-}
-@keyframes chip-float {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-8px); }
-}
-
-/* ─── Faixas cruzadas (fita de obra) logo abaixo do hero ─────────────────────── */
-.ribbons {
-  position: relative;
-  z-index: 2;
-  height: clamp(8.5rem, 17vw, 13rem);
-  margin-top: clamp(-3.5rem, -4.5vw, -2rem);
-  /* As fitas passam da largura da tela: corta na horizontal sem cortar a inclinacao na vertical. */
-  overflow-x: clip;
-  pointer-events: none;
-}
-.ribbon {
-  position: absolute;
-  left: -6vw;
-  width: 112vw;
-  top: 50%;
-  overflow: hidden;
-  padding: 0.55em 0;
-  font-family: var(--font-display);
-  font-size: clamp(1.4rem, 3.4vw, 2.75rem);
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-  pointer-events: auto;
-  border-block: 2px solid var(--ink);
-}
-.ribbon-a {
-  background: var(--lime);
-  color: var(--ink);
-  transform: translateY(-50%) rotate(-3deg);
-  z-index: 1;
-}
-.ribbon-b {
-  background: var(--violet);
-  color: var(--paper);
-  transform: translateY(-50%) rotate(2.5deg);
-}
-.ribbon-track {
-  display: flex;
-  width: max-content;
-  animation: marquee 36s linear infinite;
-}
-.ribbon-b .ribbon-track {
-  animation-direction: reverse;
-  animation-duration: 44s;
-}
-.ribbon:hover .ribbon-track {
-  animation-play-state: paused;
-}
-@keyframes marquee {
-  to { transform: translateX(-50%); }
-}
-
-/* ─── Elevacao "brutalista": o elemento sobe e deixa uma sombra chapada ──────── */
-.pop {
+/* ─── Cards: sobem um pouco e ganham sombra suave no hover ───────────────────── */
+.lift {
   transition:
-    transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    box-shadow 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    background-color 150ms ease,
-    color 150ms ease,
-    border-color 150ms ease;
-}
-.pop:hover,
-.pop:focus-visible {
-  transform: translate(-3px, -3px);
-  box-shadow: 5px 5px 0 0 var(--pop);
-}
-.pop:active {
-  transform: none;
-  box-shadow: 0 0 0 0 var(--pop);
-}
-
-.card-pop {
-  --tone: var(--lime);
-  transition:
-    transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    box-shadow 260ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 300ms ease,
     border-color 200ms ease;
 }
-.card-pop:hover,
-.card-pop:focus-within {
-  transform: translate(-5px, -5px);
-  box-shadow: 9px 9px 0 0 var(--tone);
-  border-color: var(--foreground);
+.lift:hover,
+.lift:focus-within {
+  transform: translateY(-4px);
+  border-color: var(--border-strong);
+  box-shadow: 0 18px 40px -22px rgba(17, 18, 23, 0.45);
 }
 
-/* ─── Linhas de lista que se enchem de cor no hover ──────────────────────────── */
+/* ─── Cards: holofote discreto que segue o mouse ─────────────────────────────── */
+.spotlight {
+  position: relative;
+}
+.spotlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 250ms ease;
+  background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--accent) 9%, transparent), transparent 65%);
+}
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+/* ─── Linhas de lista: fundo suave que sobe no hover ─────────────────────────── */
 .row-fill {
   position: relative;
   isolation: isolate;
-  transition: color 200ms ease, padding 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .row-fill::before {
   content: '';
   position: absolute;
   inset: 0 -1rem;
   z-index: -1;
-  border-radius: 1.25rem;
-  background: var(--accent);
+  border-radius: 0.5rem;
+  background: color-mix(in srgb, var(--foreground) 6%, transparent);
   transform: scaleY(0);
   transform-origin: 50% 100%;
   transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.row-fill:hover {
-  color: var(--accent-foreground);
-}
 .row-fill:hover::before {
   transform: scaleY(1);
 }
-.row-fill .row-muted {
+.row-fill .row-index {
   transition: color 200ms ease;
 }
-.row-fill:hover .row-muted {
-  color: inherit;
+.row-fill:hover .row-index {
+  color: var(--accent-ink);
 }
 
 /* ─── Stack que se desmonta no scroll (components/StackScene.tsx) ────────────── */
@@ -471,7 +296,7 @@ html {
   height: calc(var(--plate) * 1.9);
 }
 @media (min-width: 1024px) {
-  .stack-stage { --plate: clamp(15rem, 24vw, 20rem); }
+  .stack-stage { --plate: clamp(15rem, 23vw, 22rem); }
 }
 /* Sem `perspective`: projecao isometrica, as placas nao encolhem com a distancia. */
 .stack-3d {
@@ -486,11 +311,11 @@ html {
   inset: 0;
   display: grid;
   place-items: center;
-  border-radius: 14%;
-  border: 2px solid var(--border-strong);
+  border-radius: 8%;
+  border: 1.5px solid var(--border-strong);
   background: var(--surface);
   color: var(--muted-foreground);
-  font-size: calc(var(--plate) * 0.1);
+  font-size: calc(var(--plate) * 0.095);
   transform-style: preserve-3d;
   /* Montado, sobra um vao minimo entre as placas; aberto, cada uma sobe/desce ate o seu nivel. */
   transform: translateZ(calc(var(--level) * var(--plate) * (0.045 + var(--spread, 0) * 0.3)));
@@ -504,42 +329,39 @@ html {
 .stack-plate::before {
   content: '';
   position: absolute;
-  inset: -2px;
+  inset: -1.5px;
   border-radius: inherit;
-  background: color-mix(in srgb, var(--foreground) 22%, var(--background));
-  transform: translateZ(calc(var(--plate) * -0.035));
+  background: color-mix(in srgb, var(--foreground) 20%, var(--background));
+  transform: translateZ(calc(var(--plate) * -0.03));
+  transition: background-color 300ms ease;
 }
 .stack-plate[data-active='true'] {
   /* `translate` age no plano da propria placa: ela desliza para fora do bloco. */
   translate: 16% -16%;
-  background: var(--tone);
-  color: var(--ink);
-  border-color: var(--ink);
+  background: var(--accent);
+  color: #111217;
+  border-color: #111217;
 }
 .stack-plate[data-active='true']::before {
-  background: color-mix(in srgb, var(--tone) 55%, var(--ink));
+  background: color-mix(in srgb, var(--accent) 55%, #111217);
 }
 /* Placas acima da ativa viram so contorno: da para ver a camada em destaque atraves delas. */
 .stack-plate[data-above='true'] {
   background: transparent;
-  color: color-mix(in srgb, var(--muted-foreground) 28%, transparent);
+  color: color-mix(in srgb, var(--muted-foreground) 30%, transparent);
   border-color: var(--border);
 }
 .stack-plate[data-above='true']::before {
   background: transparent;
 }
-.stack-plate::before {
-  transition: background-color 300ms ease;
-}
 .stack-plate svg {
-  width: 62%;
+  width: 60%;
 }
 .stack-plate-label {
   position: absolute;
-  left: 9%;
+  left: 8%;
   top: 6%;
-  font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: -0.03em;
 }
 
@@ -551,7 +373,7 @@ html {
   color: var(--foreground);
 }
 .stack-row-dot {
-  background: var(--tone);
+  background: var(--accent);
   transform: scale(0);
   transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -572,7 +394,7 @@ html {
   grid-template-rows: 1fr;
 }
 
-/* ─── Trilho horizontal (cursos): encaixe por card, sem barra de rolagem nativa ─ */
+/* ─── Trilho horizontal (lista completa de cursos) ───────────────────────────── */
 .rail {
   display: flex;
   gap: 1rem;
@@ -581,8 +403,8 @@ html {
   overscroll-behavior-x: contain;
   scrollbar-width: none;
   /* Folga para a sombra do hover nao ser cortada pelo overflow; a margem negativa devolve o alinhamento. */
-  padding: 0.75rem 1.25rem 1rem 0.5rem;
-  margin: -0.75rem -1.25rem -1rem -0.5rem;
+  padding: 0.75rem 1.25rem 1.5rem 0.5rem;
+  margin: -0.75rem -1.25rem -1.5rem -0.5rem;
   scroll-padding-inline: 0.5rem;
   /* O ultimo card visivel some aos poucos na borda direita: avisa que ha mais. */
   mask-image: linear-gradient(to right, #000 calc(100% - 3rem), transparent);
@@ -596,7 +418,7 @@ html {
 }
 .rail-bar {
   position: relative;
-  height: 3px;
+  height: 2px;
   margin-top: 1.75rem;
   border-radius: 9999px;
   background: var(--border);
@@ -648,82 +470,17 @@ html {
     display: flex;
     width: max-content;
     /* Folga para a sombra do hover; `--x` vem do scroll. */
-    padding: 0.75rem 0.75rem 1rem 0.5rem;
-    margin: -0.75rem 0 -1rem -0.5rem;
+    padding: 0.75rem 0.75rem 1.5rem 0.5rem;
+    margin: -0.75rem 0 -1.5rem -0.5rem;
     transform: translate3d(var(--x, 0px), 0, 0);
     will-change: transform;
   }
   .courses-item {
-    flex: 0 0 min(21rem, 76vw);
+    flex: 0 0 min(22rem, 76vw);
   }
   .courses-bar {
     display: block;
   }
-}
-
-/* ─── Selo giratorio com texto em circulo ────────────────────────────────────── */
-.spin-slow {
-  animation: spin 18s linear infinite;
-}
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* ─── Assinatura gigante do rodape: contorno que se preenche no hover ────────── */
-.wordmark {
-  font-family: var(--font-display);
-  font-size: clamp(2.2rem, 11vw, 13rem);
-  font-weight: 800;
-  line-height: 0.85;
-  letter-spacing: -0.055em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  /* Preenchido com a cor do fundo e pintado por cima do traco: sobra so o contorno externo
-     (sem isso, fontes variaveis mostram as emendas internas das letras). */
-  color: var(--background);
-  -webkit-text-stroke: 3px var(--border-strong);
-  paint-order: stroke fill;
-  transition: color 400ms ease, -webkit-text-stroke-color 400ms ease;
-}
-.wordmark:hover {
-  color: var(--accent);
-  -webkit-text-stroke-color: var(--accent);
-}
-
-/* ─── Cards: holofote que segue o mouse ──────────────────────────────────────── */
-.spotlight {
-  position: relative;
-}
-.spotlight::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  border-radius: inherit;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 250ms ease;
-  background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--tone, var(--accent)) 14%, transparent), transparent 65%);
-}
-.spotlight:hover::before {
-  opacity: 1;
-}
-
-/* ─── Botao primario com brilho passando ─────────────────────────────────────── */
-.shine {
-  position: relative;
-  overflow: hidden;
-}
-.shine::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.4) 50%, transparent 65%);
-  transform: translateX(-120%);
-}
-.shine:hover::after {
-  transform: translateX(120%);
-  transition: transform 700ms ease;
 }
 
 /* ─── Barra de progresso de leitura (topo da janela) ─────────────────────────── */
@@ -731,37 +488,11 @@ html {
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 60;
-  height: 3px;
-  background: linear-gradient(90deg, var(--lime), var(--violet), var(--pink));
+  height: 2px;
+  background: var(--accent);
   transform-origin: 0 50%;
   transform: scaleX(var(--progress, 0));
   pointer-events: none;
-}
-
-/* ─── Cursor: ponto que inverte as cores por baixo e cresce sobre links ──────── */
-.cursor {
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 100;
-  pointer-events: none;
-  mix-blend-mode: difference;
-  opacity: 0;
-  transition: opacity 200ms ease;
-}
-.cursor[data-on='1'] {
-  opacity: 1;
-}
-.cursor-dot {
-  width: 14px;
-  height: 14px;
-  margin: -7px 0 0 -7px;
-  border-radius: 9999px;
-  background: #fff;
-  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.cursor[data-hover='1'] .cursor-dot {
-  transform: scale(3.6);
 }
 
 /* ─── Menu mobile em tela cheia ──────────────────────────────────────────────── */
@@ -783,21 +514,17 @@ html {
   .reveal, .hero-in, .menu-link {
     opacity: 1;
     transform: none;
-    filter: none;
     transition: none;
     animation: none;
   }
-  .pulse-dot::after, .chip, .chip-float, .ribbon-track, .word-rotator-item, .spin-slow {
+  .pulse-dot::after, .word-rotator-item {
     animation: none;
   }
-  .chip { opacity: 1; transform: rotate(var(--rot, 0deg)); }
   .kw-in { transform: none; transition: none; }
   .kinetic-now .kw-in { animation: none; }
   .word-rotator-item { opacity: 0; transform: none; }
   .word-rotator-item:first-child { opacity: 1; }
-  .pop:hover, .pop:focus-visible, .card-pop:hover, .card-pop:focus-within { transform: none; }
-  .portrait-wrap:hover .portrait { transform: rotate(4deg); }
-  .shine::after, .cursor { display: none; }
+  .lift:hover, .lift:focus-within { transform: none; }
   * {
     transition-property: color, background-color, border-color, box-shadow, opacity !important;
   }

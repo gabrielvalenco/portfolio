@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from '@/lib/router'
+import { useLocation } from '@/lib/location'
 import { FileText, Menu, X } from 'lucide-react'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import ThemeToggle from '@/components/ThemeToggle'
@@ -47,11 +48,13 @@ export default function Header() {
   const { lang, t } = useLang()
   const { pathname, key } = useLocation()
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const progressRef = useRef<HTMLDivElement>(null)
   const active = useActiveSection(pathname === '/')
 
   useEffect(() => {
     const onScroll = () => {
+      setScrolled(window.scrollY > 8)
       const max = document.documentElement.scrollHeight - window.innerHeight
       progressRef.current?.style.setProperty('--progress', String(max > 0 ? Math.min(window.scrollY / max, 1) : 0))
     }
@@ -93,30 +96,38 @@ export default function Header() {
     setOpen(false)
   }
 
+  const resume = `/valenco-resume-${lang === 'pt' ? 'pt' : 'en'}.pdf`
+
   return (
     <>
       <div ref={progressRef} aria-hidden className="scroll-progress" />
 
-      <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-3 pt-4 md:px-6 md:pt-6">
-        <div className="pointer-events-auto mx-auto flex h-14 max-w-5xl items-center justify-between gap-2 rounded-full border border-border bg-background/80 pl-2 pr-2 shadow-lg shadow-black/10 backdrop-blur-xl">
-          <Link to="/" aria-label="Gabriel Valenço" className="group/logo flex items-center gap-2.5 rounded-full pr-2 text-foreground no-underline">
-            <Logo className="size-10 shrink-0 transition-transform duration-300 group-hover/logo:rotate-[-8deg]" />
-            <span aria-hidden className="hidden whitespace-nowrap font-display text-base font-bold tracking-tight sm:inline">
+      <header
+        className={cn(
+          'fixed inset-x-0 top-0 z-50 border-b transition-colors duration-200',
+          scrolled || open ? 'border-border bg-background/85 backdrop-blur-md' : 'border-transparent',
+        )}
+      >
+        <div className="wrap flex h-16 items-center justify-between gap-4">
+          <Link to="/" aria-label="Gabriel Valenço" className="flex items-center gap-3 text-foreground no-underline">
+            <Logo className="size-8 shrink-0" />
+            <span aria-hidden className="hidden whitespace-nowrap text-sm font-semibold tracking-tight sm:inline">
               Gabriel Valenço
             </span>
           </Link>
 
-          <nav aria-label={t.nav.main} className="hidden items-center lg:flex">
+          <nav aria-label={t.nav.main} className="hidden items-center gap-1 lg:flex">
             {links.map(l => (
               <Link
                 key={l.hash}
                 to={{ pathname: '/', hash: l.hash }}
                 aria-current={active === l.hash ? 'location' : undefined}
                 className={cn(
-                  'whitespace-nowrap rounded-full px-3.5 py-2 text-sm font-medium no-underline transition-colors duration-150',
-                  active === l.hash ? 'bg-foreground text-background' : 'text-muted-foreground hover:text-foreground',
+                  'whitespace-nowrap rounded-md px-3 py-2 text-sm no-underline transition-colors duration-150',
+                  active === l.hash ? 'font-medium text-foreground' : 'text-muted-foreground hover:text-foreground',
                 )}
               >
+                {active === l.hash && <span aria-hidden className="mr-2 inline-block size-1.5 rounded-full bg-accent align-middle" />}
                 {t.nav[l.key]}
               </Link>
             ))}
@@ -126,7 +137,7 @@ export default function Header() {
             <LanguageSwitcher />
             <ThemeToggle />
             <Button asChild size="sm" className="hidden sm:inline-flex">
-              <a href={`/valenco-resume-${lang === 'pt' ? 'pt' : 'en'}.pdf`} target="_blank" rel="noreferrer">
+              <a href={resume} target="_blank" rel="noreferrer">
                 <FileText />
                 {t.nav.resume}
               </a>
@@ -137,7 +148,7 @@ export default function Header() {
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? t.nav.close : t.nav.menu}
-              className="inline-flex size-9 items-center justify-center rounded-full bg-foreground text-background lg:hidden"
+              className="inline-flex size-9 items-center justify-center rounded-md border border-border text-foreground lg:hidden"
             >
               {open ? <X className="size-4" /> : <Menu className="size-4" />}
             </button>
@@ -149,28 +160,30 @@ export default function Header() {
         <nav
           id="mobile-menu"
           aria-label={t.nav.main}
-          className="fixed inset-0 z-40 flex flex-col justify-between overflow-y-auto bg-background px-6 pb-8 pt-28 lg:hidden"
+          className="fixed inset-0 z-40 flex flex-col justify-between overflow-y-auto bg-background pb-8 pt-24 lg:hidden"
         >
-          <ul className="space-y-1">
+          <ul className="wrap">
             {links.map((l, i) => (
               <li key={l.hash} className="menu-link" style={{ '--i': i } as CSSProperties}>
                 <Link
                   to={{ pathname: '/', hash: l.hash }}
                   onClick={() => setOpen(false)}
-                  className="group/item flex items-baseline gap-4 border-b border-border py-4 font-display text-5xl font-extrabold tracking-tighter text-foreground no-underline"
+                  className="flex items-baseline gap-4 border-b border-border py-4 text-4xl font-semibold tracking-tight text-foreground no-underline"
                 >
                   <span className="font-mono text-xs font-normal tracking-normal text-accent-ink">0{i + 1}</span>
-                  <span className="transition-transform duration-200 group-hover/item:translate-x-2">{t.nav[l.key]}</span>
+                  {t.nav[l.key]}
                 </Link>
               </li>
             ))}
           </ul>
-          <Button asChild size="lg" className="menu-link mt-8 w-full" style={{ '--i': links.length } as CSSProperties}>
-            <a href={`/valenco-resume-${lang === 'pt' ? 'pt' : 'en'}.pdf`} target="_blank" rel="noreferrer">
-              <FileText />
-              {t.nav.resume}
-            </a>
-          </Button>
+          <div className="wrap">
+            <Button asChild size="lg" className="menu-link mt-8 w-full" style={{ '--i': links.length } as CSSProperties}>
+              <a href={resume} target="_blank" rel="noreferrer">
+                <FileText />
+                {t.nav.resume}
+              </a>
+            </Button>
+          </div>
         </nav>
       )}
     </>

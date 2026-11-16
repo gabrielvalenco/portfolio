@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@/lib/router'
 import { ExternalLink, Linkedin, User } from 'lucide-react'
 import SubPageHeader from '@/components/SubPageHeader'
 import Reveal from '@/components/Reveal'
@@ -15,45 +15,42 @@ export default function ExperiencePage() {
     <>
       <SubPageHeader title={e.title} subtitle={e.subtitle} />
 
-      <div className="mx-auto max-w-6xl px-6 pb-24 md:pb-32">
-        {/* Timeline: linha vertical fina, um marcador por experiencia. */}
-        <ol className="relative space-y-12 border-l border-border pl-8">
+      <div className="wrap pb-24 md:pb-32">
+        {/* Cada experiencia em duas colunas: quem/quando a esquerda, o que foi feito a direita. */}
+        <ol>
           {companies.map((c, i) => {
             const text = e.roles[i]
             return (
-              <Reveal as="li" key={c.company} className="relative">
-                <span
-                  aria-hidden
-                  className={`absolute -left-[37px] top-2 size-2.5 rounded-full border ${
-                    c.current ? 'border-accent bg-accent' : 'border-border-strong bg-background'
-                  }`}
-                />
-                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                  <h2>
+              <Reveal as="li" key={c.company} className="grid gap-x-12 gap-y-4 border-t border-border py-10 lg:grid-cols-12">
+                <div className="lg:col-span-4">
+                  <h2 className="flex items-center gap-3">
                     {c.company}
-                    {c.current && (
-                      <span className="ml-3 align-middle text-xs font-medium text-accent-ink">{t.common.current}</span>
-                    )}
+                    {c.current && <span aria-hidden className="pulse-dot size-2 rounded-full bg-accent" />}
                   </h2>
-                  <span className="text-sm text-muted-foreground">{text.period}</span>
+                  <p className="mt-2 text-muted-foreground">{text.role}</p>
+                  <p className="mt-1 font-mono text-sm text-muted-foreground">
+                    {text.period}
+                    {c.current && <span className="sr-only"> ({t.common.current})</span>}
+                  </p>
                 </div>
-                <p className="mt-1 text-muted-foreground">{text.role}</p>
-                <ul className="mt-4 max-w-[65ch] list-disc space-y-2 pl-5 text-muted-foreground marker:text-border-strong">
-                  {text.bullets.map(b => (
-                    <li key={b}>{b}</li>
-                  ))}
-                </ul>
-                <div className="mt-4 flex flex-wrap gap-1.5">
-                  {c.stack.map(s => (
-                    <Badge key={s}>{s}</Badge>
-                  ))}
+                <div className="lg:col-span-8">
+                  <ul className="list-disc space-y-2 pl-5 text-muted-foreground marker:text-border-strong">
+                    {text.bullets.map(b => (
+                      <li key={b}>{b}</li>
+                    ))}
+                  </ul>
+                  <div className="mt-5 flex flex-wrap gap-1.5">
+                    {c.stack.map(s => (
+                      <Badge key={s}>{s}</Badge>
+                    ))}
+                  </div>
                 </div>
               </Reveal>
             )
           })}
         </ol>
 
-        <Reveal className="mt-20 border-t border-border pt-10">
+        <Reveal className="border-t border-border pt-10">
           <h2 className="mb-6">{e.educationTitle}</h2>
           <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
             <h3 className="text-lg font-semibold">Unisalesiano</h3>

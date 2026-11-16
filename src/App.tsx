@@ -1,29 +1,43 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
-import { useEffect, lazy, Suspense } from 'react'
+import { useEffect, lazy, Suspense, type ComponentType } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Home from '@/pages/Home'
-import Backdrop from '@/components/Backdrop'
-import Cursor from '@/components/Cursor'
+import { Router } from '@/lib/router'
+import { useLocation } from '@/lib/location'
 import { useLang } from '@/i18n/context'
 
-const Certificates = lazy(() => import('@/pages/Certificates'))
-const ProjectsPage = lazy(() => import('@/pages/Projects'))
-const MoreProjects = lazy(() => import('@/pages/MoreProjects'))
-const AboutPage = lazy(() => import('@/pages/About'))
-const ExperiencePage = lazy(() => import('@/pages/Experience'))
 const NotFound = lazy(() => import('@/pages/NotFound'))
+
+// A Home vai no pacote principal; as demais paginas so sao baixadas quando visitadas.
+const PAGES: Record<string, ComponentType> = {
+  '/': Home,
+  '/projects': lazy(() => import('@/pages/Projects')),
+  '/more-projects': lazy(() => import('@/pages/MoreProjects')),
+  '/about': lazy(() => import('@/pages/About')),
+  '/experience': lazy(() => import('@/pages/Experience')),
+  '/certificates': lazy(() => import('@/pages/Certificates')),
+}
 
 const SITE = 'https://www.gabrielvalenco.com.br'
 
+const normalize = (pathname: string) => pathname.replace(/\/+$/, '') || '/'
+
 export default function App() {
-  const { t } = useLang()
   return (
-    <BrowserRouter>
+    <Router>
+      <Shell />
+    </Router>
+  )
+}
+
+function Shell() {
+  const { t } = useLang()
+  const { pathname } = useLocation()
+  const Page = PAGES[normalize(pathname)] ?? NotFound
+  return (
+    <>
       <ScrollToTop />
       <RouteMeta />
-      <Backdrop />
-      <Cursor />
       <div className="flex min-h-dvh flex-col">
         <a
           href="#main"
@@ -37,21 +51,13 @@ export default function App() {
           {/* #page: o Header marca este bloco como `inert` enquanto o menu mobile esta aberto. */}
           <div id="page" className="flex flex-1 flex-col">
             <main id="main" className="flex-1">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/projects" element={<ProjectsPage />} />
-                <Route path="/more-projects" element={<MoreProjects />} />
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/experience" element={<ExperiencePage />} />
-                <Route path="/certificates" element={<Certificates />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+              <Page />
             </main>
             <Footer />
           </div>
         </Suspense>
       </div>
-    </BrowserRouter>
+    </>
   )
 }
 
@@ -61,7 +67,7 @@ function RouteMeta() {
   const { t } = useLang()
 
   useEffect(() => {
-    const path = pathname.replace(/\/+$/, '') || '/'
+    const path = normalize(pathname)
     const pages: Record<string, string> = {
       '/projects': t.projectsPage.title,
       '/more-projects': t.moreProjects.title,
@@ -69,7 +75,7 @@ function RouteMeta() {
       '/experience': t.experience.title,
       '/certificates': t.certificates.title,
     }
-    const known = path === '/' || path in pages
+    const known = path in PAGES
     document.title = path === '/' ? t.meta.title : `${pages[path] ?? t.notFound.title} | Gabriel Valenço`
     document.querySelector('link[rel="canonical"]')?.setAttribute('href', `${SITE}${known ? path : '/'}`)
 
@@ -94,15 +100,16 @@ function ScrollToTop() {
   const { key, hash } = useLocation()
   useEffect(() => {
     if (hash) {
-      // As paginas internas sao lazy: espera a secao existir.
+      // A secao pode ainda nao existir (pagina ou cena lazy): tenta por alguns quadros.
       let tries = 0
+      let raf = 0
       const go = () => {
         const el = document.getElementById(hash.slice(1))
         if (el) el.scrollIntoView({ block: 'start' })
-        else if (tries++ < 20) requestAnimationFrame(go)
+        else if (tries++ < 40) raf = requestAnimationFrame(go)
       }
       go()
-      return
+      return () => cancelAnimationFrame(raf)
     }
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
   }, [key, hash])
